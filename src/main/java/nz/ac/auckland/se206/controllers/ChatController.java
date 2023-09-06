@@ -1,12 +1,16 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -22,8 +26,10 @@ public class ChatController {
   @FXML private TextArea chatTextArea;
   @FXML private TextField inputText;
   @FXML private Button sendButton;
+  @FXML private Button goBackButton;
 
   private ChatCompletionRequest chatCompletionRequest;
+  private ChatMessage chatMsg;
 
   /**
    * Initializes the chat view, loading the riddle.
@@ -54,18 +60,53 @@ public class ChatController {
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
   private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
-    chatCompletionRequest.addMessage(msg);
-    try {
-      ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
-      Choice result = chatCompletionResult.getChoices().iterator().next();
-      chatCompletionRequest.addMessage(result.getChatMessage());
-      appendChatMessage(result.getChatMessage());
-      return result.getChatMessage();
-    } catch (ApiProxyException e) {
-      // TODO handle exception appropriately
-      e.printStackTrace();
-      return null;
-    }
+
+    // GPT Task
+    Task<Void> askGPT =
+        new Task<Void>() {
+
+          @Override
+          protected Void call() throws Exception {
+            chatCompletionRequest.addMessage(msg);
+            try {
+              ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
+              Choice result = chatCompletionResult.getChoices().iterator().next();
+              chatCompletionRequest.addMessage(result.getChatMessage());
+              // The response from GPT-API
+              chatMsg = result.getChatMessage();
+              Platform.runLater(
+                  () -> {
+                    // After Message is recieved adding it to the chat box
+                    appendChatMessage(result.getChatMessage());
+                    // Checking to see if the riddle has been solved and changing the game state
+                    if (result.getChatMessage().getRole().equals("assistant")
+                        && result.getChatMessage().getContent().startsWith("Correct")) {
+                      GameState.isRiddleResolved = true;
+                    }
+                    // Enabling Buttons after API has finished loading
+                    sendButton.setDisable(false);
+                    goBackButton.setDisable(false);
+                    inputText.setDisable(false);
+                  });
+            } catch (Exception e) {
+              e.printStackTrace();
+              return null;
+            }
+            return null;
+          }
+        };
+    // New thread to start GPT in background
+    Thread gptThread =
+        new Thread(
+            () -> {
+              askGPT.run();
+            });
+    gptThread.start();
+    // Disabling Buttons while API is loading
+    sendButton.setDisable(true);
+    goBackButton.setDisable(true);
+    inputText.setDisable(true);
+    return chatMsg;
   }
 
   /**
@@ -84,10 +125,7 @@ public class ChatController {
     inputText.clear();
     ChatMessage msg = new ChatMessage("user", message);
     appendChatMessage(msg);
-    ChatMessage lastMsg = runGpt(msg);
-    if (lastMsg.getRole().equals("assistant") && lastMsg.getContent().startsWith("Correct")) {
-      GameState.isRiddleResolved = true;
-    }
+    runGpt(msg);
   }
 
   /**
@@ -107,6 +145,23 @@ public class ChatController {
       sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
     } catch (Exception e) {
       e.printStackTrace();
+    }
+  }
+
+  /**
+   * Handles the key released event.
+   *
+   * @param event the key event
+   */
+  @FXML
+  public void onKeyReleased(KeyEvent event) {
+    // When enter is clicked the user sends their message
+    if (event.getCode().toString().equals("ENTER")) {
+      try {
+        onSendMessage(null);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
     }
   }
 }
