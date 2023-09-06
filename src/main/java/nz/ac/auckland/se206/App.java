@@ -45,7 +45,6 @@ public class App extends Application {
   @Override
   public void start(final Stage stage) throws IOException {
 
-    SceneManager.addUi(AppUi.CHAT, loadFxml("chat"));
     SceneManager.addUi(AppUi.END, loadFxml("end"));
     SceneManager.addUi(AppUi.STARTSCREEN, loadFxml("startScreen"));
 
