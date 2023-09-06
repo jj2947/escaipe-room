@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.gpt.ChatMessage;
@@ -22,6 +23,7 @@ public class ChatController {
   @FXML private TextArea chatTextArea;
   @FXML private TextField inputText;
   @FXML private Button sendButton;
+  @FXML private Button goBackButton;
 
   private ChatCompletionRequest chatCompletionRequest;
   private ChatMessage chatMsg;
@@ -78,6 +80,10 @@ public class ChatController {
                         && result.getChatMessage().getContent().startsWith("Correct")) {
                       GameState.isRiddleResolved = true;
                     }
+                    // Enabling Buttons after API has finished loading
+                    sendButton.setDisable(false);
+                    goBackButton.setDisable(false);
+                    inputText.setDisable(false);
                   });
             } catch (Exception e) {
               e.printStackTrace();
@@ -93,6 +99,10 @@ public class ChatController {
               askGPT.run();
             });
     gptThread.start();
+    // Disabling Buttons while API is loading
+    sendButton.setDisable(true);
+    goBackButton.setDisable(true);
+    inputText.setDisable(true);
     return chatMsg;
   }
 
@@ -125,5 +135,22 @@ public class ChatController {
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
     App.setRoot("room");
+  }
+
+  /**
+   * Handles the key released event.
+   *
+   * @param event the key event
+   */
+  @FXML
+  public void onKeyReleased(KeyEvent event) {
+    // When enter is clicked the user sends their message
+    if (event.getCode().toString().equals("ENTER")) {
+      try {
+        onSendMessage(null);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
   }
 }
