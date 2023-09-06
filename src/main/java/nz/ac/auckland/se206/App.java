@@ -48,6 +48,7 @@ public class App extends Application {
     SceneManager.addUi(AppUi.END, loadFxml("end"));
     SceneManager.addUi(AppUi.STARTSCREEN, loadFxml("startScreen"));
     SceneManager.addUi(AppUi.HALLWAY, loadFxml("hallway"));
+    SceneManager.addUi(AppUi.GYMNASIUM, loadFxml("gymnasium"));
 
     scene = new Scene(SceneManager.getUiRoot(AppUi.STARTSCREEN));
     stage.setScene(scene);

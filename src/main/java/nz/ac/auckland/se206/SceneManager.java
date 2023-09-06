@@ -10,7 +10,8 @@ public class SceneManager {
     ROOM,
     END,
     STARTSCREEN,
-    HALLWAY
+    HALLWAY,
+    GYMNASIUM
   }
 
   private static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();

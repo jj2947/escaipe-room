@@ -20,4 +20,7 @@ public class GameState {
 
   /** Indicates whether hallway has been loaded */
   public static boolean hallwayIsLoaded = false;
+
+  /** Indicates whether gymnasium has been loaded */
+  public static boolean gymnasiumIsLoaded = false;
 }
