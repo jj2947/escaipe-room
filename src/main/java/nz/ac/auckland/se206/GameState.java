@@ -17,4 +17,7 @@ public class GameState {
 
   /** Indicated whether chat has already been loaded */
   public static boolean chatIsLoaded = false;
+
+  /** Indicates whether hallway has been loaded */
+  public static boolean hallwayIsLoaded = false;
 }
