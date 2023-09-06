@@ -8,7 +8,8 @@ public class SceneManager {
   public enum AppUi {
     CHAT,
     ROOM,
-    END
+    END,
+    STARTSCREEN
   }
 
   private static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();
@@ -21,4 +22,3 @@ public class SceneManager {
     return sceneMap.get(appUi);
   }
 }
-
