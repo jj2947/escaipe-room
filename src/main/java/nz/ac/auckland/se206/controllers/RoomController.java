@@ -4,6 +4,7 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -20,10 +21,15 @@ public class RoomController {
   @FXML private Rectangle door;
   @FXML private Rectangle window;
   @FXML private Rectangle vase;
+  @FXML private Label timerLabel;
+  private Timer timer;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
     // Initialization code goes here
+    // Start the timer
+    timer = new Timer(timerLabel);
+    GameState.timer = timer;
   }
 
   /**

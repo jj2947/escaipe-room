@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206;
 
+import nz.ac.auckland.se206.controllers.Timer;
+
 /** Represents the state of the game. */
 public class GameState {
 
@@ -23,4 +25,6 @@ public class GameState {
 
   /** Indicates whether gymnasium has been loaded */
   public static boolean gymnasiumIsLoaded = false;
+
+  public static Timer timer;
 }
