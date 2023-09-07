@@ -26,17 +26,23 @@ public class RoomController {
   @FXML private Label timerLabel;
   private Timer timer;
 
-  /** Initializes the room view, it is called when the room loads. */
-  public void initialize() {
+  /**
+   * Initializes the room view, it is called when the room loads.
+   *
+   * @throws IOException
+   */
+  public void initialize() throws IOException {
     // Initialization code goes here
     // Start the timer
     timer = new Timer(timerLabel);
     GameState.timer = timer;
-
-    Platform.runLater(() -> startUpdateLabelTask());
+    SceneManager.addUi(AppUi.HALLWAY, App.loadFxml("hallway"));
+    SceneManager.addUi(AppUi.GYMNASIUM, App.loadFxml("gymnasium"));
+    SceneManager.addUi(AppUi.CHAT, App.loadFxml("chat"));
+    Platform.runLater(() -> startTimer());
   }
 
-  private void startUpdateLabelTask() {
+  private void startTimer() {
     timer.startTimer();
     // Update the timer label every second
     Task<Void> updateLabelTask =
@@ -112,11 +118,6 @@ public class RoomController {
       Scene sceneButtonIsIn = room.getScene();
       // Switching Scenes to the room
       try {
-        // Chat isn't already loaded load first
-        if (!GameState.chatIsLoaded) {
-          SceneManager.addUi(AppUi.CHAT, App.loadFxml("chat"));
-          GameState.chatIsLoaded = true;
-        }
         sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.CHAT));
       } catch (Exception e) {
         e.printStackTrace();
