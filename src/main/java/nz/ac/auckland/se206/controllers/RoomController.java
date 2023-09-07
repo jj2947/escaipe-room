@@ -57,6 +57,11 @@ public class RoomController {
     updateThread.start();
   }
 
+  private void updateLabel() {
+    timerLabel.setText(
+        String.format("%02d:%02d", timer.getCounter() / 60, timer.getCounter() % 60));
+  }
+
   /**
    * Handles the key pressed event.
    *
