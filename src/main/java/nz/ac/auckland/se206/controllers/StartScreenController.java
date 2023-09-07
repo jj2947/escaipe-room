@@ -13,6 +13,15 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 public class StartScreenController {
   @FXML private Button startButton;
   @FXML private Button exitButton;
+  @FXML private Button easyButton;
+  @FXML private Button mediumButton;
+  @FXML private Button hardButton;
+  @FXML private Button twoButton;
+  @FXML private Button fourButton;
+  @FXML private Button sixButton;
+
+  private Button difficulty = null;
+  private Button time = null;
 
   /**
    * Called when the start button is clicked
@@ -33,15 +42,35 @@ public class StartScreenController {
     }
   }
 
-  /**
-   * Called when the exit button is clicked
-   *
-   * @param even the event that triggered this method
-   */
+  /** Called when the exit button is clicked */
   @FXML
   private void onExit() {
     // exit application
     Platform.exit();
     System.exit(0);
   }
+
+  /** Setting difficulty to easy */
+  @FXML
+  private void onEasy() {}
+
+  /** Setting difficulty to medium */
+  @FXML
+  private void onMedium() {}
+
+  /** Setting difficulty to hard */
+  @FXML
+  private void onHard() {}
+
+  /** Setting time to Two */
+  @FXML
+  private void onTwo() {}
+
+  /** Setting time to Four */
+  @FXML
+  private void onFour() {}
+
+  /** Setting time to Six */
+  @FXML
+  private void onSix() {}
 }

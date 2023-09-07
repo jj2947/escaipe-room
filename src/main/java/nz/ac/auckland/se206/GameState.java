@@ -23,4 +23,10 @@ public class GameState {
 
   /** Indicates whether gymnasium has been loaded */
   public static boolean gymnasiumIsLoaded = false;
+
+  /** Represents number of hints left, dependant on used and difficulty */
+  public static int numberOfHints;
+
+  /** The time choosen by the user */
+  public static int totalTime;
 }
