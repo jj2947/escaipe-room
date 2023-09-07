@@ -1,6 +1,8 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -30,6 +32,29 @@ public class RoomController {
     // Start the timer
     timer = new Timer(timerLabel);
     GameState.timer = timer;
+
+    Platform.runLater(() -> startUpdateLabelTask());
+  }
+
+  private void startUpdateLabelTask() {
+    timer.startTimer();
+    // Update the timer label every second
+    Task<Void> updateLabelTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            while (!GameState.isTimeReached) {
+              Thread.sleep(1000); // Wait for 1 second
+              Platform.runLater(() -> updateLabel());
+            }
+            return null;
+          }
+        };
+
+    // Create a new thread for the update task and start it
+    Thread updateThread = new Thread(updateLabelTask);
+    updateThread.setDaemon(true);
+    updateThread.start();
   }
 
   /**
