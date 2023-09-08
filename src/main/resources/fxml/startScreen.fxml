@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -13,33 +14,53 @@
             <Label fx:id="titleLabel" alignment="TOP_LEFT" text="WELCOME TO THE ESCAPE ROOM" />
          </children>
       </VBox>
-      <VBox alignment="CENTER" layoutY="63.0" prefHeight="58.0" prefWidth="1180.0">
+      <VBox alignment="CENTER" layoutY="63.0" prefHeight="117.0" prefWidth="1180.0" spacing="10.0">
          <children>
             <Label fx:id="titleLabel1" alignment="TOP_LEFT" text="You are stuck at school and are going to miss the only bus home, you better hurry" wrapText="true" />
+            <Label text="Difficulty:" />
+            <Label text="Easy: Unlimited Hints" />
+            <Label text="Medium: 5 Hints" />
+            <Label text="Hard: No Hints" />
             <Label fx:id="titleLabel11" alignment="TOP_LEFT" text="Select a Difficulty and Time" wrapText="true" />
          </children>
       </VBox>
       <Button fx:id="startButton" disable="true" layoutX="260.0" layoutY="615.0" mnemonicParsing="false" onAction="#onStart" text="START">
          <font>
-            <Font size="18.0" />
+            <Font size="24.0" />
          </font>
       </Button>
       <Button fx:id="exitButton" layoutX="893.0" layoutY="606.0" mnemonicParsing="false" onAction="#onExit" text="EXIT">
          <font>
-            <Font size="18.0" />
+            <Font size="24.0" />
          </font>
       </Button>
-      <Label layoutX="221.0" layoutY="362.0" text="TIME IN MINUTES:" />
-      <Label layoutX="236.0" layoutY="299.0" text="DIFFICULTY:" />
-      <Button fx:id="easyButton" layoutX="366.0" layoutY="295.0" mnemonicParsing="false" onAction="#onEasy" text="EASY" />
-      <Button fx:id="mediumButton" layoutX="460.0" layoutY="295.0" mnemonicParsing="false" onAction="#onMedium" text="MEDIUM" />
-      <Button fx:id="hardButton" layoutX="564.0" layoutY="295.0" mnemonicParsing="false" onAction="#onHard" text="HARD" />
-      <Button fx:id="twoButton" layoutX="378.0" layoutY="358.0" mnemonicParsing="false" onAction="#onTwo" text="2" />
-      <Button fx:id="fourButton" layoutX="481.0" layoutY="358.0" mnemonicParsing="false" onAction="#onFour" text="4" />
-      <Button fx:id="sixButton" layoutX="577.0" layoutY="358.0" mnemonicParsing="false" onAction="#onSix" text="6" />
-      <VBox alignment="TOP_CENTER" layoutY="451.0" prefHeight="27.0" prefWidth="1180.0">
+      <VBox alignment="TOP_CENTER" layoutY="518.0" prefHeight="27.0" prefWidth="1180.0">
          <children>
             <Label fx:id="toDoLabel" alignment="TOP_LEFT" text="Please Select Time and Difficulty" />
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutY="250.0" prefHeight="64.0" prefWidth="1180.0" spacing="30.0">
+         <children>
+            <Label text="DIFFICULTY:" />
+            <HBox alignment="CENTER" prefHeight="58.0" prefWidth="1180.0" spacing="40.0">
+               <children>
+                  <Button fx:id="easyButton" mnemonicParsing="false" onAction="#onEasy" text="EASY" />
+                  <Button fx:id="mediumButton" mnemonicParsing="false" onAction="#onMedium" text="MEDIUM" />
+                  <Button fx:id="hardButton" mnemonicParsing="false" onAction="#onHard" text="HARD" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutY="370.0" prefHeight="91.0" prefWidth="1180.0" spacing="30.0">
+         <children>
+            <Label text="TIME IN MINUTES:" />
+            <HBox alignment="CENTER" prefHeight="64.0" prefWidth="1180.0" spacing="40.0">
+               <children>
+                  <Button fx:id="twoButton" mnemonicParsing="false" onAction="#onTwo" text="2" />
+                  <Button fx:id="fourButton" mnemonicParsing="false" onAction="#onFour" text="4" />
+                  <Button fx:id="sixButton" mnemonicParsing="false" onAction="#onSix" text="6" />
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>

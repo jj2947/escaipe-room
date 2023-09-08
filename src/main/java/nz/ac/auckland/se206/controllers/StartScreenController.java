@@ -34,6 +34,22 @@ public class StartScreenController {
   private void onStart(ActionEvent event) {
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();
+    // Updating gamestate on number of hints
+    if (difficulty.equals(easyButton)) {
+      GameState.numberOfHints = -1;
+    } else if (difficulty.equals(mediumButton)) {
+      GameState.numberOfHints = 5;
+    } else {
+      GameState.numberOfHints = 0;
+    }
+    // Updating game state depending on time choosen
+    if (time.getText().equals("2")) {
+      GameState.totalTime = 120;
+    } else if (time.getText().equals("4")) {
+      GameState.totalTime = 240;
+    } else {
+      GameState.totalTime = 360;
+    }
     // Switching Scenes to the room
     try {
       SceneManager.addUi(AppUi.ROOM, App.loadFxml("room"));
@@ -103,10 +119,10 @@ public class StartScreenController {
       // Both have been selected
       toDoLabel.setText(
           "You can now start the game, you will have "
-              + GameState.totalTime / 60
+              + time.getText()
               + " minutes on "
               + difficulty.getText()
-              + " Difficulty to escape the room");
+              + " Difficulty to escape");
       startButton.setDisable(false);
     }
   }
