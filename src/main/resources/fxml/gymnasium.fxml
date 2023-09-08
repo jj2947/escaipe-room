@@ -13,7 +13,7 @@
             <Image url="@../images/Gym.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="timerLabel" alignment="CENTER" layoutX="1032.0" layoutY="15.0" prefHeight="64.0" prefWidth="140.0" textFill="WHITE">
+      <Label fx:id="timerLabel" alignment="CENTER" layoutX="11.0" layoutY="15.0" prefHeight="64.0" prefWidth="140.0" textFill="WHITE">
          <font>
             <Font size="45.0" />
          </font>

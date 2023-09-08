@@ -13,7 +13,7 @@
             <Image url="@../images/Hallway.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="timerLabel" alignment="CENTER" layoutX="1058.0" layoutY="14.0" prefHeight="37.0" prefWidth="114.0" textFill="WHITE">
+      <Label fx:id="timerLabel" alignment="CENTER" layoutX="11.0" layoutY="15.0" prefHeight="64.0" prefWidth="140.0" textFill="WHITE">
          <font>
             <Font size="45.0" />
          </font>
