@@ -15,7 +15,7 @@ public class GymnasiumController {
   public void initialize() {
     // Initialization code goes here
     timer = GameState.timer;
-    Platform.runLater (() -> updateTimer());
+    Platform.runLater(() -> updateTimer());
   }
 
   private void updateTimer() {
@@ -25,13 +25,13 @@ public class GymnasiumController {
           @Override
           protected Void call() throws Exception {
             while (!GameState.isTimeReached) {
-              Thread.sleep(1000); // Wait for 1 second
               Platform.runLater(
                   () ->
                       timerLabel.setText(
                           String.format(
                               "%02d:%02d", timer.getCounter() / 60, timer.getCounter() % 60)));
               ;
+              Thread.sleep(1000); // Wait for 1 second
             }
             return null;
           }

@@ -50,8 +50,8 @@ public class RoomController {
           @Override
           protected Void call() throws Exception {
             while (!GameState.isTimeReached) {
-              Thread.sleep(1000); // Wait for 1 second
               Platform.runLater(() -> updateLabel());
+              Thread.sleep(1000);
             }
             return null;
           }
