@@ -13,7 +13,8 @@ public class Timer {
   }
 
   public void startTimer() {
-    counter = 120; // Set the initial value of the counter to 2 minutes (120 seconds)
+    counter =
+        GameState.totalTime; // Setting value to the number of time choosen at the start of the game
     updateLabel();
 
     Task<Void> backgroundTask =
