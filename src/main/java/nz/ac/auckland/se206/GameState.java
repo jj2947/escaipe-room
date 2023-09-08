@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206;
 
+import nz.ac.auckland.se206.controllers.Timer;
+
 /** Represents the state of the game. */
 public class GameState {
 
@@ -17,4 +19,7 @@ public class GameState {
 
   /** The time choosen by the user */
   public static int totalTime;
+
+  public static Timer timer;
+
 }

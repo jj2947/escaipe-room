@@ -10,7 +10,6 @@ public class Timer {
 
   public Timer(Label timerLabel) {
     this.timerLabel = timerLabel;
-    startTimer();
   }
 
   public void startTimer() {

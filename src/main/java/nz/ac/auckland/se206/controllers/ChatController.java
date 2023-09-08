@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -26,6 +27,8 @@ public class ChatController {
   @FXML private TextField inputText;
   @FXML private Button sendButton;
   @FXML private Button goBackButton;
+  @FXML private Label timerLabel;
+  private Timer timer;
 
   private ChatCompletionRequest chatCompletionRequest;
   private ChatMessage chatMsg;
@@ -40,6 +43,9 @@ public class ChatController {
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
     runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("vase")));
+
+    timer = GameState.timer;
+    Platform.runLater (() -> updateTimer());
   }
 
   /**
@@ -162,5 +168,30 @@ public class ChatController {
         e.printStackTrace();
       }
     }
+  }
+
+  private void updateTimer() {
+    // Update the timer label every second
+    Task<Void> updateLabelTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            while (!GameState.isTimeReached) {
+              Thread.sleep(1000); // Wait for 1 second
+              Platform.runLater(
+                  () ->
+                      timerLabel.setText(
+                          String.format(
+                              "%02d:%02d", timer.getCounter() / 60, timer.getCounter() % 60)));
+              ;
+            }
+            return null;
+          }
+        };
+
+    // Create a new thread for the update task and start it
+    Thread updateThread = new Thread(updateLabelTask);
+    updateThread.setDaemon(true);
+    updateThread.start();
   }
 }
