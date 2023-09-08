@@ -53,7 +53,6 @@ public class StartScreenController {
     // Switching Scenes to the room
     try {
       SceneManager.addUi(AppUi.ROOM, App.loadFxml("room"));
-      GameState.roomIsLoaded = true;
       sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
     } catch (Exception e) {
       e.printStackTrace();
