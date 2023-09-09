@@ -14,21 +14,21 @@
             <Image url="@../images/Hallway.jpg" />
          </image>
       </ImageView>
+      <Label alignment="CENTER" layoutX="78.0" layoutY="220.0" opacity="0.5" prefHeight="28.0" prefWidth="126.0" styleClass="roomLabel" stylesheets="@../css/stylesheet.css" text="GEOGRAPHY" textFill="WHITE">
+         <font>
+            <Font name="Chalkduster" size="28.0" />
+         </font>
+      </Label>
       <Label fx:id="timerLabel" alignment="CENTER" layoutX="11.0" layoutY="15.0" prefHeight="64.0" prefWidth="140.0" textFill="WHITE">
          <font>
             <Font size="45.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="66.0" layoutY="214.0" opacity="0.8" prefHeight="37.0" prefWidth="151.0" styleClass="roomLabel" stylesheets="@../css/stylesheet.css" text="GEOGRAPHY" textFill="WHITE">
-         <font>
-            <Font name="Chalkduster" size="28.0" />
-         </font>
-      </Label>
       <Rectangle fx:id="classroomDoor" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="441.0" layoutX="46.0" layoutY="199.0" onMouseClicked="#clickClassroomDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
       <Rectangle fx:id="gymDoor" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" layoutX="649.0" layoutY="330.0" onMouseClicked="#clickGymDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="591.0" layoutY="299.0" opacity="0.8" prefHeight="19.0" prefWidth="175.0" style="-fx-font-size: 15; -fx-background-color: blue; -fx-text-fill: white;" styleClass="roomLabel" stylesheets="@../css/stylesheet.css" text="GYMNASIUM" textFill="BLUE">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="597.0" layoutY="299.0" opacity="0.5" prefHeight="22.0" prefWidth="169.0" style="-fx-background-color: blue; -fx-text-fill: white;" styleClass="roomLabel" text="GYMNASIUM" textFill="BLUE">
          <font>
-            <Font name="Chalkduster" size="28.0" />
+            <Font name="Palatino" size="15.0" />
          </font>
       </Label>
    </children>

@@ -111,7 +111,7 @@ public class RoomController {
    */
   @FXML
   public void clickDoor(MouseEvent event) throws IOException {
-    System.out.println("door clicked");
+    System.out.println("hallway door clicked");
 
     // Switching to hallway scene
     Rectangle rectangle = (Rectangle) event.getSource();

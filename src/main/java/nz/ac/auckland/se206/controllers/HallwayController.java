@@ -28,7 +28,7 @@ public class HallwayController {
 
   @FXML
   public void clickClassroomDoor(MouseEvent event) throws IOException {
-    System.out.println("door clicked");
+    System.out.println("classroom door clicked");
 
     // Switching to hallway scene
     Rectangle rectangle = (Rectangle) event.getSource();
@@ -41,7 +41,7 @@ public class HallwayController {
 
   @FXML
   public void clickGymDoor(MouseEvent event) throws IOException {
-    System.out.println("door clicked");
+    System.out.println("gym door clicked");
 
     // Switching to hallway scene
     Rectangle rectangle = (Rectangle) event.getSource();
