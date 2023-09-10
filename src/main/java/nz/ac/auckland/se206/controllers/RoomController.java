@@ -28,6 +28,8 @@ public class RoomController {
   @FXML private Ellipse mapEclipse;
   @FXML private Rectangle mapRectangleOne;
   @FXML private Rectangle mapRectangleTwo;
+  @FXML private Label goBackLabel;
+  @FXML private ImageView classroomImage;
   private Timer timer;
 
   /**
@@ -128,6 +130,25 @@ public class RoomController {
   @FXML
   public void clickMap() {
     disableWhileMapOpen();
+    showWhenOnMap();
+  }
+
+  @FXML
+  public void exitMap() {
+    enableWithMapClose();
+    hideAfterMap();
+  }
+
+  public void showWhenOnMap() {
+    mapImage.setVisible(true);
+    classroomImage.setOpacity(0.5);
+    goBackLabel.setVisible(true);
+  }
+
+  public void hideAfterMap() {
+    mapImage.setVisible(false);
+    classroomImage.setOpacity(1);
+    goBackLabel.setVisible(false);
   }
 
   public void disableWhileMapOpen() {

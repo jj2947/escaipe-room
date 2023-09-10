@@ -10,7 +10,7 @@
 
 <Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="740.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
-      <ImageView fitHeight="664.0" fitWidth="1219.0" layoutX="-1.0" layoutY="-4.0" preserveRatio="true">
+      <ImageView fx:id="classroomImage" fitHeight="664.0" fitWidth="1219.0" layoutY="-4.0" preserveRatio="true">
          <image>
             <Image url="@../images/Classroom.jpeg" />
          </image>
@@ -21,7 +21,7 @@
             <Font size="45.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="1018.0" layoutY="28.0" opacity="0.5" prefHeight="36.0" prefWidth="98.0" style="-fx-background-color: green;" text="EXIT" textFill="WHITE">
+      <Label fx:id="exitLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="1018.0" layoutY="28.0" opacity="0.5" prefHeight="36.0" prefWidth="98.0" style="-fx-background-color: green;" text="EXIT" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="27.0" />
          </font>
@@ -34,5 +34,23 @@
             <Image url="@../images/Map.png" />
          </image>
       </ImageView>
+      <Label fx:id="goBackLabel" layoutX="546.0" layoutY="31.0" onMouseClicked="#exitMap" text="Go Back" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Ellipse fx:id="nzMap" fill="#ebff1f" layoutX="1026.0" layoutY="566.0" opacity="0.25" radiusX="27.0" radiusY="30.0" stroke="BLACK" strokeType="INSIDE" />
+      <Rectangle fx:id="australiaMap" arcHeight="5.0" arcWidth="5.0" fill="#fffe1f" height="88.0" layoutX="860.0" layoutY="471.0" opacity="0.39" stroke="BLACK" strokeType="INSIDE" width="112.0" />
+      <Ellipse fx:id="greenlandMapOne" fill="#e7ff1f" layoutX="421.0" layoutY="181.0" opacity="0.27" radiusX="64.0" radiusY="69.0" stroke="BLACK" strokeType="INSIDE" />
+      <Rectangle fx:id="greenlandMapTwo" arcHeight="5.0" arcWidth="5.0" fill="#e2ff1f" height="29.0" layoutX="370.0" layoutY="123.0" opacity="0.34" stroke="BLACK" strokeType="INSIDE" width="136.0" />
+      <Rectangle fx:id="greenlandMapThree" arcHeight="5.0" arcWidth="5.0" fill="#e7ff1f" height="21.0" layoutX="335.0" layoutY="151.0" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle fx:id="greenlandMapFour" arcHeight="5.0" arcWidth="5.0" fill="#e7ff1f" height="21.0" layoutX="353.0" layoutY="140.0" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Ellipse fx:id="usaMapOne" fill="#f8ff1f" layoutX="98.0" layoutY="234.0" opacity="0.23" radiusX="40.0" radiusY="43.0" stroke="BLACK" strokeType="INSIDE" />
+      <Rectangle fx:id="usaMapTwo" arcHeight="5.0" arcWidth="5.0" fill="#ebff1f" height="63.0" layoutX="190.0" layoutY="295.0" opacity="0.2" stroke="BLACK" strokeType="INSIDE" width="152.0" />
+      <Rectangle fx:id="canandaMapOne" arcHeight="5.0" arcWidth="5.0" fill="#deff1f" height="98.0" layoutX="185.0" layoutY="196.0" opacity="0.2" stroke="BLACK" strokeType="INSIDE" width="173.0" />
+      <Rectangle fx:id="canadaMapTwo" arcHeight="5.0" arcWidth="5.0" fill="#ebff1f" height="66.0" layoutX="139.0" layoutY="202.0" opacity="0.29" stroke="BLACK" strokeType="INSIDE" width="47.0" />
+      <Ellipse fx:id="canadaMapThree" fill="#e2ff1f" layoutX="265.0" layoutY="162.0" opacity="0.28" radiusX="70.0" radiusY="35.0" stroke="BLACK" strokeType="INSIDE" />
+      <Rectangle fx:id="canadaMapFour" arcHeight="5.0" arcWidth="5.0" fill="#e7ff1f" height="21.0" layoutX="186.0" layoutY="177.0" opacity="0.19" stroke="BLACK" strokeType="INSIDE" width="147.0" />
+      <Rectangle fx:id="canadaMapFive" arcHeight="5.0" arcWidth="5.0" fill="#e2ff1f" height="26.0" layoutX="297.0" layoutY="124.0" opacity="0.17" stroke="BLACK" strokeType="INSIDE" width="55.0" />
    </children>
 </Pane>
