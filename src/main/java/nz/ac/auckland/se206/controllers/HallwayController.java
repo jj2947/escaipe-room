@@ -63,7 +63,7 @@ public class HallwayController {
                   () ->
                       timerLabel.setText(
                           String.format(
-                              "%02d:%02d", timer.getCounter() / 60, timer.getCounter() % 60)));
+                              "%d:%02d", timer.getCounter() / 60, timer.getCounter() % 60)));
               ;
               Thread.sleep(1000); // Wait for 1 second
             }
