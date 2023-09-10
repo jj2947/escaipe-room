@@ -32,6 +32,8 @@ public class ChatController {
 
   private ChatCompletionRequest chatCompletionRequest;
   private ChatMessage chatMsg;
+  private CountryChoice countryChooser = new CountryChoice();
+  private String country;
 
   /**
    * Initializes the chat view, loading the riddle.
@@ -40,9 +42,10 @@ public class ChatController {
    */
   @FXML
   public void initialize() throws ApiProxyException {
+    country = countryChooser.chooseCountry();
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
-    runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("vase")));
+    runGpt(new ChatMessage("user", GptPromptEngineering.initRiddleAndMaster(country)));
 
     timer = GameState.timer;
     Platform.runLater(() -> updateTimer());
