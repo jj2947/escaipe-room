@@ -1,0 +1,6 @@
+.roomLabel {
+    -fx-font-size: 15px;
+    -fx-font-family: "palatino";
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}

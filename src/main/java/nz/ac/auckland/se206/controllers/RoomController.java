@@ -111,26 +111,15 @@ public class RoomController {
    */
   @FXML
   public void clickDoor(MouseEvent event) throws IOException {
-    System.out.println("door clicked");
+    System.out.println("hallway door clicked");
 
-    if (!GameState.isRiddleResolved) {
-      showDialog("Info", "Riddle", "You need to resolve the riddle!");
-      Scene sceneButtonIsIn = room.getScene();
-      // Switching Scenes to the room
-      try {
-        sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.CHAT));
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-      return;
-    }
+    // Switching to hallway scene
+    Rectangle rectangle = (Rectangle) event.getSource();
+    Scene sceneRectangleIsIn = rectangle.getScene();
+    sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.HALLWAY));
 
-    if (!GameState.isKeyFound) {
-      showDialog(
-          "Info", "Find the key!", "You resolved the riddle, now you know where the key is.");
-    } else {
-      showDialog("Info", "You Won!", "Good Job!");
-    }
+    // Resizing the window so the larger scene fits
+    sceneRectangleIsIn.getWindow().sizeToScene();
   }
 
   /**
