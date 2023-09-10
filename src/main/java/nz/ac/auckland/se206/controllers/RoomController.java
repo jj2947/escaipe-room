@@ -65,7 +65,7 @@ public class RoomController {
 
   private void updateLabel() {
     timerLabel.setText(
-        String.format("%02d:%02d", timer.getCounter() / 60, timer.getCounter() % 60));
+      String.format("%d:%02d", timer.getCounter() / 60, timer.getCounter() % 60));
   }
 
   /**

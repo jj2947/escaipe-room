@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -37,7 +36,7 @@ public class GymnasiumController {
                   () ->
                       timerLabel.setText(
                           String.format(
-                              "%02d:%02d", timer.getCounter() / 60, timer.getCounter() % 60)));
+                              "%d:%02d", timer.getCounter() / 60, timer.getCounter() % 60)));
               ;
               Thread.sleep(1000); // Wait for 1 second
             }
