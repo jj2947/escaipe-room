@@ -7,9 +7,11 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
@@ -21,9 +23,11 @@ public class RoomController {
 
   @FXML private Pane room;
   @FXML private Rectangle door;
-  @FXML private Rectangle window;
-  @FXML private Rectangle vase;
   @FXML private Label timerLabel;
+  @FXML private ImageView mapImage;
+  @FXML private Ellipse mapEclipse;
+  @FXML private Rectangle mapRectangleOne;
+  @FXML private Rectangle mapRectangleTwo;
   private Timer timer;
 
   /**
@@ -107,10 +111,9 @@ public class RoomController {
    * Handles the click event on the door.
    *
    * @param event the mouse event
-   * @throws IOException if there is an error loading the chat view
    */
   @FXML
-  public void clickDoor(MouseEvent event) throws IOException {
+  public void clickDoor(MouseEvent event) {
     System.out.println("hallway door clicked");
 
     // Switching to hallway scene
@@ -122,27 +125,22 @@ public class RoomController {
     sceneRectangleIsIn.getWindow().sizeToScene();
   }
 
-  /**
-   * Handles the click event on the vase.
-   *
-   * @param event the mouse event
-   */
   @FXML
-  public void clickVase(MouseEvent event) {
-    System.out.println("vase clicked");
-    if (GameState.isRiddleResolved && !GameState.isKeyFound) {
-      showDialog("Info", "Key Found", "You found a key under the vase!");
-      GameState.isKeyFound = true;
-    }
+  public void clickMap() {
+    disableWhileMapOpen();
   }
 
-  /**
-   * Handles the click event on the window.
-   *
-   * @param event the mouse event
-   */
-  @FXML
-  public void clickWindow(MouseEvent event) {
-    System.out.println("window clicked");
+  public void disableWhileMapOpen() {
+    mapEclipse.setDisable(true);
+    mapRectangleOne.setDisable(true);
+    mapRectangleTwo.setDisable(true);
+    door.setDisable(true);
+  }
+
+  public void enableWithMapClose() {
+    mapEclipse.setDisable(false);
+    mapRectangleOne.setDisable(false);
+    mapRectangleTwo.setDisable(false);
+    door.setDisable(false);
   }
 }
