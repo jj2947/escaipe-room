@@ -139,6 +139,66 @@ public class RoomController {
     hideAfterMap();
   }
 
+  @FXML
+  public void nzEnter() {}
+
+  @FXML
+  public void nzExit() {}
+
+  @FXML
+  public void australiaEnter() {}
+
+  @FXML
+  public void australiaExit() {}
+
+  @FXML
+  public void argentinaEnter() {}
+
+  @FXML
+  public void argentinaExit() {}
+
+  @FXML
+  public void indiaEnter() {}
+
+  @FXML
+  public void indiaExit() {}
+
+  @FXML
+  public void greenlandEnter() {}
+
+  @FXML
+  public void greenlandExit() {}
+
+  @FXML
+  public void brazilEnter() {}
+
+  @FXML
+  public void brazilExit() {}
+
+  @FXML
+  public void canadaEnter() {}
+
+  @FXML
+  public void canadaExit() {}
+
+  @FXML
+  public void usaEnter() {}
+
+  @FXML
+  public void usaExit() {}
+
+  @FXML
+  public void chinaEnter() {}
+
+  @FXML
+  public void chinaExit() {}
+
+  @FXML
+  public void russiaEnter() {}
+
+  @FXML
+  public void russiaExit() {}
+
   public void showWhenOnMap() {
     mapImage.setVisible(true);
     classroomImage.setOpacity(0.5);
