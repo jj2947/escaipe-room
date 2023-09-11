@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -185,6 +186,9 @@ public class ChatController {
               ;
               Thread.sleep(1000); // Wait for 1 second
             }
+            if (GameState.isTimeReached) {
+              switchToEndScene();
+            }
             return null;
           }
         };
@@ -193,5 +197,22 @@ public class ChatController {
     Thread updateThread = new Thread(updateLabelTask);
     updateThread.setDaemon(true);
     updateThread.start();
+  }
+
+  private void switchToEndScene() {
+    Platform.runLater(
+        () -> {
+          Scene currentScene = timerLabel.getScene();
+          if (currentScene != null) {
+            try {
+              SceneManager.addUi(AppUi.END, App.loadFxml("end"));
+            } catch (IOException e) {
+              // TODO Auto-generated catch block
+              e.printStackTrace();
+            }
+            currentScene.setRoot(SceneManager.getUiRoot(AppUi.END));
+            currentScene.getWindow().sizeToScene();
+          }
+        });
   }
 }

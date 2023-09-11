@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -67,6 +68,9 @@ public class HallwayController {
               ;
               Thread.sleep(1000); // Wait for 1 second
             }
+            if (GameState.isTimeReached) {
+            switchToEndScene();
+            }
             return null;
           }
         };
@@ -75,5 +79,22 @@ public class HallwayController {
     Thread updateThread = new Thread(updateLabelTask);
     updateThread.setDaemon(true);
     updateThread.start();
+  }
+
+  private void switchToEndScene() {
+    Platform.runLater(
+        () -> {
+          Scene currentScene = timerLabel.getScene();
+          if (currentScene != null) {
+            try {
+              SceneManager.addUi(AppUi.END, App.loadFxml("end"));
+            } catch (IOException e) {
+              // TODO Auto-generated catch block
+              e.printStackTrace();
+            }
+            currentScene.setRoot(SceneManager.getUiRoot(AppUi.END));
+            currentScene.getWindow().sizeToScene();
+          }
+        });
   }
 }

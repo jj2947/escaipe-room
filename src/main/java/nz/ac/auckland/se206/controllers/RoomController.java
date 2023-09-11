@@ -53,6 +53,9 @@ public class RoomController {
               Platform.runLater(() -> updateLabel());
               Thread.sleep(1000);
             }
+            if (GameState.isTimeReached) {
+              switchToEndScene();
+            }
             return null;
           }
         };
@@ -64,8 +67,7 @@ public class RoomController {
   }
 
   private void updateLabel() {
-    timerLabel.setText(
-      String.format("%d:%02d", timer.getCounter() / 60, timer.getCounter() % 60));
+    timerLabel.setText(String.format("%d:%02d", timer.getCounter() / 60, timer.getCounter() % 60));
   }
 
   /**
@@ -144,5 +146,22 @@ public class RoomController {
   @FXML
   public void clickWindow(MouseEvent event) {
     System.out.println("window clicked");
+  }
+
+  private void switchToEndScene() {
+    Platform.runLater(
+        () -> {
+          Scene currentScene = timerLabel.getScene();
+          if (currentScene != null) {
+            try {
+              SceneManager.addUi(AppUi.END, App.loadFxml("end"));
+            } catch (IOException e) {
+              // TODO Auto-generated catch block
+              e.printStackTrace();
+            }
+            currentScene.setRoot(SceneManager.getUiRoot(AppUi.END));
+            currentScene.getWindow().sizeToScene();
+          }
+        });
   }
 }

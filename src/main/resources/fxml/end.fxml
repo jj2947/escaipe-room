@@ -6,7 +6,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.EndController">
    <children>
-      <Label fx:id="textLabel" alignment="CENTER" layoutX="31.0" layoutY="294.0" prefHeight="125.0" prefWidth="734.0" textAlignment="CENTER">
+      <Label fx:id="textLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="213.0" layoutY="264.0" prefHeight="125.0" prefWidth="734.0" text="You Lost!" textAlignment="CENTER">
          <font>
             <Font name="Chalkduster" size="80.0" />
          </font>
