@@ -8,8 +8,12 @@ public class EndController {
 
   @FXML private Label textLabel;
 
+  public void initialize() {
+    updateLabel();
+  }
+
   @FXML
-  private void updateLabel() {
+  public void updateLabel() {
     if (GameState.isTimeReached) {
       textLabel.setText("You Lost!");
     } else {
