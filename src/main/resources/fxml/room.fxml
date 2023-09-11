@@ -29,9 +29,9 @@
       <Ellipse fx:id="mapEcllipse" fill="DODGERBLUE" layoutX="290.0" layoutY="250.0" onMouseClicked="#clickMap" opacity="0.0" radiusX="186.0" radiusY="99.0" stroke="BLACK" strokeType="INSIDE" />
       <Rectangle fx:id="mapRectangleOne" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="180.0" layoutX="105.0" layoutY="161.0" onMouseClicked="#clickMap" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="122.0" />
       <Rectangle fx:id="mapRectangleTwo" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="220.0" layoutX="316.0" layoutY="130.0" onMouseClicked="#clickMap" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="160.0" />
-      <ImageView fx:id="mapImage" fitHeight="640.0" fitWidth="1137.0" layoutX="39.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="mapImage" fitHeight="854.0" fitWidth="1452.0" layoutX="-61.0" layoutY="-47.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/Map.png" />
+            <Image url="@../images/allBlueMap.png" />
          </image>
       </ImageView>
       <Label fx:id="goBackLabel" layoutX="546.0" layoutY="31.0" onMouseClicked="#exitMap" text="Go Back" textFill="WHITE">
@@ -39,18 +39,37 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Ellipse fx:id="nzMap" fill="#ebff1f" layoutX="1026.0" layoutY="566.0" opacity="0.25" radiusX="27.0" radiusY="30.0" stroke="BLACK" strokeType="INSIDE" />
-      <Rectangle fx:id="australiaMap" arcHeight="5.0" arcWidth="5.0" fill="#fffe1f" height="88.0" layoutX="860.0" layoutY="471.0" opacity="0.39" stroke="BLACK" strokeType="INSIDE" width="112.0" />
-      <Ellipse fx:id="greenlandMapOne" fill="#e7ff1f" layoutX="421.0" layoutY="181.0" opacity="0.27" radiusX="64.0" radiusY="69.0" stroke="BLACK" strokeType="INSIDE" />
-      <Rectangle fx:id="greenlandMapTwo" arcHeight="5.0" arcWidth="5.0" fill="#e2ff1f" height="29.0" layoutX="370.0" layoutY="123.0" opacity="0.34" stroke="BLACK" strokeType="INSIDE" width="136.0" />
-      <Rectangle fx:id="greenlandMapThree" arcHeight="5.0" arcWidth="5.0" fill="#e7ff1f" height="21.0" layoutX="335.0" layoutY="151.0" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="38.0" />
-      <Rectangle fx:id="greenlandMapFour" arcHeight="5.0" arcWidth="5.0" fill="#e7ff1f" height="21.0" layoutX="353.0" layoutY="140.0" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="38.0" />
-      <Ellipse fx:id="usaMapOne" fill="#f8ff1f" layoutX="98.0" layoutY="234.0" opacity="0.23" radiusX="40.0" radiusY="43.0" stroke="BLACK" strokeType="INSIDE" />
-      <Rectangle fx:id="usaMapTwo" arcHeight="5.0" arcWidth="5.0" fill="#ebff1f" height="63.0" layoutX="190.0" layoutY="295.0" opacity="0.2" stroke="BLACK" strokeType="INSIDE" width="152.0" />
-      <Rectangle fx:id="canandaMapOne" arcHeight="5.0" arcWidth="5.0" fill="#deff1f" height="98.0" layoutX="185.0" layoutY="196.0" opacity="0.2" stroke="BLACK" strokeType="INSIDE" width="173.0" />
-      <Rectangle fx:id="canadaMapTwo" arcHeight="5.0" arcWidth="5.0" fill="#ebff1f" height="66.0" layoutX="139.0" layoutY="202.0" opacity="0.29" stroke="BLACK" strokeType="INSIDE" width="47.0" />
-      <Ellipse fx:id="canadaMapThree" fill="#e2ff1f" layoutX="265.0" layoutY="162.0" opacity="0.28" radiusX="70.0" radiusY="35.0" stroke="BLACK" strokeType="INSIDE" />
-      <Rectangle fx:id="canadaMapFour" arcHeight="5.0" arcWidth="5.0" fill="#e7ff1f" height="21.0" layoutX="186.0" layoutY="177.0" opacity="0.19" stroke="BLACK" strokeType="INSIDE" width="147.0" />
-      <Rectangle fx:id="canadaMapFive" arcHeight="5.0" arcWidth="5.0" fill="#e2ff1f" height="26.0" layoutX="297.0" layoutY="124.0" opacity="0.17" stroke="BLACK" strokeType="INSIDE" width="55.0" />
+      <Ellipse fx:id="nzMap" fill="#e7ff1f" layoutX="1016.0" layoutY="547.0" onMouseEntered="#nzEnter" onMouseExited="#nzExit" opacity="0.21" radiusX="25.0" radiusY="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Ellipse fx:id="australiaMap" fill="#e3ff1f" layoutX="915.0" layoutY="503.0" onMouseEntered="#australiaEnter" onMouseExited="#australiaExit" opacity="0.22" radiusX="64.0" radiusY="48.0" stroke="BLACK" strokeType="INSIDE" />
+      <Ellipse fx:id="greenlandMapOne" fill="#e7ff1f" layoutX="439.0" layoutY="167.0" onMouseEntered="#greenlandEnter" onMouseExited="#greenlandExit" opacity="0.17" radiusX="75.0" radiusY="48.0" stroke="BLACK" strokeType="INSIDE" />
+      <Rectangle fx:id="greenlandMapTwo" arcHeight="5.0" arcWidth="5.0" fill="#ebff1f" height="44.0" layoutX="405.0" layoutY="202.0" onMouseEntered="#greenlandEnter" onMouseExited="#greenlandExit" opacity="0.25" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+      <Rectangle fx:id="usaMapOne" arcHeight="5.0" arcWidth="5.0" fill="#daff1f" height="58.0" layoutX="98.0" layoutY="193.0" onMouseEntered="#usaEnter" onMouseExited="#usaExit" opacity="0.22" stroke="BLACK" strokeType="INSIDE" width="74.0" />
+      <Rectangle fx:id="usaMapTwo" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="55.0" layoutX="215.0" layoutY="287.0" onMouseEntered="#usaEnter" onMouseExited="#usaExit" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="107.0" />
+      <Rectangle fx:id="usaMapThree" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="45.0" layoutX="319.0" layoutY="299.0" onMouseEntered="#usaEnter" onMouseExited="#usaExit" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="43.0" />
+      <Rectangle fx:id="usaMapFour" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="14.0" layoutX="269.0" layoutY="342.0" onMouseEntered="#usaEnter" onMouseExited="#usaExit" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="67.0" />
+      <Rectangle fx:id="canadaMapOne" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="92.0" layoutX="175.0" layoutY="191.0" onMouseEntered="#canadaEnter" onMouseExited="#canadaExit" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="196.0" />
+      <Rectangle fx:id="canadaMapTwo" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="48.0" layoutX="217.0" layoutY="144.0" onMouseEntered="#canadaEnter" onMouseExited="#canadaExit" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="146.0" />
+      <Rectangle fx:id="canadaMapThree" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="19.0" layoutX="292.0" layoutY="125.0" onMouseEntered="#canadaEnter" onMouseExited="#canadaExit" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+      <Rectangle fx:id="canadaMapFour" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="48.0" layoutX="326.0" layoutY="248.0" onMouseEntered="#canadaEnter" onMouseExited="#canadaExit" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="84.0" />
+      <Rectangle fx:id="russiaMapOne" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="65.0" layoutX="632.0" layoutY="197.0" onMouseEntered="#russiaEnter" onMouseExited="#russiaExit" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="409.0" />
+      <Rectangle fx:id="russiaMapTwo" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="49.0" layoutX="688.0" layoutY="156.0" onMouseEntered="#russiaEnter" onMouseExited="#russiaExit" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="300.0" />
+      <Rectangle fx:id="russiaMapThree" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="14.0" layoutX="763.0" layoutY="255.0" onMouseEntered="#russiaEnter" onMouseExited="#russiaExit" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="182.0" />
+      <Rectangle fx:id="russiaMapFour" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="23.0" layoutX="640.0" layoutY="254.0" onMouseEntered="#russiaEnter" onMouseExited="#russiaExit" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="71.0" />
+      <Rectangle fx:id="russiaMapFive" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="18.0" layoutX="770.0" layoutY="265.0" onMouseEntered="#russiaEnter" onMouseExited="#russiaExit" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="104.0" />
+      <Rectangle fx:id="russiaMapSix" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="19.0" layoutX="896.0" layoutY="265.0" onMouseEntered="#russiaEnter" onMouseExited="#russiaExit" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="37.0" />
+      <Rectangle fx:id="russiaMapSeven" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="38.0" layoutX="659.0" layoutY="269.0" onMouseEntered="#russiaEnter" onMouseExited="#russiaExit" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+      <Rectangle fx:id="chinaMapOne" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="62.0" layoutX="819.0" layoutY="306.0" onMouseEntered="#chinaEnter" onMouseExited="#chinaExit" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="61.0" />
+      <Ellipse fx:id="chinaMapTwo" fill="#f4ff1f" layoutX="790.0" layoutY="319.0" onMouseEntered="#chinaEnter" onMouseExited="#chinaExit" opacity="0.17" radiusX="33.0" radiusY="28.0" stroke="BLACK" strokeType="INSIDE" />
+      <Rectangle fx:id="chinaMapThree" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="23.0" layoutX="855.0" layoutY="287.0" onMouseEntered="#chinaEnter" onMouseExited="#chinaExit" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="61.0" />
+      <Rectangle fx:id="chinaMapFour" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="22.0" layoutX="875.0" layoutY="270.0" onMouseEntered="#chinaEnter" onMouseExited="#chinaExit" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="19.0" />
+      <Rectangle fx:id="brazilMapOne" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="81.0" layoutX="399.0" layoutY="422.0" onMouseEntered="#brazilEnter" onMouseExited="#brazilExit" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="62.0" />
+      <Rectangle fx:id="brazilMapTwo" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="39.0" layoutX="364.0" layoutY="426.0" onMouseEntered="#brazilEnter" onMouseExited="#brazilExit" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="46.0" />
+      <Rectangle fx:id="brazilMapThree" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="18.0" layoutX="402.0" layoutY="501.0" onMouseEntered="#brazilEnter" onMouseExited="#brazilExit" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+      <Rectangle fx:id="argentinaMapOne" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="63.0" layoutX="361.0" layoutY="490.0" onMouseEntered="#argentinaEnter" onMouseExited="#argentinaExit" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="37.0" />
+      <Rectangle fx:id="argentinaMapTwo" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="74.0" layoutX="357.0" layoutY="522.0" onMouseEntered="#argentinaEnter" onMouseExited="#argentinaExit" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="22.0" />
+      <Rectangle fx:id="indiaMapOne" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="26.0" layoutX="736.0" layoutY="348.0" onMouseEntered="#indiaEnter" onMouseExited="#indiaExit" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="56.0" />
+      <Rectangle fx:id="indiaMapTwo" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="56.0" layoutX="748.0" layoutY="358.0" onMouseEntered="#indiaEnter" onMouseExited="#inidaExit" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle fx:id="indiaMapThree" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="17.0" layoutX="751.0" layoutY="333.0" onMouseEntered="#indiaEnter" onMouseExited="#indiaExit" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="11.0" />
+      <Rectangle fx:id="indiaMapFour" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="8.0" layoutX="759.0" layoutY="342.0" onMouseEntered="#indiaEnter" onMouseExited="#indiaExit" opacity="0.28" stroke="BLACK" strokeType="INSIDE" width="13.0" />
    </children>
 </Pane>
