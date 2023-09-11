@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="865.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.LockerController">
+   <children>
+      <ImageView fitHeight="675.0" fitWidth="878.0" layoutX="-3.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/locker.jpeg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="358.0" layoutY="396.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/ball.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="110.0" fitWidth="102.0" layoutX="382.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/note.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="86.0" fitWidth="85.0" layoutX="413.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/note2.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="timerLabel" alignment="CENTER" layoutX="21.0" layoutY="25.0" prefHeight="64.0" prefWidth="140.0" textFill="WHITE">
+         <font>
+            <Font size="45.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
