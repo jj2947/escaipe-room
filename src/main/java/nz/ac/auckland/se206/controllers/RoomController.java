@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -82,7 +83,6 @@ public class RoomController {
     GameState.timer.setClass(timerLabel);
     timerLabel.setText(String.format("%02d:%02d", GameState.totalTime / 60, 0));
     SceneManager.addUi(AppUi.CHAT, App.loadFxml("chat"));
-    SceneManager.addUi(AppUi.LOCKER, App.loadFxml("locker"));
   }
 
   /**

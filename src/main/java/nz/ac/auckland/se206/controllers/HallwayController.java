@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -18,7 +19,6 @@ public class HallwayController {
   @FXML private Rectangle gymDoor;
   @FXML private Rectangle locker1;
   @FXML private Rectangle locker2;
-
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {

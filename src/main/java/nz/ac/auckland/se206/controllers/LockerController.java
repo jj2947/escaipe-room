@@ -2,7 +2,6 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -42,46 +41,16 @@ public class LockerController {
   private int numsEntered = 0;
   private int randNum;
   private int randNum1 = 0;
-  private Timer timer;
 
   public void initialize() {
     // Initialization code goes here
-    timer = GameState.timer;
-    Platform.runLater (() -> updateTimer());
+    GameState.timer.setLocker(timerLabel);
     enterButton.disableProperty().setValue(true);
     randNum = (int) (Math.random() * 100);
     while (randNum1 > 9000 || randNum1 < 1000) {
       randNum1 = (int) (Math.random() * 10000);
     }
     chatLabel.setText("What is " + randNum1 + " + " + randNum + "?");
-  }
-
-  private void updateTimer() {
-    // Update the timer label every second
-    Task<Void> updateLabelTask =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            while (!GameState.isTimeReached) {
-              Platform.runLater(
-                  () ->
-                      timerLabel.setText(
-                          String.format(
-                              "%d:%02d", timer.getCounter() / 60, timer.getCounter() % 60)));
-              ;
-              Thread.sleep(1000); // Wait for 1 second
-            }
-            if (GameState.isTimeReached) {
-              switchToEndScene();
-            }
-            return null;
-          }
-        };
-
-    // Create a new thread for the update task and start it
-    Thread updateThread = new Thread(updateLabelTask);
-    updateThread.setDaemon(true);
-    updateThread.start();
   }
 
   private void switchToEndScene() {

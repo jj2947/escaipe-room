@@ -12,6 +12,7 @@ public class Timer {
   private Label classroomLabel;
   private Label hallwayLabel;
   private Label gymLabel;
+  private Label lockerLabel;
 
   public Timer() {}
 
@@ -76,9 +77,14 @@ public class Timer {
     update();
   }
 
+  public void setLocker(Label lab) {
+    lockerLabel = lab;
+    update();
+  }
+
   public void update() {
     // If all three rooms have been loaded the timeline is started synching there label changes
-    if (classroomLabel != null && hallwayLabel != null && gymLabel != null) {
+    if (classroomLabel != null && hallwayLabel != null && gymLabel != null && lockerLabel != null) {
       timeline.setCycleCount(Timeline.INDEFINITE);
       timeline.play();
     }
@@ -90,12 +96,16 @@ public class Timer {
           new KeyFrame(
               Duration.seconds(1),
               e -> {
-                String timeCurrent =
-                    String.format(
-                        "%d:%02d",
-                        GameState.timer.getCounter() / 60, GameState.timer.getCounter() % 60);
-                classroomLabel.setText(timeCurrent);
-                hallwayLabel.setText(timeCurrent);
-                gymLabel.setText(timeCurrent);
+                updateLabels();
               }));
+
+  public void updateLabels() {
+    String timeCurrent =
+        String.format(
+            "%d:%02d", GameState.timer.getCounter() / 60, GameState.timer.getCounter() % 60);
+    classroomLabel.setText(timeCurrent);
+    hallwayLabel.setText(timeCurrent);
+    gymLabel.setText(timeCurrent);
+    lockerLabel.setText(timeCurrent);
+  }
 }
