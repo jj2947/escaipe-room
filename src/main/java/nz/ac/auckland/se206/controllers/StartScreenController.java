@@ -54,6 +54,7 @@ public class StartScreenController {
     try {
       SceneManager.addUi(AppUi.ROOM, App.loadFxml("room"));
       sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
+      sceneButtonIsIn.getWindow().sizeToScene();
     } catch (Exception e) {
       e.printStackTrace();
     }

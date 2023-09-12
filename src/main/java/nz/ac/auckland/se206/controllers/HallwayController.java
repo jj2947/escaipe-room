@@ -7,7 +7,9 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
@@ -20,18 +22,21 @@ public class HallwayController {
   @FXML private Rectangle gymDoor;
   @FXML private Rectangle locker1;
   @FXML private Rectangle locker2;
+  @FXML private Pane chatContainer;
   private Timer timer;
+  private boolean chatAdded;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
     // Initialization code goes here
     timer = GameState.timer;
-    Platform.runLater (() -> updateTimer());
+    Platform.runLater(() -> updateTimer());
   }
 
   @FXML
   public void clickClassroomDoor(MouseEvent event) throws IOException {
     System.out.println("classroom door clicked");
+    chatAdded = false;
 
     // Switching to hallway scene
     Rectangle rectangle = (Rectangle) event.getSource();
@@ -45,6 +50,7 @@ public class HallwayController {
   @FXML
   public void clickGymDoor(MouseEvent event) throws IOException {
     System.out.println("gym door clicked");
+    chatAdded = false;
 
     // Switching to hallway scene
     Rectangle rectangle = (Rectangle) event.getSource();
@@ -94,6 +100,20 @@ public class HallwayController {
     Thread updateThread = new Thread(updateLabelTask);
     updateThread.setDaemon(true);
     updateThread.start();
+  }
+
+  @FXML
+  public void onClickGhost(MouseEvent event) {
+    System.out.println("ghost clicked");
+    // Add the chat to the chat container
+    if (!chatAdded) {
+      chatContainer.getChildren().add(GameState.chatController.getChatPane());
+      chatAdded = true;
+    }
+    // Get the stage from the chatContainer's scene
+    Stage stage = (Stage) timerLabel.getScene().getWindow();
+    // Resize the stage
+    stage.setWidth(1407);
   }
 
   private void switchToEndScene() {

@@ -11,6 +11,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
@@ -24,7 +25,9 @@ public class RoomController {
   @FXML private Rectangle window;
   @FXML private Rectangle vase;
   @FXML private Label timerLabel;
+  @FXML private Pane chatContainer;
   private Timer timer;
+  private boolean chatAdded;
 
   /**
    * Initializes the room view, it is called when the room loads.
@@ -36,10 +39,10 @@ public class RoomController {
     // Start the timer
     timer = new Timer(timerLabel);
     GameState.timer = timer;
-    SceneManager.addUi(AppUi.HALLWAY, App.loadFxml("hallway"));
+
     SceneManager.addUi(AppUi.GYMNASIUM, App.loadFxml("gymnasium"));
-    SceneManager.addUi(AppUi.CHAT, App.loadFxml("chat"));
     SceneManager.addUi(AppUi.LOCKER, App.loadFxml("locker"));
+    SceneManager.addUi(AppUi.HALLWAY, App.loadFxml("hallway"));
     Platform.runLater(() -> startTimer());
   }
 
@@ -115,13 +118,14 @@ public class RoomController {
   @FXML
   public void clickDoor(MouseEvent event) throws IOException {
     System.out.println("hallway door clicked");
+    chatAdded = false;
 
     // Switching to hallway scene
     Rectangle rectangle = (Rectangle) event.getSource();
     Scene sceneRectangleIsIn = rectangle.getScene();
     sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.HALLWAY));
 
-    // Resizing the window so the larger scene fits
+    // Resizing the window so the scene fits
     sceneRectangleIsIn.getWindow().sizeToScene();
   }
 
@@ -147,6 +151,20 @@ public class RoomController {
   @FXML
   public void clickWindow(MouseEvent event) {
     System.out.println("window clicked");
+  }
+
+  @FXML
+  public void onClickGhost(MouseEvent event) {
+    System.out.println("ghost clicked");
+    // Add the chat to the chat container
+    if (!chatAdded) {
+      chatContainer.getChildren().add(GameState.chatController.getChatPane());
+      chatAdded = true;
+    }
+    // Get the stage from the chatContainer's scene
+    Stage stage = (Stage) timerLabel.getScene().getWindow();
+    // Resize the stage
+    stage.setWidth(1407);
   }
 
   private void switchToEndScene() {
