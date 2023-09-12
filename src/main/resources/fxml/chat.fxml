@@ -7,12 +7,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#onKeyReleased" prefHeight="740" prefWidth="1180" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChatController">
+<AnchorPane fx:id="chatPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#onKeyReleased" prefHeight="655.0" prefWidth="222.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChatController">
   <children>
-    <TextArea fx:id="chatTextArea" editable="false" layoutX="35.0" layoutY="26.0" prefHeight="299.0" prefWidth="538.0" wrapText="true" />
-    <TextField fx:id="inputText" layoutX="35.0" layoutY="341.0" prefHeight="26.0" prefWidth="435.0" />
-    <Button fx:id="sendButton" layoutX="505.0" layoutY="342.0" mnemonicParsing="false" onAction="#onSendMessage" text="Send" />
-    <Button fx:id="goBackButton" layoutX="505.0" layoutY="367.0" mnemonicParsing="false" onAction="#onGoBack" text="Go Back" />
+    <TextArea fx:id="chatTextArea" editable="false" layoutX="22.0" layoutY="50.0" prefHeight="528.0" prefWidth="178.0" wrapText="true" />
+    <TextField fx:id="inputText" layoutX="22.0" layoutY="588.0" prefHeight="26.0" prefWidth="179.0" />
+    <Button fx:id="sendButton" layoutX="87.0" layoutY="620.0" mnemonicParsing="false" onAction="#onSendMessage" text="Send" />
+    <Button fx:id="goBackButton" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#onGoBack" text="Close" />
       <Label fx:id="timerLabel" alignment="CENTER" layoutX="1030.0" layoutY="15.0" prefHeight="58.0" prefWidth="141.0">
          <font>
             <Font size="45.0" />

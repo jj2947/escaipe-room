@@ -7,9 +7,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="740.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
+<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="658.0" prefWidth="1176.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
-      <ImageView fitHeight="664.0" fitWidth="1219.0" layoutX="-1.0" layoutY="-4.0" preserveRatio="true">
+      <ImageView fitHeight="664.0" fitWidth="1185.0" layoutX="-1.0" layoutY="-4.0" preserveRatio="true">
          <image>
             <Image url="@../images/Classroom.jpeg" />
          </image>
@@ -27,5 +27,21 @@
             <Font name="Arial Rounded MT Bold" size="27.0" />
          </font>
       </Label>
+      <ImageView fitHeight="269.0" fitWidth="182.0" layoutX="675.0" layoutY="225.0" onMouseClicked="#onClickGhost" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/ghost.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="169.0" fitWidth="257.0" layoutX="792.0" layoutY="131.0" opacity="0.37" pickOnBounds="true">
+         <image>
+            <Image url="@../images/SpeechBubble.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="817.0" layoutY="141.0" prefHeight="100.0" prefWidth="201.0" text="I am a ghost" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="Luminari" size="25.0" />
+         </font>
+      </Label>
+      <Pane fx:id="chatContainer" layoutX="1175.0" layoutY="5.0" prefHeight="655.0" prefWidth="222.0" />
    </children>
 </Pane>

@@ -120,9 +120,9 @@
             <Font size="45.0" />
          </font>
       </Label>
-      <Button fx:id="backButton" layoutX="27.0" layoutY="75.0" mnemonicParsing="false" onAction="#onBack" prefHeight="49.0" prefWidth="109.0" stylesheets="@../css/pinpadStylesheet.css" text="Back">
+      <Button fx:id="backButton" layoutX="27.0" layoutY="75.0" mnemonicParsing="false" onAction="#onBack" prefHeight="49.0" prefWidth="109.0" style="-fx-border-color: none; -fx-background-color: none;" stylesheets="@../css/pinpadStylesheet.css" text="Back" textFill="WHITE">
          <font>
-            <Font size="26.0" />
+            <Font name="Courier" size="26.0" />
          </font>
       </Button>
    </children>
