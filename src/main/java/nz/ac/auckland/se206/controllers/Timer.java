@@ -14,7 +14,7 @@ import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class Timer {
-  private int counter;
+  private int counter = -1;
   private Scene currentScene;
   private Label classroomLabel;
   private Label hallwayLabel;
