@@ -9,7 +9,7 @@ Hallway.jpg
 Classroom.jpg
 <a href="https://slidesdocs.com/background/classroom-geography-lesson-powerpoint-background_07073ef910">Classroom Geography Lesson Background - Slidesdocs</a>
 
-Map.jpeg
+allBlueMap.png, argentinaView.png, australiaView.png, brazilView.png, canadaView.png, chinaView.png, greenlandView.png, indiaView.png, nzView.png, russiaView.png, usaView.png
 Created with <a href="https://www.mapchart.net/world.html">MapChart </a> 
 licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
 
