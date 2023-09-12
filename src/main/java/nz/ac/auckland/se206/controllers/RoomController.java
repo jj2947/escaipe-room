@@ -185,64 +185,124 @@ public class RoomController {
   }
 
   @FXML
-  public void nzEnter() {}
+  public void nzEnter() {
+    nzView.setVisible(true);
+    mapImage.setVisible(false);
+  }
 
   @FXML
-  public void nzExit() {}
+  public void nzExit() {
+    nzView.setVisible(false);
+    mapImage.setVisible(true);
+  }
 
   @FXML
-  public void australiaEnter() {}
+  public void australiaEnter() {
+    australiaView.setVisible(true);
+    mapImage.setVisible(false);
+  }
 
   @FXML
-  public void australiaExit() {}
+  public void australiaExit() {
+    australiaView.setVisible(false);
+    mapImage.setVisible(true);
+  }
 
   @FXML
-  public void argentinaEnter() {}
+  public void argentinaEnter() {
+    argentinaView.setVisible(true);
+    mapImage.setVisible(false);
+  }
 
   @FXML
-  public void argentinaExit() {}
+  public void argentinaExit() {
+    argentinaView.setVisible(false);
+    mapImage.setVisible(true);
+  }
 
   @FXML
-  public void indiaEnter() {}
+  public void indiaEnter() {
+    indiaView.setVisible(true);
+    mapImage.setVisible(false);
+  }
 
   @FXML
-  public void indiaExit() {}
+  public void indiaExit() {
+    indiaView.setVisible(false);
+    mapImage.setVisible(true);
+  }
 
   @FXML
-  public void greenlandEnter() {}
+  public void greenlandEnter() {
+    greenlandView.setVisible(true);
+    mapImage.setVisible(false);
+  }
 
   @FXML
-  public void greenlandExit() {}
+  public void greenlandExit() {
+    greenlandView.setVisible(false);
+    mapImage.setVisible(true);
+  }
 
   @FXML
-  public void brazilEnter() {}
+  public void brazilEnter() {
+    brazilView.setVisible(true);
+    mapImage.setVisible(false);
+  }
 
   @FXML
-  public void brazilExit() {}
+  public void brazilExit() {
+    brazilView.setVisible(false);
+    mapImage.setVisible(true);
+  }
 
   @FXML
-  public void canadaEnter() {}
+  public void canadaEnter() {
+    canadaView.setVisible(true);
+    mapImage.setVisible(false);
+  }
 
   @FXML
-  public void canadaExit() {}
+  public void canadaExit() {
+    canadaView.setVisible(false);
+    mapImage.setVisible(true);
+  }
 
   @FXML
-  public void usaEnter() {}
+  public void usaEnter() {
+    usaView.setVisible(true);
+    mapImage.setVisible(false);
+  }
 
   @FXML
-  public void usaExit() {}
+  public void usaExit() {
+    usaView.setVisible(false);
+    mapImage.setVisible(true);
+  }
 
   @FXML
-  public void chinaEnter() {}
+  public void chinaEnter() {
+    chinaView.setVisible(true);
+    mapImage.setVisible(false);
+  }
 
   @FXML
-  public void chinaExit() {}
+  public void chinaExit() {
+    chinaView.setVisible(false);
+    mapImage.setVisible(true);
+  }
 
   @FXML
-  public void russiaEnter() {}
+  public void russiaEnter() {
+    russiaView.setVisible(true);
+    mapImage.setVisible(false);
+  }
 
   @FXML
-  public void russiaExit() {}
+  public void russiaExit() {
+    russiaView.setVisible(false);
+    mapImage.setVisible(true);
+  }
 
   public void showWhenOnMap() {
     mapImage.setVisible(true);
