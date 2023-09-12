@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -52,7 +51,10 @@ public class StartScreenController {
     }
     // Switching Scenes to the room
     try {
-      SceneManager.addUi(AppUi.ROOM, App.loadFxml("room"));
+      // Starting the timer
+      // THE GAME WILL CRASH IF THE USER SELECTS TIME AND DIFFICULTY BEFORE THE ROOM HAS LOADED
+      // A FIX NEEDS TO BE IN PLACE
+      GameState.timer.startTimer();
       sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
     } catch (Exception e) {
       e.printStackTrace();
@@ -89,18 +91,21 @@ public class StartScreenController {
   @FXML
   private void onTwo() {
     timeButtonClicked(twoButton);
+    GameState.timer.setCounter(120);
   }
 
   /** Setting time to Four */
   @FXML
   private void onFour() {
     timeButtonClicked(fourButton);
+    GameState.timer.setCounter(240);
   }
 
   /** Setting time to Six */
   @FXML
   private void onSix() {
     timeButtonClicked(sixButton);
+    GameState.timer.setCounter(360);
   }
 
   /** Depending on current state label text is changed */
