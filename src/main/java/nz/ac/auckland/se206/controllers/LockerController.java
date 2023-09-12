@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206.controllers;
 
-import java.io.IOException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -10,7 +9,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
-import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -51,23 +49,6 @@ public class LockerController {
       randNum1 = (int) (Math.random() * 10000);
     }
     chatLabel.setText("What is " + randNum1 + " + " + randNum + "?");
-  }
-
-  private void switchToEndScene() {
-    Platform.runLater(
-        () -> {
-          Scene currentScene = timerLabel.getScene();
-          if (currentScene != null) {
-            try {
-              SceneManager.addUi(AppUi.END, App.loadFxml("end"));
-            } catch (IOException e) {
-              // TODO Auto-generated catch block
-              e.printStackTrace();
-            }
-            currentScene.setRoot(SceneManager.getUiRoot(AppUi.END));
-            currentScene.getWindow().sizeToScene();
-          }
-        });
   }
 
   @FXML

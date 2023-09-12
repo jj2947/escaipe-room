@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -384,22 +383,5 @@ public class RoomController {
     russiaMapFive.setVisible(false);
     russiaMapSix.setVisible(false);
     russiaMapSeven.setVisible(false);
-  }
-
-  private void switchToEndScene() {
-    Platform.runLater(
-        () -> {
-          Scene currentScene = timerLabel.getScene();
-          if (currentScene != null) {
-            try {
-              SceneManager.addUi(AppUi.END, App.loadFxml("end"));
-            } catch (IOException e) {
-              // TODO Auto-generated catch block
-              e.printStackTrace();
-            }
-            currentScene.setRoot(SceneManager.getUiRoot(AppUi.END));
-            currentScene.getWindow().sizeToScene();
-          }
-        });
   }
 }

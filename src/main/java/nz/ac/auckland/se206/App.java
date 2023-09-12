@@ -64,7 +64,6 @@ public class App extends Application {
 
     SceneManager.addUi(AppUi.HALLWAY, App.loadFxml("hallway"));
     SceneManager.addUi(AppUi.GYMNASIUM, App.loadFxml("gymnasium"));
-    SceneManager.addUi(AppUi.END, loadFxml("end"));
     SceneManager.addUi(AppUi.STARTSCREEN, loadFxml("startScreen"));
     SceneManager.addUi(AppUi.LOCKER, App.loadFxml("locker"));
 
