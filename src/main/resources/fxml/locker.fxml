@@ -13,70 +13,70 @@
    <children>
       <Pane fx:id="lockerPane" layoutY="1.0" prefHeight="740.0" prefWidth="868.0">
          <children>
+            <Rectangle fx:id="basketball" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="122.0" layoutX="364.0" layoutY="408.0" onMouseClicked="#onClickBasketball" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="133.0" />
             <ImageView fitHeight="675.0" fitWidth="878.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/locker.jpeg" />
                </image>
             </ImageView>
-            <ImageView fx:id="basketball" fitHeight="150.0" fitWidth="200.0" layoutX="358.0" layoutY="396.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="basketballImg" fitHeight="150.0" fitWidth="200.0" layoutX="358.0" layoutY="396.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../images/ball.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="note1" fitHeight="110.0" fitWidth="102.0" layoutX="423.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="note1" fitHeight="110.0" fitWidth="102.0" layoutX="423.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../images/note.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="note2" fitHeight="86.0" fitWidth="85.0" layoutX="391.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="note2" fitHeight="86.0" fitWidth="85.0" layoutX="391.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../images/note2.png" />
                </image>
             </ImageView>
-            <Rectangle fx:id="basketball" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="122.0" layoutX="364.0" layoutY="408.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="133.0" />
-            <Pane layoutX="-1.0" layoutY="-3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="743.0" prefWidth="869.0" styleClass="pane" stylesheets="@../css/pinpadStylesheet.css">
+            <Pane fx:id="pinpad" layoutX="-1.0" layoutY="-3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="743.0" prefWidth="869.0" styleClass="pane" stylesheets="@../css/pinpadStylesheet.css">
                <children>
-                  <Button fx:id="oneButton" layoutX="244.0" layoutY="187.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickOne" prefHeight="100.0" prefWidth="100.0" stylesheets="@../../../../../escaipe-room-alpha-jj2947/src/main/resources/css/stylesheet.css" text="1">
+                  <Button fx:id="oneButton" layoutX="244.0" layoutY="187.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickOne" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="1">
                      <font>
                         <Font size="45.0" />
                      </font>
                   </Button>
-                  <Button fx:id="twoButton" layoutX="384.0" layoutY="187.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickTwo" prefHeight="100.0" prefWidth="100.0" stylesheets="@../../../../../escaipe-room-alpha-jj2947/src/main/resources/css/stylesheet.css" text="2">
+                  <Button fx:id="twoButton" layoutX="384.0" layoutY="187.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickTwo" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="2">
                      <font>
                         <Font size="45.0" />
                      </font>
                   </Button>
-                  <Button fx:id="threeButton" layoutX="524.0" layoutY="187.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickThree" prefHeight="100.0" prefWidth="100.0" stylesheets="@../../../../../escaipe-room-alpha-jj2947/src/main/resources/css/stylesheet.css" text="3">
+                  <Button fx:id="threeButton" layoutX="524.0" layoutY="187.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickThree" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="3">
                      <font>
                         <Font size="45.0" />
                      </font>
                   </Button>
-                  <Button fx:id="fourButton" layoutX="244.0" layoutY="304.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickFour" prefHeight="100.0" prefWidth="100.0" stylesheets="@../../../../../escaipe-room-alpha-jj2947/src/main/resources/css/stylesheet.css" text="4">
+                  <Button fx:id="fourButton" layoutX="244.0" layoutY="304.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickFour" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="4">
                      <font>
                         <Font size="45.0" />
                      </font>
                   </Button>
-                  <Button fx:id="fiveButton" layoutX="384.0" layoutY="304.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickFive" prefHeight="100.0" prefWidth="100.0" stylesheets="@../../../../../escaipe-room-alpha-jj2947/src/main/resources/css/stylesheet.css" text="5">
+                  <Button fx:id="fiveButton" layoutX="384.0" layoutY="304.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickFive" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="5">
                      <font>
                         <Font size="45.0" />
                      </font>
                   </Button>
-                  <Button fx:id="sixButton" layoutX="524.0" layoutY="304.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickSix" prefHeight="100.0" prefWidth="100.0" stylesheets="@../../../../../escaipe-room-alpha-jj2947/src/main/resources/css/stylesheet.css" text="6">
+                  <Button fx:id="sixButton" layoutX="524.0" layoutY="304.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickSix" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="6">
                      <font>
                         <Font size="45.0" />
                      </font>
                   </Button>
-                  <Button fx:id="sevenButton" layoutX="244.0" layoutY="420.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickSeven" prefHeight="100.0" prefWidth="100.0" stylesheets="@../../../../../escaipe-room-alpha-jj2947/src/main/resources/css/stylesheet.css" text="7">
+                  <Button fx:id="sevenButton" layoutX="244.0" layoutY="420.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickSeven" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="7">
                      <font>
                         <Font size="45.0" />
                      </font>
                   </Button>
-                  <Button fx:id="eightButton" layoutX="385.0" layoutY="420.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickEight" prefHeight="100.0" prefWidth="100.0" stylesheets="@../../../../../escaipe-room-alpha-jj2947/src/main/resources/css/stylesheet.css" text="8">
+                  <Button fx:id="eightButton" layoutX="385.0" layoutY="420.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickEight" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="8">
                      <font>
                         <Font size="45.0" />
                      </font>
                   </Button>
-                  <Button fx:id="nineButton" layoutX="524.0" layoutY="420.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickNine" prefHeight="100.0" prefWidth="100.0" stylesheets="@../../../../../escaipe-room-alpha-jj2947/src/main/resources/css/stylesheet.css" text="9">
+                  <Button fx:id="nineButton" layoutX="524.0" layoutY="420.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickNine" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="9">
                      <font>
                         <Font size="45.0" />
                      </font>
@@ -86,17 +86,17 @@
                         <Font size="75.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="enterButton" layoutX="344.0" layoutY="659.0" mnemonicParsing="false" onAction="#onEnter" prefHeight="55.0" prefWidth="180.0" stylesheets="@../../../../../escaipe-room-alpha-jj2947/src/main/resources/css/stylesheet.css" text="Enter">
+                  <Button fx:id="enterButton" layoutX="344.0" layoutY="659.0" mnemonicParsing="false" onAction="#onEnter" prefHeight="55.0" prefWidth="180.0" stylesheets="@../css/pinpadStylesheet.css" text="Enter">
                      <font>
                         <Font name="System Font" size="29.0" />
                      </font>
                   </Button>
-                  <Button fx:id="backButton" layoutX="31.0" layoutY="76.0" mnemonicParsing="false" onAction="#onBack" prefHeight="49.0" prefWidth="109.0" stylesheets="@../../../../../escaipe-room-alpha-jj2947/src/main/resources/css/stylesheet.css" text="Back">
+                  <Button fx:id="backButton" layoutX="31.0" layoutY="76.0" mnemonicParsing="false" onAction="#onBack" prefHeight="49.0" prefWidth="109.0" stylesheets="@../css/pinpadStylesheet.css" text="Back">
                      <font>
                         <Font size="26.0" />
                      </font>
                   </Button>
-                  <Button fx:id="helpButton" layoutX="643.0" layoutY="661.0" mnemonicParsing="false" onAction="#onClickHelp" prefHeight="55.0" prefWidth="180.0" stylesheets="@../../../../../escaipe-room-alpha-jj2947/src/main/resources/css/stylesheet.css" text="Help">
+                  <Button fx:id="helpButton" layoutX="643.0" layoutY="661.0" mnemonicParsing="false" onAction="#onClickHelp" prefHeight="55.0" prefWidth="180.0" stylesheets="@../css/pinpadStylesheet.css" text="Question">
                      <font>
                         <Font size="28.0" />
                      </font>
@@ -106,12 +106,12 @@
                         <Font name="Courier Bold" size="23.0" />
                      </font>
                   </Label>
-                  <Button fx:id="clearButton" layoutX="55.0" layoutY="661.0" mnemonicParsing="false" onAction="#onClear" prefHeight="55.0" prefWidth="180.0" stylesheets="@../../../../../escaipe-room-alpha-jj2947/src/main/resources/css/stylesheet.css" text="Clear">
+                  <Button fx:id="clearButton" layoutX="55.0" layoutY="661.0" mnemonicParsing="false" onAction="#onClear" prefHeight="55.0" prefWidth="180.0" stylesheets="@../css/pinpadStylesheet.css" text="Clear">
                      <font>
                         <Font size="28.0" />
                      </font>
                   </Button>
-                  <Button fx:id="zeroButton" layoutX="384.0" layoutY="540.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickZero" prefHeight="100.0" prefWidth="100.0" stylesheets="@../../../../../escaipe-room-alpha-jj2947/src/main/resources/css/stylesheet.css" text="0">
+                  <Button fx:id="zeroButton" layoutX="384.0" layoutY="540.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickZero" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="0">
                      <font>
                         <Font size="45.0" />
                      </font>
