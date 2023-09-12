@@ -24,4 +24,12 @@ public class GameState {
   public static Timer timer;
 
   public static ChatController chatController;
+
+  public static boolean chatInRoom;
+
+  public static boolean chatInHall;
+
+  public static boolean chatInLocker;
+
+  public static boolean chatInGym;
 }

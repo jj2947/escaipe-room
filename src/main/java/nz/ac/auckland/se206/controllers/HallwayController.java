@@ -24,7 +24,6 @@ public class HallwayController {
   @FXML private Rectangle locker2;
   @FXML private Pane chatContainer;
   private Timer timer;
-  private boolean chatAdded;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
@@ -36,7 +35,6 @@ public class HallwayController {
   @FXML
   public void clickClassroomDoor(MouseEvent event) throws IOException {
     System.out.println("classroom door clicked");
-    chatAdded = false;
 
     // Switching to hallway scene
     Rectangle rectangle = (Rectangle) event.getSource();
@@ -50,7 +48,6 @@ public class HallwayController {
   @FXML
   public void clickGymDoor(MouseEvent event) throws IOException {
     System.out.println("gym door clicked");
-    chatAdded = false;
 
     // Switching to hallway scene
     Rectangle rectangle = (Rectangle) event.getSource();
@@ -105,15 +102,18 @@ public class HallwayController {
   @FXML
   public void onClickGhost(MouseEvent event) {
     System.out.println("ghost clicked");
-    // Add the chat to the chat container
-    if (!chatAdded) {
-      chatContainer.getChildren().add(GameState.chatController.getChatPane());
-      chatAdded = true;
-    }
     // Get the stage from the chatContainer's scene
     Stage stage = (Stage) timerLabel.getScene().getWindow();
     // Resize the stage
     stage.setWidth(1407);
+     // Add the chat to the chat container
+    if (!GameState.chatInHall) {
+      GameState.chatInGym = false;
+      GameState.chatInRoom = false;
+      GameState.chatInLocker = false;
+      chatContainer.getChildren().add(GameState.chatController.getChatPane());
+      GameState.chatInHall = true;
+    }
   }
 
   private void switchToEndScene() {
