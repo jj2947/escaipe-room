@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.controllers.Timer;
 
 /**
  * This is the entry point of the JavaFX application, while you can change this class, it should
@@ -45,6 +46,24 @@ public class App extends Application {
   @Override
   public void start(final Stage stage) throws IOException {
 
+    // Timer for the whole game
+    GameState.timer = new Timer();
+
+    // Thread to load the room
+    // CHANCE OF ERROR IF THE USER STARTS CLICKING STUFF FAST
+    Thread loadRoom =
+        new Thread(
+            () -> {
+              try {
+                SceneManager.addUi(AppUi.ROOM, App.loadFxml("room"));
+              } catch (IOException e) {
+                e.printStackTrace();
+              }
+            });
+    loadRoom.start();
+
+    SceneManager.addUi(AppUi.HALLWAY, App.loadFxml("hallway"));
+    SceneManager.addUi(AppUi.GYMNASIUM, App.loadFxml("gymnasium"));
     SceneManager.addUi(AppUi.END, loadFxml("end"));
     SceneManager.addUi(AppUi.STARTSCREEN, loadFxml("startScreen"));
 

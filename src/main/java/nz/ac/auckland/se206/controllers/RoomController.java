@@ -1,8 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -73,8 +71,6 @@ public class RoomController {
   @FXML private Rectangle indiaMapThree;
   @FXML private Rectangle indiaMapFour;
 
-  private Timer timer;
-
   /**
    * Initializes the room view, it is called when the room loads.
    *
@@ -82,39 +78,11 @@ public class RoomController {
    */
   public void initialize() throws IOException {
     // Initialization code goes here
-    // Start the timer
-    timer = new Timer(timerLabel);
-    GameState.timer = timer;
-    SceneManager.addUi(AppUi.HALLWAY, App.loadFxml("hallway"));
-    SceneManager.addUi(AppUi.GYMNASIUM, App.loadFxml("gymnasium"));
+    // Adding timerLabel to synched timer
+    GameState.timer.setClass(timerLabel);
+    timerLabel.setText(String.format("%02d:%02d", GameState.totalTime / 60, 0));
+    // updateTimer();
     SceneManager.addUi(AppUi.CHAT, App.loadFxml("chat"));
-    Platform.runLater(() -> startTimer());
-  }
-
-  private void startTimer() {
-    timer.startTimer();
-    // Update the timer label every second
-    Task<Void> updateLabelTask =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            while (!GameState.isTimeReached) {
-              Platform.runLater(() -> updateLabel());
-              Thread.sleep(1000);
-            }
-            return null;
-          }
-        };
-
-    // Create a new thread for the update task and start it
-    Thread updateThread = new Thread(updateLabelTask);
-    updateThread.setDaemon(true);
-    updateThread.start();
-  }
-
-  private void updateLabel() {
-    timerLabel.setText(
-        String.format("%02d:%02d", timer.getCounter() / 60, timer.getCounter() % 60));
   }
 
   /**

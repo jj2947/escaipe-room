@@ -1,8 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -17,13 +15,12 @@ public class HallwayController {
   @FXML private Label timerLabel;
   @FXML private Rectangle classroomDoor;
   @FXML private Rectangle gymDoor;
-  private Timer timer;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
     // Initialization code goes here
-    timer = GameState.timer;
-    updateTimer();
+    // Adding timerlabel to synched timer
+    GameState.timer.setHall(timerLabel);
   }
 
   @FXML
@@ -50,30 +47,5 @@ public class HallwayController {
 
     // Resizing the window so the larger scene fits
     sceneRectangleIsIn.getWindow().sizeToScene();
-  }
-
-  private void updateTimer() {
-    // Update the timer label every second
-    Task<Void> updateLabelTask =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            while (!GameState.isTimeReached) {
-              Platform.runLater(
-                  () ->
-                      timerLabel.setText(
-                          String.format(
-                              "%02d:%02d", timer.getCounter() / 60, timer.getCounter() % 60)));
-              ;
-              Thread.sleep(1000); // Wait for 1 second
-            }
-            return null;
-          }
-        };
-
-    // Create a new thread for the update task and start it
-    Thread updateThread = new Thread(updateLabelTask);
-    updateThread.setDaemon(true);
-    updateThread.start();
   }
 }
