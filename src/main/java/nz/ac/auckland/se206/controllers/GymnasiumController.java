@@ -22,7 +22,7 @@ public class GymnasiumController {
   public void initialize() {
     // Initialization code goes here
     timer = GameState.timer;
-    Platform.runLater(() -> updateTimer());
+    updateTimer();
   }
 
   private void updateTimer() {

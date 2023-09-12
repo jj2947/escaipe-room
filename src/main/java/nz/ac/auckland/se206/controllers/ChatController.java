@@ -45,7 +45,7 @@ public class ChatController {
     runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("vase")));
 
     timer = GameState.timer;
-    Platform.runLater(() -> updateTimer());
+    updateTimer();
   }
 
   /**

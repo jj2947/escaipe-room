@@ -6,6 +6,7 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
@@ -13,6 +14,9 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class LockerController {
   @FXML private Label timerLabel;
+  @FXML private ImageView basketball;
+  @FXML private ImageView note1;
+  @FXML private ImageView note2;
   private Timer timer;
 
   public void initialize() {
