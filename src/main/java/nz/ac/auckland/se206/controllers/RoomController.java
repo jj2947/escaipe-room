@@ -39,6 +39,7 @@ public class RoomController {
     SceneManager.addUi(AppUi.HALLWAY, App.loadFxml("hallway"));
     SceneManager.addUi(AppUi.GYMNASIUM, App.loadFxml("gymnasium"));
     SceneManager.addUi(AppUi.CHAT, App.loadFxml("chat"));
+    SceneManager.addUi(AppUi.LOCKER, App.loadFxml("locker"));
     Platform.runLater(() -> startTimer());
   }
 

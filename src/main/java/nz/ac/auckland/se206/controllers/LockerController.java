@@ -238,6 +238,7 @@ public class LockerController {
       // Open Locker
       pinpad.setVisible(false);
       basketballImg.setVisible(true);
+      basketball.toFront();
       note1.setVisible(true);
       note2.setVisible(true);
     } else {
