@@ -81,8 +81,8 @@ public class RoomController {
     // Adding timerLabel to synched timer
     GameState.timer.setClass(timerLabel);
     timerLabel.setText(String.format("%02d:%02d", GameState.totalTime / 60, 0));
-    // updateTimer();
     SceneManager.addUi(AppUi.CHAT, App.loadFxml("chat"));
+    SceneManager.addUi(AppUi.LOCKER, App.loadFxml("locker"));
   }
 
   /**
@@ -384,5 +384,22 @@ public class RoomController {
     russiaMapFive.setVisible(false);
     russiaMapSix.setVisible(false);
     russiaMapSeven.setVisible(false);
+  }
+
+  private void switchToEndScene() {
+    Platform.runLater(
+        () -> {
+          Scene currentScene = timerLabel.getScene();
+          if (currentScene != null) {
+            try {
+              SceneManager.addUi(AppUi.END, App.loadFxml("end"));
+            } catch (IOException e) {
+              // TODO Auto-generated catch block
+              e.printStackTrace();
+            }
+            currentScene.setRoot(SceneManager.getUiRoot(AppUi.END));
+            currentScene.getWindow().sizeToScene();
+          }
+        });
   }
 }

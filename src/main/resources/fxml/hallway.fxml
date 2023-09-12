@@ -31,5 +31,7 @@
             <Font name="Palatino" size="15.0" />
          </font>
       </Label>
+      <Rectangle fx:id="locker1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="312.0" layoutX="258.0" layoutY="252.0" onMouseClicked="#clickLocker" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="206.0" />
+      <Rectangle fx:id="locker2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="235.0" layoutX="841.0" layoutY="294.0" onMouseClicked="#clickLocker" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="158.0" />
    </children>
 </Pane>
