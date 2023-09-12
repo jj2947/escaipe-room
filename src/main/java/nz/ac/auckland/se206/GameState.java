@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206;
 
+import nz.ac.auckland.se206.controllers.ChatController;
 import nz.ac.auckland.se206.controllers.Timer;
 
 /** Represents the state of the game. */
@@ -22,4 +23,5 @@ public class GameState {
 
   public static Timer timer;
 
+  public static ChatController chatController;
 }

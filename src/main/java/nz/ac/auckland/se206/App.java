@@ -45,10 +45,19 @@ public class App extends Application {
   @Override
   public void start(final Stage stage) throws IOException {
 
+    // Load the Chat.fxml and create its controller
+    FXMLLoader chatLoader = new FXMLLoader(getClass().getResource("/fxml/chat.fxml"));
+    chatLoader.load();
+    GameState.chatController = chatLoader.getController();
+
     SceneManager.addUi(AppUi.STARTSCREEN, loadFxml("startScreen"));
+    SceneManager.addUi(AppUi.CHAT, loadFxml("chat"));
 
     scene = new Scene(SceneManager.getUiRoot(AppUi.STARTSCREEN));
     stage.setScene(scene);
+    // Set the X and Y coordinates to 0 to open the window at the very left of the screen
+    stage.setX(0);
+    stage.setY(0);
     stage.show();
   }
 }
