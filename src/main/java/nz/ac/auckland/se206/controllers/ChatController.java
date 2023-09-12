@@ -7,14 +7,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import nz.ac.auckland.se206.App;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.SceneManager;
-import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -28,8 +26,7 @@ public class ChatController {
   @FXML private TextField inputText;
   @FXML private Button sendButton;
   @FXML private Button goBackButton;
-  @FXML private Label timerLabel;
-  private Timer timer;
+  @FXML private AnchorPane chatPane;
 
   private ChatCompletionRequest chatCompletionRequest;
   private ChatMessage chatMsg;
@@ -44,9 +41,6 @@ public class ChatController {
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
     runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("vase")));
-
-    timer = GameState.timer;
-    updateTimer();
   }
 
   /**
@@ -145,13 +139,11 @@ public class ChatController {
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();
-    // Switching Scenes to the room
-    // Needs to be changed later on so that it goes back to the most recent room
-    try {
-      sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    // Close chat window
+    // Get the stage from the chatContainer's scene
+    Stage stage = (Stage) sceneButtonIsIn.getWindow();
+    // Resize the stage
+    stage.setWidth(1176);
   }
 
   /**
@@ -171,48 +163,7 @@ public class ChatController {
     }
   }
 
-  private void updateTimer() {
-    // Update the timer label every second
-    Task<Void> updateLabelTask =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            while (!GameState.isTimeReached) {
-              Platform.runLater(
-                  () ->
-                      timerLabel.setText(
-                          String.format(
-                              "%d:%02d", timer.getCounter() / 60, timer.getCounter() % 60)));
-              ;
-              Thread.sleep(1000); // Wait for 1 second
-            }
-            if (GameState.isTimeReached) {
-              switchToEndScene();
-            }
-            return null;
-          }
-        };
-
-    // Create a new thread for the update task and start it
-    Thread updateThread = new Thread(updateLabelTask);
-    updateThread.setDaemon(true);
-    updateThread.start();
-  }
-
-  private void switchToEndScene() {
-    Platform.runLater(
-        () -> {
-          Scene currentScene = timerLabel.getScene();
-          if (currentScene != null) {
-            try {
-              SceneManager.addUi(AppUi.END, App.loadFxml("end"));
-            } catch (IOException e) {
-              // TODO Auto-generated catch block
-              e.printStackTrace();
-            }
-            currentScene.setRoot(SceneManager.getUiRoot(AppUi.END));
-            currentScene.getWindow().sizeToScene();
-          }
-        });
+  public AnchorPane getChatPane() {
+    return chatPane;
   }
 }
