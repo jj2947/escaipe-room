@@ -1,0 +1,13 @@
+.button {
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+}
+
+.pane {
+    -fx-background-color: rgba(109, 109, 109, 0.685);
+}
+
+.button:disabled .hintButton:disabled{
+    -fx-opacity: 0.5;
+}
