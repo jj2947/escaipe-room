@@ -25,11 +25,54 @@ public class RoomController {
   @FXML private Rectangle door;
   @FXML private Label timerLabel;
   @FXML private ImageView mapImage;
-  @FXML private Ellipse mapEclipse;
+  @FXML private Ellipse mapEllipse;
   @FXML private Rectangle mapRectangleOne;
   @FXML private Rectangle mapRectangleTwo;
   @FXML private Label goBackLabel;
   @FXML private ImageView classroomImage;
+  @FXML private ImageView nzView;
+  @FXML private ImageView australiaView;
+  @FXML private ImageView argentinaView;
+  @FXML private ImageView indiaView;
+  @FXML private ImageView greenlandView;
+  @FXML private ImageView brazilView;
+  @FXML private ImageView canadaView;
+  @FXML private ImageView usaView;
+  @FXML private ImageView chinaView;
+  @FXML private ImageView russiaView;
+  @FXML private Ellipse nzMap;
+  @FXML private Ellipse australiaMap;
+  @FXML private Ellipse greenlandMapOne;
+  @FXML private Rectangle greenlandMapTwo;
+  @FXML private Rectangle usaMapOne;
+  @FXML private Rectangle usaMapTwo;
+  @FXML private Rectangle usaMapThree;
+  @FXML private Rectangle usaMapFour;
+  @FXML private Rectangle canadaMapOne;
+  @FXML private Rectangle canadaMapTwo;
+  @FXML private Rectangle canadaMapThree;
+  @FXML private Rectangle canadaMapFour;
+  @FXML private Rectangle russiaMapOne;
+  @FXML private Rectangle russiaMapTwo;
+  @FXML private Rectangle russiaMapThree;
+  @FXML private Rectangle russiaMapFour;
+  @FXML private Rectangle russiaMapFive;
+  @FXML private Rectangle russiaMapSix;
+  @FXML private Rectangle russiaMapSeven;
+  @FXML private Rectangle chinaMapOne;
+  @FXML private Ellipse chinaMapTwo;
+  @FXML private Rectangle chinaMapThree;
+  @FXML private Rectangle chinaMapFour;
+  @FXML private Rectangle brazilMapOne;
+  @FXML private Rectangle brazilMapTwo;
+  @FXML private Rectangle brazilMapThree;
+  @FXML private Rectangle argentinaMapOne;
+  @FXML private Rectangle argentinaMapTwo;
+  @FXML private Rectangle indiaMapOne;
+  @FXML private Rectangle indiaMapTwo;
+  @FXML private Rectangle indiaMapThree;
+  @FXML private Rectangle indiaMapFour;
+
   private Timer timer;
 
   /**
@@ -130,12 +173,14 @@ public class RoomController {
   @FXML
   public void clickMap() {
     disableWhileMapOpen();
+    enableCountries();
     showWhenOnMap();
   }
 
   @FXML
   public void exitMap() {
     enableWithMapClose();
+    disableCounties();
     hideAfterMap();
   }
 
@@ -212,16 +257,104 @@ public class RoomController {
   }
 
   public void disableWhileMapOpen() {
-    mapEclipse.setDisable(true);
+    mapEllipse.setDisable(true);
     mapRectangleOne.setDisable(true);
     mapRectangleTwo.setDisable(true);
     door.setDisable(true);
   }
 
   public void enableWithMapClose() {
-    mapEclipse.setDisable(false);
+    mapEllipse.setDisable(false);
     mapRectangleOne.setDisable(false);
     mapRectangleTwo.setDisable(false);
     door.setDisable(false);
+  }
+
+  public void enableCountries() {
+    nzMap.setVisible(true);
+
+    australiaMap.setVisible(true);
+
+    argentinaMapOne.setVisible(true);
+    argentinaMapTwo.setVisible(true);
+
+    indiaMapOne.setVisible(true);
+    indiaMapTwo.setVisible(true);
+    indiaMapThree.setVisible(true);
+    indiaMapFour.setVisible(true);
+
+    greenlandMapOne.setVisible(true);
+    greenlandMapTwo.setVisible(true);
+
+    brazilMapOne.setVisible(true);
+    brazilMapTwo.setVisible(true);
+    brazilMapThree.setVisible(true);
+
+    canadaMapOne.setVisible(true);
+    canadaMapTwo.setVisible(true);
+    canadaMapThree.setVisible(true);
+    canadaMapFour.setVisible(true);
+
+    usaMapOne.setVisible(true);
+    usaMapTwo.setVisible(true);
+    usaMapThree.setVisible(true);
+    usaMapFour.setVisible(true);
+
+    chinaMapOne.setVisible(true);
+    chinaMapTwo.setVisible(true);
+    chinaMapThree.setVisible(true);
+    chinaMapFour.setVisible(true);
+
+    russiaMapOne.setVisible(true);
+    russiaMapTwo.setVisible(true);
+    russiaMapThree.setVisible(true);
+    russiaMapFour.setVisible(true);
+    russiaMapFive.setVisible(true);
+    russiaMapSix.setVisible(true);
+    russiaMapSeven.setVisible(true);
+  }
+
+  public void disableCounties() {
+    nzMap.setVisible(false);
+
+    australiaMap.setVisible(false);
+
+    argentinaMapOne.setVisible(false);
+    argentinaMapTwo.setVisible(false);
+
+    indiaMapOne.setVisible(false);
+    indiaMapTwo.setVisible(false);
+    indiaMapThree.setVisible(false);
+    indiaMapFour.setVisible(false);
+
+    greenlandMapOne.setVisible(false);
+    greenlandMapTwo.setVisible(false);
+
+    brazilMapOne.setVisible(false);
+    brazilMapTwo.setVisible(false);
+    brazilMapThree.setVisible(false);
+
+    canadaMapOne.setVisible(false);
+    canadaMapTwo.setVisible(false);
+    canadaMapThree.setVisible(false);
+    canadaMapFour.setVisible(false);
+
+    usaMapOne.setVisible(false);
+    usaMapTwo.setVisible(false);
+    usaMapThree.setVisible(false);
+    usaMapFour.setVisible(false);
+
+    chinaMapOne.setVisible(false);
+    chinaMapTwo.setVisible(false);
+    chinaMapThree.setVisible(false);
+    chinaMapFour.setVisible(false);
+
+    russiaMapOne.setVisible(false);
+    russiaMapTwo.setVisible(false);
+    russiaMapThree.setVisible(false);
+    russiaMapFour.setVisible(false);
+    russiaMapFive.setVisible(false);
+    russiaMapSix.setVisible(false);
+    russiaMapSeven.setVisible(false);
   }
 }
