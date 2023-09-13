@@ -9,8 +9,9 @@ Hallway.jpg
 Classroom.jpg
 <a href="https://slidesdocs.com/background/classroom-geography-lesson-powerpoint-background_07073ef910">Classroom Geography Lesson Background - Slidesdocs</a>
 
-Map.png
-<a href="https://www.freepik.com/free-vector/illustration-global-icon_2687446.htm#query=world%20map&position=0&from_view=keyword&track=ais">Image by rawpixel.com</a> on Freepik
+allBlueMap.png, argentinaView.png, australiaView.png, brazilView.png, canadaView.png, chinaView.png, greenlandView.png, indiaView.png, nzView.png, russiaView.png, usaView.png
+Created with <a href="https://www.mapchart.net/world.html">MapChart </a> 
+licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
 
 Man.png
 <a href="https://www.freepik.com/free-vector/anonymous-worker_931287.htm#query=mysterious%20man&position=8&from_view=search&track=ais">Image by ibrandify</a> on Freepik

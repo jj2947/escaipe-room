@@ -19,8 +19,8 @@ public class GameState {
   /** Represents number of hints left, dependant on used and difficulty */
   public static int numberOfHints;
 
-  /** The time choosen by the user */
-  public static int totalTime;
+  /** The time choosen by the user, set early for some reason cant remember rn */
+  public static int totalTime = 10000;
 
   public static Timer timer;
 
