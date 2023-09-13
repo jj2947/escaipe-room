@@ -25,7 +25,7 @@ public class ChatController {
   @FXML private TextArea chatTextArea;
   @FXML private TextField inputText;
   @FXML private Button sendButton;
-  @FXML private Button goBackButton;
+  //@FXML private Button goBackButton;
   @FXML private AnchorPane chatPane;
 
   private ChatCompletionRequest chatCompletionRequest;
@@ -86,7 +86,7 @@ public class ChatController {
                     }
                     // Enabling Buttons after API has finished loading
                     sendButton.setDisable(false);
-                    goBackButton.setDisable(false);
+                    //goBackButton.setDisable(false);
                     inputText.setDisable(false);
                   });
             } catch (Exception e) {
@@ -105,7 +105,7 @@ public class ChatController {
     gptThread.start();
     // Disabling Buttons while API is loading
     sendButton.setDisable(true);
-    goBackButton.setDisable(true);
+    //goBackButton.setDisable(true);
     inputText.setDisable(true);
     return chatMsg;
   }
@@ -129,6 +129,20 @@ public class ChatController {
     runGpt(msg);
   }
 
+  @FXML
+  private void onEnterPressed(KeyEvent event) throws ApiProxyException, IOException {
+    if (event.getCode().toString().equals("ENTER")) {
+      String message = inputText.getText();
+      if (message.trim().isEmpty()) {
+        return;
+      }
+      inputText.clear();
+      ChatMessage msg = new ChatMessage("user", message);
+      appendChatMessage(msg);
+      runGpt(msg);
+    }
+  } 
+
   /**
    * Navigates back to the previous view.
    *
@@ -144,18 +158,18 @@ public class ChatController {
     // Get the stage from the chatContainer's scene
     Stage stage = (Stage) sceneButtonIsIn.getWindow();
     // Resize the stage
-    stage.setWidth(1176);
+    stage.setWidth(1180);
     GameState.isChatOpen = false;
   }
 
   public void closeChat() {
     Stage stage = (Stage) chatPane.getScene().getWindow();
-   stage.setWidth(1176);
+    stage.setWidth(1180);
   }
 
   public void openChat() {
     Stage stage = (Stage) chatPane.getScene().getWindow();
-    stage.setWidth(1407);
+    stage.setWidth(1402);
   }
 
   /**
