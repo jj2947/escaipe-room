@@ -25,7 +25,7 @@ public class ChatController {
   @FXML private TextArea chatTextArea;
   @FXML private TextField inputText;
   @FXML private Button sendButton;
-  //@FXML private Button goBackButton;
+  // @FXML private Button goBackButton;
   @FXML private AnchorPane chatPane;
 
   private ChatCompletionRequest chatCompletionRequest;
@@ -61,7 +61,9 @@ public class ChatController {
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
   private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
-
+    if (GameState.isChatOpen) {
+      responseLoading();
+    }
     // GPT Task
     Task<Void> askGPT =
         new Task<Void>() {
@@ -86,7 +88,10 @@ public class ChatController {
                     }
                     // Enabling Buttons after API has finished loading
                     sendButton.setDisable(false);
-                    //goBackButton.setDisable(false);
+                    if (GameState.isChatOpen) {
+                      responseLoaded();
+                    }
+                    // goBackButton.setDisable(false);
                     inputText.setDisable(false);
                   });
             } catch (Exception e) {
@@ -105,7 +110,7 @@ public class ChatController {
     gptThread.start();
     // Disabling Buttons while API is loading
     sendButton.setDisable(true);
-    //goBackButton.setDisable(true);
+    // goBackButton.setDisable(true);
     inputText.setDisable(true);
     return chatMsg;
   }
@@ -141,7 +146,7 @@ public class ChatController {
       appendChatMessage(msg);
       runGpt(msg);
     }
-  } 
+  }
 
   /**
    * Navigates back to the previous view.
@@ -191,5 +196,29 @@ public class ChatController {
 
   public AnchorPane getChatPane() {
     return chatPane;
+  }
+
+  private void responseLoaded() {
+    if (GameState.chatInGym) {
+      // GameState.gymController.responseLoaded();
+    } else if (GameState.chatInRoom) {
+      GameState.roomController.responseLoaded();
+    } else if (GameState.chatInLocker) {
+      // GameState.lockerController.responseLoaded();
+    } else if (GameState.chatInHall) {
+      // GameState.hallwayController.responseLoaded();
+    }
+  }
+
+  private void responseLoading() {
+    if (GameState.chatInGym) {
+      // GameState.gymController.responseLoading();
+    } else if (GameState.chatInRoom) {
+      GameState.roomController.responseLoading();
+    } else if (GameState.chatInLocker) {
+      // GameState.lockerController.responseLoading();
+    } else if (GameState.chatInHall) {
+      // GameState.hallwayController.responseLoading();
+    }
   }
 }

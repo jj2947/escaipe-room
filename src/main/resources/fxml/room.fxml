@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -12,16 +13,29 @@
 
 <Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="740.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
-      <ImageView fx:id="classroomImage" fitHeight="664.0" fitWidth="1185.0" layoutY="-4.0" preserveRatio="true">
+      <ImageView fx:id="classroomImage" fitHeight="664.0" fitWidth="1185.0" preserveRatio="true">
          <image>
             <Image url="@../images/Classroom.jpeg" />
          </image>
       </ImageView>
       <Rectangle fx:id="door" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="377.0" layoutX="1021.0" layoutY="123.0" onMouseClicked="#clickDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="144.0" />
+      <ImageView fx:id="ghost1" fitHeight="269.0" fitWidth="182.0" layoutX="706.0" layoutY="171.0" onMouseClicked="#onClickGhost" opacity="0.7" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/ghost.png" />
+         </image>
+      </ImageView>
       <Label fx:id="timerLabel" alignment="CENTER" layoutX="11.0" layoutY="15.0" prefHeight="64.0" prefWidth="140.0" textFill="#fffbfb">
          <font>
             <Font size="45.0" />
          </font>
+      </Label>
+      <Label fx:id="messageText" alignment="CENTER" contentDisplay="CENTER" layoutX="736.0" layoutY="58.0" prefHeight="158.0" prefWidth="111.0" text="ESCAPE OR ELSE!" textAlignment="CENTER" textFill="WHITE" visible="false" wrapText="true">
+         <font>
+            <Font name="Luminari" size="25.0" />
+         </font>
+         <effect>
+            <InnerShadow blurType="GAUSSIAN" />
+         </effect>
       </Label>
       <Label fx:id="exitLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="1018.0" layoutY="28.0" opacity="0.5" prefHeight="36.0" prefWidth="98.0" style="-fx-background-color: green;" text="EXIT" textFill="WHITE">
          <font>
@@ -123,23 +137,13 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <ImageView fitHeight="269.0" fitWidth="182.0" layoutX="6.0" layoutY="409.0" onMouseClicked="#onClickGhost" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ghost" fitHeight="269.0" fitWidth="182.0" layoutX="6.0" layoutY="409.0" onMouseClicked="#onClickGhost" opacity="0.7" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/ghost.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="169.0" fitWidth="257.0" layoutX="792.0" layoutY="131.0" opacity="0.37" pickOnBounds="true" visible="false">
-         <image>
-            <Image url="@../images/SpeechBubble.png" />
-         </image>
-      </ImageView>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="817.0" layoutY="141.0" prefHeight="100.0" prefWidth="201.0" text="I am a ghost" textAlignment="CENTER" visible="false" wrapText="true">
-         <font>
-            <Font name="Luminari" size="25.0" />
-         </font>
-      </Label>
       <Pane fx:id="chatContainer" layoutX="1180.0" prefHeight="740.0" prefWidth="222.0" />
-      <TextField alignment="CENTER" layoutY="658.0" prefHeight="83.0" prefWidth="1180.0" styleClass="textField" stylesheets="@../css/chatStylesheet.css">
+      <TextField alignment="CENTER" editable="false" layoutY="658.0" prefHeight="83.0" prefWidth="1180.0" styleClass="textField" stylesheets="@../css/chatStylesheet.css">
          <effect>
             <Bloom threshold="0.75" />
          </effect></TextField>

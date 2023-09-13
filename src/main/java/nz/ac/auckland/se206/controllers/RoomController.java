@@ -1,14 +1,18 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.util.Random;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.effect.Glow;
+import javafx.scene.effect.Shadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
@@ -70,6 +74,10 @@ public class RoomController {
   @FXML private Rectangle indiaMapTwo;
   @FXML private Rectangle indiaMapThree;
   @FXML private Rectangle indiaMapFour;
+  @FXML private Label messageText;
+  @FXML private ImageView ghost;
+  @FXML private Label exitLabel;
+  @FXML private ImageView ghost1;
 
   /**
    * Initializes the room view, it is called when the room loads.
@@ -78,10 +86,44 @@ public class RoomController {
    */
   public void initialize() throws IOException {
     // Initialization code goes here
+    GameState.roomController = this;
     // Adding timerLabel to synched timer
     GameState.timer.setClass(timerLabel);
     timerLabel.setText(String.format("%02d:%02d", GameState.totalTime / 60, 0));
-    GameState.roomController = this;
+  }
+
+  public void responseLoading() {
+    Shadow shadow = new Shadow(10, Color.BLACK);
+    Glow glow = new Glow(0.8);
+    ghost.setEffect(shadow);
+    Random random = new Random();
+    int randomNumber = random.nextInt(3); // Generates a random number 0, 1, or 2
+
+    switch (randomNumber) {
+      case 0:
+        // Apply the effect to 'room'
+        room.setEffect(glow);
+        break;
+      case 1:
+        // Apply the shadow effect to 'exitLabel'
+        exitLabel.setEffect(glow);
+        ghost1.setVisible(true);
+        break;
+      case 2:
+        // Make the escape message visible
+        messageText.setVisible(true);
+        break;
+      default:
+        break;
+    }
+  }
+
+  public void responseLoaded() {
+    ghost.setEffect(null);
+    messageText.setVisible(false);
+    room.setEffect(null);
+    exitLabel.setEffect(null);
+    ghost1.setVisible(false);
   }
 
   /**
