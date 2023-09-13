@@ -23,6 +23,8 @@ public class GameState {
   /** The time choosen by the user, set early for some reason cant remember rn */
   public static int totalTime = 10000;
 
+  public static boolean basketballCollected = false;
+
   public static Timer timer;
 
   public static ChatController chatController;

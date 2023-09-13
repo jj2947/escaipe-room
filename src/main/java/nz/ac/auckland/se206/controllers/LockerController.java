@@ -54,6 +54,7 @@ public class LockerController {
   @FXML
   void onClickBasketball() {
     System.out.println("basketball clicked");
+    GameState.basketballCollected = true;
     basketballImg.setVisible(false);
   }
 
