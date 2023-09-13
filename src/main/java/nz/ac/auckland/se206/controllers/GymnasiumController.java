@@ -45,4 +45,7 @@ public class GymnasiumController {
       goalLabel.setText(toAdd);
     }
   }
+
+  @FXML
+  public void clickRedButton() {}
 }

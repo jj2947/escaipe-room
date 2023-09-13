@@ -36,5 +36,10 @@
          </children>
       </HBox>
       <Rectangle fx:id="backboard" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="55.0" layoutX="548.0" layoutY="356.0" onMouseClicked="#clickBackboard" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="85.0" />
+      <ImageView fx:id="redButton" fitHeight="24.0" fitWidth="20.0" layoutX="888.0" layoutY="347.0" onMouseClicked="#clickRedButton" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/RedButton.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
