@@ -11,7 +11,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
-import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -82,6 +81,7 @@ public class RoomController {
     // Adding timerLabel to synched timer
     GameState.timer.setClass(timerLabel);
     timerLabel.setText(String.format("%02d:%02d", GameState.totalTime / 60, 0));
+    GameState.roomController = this;
   }
 
   /**
@@ -128,13 +128,44 @@ public class RoomController {
   public void clickDoor(MouseEvent event) {
     System.out.println("hallway door clicked");
 
+    if (GameState.isChatOpen) {
+      GameState.hallController.openChat();
+    }
+
     // Switching to hallway scene
     Rectangle rectangle = (Rectangle) event.getSource();
     Scene sceneRectangleIsIn = rectangle.getScene();
     sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.HALLWAY));
 
-    // Resizing the window so the scene fits
-    sceneRectangleIsIn.getWindow().sizeToScene();
+    if (!GameState.isChatOpen) {
+      // Resizing the window so the scene fits
+      sceneRectangleIsIn.getWindow().sizeToScene();
+    }
+  }
+
+  @FXML
+  public void onClickGhost(MouseEvent event) {
+    System.out.println("ghost clicked");
+    // Add the chat to the chat container
+    if (!GameState.chatInRoom) {
+      openChat();
+    }
+
+    if (GameState.isChatOpen) {
+      GameState.chatController.closeChat();
+      GameState.isChatOpen = false;
+    } else {
+      GameState.chatController.openChat();
+      GameState.isChatOpen = true;
+    }
+  }
+
+  public void openChat() {
+    GameState.chatInGym = false;
+    GameState.chatInHall = false;
+    GameState.chatInLocker = false;
+    chatContainer.getChildren().add(GameState.chatController.getChatPane());
+    GameState.chatInRoom = true;
   }
 
   @FXML
@@ -288,27 +319,6 @@ public class RoomController {
     mapRectangleOne.setDisable(true);
     mapRectangleTwo.setDisable(true);
     door.setDisable(true);
-  }
-
-  @FXML
-  public void onClickGhost(MouseEvent event) {
-    System.out.println("ghost clicked");
-    // Add the chat to the chat container
-    if (!GameState.chatInRoom) {
-      GameState.chatInGym = false;
-      GameState.chatInHall = false;
-      GameState.chatInLocker = false;
-      chatContainer.getChildren().add(GameState.chatController.getChatPane());
-      GameState.chatInRoom = true;
-    }
-
-    if (GameState.isChatOpen) {
-      GameState.chatController.closeChat();
-      GameState.isChatOpen = false;
-    } else {
-      GameState.chatController.openChat();
-      GameState.isChatOpen = true;
-    }
   }
 
   public void enableWithMapClose() {

@@ -46,11 +46,6 @@ public class App extends Application {
   @Override
   public void start(final Stage stage) throws IOException {
 
-    // Load the Chat.fxml and create its controller
-    FXMLLoader chatLoader = new FXMLLoader(getClass().getResource("/fxml/chat.fxml"));
-    chatLoader.load();
-    GameState.chatController = chatLoader.getController();
-
     // Timer for the whole game
     GameState.timer = new Timer();
 

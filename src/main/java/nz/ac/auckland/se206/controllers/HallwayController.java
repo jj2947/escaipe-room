@@ -25,19 +25,26 @@ public class HallwayController {
     // Initialization code goes here
     // Adding timerlabel to synched timer
     GameState.timer.setHall(timerLabel);
+    GameState.hallController = this;
   }
 
   @FXML
   public void clickClassroomDoor(MouseEvent event) throws IOException {
     System.out.println("classroom door clicked");
 
+    if (GameState.isChatOpen) {
+      GameState.roomController.openChat();
+    }
+
     // Switching to hallway scene
     Rectangle rectangle = (Rectangle) event.getSource();
     Scene sceneRectangleIsIn = rectangle.getScene();
     sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
 
-    // Resizing the window so the larger scene fits
-    sceneRectangleIsIn.getWindow().sizeToScene();
+    if (!GameState.isChatOpen) {
+      // Resizing the window so the scene fits
+      sceneRectangleIsIn.getWindow().sizeToScene();
+    }
   }
 
   @FXML
@@ -71,11 +78,7 @@ public class HallwayController {
     System.out.println("ghost clicked");
     // Add the chat to the chat container
     if (!GameState.chatInHall) {
-      GameState.chatInGym = false;
-      GameState.chatInRoom = false;
-      GameState.chatInLocker = false;
-      chatContainer.getChildren().add(GameState.chatController.getChatPane());
-      GameState.chatInHall = true;
+      openChat();
     }
 
     if (GameState.isChatOpen) {
@@ -85,5 +88,13 @@ public class HallwayController {
       GameState.chatController.openChat();
       GameState.isChatOpen = true;
     }
+  }
+
+  public void openChat() {
+    GameState.chatInGym = false;
+    GameState.chatInRoom = false;
+    GameState.chatInLocker = false;
+    chatContainer.getChildren().add(GameState.chatController.getChatPane());
+    GameState.chatInHall = true;
   }
 }
