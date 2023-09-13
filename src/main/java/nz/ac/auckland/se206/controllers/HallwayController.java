@@ -102,10 +102,6 @@ public class HallwayController {
   @FXML
   public void onClickGhost(MouseEvent event) {
     System.out.println("ghost clicked");
-    // Get the stage from the chatContainer's scene
-    Stage stage = (Stage) timerLabel.getScene().getWindow();
-    // Resize the stage
-    stage.setWidth(1407);
      // Add the chat to the chat container
     if (!GameState.chatInHall) {
       GameState.chatInGym = false;
@@ -113,6 +109,14 @@ public class HallwayController {
       GameState.chatInLocker = false;
       chatContainer.getChildren().add(GameState.chatController.getChatPane());
       GameState.chatInHall = true;
+    }
+
+    if (GameState.isChatOpen) {
+      GameState.chatController.closeChat();
+      GameState.isChatOpen = false;
+    } else {
+      GameState.chatController.openChat();
+      GameState.isChatOpen = true;
     }
   }
 

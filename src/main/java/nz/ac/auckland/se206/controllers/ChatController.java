@@ -144,6 +144,17 @@ public class ChatController {
     Stage stage = (Stage) sceneButtonIsIn.getWindow();
     // Resize the stage
     stage.setWidth(1176);
+    GameState.isChatOpen = false;
+  }
+
+  public void closeChat() {
+    Stage stage = (Stage) chatPane.getScene().getWindow();
+   stage.setWidth(1176);
+  }
+
+  public void openChat() {
+    Stage stage = (Stage) chatPane.getScene().getWindow();
+    stage.setWidth(1407);
   }
 
   /**

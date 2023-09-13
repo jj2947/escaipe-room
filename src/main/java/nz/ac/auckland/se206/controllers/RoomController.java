@@ -11,7 +11,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
@@ -154,10 +153,6 @@ public class RoomController {
   @FXML
   public void onClickGhost(MouseEvent event) {
     System.out.println("ghost clicked");
-    // Get the stage from the chatContainer's scene
-    Stage stage = (Stage) timerLabel.getScene().getWindow();
-    // Resize the stage
-    stage.setWidth(1407);
     // Add the chat to the chat container
     if (!GameState.chatInRoom) {
       GameState.chatInGym = false;
@@ -165,6 +160,14 @@ public class RoomController {
       GameState.chatInLocker = false;
       chatContainer.getChildren().add(GameState.chatController.getChatPane());
       GameState.chatInRoom = true;
+    }
+
+    if (GameState.isChatOpen) {
+      GameState.chatController.closeChat();
+      GameState.isChatOpen = false;
+    } else {
+      GameState.chatController.openChat();
+      GameState.isChatOpen = true;
     }
   }
 

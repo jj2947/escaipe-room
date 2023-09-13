@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206;
 
 import nz.ac.auckland.se206.controllers.ChatController;
+import nz.ac.auckland.se206.controllers.HallwayController;
 import nz.ac.auckland.se206.controllers.Timer;
 
 /** Represents the state of the game. */
@@ -25,11 +26,15 @@ public class GameState {
 
   public static ChatController chatController;
 
-  public static boolean chatInRoom;
+  public static HallwayController hallwayController;
 
-  public static boolean chatInHall;
+  public static boolean chatInRoom = false;
 
-  public static boolean chatInLocker;
+  public static boolean chatInHall = false;;
 
-  public static boolean chatInGym;
+  public static boolean chatInLocker = false;
+
+  public static boolean chatInGym = false;
+
+  public static boolean isChatOpen = false;
 }
