@@ -14,6 +14,8 @@ public class GymnasiumController {
 
   @FXML private Label timerLabel;
   @FXML private Rectangle hallwayDoor;
+  @FXML private Label goalLabel;
+  private int goalCount = 0;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
@@ -33,5 +35,14 @@ public class GymnasiumController {
 
     // Resizing the window so the larger scene fits
     sceneRectangleIsIn.getWindow().sizeToScene();
+  }
+
+  @FXML
+  public void clickBackboard() {
+    if (GameState.basketballCollected) {
+      goalCount += 3;
+      String toAdd = String.format("%02d", goalCount);
+      goalLabel.setText(toAdd);
+    }
   }
 }

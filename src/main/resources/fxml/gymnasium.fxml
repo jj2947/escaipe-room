@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -20,10 +21,20 @@
          </font>
       </Label>
       <Rectangle fx:id="hallwayDoor" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="107.0" layoutX="228.0" layoutY="410.0" onMouseClicked="#clickHallDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="83.0" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="245.0" layoutY="394.0" opacity="0.5" prefHeight="14.0" prefWidth="51.0" style="-fx-background-color: green;" text="EXIT" textFill="WHITE">
+      <Label fx:id="exitLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="245.0" layoutY="394.0" opacity="0.5" prefHeight="14.0" prefWidth="51.0" style="-fx-background-color: green;" text="EXIT" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="12.0" />
          </font>
       </Label>
+      <HBox alignment="CENTER" layoutY="295.0" prefWidth="1180.0">
+         <children>
+            <Label fx:id="goalLabel" text="00" textFill="#eaff00">
+               <font>
+                  <Font name="DIN Alternate Bold" size="31.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <Rectangle fx:id="backboard" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="55.0" layoutX="548.0" layoutY="356.0" onMouseClicked="#clickBackboard" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="85.0" />
    </children>
 </Pane>
