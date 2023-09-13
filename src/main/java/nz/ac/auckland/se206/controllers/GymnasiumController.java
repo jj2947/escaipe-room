@@ -20,6 +20,7 @@ public class GymnasiumController {
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
     // Initialization code goes here
+    GameState.gymController = this;
     // Adding timer label to synced timer
     GameState.timer.setGym(timerLabel);
   }

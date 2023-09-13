@@ -3,10 +3,7 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -24,8 +21,6 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 public class ChatController {
   @FXML private TextArea chatTextArea;
   @FXML private TextField inputText;
-  @FXML private Button sendButton;
-  // @FXML private Button goBackButton;
   @FXML private AnchorPane chatPane;
 
   private ChatCompletionRequest chatCompletionRequest;
@@ -86,12 +81,9 @@ public class ChatController {
                         && result.getChatMessage().getContent().startsWith("Correct")) {
                       GameState.isRiddleResolved = true;
                     }
-                    // Enabling Buttons after API has finished loading
-                    sendButton.setDisable(false);
                     if (GameState.isChatOpen) {
                       responseLoaded();
                     }
-                    // goBackButton.setDisable(false);
                     inputText.setDisable(false);
                   });
             } catch (Exception e) {
@@ -108,30 +100,8 @@ public class ChatController {
               askGPT.run();
             });
     gptThread.start();
-    // Disabling Buttons while API is loading
-    sendButton.setDisable(true);
-    // goBackButton.setDisable(true);
     inputText.setDisable(true);
     return chatMsg;
-  }
-
-  /**
-   * Sends a message to the GPT model.
-   *
-   * @param event the action event triggered by the send button
-   * @throws ApiProxyException if there is an error communicating with the API proxy
-   * @throws IOException if there is an I/O error
-   */
-  @FXML
-  private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
-    String message = inputText.getText();
-    if (message.trim().isEmpty()) {
-      return;
-    }
-    inputText.clear();
-    ChatMessage msg = new ChatMessage("user", message);
-    appendChatMessage(msg);
-    runGpt(msg);
   }
 
   @FXML
@@ -146,25 +116,6 @@ public class ChatController {
       appendChatMessage(msg);
       runGpt(msg);
     }
-  }
-
-  /**
-   * Navigates back to the previous view.
-   *
-   * @param event the action event triggered by the go back button
-   * @throws ApiProxyException if there is an error communicating with the API proxy
-   * @throws IOException if there is an I/O error
-   */
-  @FXML
-  private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
-    Button button = (Button) event.getSource();
-    Scene sceneButtonIsIn = button.getScene();
-    // Close chat window
-    // Get the stage from the chatContainer's scene
-    Stage stage = (Stage) sceneButtonIsIn.getWindow();
-    // Resize the stage
-    stage.setWidth(1180);
-    GameState.isChatOpen = false;
   }
 
   public void closeChat() {
@@ -187,7 +138,7 @@ public class ChatController {
     // When enter is clicked the user sends their message
     if (event.getCode().toString().equals("ENTER")) {
       try {
-        onSendMessage(null);
+        onEnterPressed(event);
       } catch (Exception e) {
         e.printStackTrace();
       }

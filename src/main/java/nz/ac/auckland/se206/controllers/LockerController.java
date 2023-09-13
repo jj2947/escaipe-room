@@ -48,6 +48,7 @@ public class LockerController {
     while (randNum1 > 9000 || randNum1 < 1000) {
       randNum1 = (int) (Math.random() * 10000);
     }
+    GameState.lockerController = this;
     chatLabel.setText("What is " + randNum1 + " + " + randNum + "?");
   }
 
