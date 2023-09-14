@@ -7,8 +7,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -36,6 +38,8 @@ public class LockerController {
   @FXML private Button clearButton;
   @FXML private Label chatLabel;
   @FXML private Pane pinpad;
+  @FXML private ImageView ghost;
+  @FXML private Pane chatContainer;
   private int numsEntered = 0;
   private int randNum;
   private int randNum1 = 0;
@@ -50,6 +54,33 @@ public class LockerController {
     }
     GameState.lockerController = this;
     chatLabel.setText("What is " + randNum1 + " + " + randNum + "?");
+  }
+
+  @FXML
+  public void onClickGhost(MouseEvent event) {
+    System.out.println("ghost clicked");
+    // Add the chat to the chat container
+    if (!GameState.chatInRoom) {
+      openChat();
+    }
+
+    if (GameState.isChatOpen) {
+      Stage stage = (Stage) chatContainer.getScene().getWindow();
+      stage.setWidth(1109);
+      GameState.isChatOpen = false;
+    } else {
+      Stage stage = (Stage) chatContainer.getScene().getWindow();
+      stage.setWidth(869);
+      GameState.isChatOpen = true;
+    }
+  }
+
+  public void openChat() {
+    GameState.chatInGym = false;
+    GameState.chatInHall = false;
+    GameState.chatInRoom = false;
+    chatContainer.getChildren().add(GameState.chatController.getChatPane());
+    GameState.chatInLocker = true;
   }
 
   @FXML

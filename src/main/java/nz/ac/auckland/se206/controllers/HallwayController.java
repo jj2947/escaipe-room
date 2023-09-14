@@ -4,9 +4,11 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -20,6 +22,7 @@ public class HallwayController {
   @FXML private Rectangle locker2;
   @FXML private Pane chatContainer;
   @FXML private Pane blackboardContainer;
+  @FXML private ImageView ghost;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
@@ -72,13 +75,21 @@ public class HallwayController {
   public void clickLocker(MouseEvent event) throws IOException {
     System.out.println("locker clicked");
 
+    if (GameState.isChatOpen) {
+      Stage stage = (Stage) chatContainer.getScene().getWindow();
+      stage.setWidth(1109);
+      GameState.lockerController.openChat();
+    }
+
     // Switching to hallway scene
     Rectangle rectangle = (Rectangle) event.getSource();
     Scene sceneRectangleIsIn = rectangle.getScene();
     sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.LOCKER));
 
-    // Resizing the window so the larger scene fits
-    sceneRectangleIsIn.getWindow().sizeToScene();
+    if (!GameState.isChatOpen) {
+      // Resizing the window so the scene fits
+      sceneRectangleIsIn.getWindow().sizeToScene();
+    }
   }
 
   @FXML

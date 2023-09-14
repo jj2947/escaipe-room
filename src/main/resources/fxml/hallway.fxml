@@ -30,7 +30,7 @@
       <Rectangle fx:id="locker2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="221.0" layoutX="786.0" layoutY="272.0" onMouseClicked="#clickLocker" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="147.0" />
       <Pane fx:id="chatContainer" layoutX="1100.0" prefHeight="702.0" prefWidth="240.0">
       </Pane>
-      <ImageView fitHeight="207.0" fitWidth="151.0" layoutX="939.0" layoutY="406.0" onMouseClicked="#onClickGhost" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ghost" fitHeight="192.0" fitWidth="191.0" layoutX="939.0" layoutY="406.0" onMouseClicked="#onClickGhost" opacity="0.5" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/ghost.png" />
          </image>
