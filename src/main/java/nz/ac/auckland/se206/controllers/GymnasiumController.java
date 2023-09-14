@@ -4,7 +4,9 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
@@ -15,6 +17,9 @@ public class GymnasiumController {
   @FXML private Label timerLabel;
   @FXML private Rectangle hallwayDoor;
   @FXML private Label goalLabel;
+  @FXML private ImageView ghost;
+  @FXML private Pane chatContainer;
+  @FXML private Pane blackboardContainer;
   private int goalCount = 0;
 
   /** Initializes the room view, it is called when the room loads. */
@@ -29,13 +34,21 @@ public class GymnasiumController {
   public void clickHallDoor(MouseEvent event) throws IOException {
     System.out.println("hallway door clicked");
 
+    if (GameState.isChatOpen) {
+      GameState.hallController.openChat();
+    }
+
     // Switching to hallway scene
     Rectangle rectangle = (Rectangle) event.getSource();
     Scene sceneRectangleIsIn = rectangle.getScene();
     sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.HALLWAY));
 
-    // Resizing the window so the larger scene fits
-    sceneRectangleIsIn.getWindow().sizeToScene();
+    if (!GameState.isChatOpen) {
+      // Resizing the window so the scene fits
+      sceneRectangleIsIn.getWindow().sizeToScene();
+    }
+
+    GameState.hallController.addBlackboard();
   }
 
   @FXML
@@ -49,4 +62,48 @@ public class GymnasiumController {
 
   @FXML
   public void clickRedButton() {}
+
+  @FXML
+  private void onClickGhost() {
+    System.out.println("ghost clicked");
+    // Add the chat to the chat container
+    if (!GameState.chatInGym) {
+      openChat();
+    }
+
+    if (GameState.isChatOpen) {
+      GameState.chatController.closeChat();
+      GameState.isChatOpen = false;
+    } else {
+      GameState.chatController.openChat();
+      GameState.isChatOpen = true;
+    }
+  }
+
+  @FXML
+  private void onEnterGhost() {
+    System.out.println("hover on ghost");
+    // Add the chat to the chat container
+    if (!GameState.chatInGym) {
+      openChat();
+    }
+
+    if (!GameState.isChatOpen) {
+      GameState.chatController.openChat();
+      GameState.isChatOpen = true;
+    }
+  }
+
+  public void openChat() {
+    GameState.chatInHall = false;
+    GameState.chatInRoom = false;
+    GameState.chatInLocker = false;
+    chatContainer.getChildren().add(GameState.chatController.getChatPane());
+    GameState.chatInGym = true;
+  }
+
+  public void addBlackboard() {
+    // Adding the blackboard to the scene
+    blackboardContainer.getChildren().add(GameState.blackboardController.getPane());
+  }
 }

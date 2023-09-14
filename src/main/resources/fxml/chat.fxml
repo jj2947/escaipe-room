@@ -9,14 +9,14 @@
 
 <AnchorPane fx:id="chatPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#onKeyReleased" prefHeight="702.0" prefWidth="240.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChatController">
   <children>
-    <TextArea fx:id="chatTextArea" editable="false" layoutX="2.0" layoutY="3.0" prefHeight="650.0" prefWidth="236.0" styleClass="textArea" stylesheets="@../css/chatStylesheet.css" wrapText="true">
+    <TextArea fx:id="chatTextArea" editable="false" layoutX="2.0" layoutY="2.0" prefHeight="653.0" prefWidth="236.0" styleClass="textArea" stylesheets="@../css/chatStylesheet.css" wrapText="true">
          <font>
             <Font name="Chalkduster" size="16.0" />
          </font>
          <effect>
             <Bloom threshold="0.75" />
          </effect></TextArea>
-    <TextField fx:id="inputText" layoutX="2.0" layoutY="657.0" onKeyPressed="#onEnterPressed" prefHeight="35.0" prefWidth="236.0" promptText="Write Here" styleClass="textArea" stylesheets="@../css/chatStylesheet.css">
+    <TextField fx:id="inputText" layoutX="2.0" layoutY="659.0" onKeyPressed="#onEnterPressed" prefHeight="35.0" prefWidth="236.0" promptText="Write Here..." styleClass="textArea" stylesheets="@../css/chatStylesheet.css">
          <effect>
             <Bloom threshold="0.75" />
          </effect></TextField>

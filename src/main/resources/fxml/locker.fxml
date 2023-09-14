@@ -113,11 +113,16 @@
                   <Font size="45.0" />
                </font>
             </Button>
-            <ImageView fx:id="ghost" fitHeight="192.0" fitWidth="191.0" layoutX="712.0" layoutY="35.0" onMouseClicked="#onClickGhost" onMouseEntered="#onEnterGhost" opacity="0.9" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ghost" fitHeight="192.0" fitWidth="191.0" layoutX="710.0" layoutY="228.0" onMouseClicked="#onClickGhost" onMouseEntered="#onEnterGhost" opacity="0.7" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/ghost.png" />
                </image>
             </ImageView>
+            <Label fx:id="messageBox" alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="216.0" prefHeight="204.0" prefWidth="221.0" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Chalkduster" size="24.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Label fx:id="timerLabel" alignment="CENTER" layoutX="11.0" layoutY="15.0" prefHeight="64.0" prefWidth="140.0" textFill="WHITE">

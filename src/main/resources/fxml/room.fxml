@@ -130,9 +130,9 @@
       <Rectangle fx:id="indiaMapTwo" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="56.0" layoutX="748.0" layoutY="358.0" onMouseEntered="#indiaEnter" onMouseExited="#indiaExit" opacity="0.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="38.0" />
       <Rectangle fx:id="indiaMapThree" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="17.0" layoutX="751.0" layoutY="333.0" onMouseEntered="#indiaEnter" onMouseExited="#indiaExit" opacity="0.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="11.0" />
       <Rectangle fx:id="indiaMapFour" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="8.0" layoutX="759.0" layoutY="342.0" onMouseEntered="#indiaEnter" onMouseExited="#indiaExit" opacity="0.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="13.0" />
-      <Label fx:id="goBackLabel" layoutX="546.0" layoutY="31.0" onMouseClicked="#exitMap" text="Go Back" textFill="WHITE" visible="false">
+      <Label fx:id="goBackLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="492.5" layoutY="31.0" onMouseClicked="#exitMap" prefHeight="39.0" prefWidth="115.0" text="Go Back" textFill="WHITE" visible="false">
          <font>
-            <Font size="24.0" />
+            <Font name="Palatino" size="30.0" />
          </font>
       </Label>
       <ImageView fx:id="ghost" fitHeight="269.0" fitWidth="182.0" layoutX="1.0" layoutY="377.0" onMouseClicked="#onClickGhost" onMouseEntered="#onEnterGhost" opacity="0.7" pickOnBounds="true" preserveRatio="true">

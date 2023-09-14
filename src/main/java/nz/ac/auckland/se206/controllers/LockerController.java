@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206.controllers;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -39,6 +38,7 @@ public class LockerController {
   @FXML private Pane pinpad;
   @FXML private ImageView ghost;
   @FXML private Pane chatContainer;
+  @FXML private Label messageBox;
   private int numsEntered = 0;
   private int randNum;
   private int randNum1 = 0;
@@ -248,12 +248,19 @@ public class LockerController {
 
   @FXML
   private void onBack() {
+    if (GameState.isChatOpen) {
+      Stage stage = (Stage) chatContainer.getScene().getWindow();
+      stage.setWidth(1340);
+      GameState.hallController.openChat();
+    }
+
     Scene currentScene = timerLabel.getScene();
-    Platform.runLater(
-        () -> {
-          currentScene.setRoot(SceneManager.getUiRoot(AppUi.HALLWAY));
-          currentScene.getWindow().sizeToScene();
-        });
+    currentScene.setRoot(SceneManager.getUiRoot(AppUi.HALLWAY));
+
+    if (!GameState.isChatOpen) {
+      // Resizing the window so the scene fits
+      currentScene.getWindow().sizeToScene();
+    }
   }
 
   @FXML

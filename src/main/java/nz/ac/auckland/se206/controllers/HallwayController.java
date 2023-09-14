@@ -62,13 +62,21 @@ public class HallwayController {
   public void clickGymDoor(MouseEvent event) throws IOException {
     System.out.println("gym door clicked");
 
+    if (GameState.isChatOpen) {
+      GameState.gymController.openChat();
+    }
+
     // Switching to hallway scene
     Rectangle rectangle = (Rectangle) event.getSource();
     Scene sceneRectangleIsIn = rectangle.getScene();
     sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.GYMNASIUM));
 
-    // Resizing the window so the larger scene fits
-    sceneRectangleIsIn.getWindow().sizeToScene();
+   if (!GameState.isChatOpen) {
+      // Resizing the window so the scene fits
+      sceneRectangleIsIn.getWindow().sizeToScene();
+    }
+
+    GameState.gymController.addBlackboard();
   }
 
   @FXML
