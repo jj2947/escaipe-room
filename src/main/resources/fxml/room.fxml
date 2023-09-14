@@ -17,7 +17,7 @@
          </image>
       </ImageView>
       <Rectangle fx:id="door" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="377.0" layoutX="947.0" layoutY="109.0" onMouseClicked="#clickDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="143.0" />
-      <ImageView fx:id="ghost1" fitHeight="288.0" fitWidth="182.0" layoutX="674.0" layoutY="74.0" onMouseClicked="#onClickGhost" opacity="0.7" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="ghost1" fitHeight="288.0" fitWidth="182.0" layoutX="674.0" layoutY="20.0" onMouseClicked="#onClickGhost" opacity="0.7" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/ghost.png" />
          </image>
@@ -41,8 +41,8 @@
          </font>
       </Label>
       <Ellipse fx:id="mapEllipse" fill="DODGERBLUE" layoutX="277.0" layoutY="230.0" onMouseClicked="#clickMap" opacity="0.0" radiusX="178.0" radiusY="99.0" stroke="BLACK" strokeType="INSIDE" />
-      <Rectangle fx:id="mapRectangleOne" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="180.0" layoutX="105.0" layoutY="161.0" onMouseClicked="#clickMap" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="122.0" />
-      <Rectangle fx:id="mapRectangleTwo" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="220.0" layoutX="316.0" layoutY="130.0" onMouseClicked="#clickMap" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="160.0" />
+      <Rectangle fx:id="mapRectangleOne" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="184.0" layoutX="87.0" layoutY="143.0" onMouseClicked="#clickMap" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="140.0" />
+      <Rectangle fx:id="mapRectangleTwo" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="198.0" layoutX="288.0" layoutY="130.0" onMouseClicked="#clickMap" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="156.0" />
       <ImageView fx:id="mapImage" fitHeight="854.0" fitWidth="1452.0" layoutX="-61.0" layoutY="-47.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/maps/allBlueMap.png" />
@@ -135,7 +135,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <ImageView fx:id="ghost" fitHeight="269.0" fitWidth="182.0" layoutX="1.0" layoutY="377.0" onMouseClicked="#onClickGhost" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ghost" fitHeight="269.0" fitWidth="182.0" layoutX="1.0" layoutY="377.0" onMouseClicked="#onClickGhost" onMouseEntered="#onEnterGhost" opacity="0.7" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/ghost.png" />
          </image>

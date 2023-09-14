@@ -93,7 +93,7 @@ public class HallwayController {
   }
 
   @FXML
-  public void onClickGhost(MouseEvent event) {
+  public void onClickGhost() {
     System.out.println("ghost clicked");
     // Add the chat to the chat container
     if (!GameState.chatInHall) {
@@ -104,6 +104,20 @@ public class HallwayController {
       GameState.chatController.closeChat();
       GameState.isChatOpen = false;
     } else {
+      GameState.chatController.openChat();
+      GameState.isChatOpen = true;
+    }
+  }
+
+  @FXML
+  private void onEnterGhost() {
+    System.out.println("hover on ghost");
+    // Add the chat to the chat container
+    if (!GameState.chatInHall) {
+      openChat();
+    }
+
+    if (!GameState.isChatOpen) {
       GameState.chatController.openChat();
       GameState.isChatOpen = true;
     }

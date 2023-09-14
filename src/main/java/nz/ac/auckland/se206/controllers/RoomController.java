@@ -195,7 +195,7 @@ public class RoomController {
   }
 
   @FXML
-  public void onClickGhost(MouseEvent event) {
+  private void onClickGhost() {
     System.out.println("ghost clicked");
     // Add the chat to the chat container
     if (!GameState.chatInRoom) {
@@ -206,6 +206,20 @@ public class RoomController {
       GameState.chatController.closeChat();
       GameState.isChatOpen = false;
     } else {
+      GameState.chatController.openChat();
+      GameState.isChatOpen = true;
+    }
+  }
+
+  @FXML
+  private void onEnterGhost() {
+    System.out.println("hover on ghost");
+    // Add the chat to the chat container
+    if (!GameState.chatInRoom) {
+      openChat();
+    }
+
+    if (!GameState.isChatOpen) {
       GameState.chatController.openChat();
       GameState.isChatOpen = true;
     }

@@ -7,7 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -57,20 +56,35 @@ public class LockerController {
   }
 
   @FXML
-  public void onClickGhost(MouseEvent event) {
+  private void onClickGhost() {
     System.out.println("ghost clicked");
     // Add the chat to the chat container
-    if (!GameState.chatInRoom) {
+    if (!GameState.chatInLocker) {
       openChat();
     }
 
     if (GameState.isChatOpen) {
-      Stage stage = (Stage) chatContainer.getScene().getWindow();
-      stage.setWidth(1109);
+      Stage stage = (Stage) ghost.getScene().getWindow();
+      stage.setWidth(869);
       GameState.isChatOpen = false;
     } else {
-      Stage stage = (Stage) chatContainer.getScene().getWindow();
-      stage.setWidth(869);
+      Stage stage = (Stage) ghost.getScene().getWindow();
+      stage.setWidth(1109);
+      GameState.isChatOpen = true;
+    }
+  }
+
+  @FXML
+  private void onEnterGhost() {
+    System.out.println("hover on ghost");
+    // Add the chat to the chat container
+    if (!GameState.chatInLocker) {
+      openChat();
+    }
+
+    if (!GameState.isChatOpen) {
+      Stage stage = (Stage) ghost.getScene().getWindow();
+      stage.setWidth(1109);
       GameState.isChatOpen = true;
     }
   }
@@ -84,7 +98,7 @@ public class LockerController {
   }
 
   @FXML
-  void onClickBasketball() {
+  private void onClickBasketball() {
     System.out.println("basketball clicked");
     GameState.basketballCollected = true;
     basketballImg.setVisible(false);
