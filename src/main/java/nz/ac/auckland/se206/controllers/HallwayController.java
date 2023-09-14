@@ -19,6 +19,7 @@ public class HallwayController {
   @FXML private Rectangle locker1;
   @FXML private Rectangle locker2;
   @FXML private Pane chatContainer;
+  @FXML private Pane blackboardContainer;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
@@ -26,6 +27,11 @@ public class HallwayController {
     // Adding timerlabel to synched timer
     GameState.timer.setHall(timerLabel);
     GameState.hallController = this;
+  }
+
+  public void addBlackboard() {
+    // Adding the blackboard to the scene
+    blackboardContainer.getChildren().add(GameState.blackboardController.getPane());
   }
 
   @FXML
@@ -45,6 +51,8 @@ public class HallwayController {
       // Resizing the window so the scene fits
       sceneRectangleIsIn.getWindow().sizeToScene();
     }
+
+    GameState.roomController.addBlackboard();
   }
 
   @FXML

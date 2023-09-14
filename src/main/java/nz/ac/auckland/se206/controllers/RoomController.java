@@ -78,6 +78,7 @@ public class RoomController {
   @FXML private ImageView ghost;
   @FXML private Label exitLabel;
   @FXML private ImageView ghost1;
+  @FXML private Pane blackboardContainer;
 
   /**
    * Initializes the room view, it is called when the room loads.
@@ -90,6 +91,12 @@ public class RoomController {
     // Adding timerLabel to synched timer
     GameState.timer.setClass(timerLabel);
     timerLabel.setText(String.format("%02d:%02d", GameState.totalTime / 60, 0));
+    addBlackboard();
+  }
+
+  public void addBlackboard() {
+    // Adding the blackboard to the scene
+    blackboardContainer.getChildren().add(GameState.blackboardController.getPane());
   }
 
   public void responseLoading() {
@@ -183,6 +190,8 @@ public class RoomController {
       // Resizing the window so the scene fits
       sceneRectangleIsIn.getWindow().sizeToScene();
     }
+
+    GameState.hallController.addBlackboard();
   }
 
   @FXML

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -143,9 +141,6 @@
          </image>
       </ImageView>
       <Pane fx:id="chatContainer" layoutX="1100.0" prefHeight="702.0" prefWidth="240.0" />
-      <TextField alignment="CENTER" editable="false" layoutY="619.0" prefHeight="83.0" prefWidth="1100.0" styleClass="textField" stylesheets="@../css/chatStylesheet.css">
-         <effect>
-            <Bloom threshold="0.75" />
-         </effect></TextField>
+      <Pane fx:id="blackboardContainer" layoutY="619.0" prefHeight="83.0" prefWidth="1100.0" />
    </children>
 </Pane>

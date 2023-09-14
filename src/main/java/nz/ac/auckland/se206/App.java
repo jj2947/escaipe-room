@@ -67,6 +67,7 @@ public class App extends Application {
     SceneManager.addUi(AppUi.STARTSCREEN, loadFxml("startScreen"));
     SceneManager.addUi(AppUi.LOCKER, App.loadFxml("locker"));
     SceneManager.addUi(AppUi.CHAT, loadFxml("chat"));
+    SceneManager.addUi(AppUi.BLACKBOARD, loadFxml("blackboard"));
 
     scene = new Scene(SceneManager.getUiRoot(AppUi.STARTSCREEN));
     stage.setScene(scene);

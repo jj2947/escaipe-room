@@ -4,10 +4,9 @@
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane fx:id="blackboardPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="83.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.BlackboardController">
+<AnchorPane fx:id="blackboardPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="83.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.BlackboardController">
    <children>
-      <TextField fx:id="blackboard" alignment="CENTER" editable="false" prefHeight="83.0" prefWidth="1180.0" styleClass="textField" stylesheets="@../css/chatStylesheet.css">
+      <TextField fx:id="blackboard" alignment="CENTER" editable="false" prefHeight="83.0" prefWidth="1100.0" styleClass="textField" stylesheets="@../css/chatStylesheet.css">
          <effect>
             <Bloom threshold="0.75" />
          </effect>
