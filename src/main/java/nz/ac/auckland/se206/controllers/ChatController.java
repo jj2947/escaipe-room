@@ -120,12 +120,12 @@ public class ChatController {
 
   public void closeChat() {
     Stage stage = (Stage) chatPane.getScene().getWindow();
-    stage.setWidth(1180);
+    stage.setWidth(1100);
   }
 
   public void openChat() {
     Stage stage = (Stage) chatPane.getScene().getWindow();
-    stage.setWidth(1402);
+    stage.setWidth(1340);
   }
 
   /**

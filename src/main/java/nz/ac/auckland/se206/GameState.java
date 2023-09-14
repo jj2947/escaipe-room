@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206;
 
+import nz.ac.auckland.se206.controllers.BlackboardController;
 import nz.ac.auckland.se206.controllers.ChatController;
 import nz.ac.auckland.se206.controllers.GymnasiumController;
 import nz.ac.auckland.se206.controllers.HallwayController;
@@ -38,6 +39,8 @@ public class GameState {
   public static GymnasiumController gymController;
 
   public static LockerController lockerController;
+
+  public static BlackboardController blackboardController;
 
   public static boolean chatInRoom = false;
 
