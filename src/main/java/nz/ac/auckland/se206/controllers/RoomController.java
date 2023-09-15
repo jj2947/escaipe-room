@@ -79,6 +79,9 @@ public class RoomController {
   @FXML private Label exitLabel;
   @FXML private ImageView ghost1;
   @FXML private Pane blackboardContainer;
+  @FXML private ImageView chatButton;
+  private Shadow shadow = new Shadow(10, Color.BLACK);
+  private Glow glow = new Glow(0.8);
 
   /**
    * Initializes the room view, it is called when the room loads.
@@ -97,11 +100,10 @@ public class RoomController {
   public void addBlackboard() {
     // Adding the blackboard to the scene
     blackboardContainer.getChildren().add(GameState.blackboardController.getPane());
+    chatButton.toFront();
   }
 
   public void responseLoading() {
-    Shadow shadow = new Shadow(10, Color.BLACK);
-    Glow glow = new Glow(0.8);
     ghost.setEffect(shadow);
     Random random = new Random();
     int randomNumber = random.nextInt(3); // Generates a random number 0, 1, or 2
@@ -195,8 +197,9 @@ public class RoomController {
   }
 
   @FXML
-  private void onClickGhost() {
-    System.out.println("ghost clicked");
+  private void onClickChat() {
+    System.out.println("chat clicked");
+    chatButton.setOpacity(0.5);
     // Add the chat to the chat container
     if (!GameState.chatInRoom) {
       openChat();
@@ -212,17 +215,25 @@ public class RoomController {
   }
 
   @FXML
+  private void releaseChat() {
+    chatButton.setOpacity(1);
+  }
+
+  @FXML
+  private void enterChatButton() {
+    chatButton.setOpacity(0.5);
+  }
+
+  @FXML
   private void onEnterGhost() {
     System.out.println("hover on ghost");
-    // Add the chat to the chat container
-    if (!GameState.chatInRoom) {
-      openChat();
-    }
+    ghost.setEffect(shadow);
+  }
 
-    if (!GameState.isChatOpen) {
-      GameState.chatController.openChat();
-      GameState.isChatOpen = true;
-    }
+  @FXML
+  private void onExitGhost() {
+    System.out.println("hover off ghost");
+    ghost.setEffect(null);
   }
 
   public void openChat() {

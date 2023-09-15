@@ -66,10 +66,12 @@ public class LockerController {
     if (GameState.isChatOpen) {
       Stage stage = (Stage) ghost.getScene().getWindow();
       stage.setWidth(869);
+      stage.centerOnScreen();
       GameState.isChatOpen = false;
     } else {
       Stage stage = (Stage) ghost.getScene().getWindow();
       stage.setWidth(1109);
+      stage.centerOnScreen();
       GameState.isChatOpen = true;
     }
   }
@@ -85,6 +87,7 @@ public class LockerController {
     if (!GameState.isChatOpen) {
       Stage stage = (Stage) ghost.getScene().getWindow();
       stage.setWidth(1109);
+      stage.centerOnScreen();
       GameState.isChatOpen = true;
     }
   }
@@ -251,6 +254,7 @@ public class LockerController {
     if (GameState.isChatOpen) {
       Stage stage = (Stage) chatContainer.getScene().getWindow();
       stage.setWidth(1340);
+      stage.centerOnScreen();
       GameState.hallController.openChat();
     }
 

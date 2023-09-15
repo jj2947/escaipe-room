@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -30,7 +31,7 @@
       <Rectangle fx:id="locker2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="221.0" layoutX="786.0" layoutY="272.0" onMouseClicked="#clickLocker" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="147.0" />
       <Pane fx:id="chatContainer" layoutX="1100.0" prefHeight="702.0" prefWidth="240.0">
       </Pane>
-      <ImageView fx:id="ghost" fitHeight="192.0" fitWidth="191.0" layoutX="939.0" layoutY="406.0" onMouseClicked="#onClickGhost" onMouseEntered="#onEnterGhost" opacity="0.8" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ghost" fitHeight="192.0" fitWidth="191.0" layoutX="939.0" layoutY="406.0" onMouseEntered="#onEnterGhost" onMouseExited="#onExitGhost" opacity="0.8" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/ghost.png" />
          </image>
@@ -40,6 +41,16 @@
             <Font name="Chalkduster" size="28.0" />
          </font>
       </Label>
-      <Pane fx:id="blackboardContainer" layoutY="619.0" prefHeight="83.0" prefWidth="1100.0" />
+      <Pane fx:id="blackboardContainer" layoutY="619.0" prefHeight="83.0" prefWidth="1100.0">
+         <children>
+            <ImageView fx:id="chatButton" fitHeight="80.0" fitWidth="110.0" layoutX="1005.0" layoutY="7.0" onMouseEntered="#enterChatButton" onMouseExited="#releaseChat" onMousePressed="#onClickChat" onMouseReleased="#releaseChat" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/SpeechBubble.png" />
+               </image>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </ImageView>
+         </children></Pane>
    </children>
 </Pane>

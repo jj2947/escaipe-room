@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -42,8 +43,18 @@
          </image>
       </ImageView>
       <Pane fx:id="chatContainer" layoutX="1100.0" prefHeight="702.0" prefWidth="240.0" />
-      <Pane fx:id="blackboardContainer" layoutY="619.0" prefHeight="83.0" prefWidth="1100.0" />
-      <ImageView fx:id="ghost" fitHeight="192.0" fitWidth="191.0" layoutX="917.0" layoutY="88.0" onMouseClicked="#onClickGhost" onMouseEntered="#onEnterGhost" opacity="0.6" pickOnBounds="true" preserveRatio="true">
+      <Pane fx:id="blackboardContainer" layoutY="619.0" prefHeight="83.0" prefWidth="1100.0">
+         <children>
+            <ImageView fx:id="chatButton" fitHeight="80.0" fitWidth="110.0" layoutX="1005.0" layoutY="7.0" onMouseEntered="#enterChatButton" onMouseExited="#releaseChat" onMousePressed="#onClickChat" onMouseReleased="#releaseChat" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/SpeechBubble.png" />
+               </image>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </ImageView>
+         </children></Pane>
+      <ImageView fx:id="ghost" fitHeight="192.0" fitWidth="191.0" layoutX="917.0" layoutY="88.0" onMouseEntered="#onEnterGhost" onMouseExited="#onExitGhost" opacity="0.6" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/ghost.png" />
          </image>

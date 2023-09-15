@@ -4,9 +4,12 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.effect.Glow;
+import javafx.scene.effect.Shadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.GameState;
@@ -23,6 +26,9 @@ public class HallwayController {
   @FXML private Pane chatContainer;
   @FXML private Pane blackboardContainer;
   @FXML private ImageView ghost;
+  @FXML private ImageView chatButton;
+  private Shadow shadow = new Shadow(10, Color.BLACK);
+  private Glow glow = new Glow(0.8);
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
@@ -35,6 +41,7 @@ public class HallwayController {
   public void addBlackboard() {
     // Adding the blackboard to the scene
     blackboardContainer.getChildren().add(GameState.blackboardController.getPane());
+    chatButton.toFront();
   }
 
   @FXML
@@ -71,7 +78,7 @@ public class HallwayController {
     Scene sceneRectangleIsIn = rectangle.getScene();
     sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.GYMNASIUM));
 
-   if (!GameState.isChatOpen) {
+    if (!GameState.isChatOpen) {
       // Resizing the window so the scene fits
       sceneRectangleIsIn.getWindow().sizeToScene();
     }
@@ -86,6 +93,7 @@ public class HallwayController {
     if (GameState.isChatOpen) {
       Stage stage = (Stage) chatContainer.getScene().getWindow();
       stage.setWidth(1109);
+      stage.centerOnScreen();
       GameState.lockerController.openChat();
     }
 
@@ -101,8 +109,9 @@ public class HallwayController {
   }
 
   @FXML
-  public void onClickGhost() {
-    System.out.println("ghost clicked");
+  private void onClickChat() {
+    System.out.println("chat clicked");
+    chatButton.setOpacity(0.5);
     // Add the chat to the chat container
     if (!GameState.chatInHall) {
       openChat();
@@ -118,17 +127,13 @@ public class HallwayController {
   }
 
   @FXML
-  private void onEnterGhost() {
-    System.out.println("hover on ghost");
-    // Add the chat to the chat container
-    if (!GameState.chatInHall) {
-      openChat();
-    }
+  private void enterChatButton() {
+    chatButton.setOpacity(0.5);
+  }
 
-    if (!GameState.isChatOpen) {
-      GameState.chatController.openChat();
-      GameState.isChatOpen = true;
-    }
+  @FXML
+  private void releaseChat() {
+    chatButton.setOpacity(1);
   }
 
   public void openChat() {
@@ -137,5 +142,17 @@ public class HallwayController {
     GameState.chatInLocker = false;
     chatContainer.getChildren().add(GameState.chatController.getChatPane());
     GameState.chatInHall = true;
+  }
+
+  @FXML
+  private void onEnterGhost() {
+    System.out.println("hover on ghost");
+    ghost.setEffect(shadow);
+  }
+
+  @FXML
+  private void onExitGhost() {
+    System.out.println("hover off ghost");
+    ghost.setEffect(null);
   }
 }

@@ -17,7 +17,7 @@
          </image>
       </ImageView>
       <Rectangle fx:id="door" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="377.0" layoutX="947.0" layoutY="109.0" onMouseClicked="#clickDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="143.0" />
-      <ImageView fx:id="ghost1" fitHeight="288.0" fitWidth="182.0" layoutX="674.0" layoutY="20.0" onMouseClicked="#onClickGhost" opacity="0.7" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="ghost1" fitHeight="288.0" fitWidth="182.0" layoutX="674.0" layoutY="20.0" opacity="0.7" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/ghost.png" />
          </image>
@@ -135,12 +135,22 @@
             <Font name="Palatino" size="30.0" />
          </font>
       </Label>
-      <ImageView fx:id="ghost" fitHeight="269.0" fitWidth="182.0" layoutX="1.0" layoutY="377.0" onMouseClicked="#onClickGhost" onMouseEntered="#onEnterGhost" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ghost" fitHeight="269.0" fitWidth="182.0" layoutX="1.0" layoutY="377.0" onMouseEntered="#onEnterGhost" onMouseExited="#onExitGhost" opacity="0.7" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/ghost.png" />
          </image>
       </ImageView>
       <Pane fx:id="chatContainer" layoutX="1100.0" prefHeight="702.0" prefWidth="240.0" />
-      <Pane fx:id="blackboardContainer" layoutY="619.0" prefHeight="83.0" prefWidth="1100.0" />
+      <Pane fx:id="blackboardContainer" layoutY="619.0" prefHeight="83.0" prefWidth="1100.0">
+         <children>
+            <ImageView fx:id="chatButton" fitHeight="80.0" fitWidth="110.0" layoutX="1005.0" layoutY="7.0" onMouseEntered="#enterChatButton" onMouseExited="#releaseChat" onMousePressed="#onClickChat" onMouseReleased="#releaseChat" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/SpeechBubble.png" />
+               </image>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </ImageView>
+         </children></Pane>
    </children>
 </Pane>

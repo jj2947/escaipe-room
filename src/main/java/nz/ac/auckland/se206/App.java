@@ -62,18 +62,15 @@ public class App extends Application {
             });
     loadRoom.start();
 
+    SceneManager.addUi(AppUi.BLACKBOARD, loadFxml("blackboard"));
     SceneManager.addUi(AppUi.HALLWAY, App.loadFxml("hallway"));
     SceneManager.addUi(AppUi.GYMNASIUM, App.loadFxml("gymnasium"));
     SceneManager.addUi(AppUi.STARTSCREEN, loadFxml("startScreen"));
     SceneManager.addUi(AppUi.LOCKER, App.loadFxml("locker"));
     SceneManager.addUi(AppUi.CHAT, loadFxml("chat"));
-    SceneManager.addUi(AppUi.BLACKBOARD, loadFxml("blackboard"));
 
     scene = new Scene(SceneManager.getUiRoot(AppUi.STARTSCREEN));
     stage.setScene(scene);
-    // Set the X and Y coordinates to 0 to open the window at the very left of the screen
-    stage.setX(0);
-    stage.setY(0);
     stage.show();
   }
 }

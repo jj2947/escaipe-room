@@ -4,9 +4,12 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.effect.Glow;
+import javafx.scene.effect.Shadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
@@ -20,6 +23,9 @@ public class GymnasiumController {
   @FXML private ImageView ghost;
   @FXML private Pane chatContainer;
   @FXML private Pane blackboardContainer;
+  @FXML private ImageView chatButton;
+  private Shadow shadow = new Shadow(10, Color.BLACK);
+  private Glow glow = new Glow(0.8);
   private int goalCount = 0;
 
   /** Initializes the room view, it is called when the room loads. */
@@ -64,8 +70,9 @@ public class GymnasiumController {
   public void clickRedButton() {}
 
   @FXML
-  private void onClickGhost() {
-    System.out.println("ghost clicked");
+  private void onClickChat() {
+    System.out.println("chat clicked");
+    chatButton.setOpacity(0.5);
     // Add the chat to the chat container
     if (!GameState.chatInGym) {
       openChat();
@@ -81,17 +88,25 @@ public class GymnasiumController {
   }
 
   @FXML
+  private void releaseChat() {
+    chatButton.setOpacity(1);
+  }
+
+  @FXML
+  private void enterChatButton() {
+    chatButton.setOpacity(0.5);
+  }
+
+  @FXML
   private void onEnterGhost() {
     System.out.println("hover on ghost");
-    // Add the chat to the chat container
-    if (!GameState.chatInGym) {
-      openChat();
-    }
+    ghost.setEffect(shadow);
+  }
 
-    if (!GameState.isChatOpen) {
-      GameState.chatController.openChat();
-      GameState.isChatOpen = true;
-    }
+  @FXML
+  private void onExitGhost() {
+    System.out.println("hover off ghost");
+    ghost.setEffect(null);
   }
 
   public void openChat() {
@@ -105,5 +120,6 @@ public class GymnasiumController {
   public void addBlackboard() {
     // Adding the blackboard to the scene
     blackboardContainer.getChildren().add(GameState.blackboardController.getPane());
+    chatButton.toFront();
   }
 }
