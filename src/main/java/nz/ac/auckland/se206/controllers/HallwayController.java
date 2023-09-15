@@ -105,6 +105,9 @@ public class HallwayController {
     if (!GameState.isChatOpen) {
       // Resizing the window so the scene fits
       sceneRectangleIsIn.getWindow().sizeToScene();
+      // Get the stage after switching the scene
+      Stage stage = (Stage) sceneRectangleIsIn.getWindow();
+      stage.centerOnScreen();
     }
   }
 

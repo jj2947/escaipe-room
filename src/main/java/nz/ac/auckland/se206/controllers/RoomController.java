@@ -245,6 +245,18 @@ public class RoomController {
   }
 
   @FXML
+  private void enterBackButton()  {
+    System.out.println("hover on back button");
+    goBackLabel.setOpacity(0.5);
+  }
+
+  @FXML
+  private void exitBackButton() {
+    System.out.println("hover off back button");
+    goBackLabel.setOpacity(1);
+  }
+
+  @FXML
   public void clickMap() {
     disableWhileMapOpen();
     enableCountries();
