@@ -245,7 +245,7 @@ public class RoomController {
   }
 
   @FXML
-  private void enterBackButton()  {
+  private void enterBackButton() {
     System.out.println("hover on back button");
     goBackLabel.setOpacity(0.5);
   }
@@ -389,6 +389,36 @@ public class RoomController {
     russiaView.setVisible(false);
     mapImage.setVisible(true);
   }
+
+  @FXML
+  public void nzClicked() {}
+
+  @FXML
+  public void australiaClicked() {}
+
+  @FXML
+  public void argentinaClicked() {}
+
+  @FXML
+  public void usaClicked() {}
+
+  @FXML
+  public void canadaClicked() {}
+
+  @FXML
+  public void brazilClicked() {}
+
+  @FXML
+  public void chinaClicked() {}
+
+  @FXML
+  public void russiaClicked() {}
+
+  @FXML
+  public void greenlandClicked() {}
+
+  @FXML
+  public void indiaClicked() {}
 
   public void showWhenOnMap() {
     mapImage.setVisible(true);

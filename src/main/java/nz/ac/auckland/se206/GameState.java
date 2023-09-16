@@ -26,6 +26,8 @@ public class GameState {
   /** The time choosen by the user, set early for some reason cant remember rn */
   public static int totalTime = 10000;
 
+  public static String countryToFind;
+
   public static boolean basketballCollected = false;
 
   public static Timer timer;
@@ -44,7 +46,8 @@ public class GameState {
 
   public static boolean chatInRoom = false;
 
-  public static boolean chatInHall = false;;
+  public static boolean chatInHall = false;
+  ;
 
   public static boolean chatInLocker = false;
 
