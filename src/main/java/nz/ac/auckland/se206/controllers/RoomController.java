@@ -391,28 +391,44 @@ public class RoomController {
   }
 
   @FXML
-  public void nzClicked() {}
+  public void nzClicked() {
+    if (isTheCountry("New Zealand")) {}
+  }
 
   @FXML
-  public void australiaClicked() {}
+  public void australiaClicked() {
+    if (isTheCountry("Australia")) {}
+  }
 
   @FXML
-  public void argentinaClicked() {}
+  public void argentinaClicked() {
+    if (isTheCountry("Argentina")) {}
+  }
 
   @FXML
-  public void usaClicked() {}
+  public void usaClicked() {
+    if (isTheCountry("USA")) {}
+  }
 
   @FXML
-  public void canadaClicked() {}
+  public void canadaClicked() {
+    if (isTheCountry("Canada")) {}
+  }
 
   @FXML
-  public void brazilClicked() {}
+  public void brazilClicked() {
+    if (isTheCountry("Brazil")) {}
+  }
 
   @FXML
-  public void chinaClicked() {}
+  public void chinaClicked() {
+    if (isTheCountry("China")) {}
+  }
 
   @FXML
-  public void russiaClicked() {}
+  public void russiaClicked() {
+    if (isTheCountry("Russia")) {}
+  }
 
   @FXML
   public void greenlandClicked() {}
@@ -532,5 +548,15 @@ public class RoomController {
     russiaMapFive.setVisible(false);
     russiaMapSix.setVisible(false);
     russiaMapSeven.setVisible(false);
+  }
+
+  public boolean isTheCountry(String country) {
+    if (GameState.isRiddleResolved
+        && !GameState.countryIsFound
+        && GameState.countryToFind.equals(country)) {
+      GameState.countryIsFound = true;
+      return true;
+    }
+    return false;
   }
 }
