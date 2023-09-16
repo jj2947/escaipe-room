@@ -56,6 +56,7 @@ public class StartScreenController {
       // A FIX NEEDS TO BE IN PLACE
       GameState.timer.startTimer();
       sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
+      sceneButtonIsIn.getWindow().sizeToScene();
     } catch (Exception e) {
       e.printStackTrace();
     }

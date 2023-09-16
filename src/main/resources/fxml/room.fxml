@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -8,27 +9,40 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="740.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
+<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="702.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
-      <ImageView fx:id="classroomImage" fitHeight="664.0" fitWidth="1219.0" layoutY="-4.0" preserveRatio="true">
+      <ImageView fx:id="classroomImage" fitHeight="619.0" fitWidth="1100.0" preserveRatio="true">
          <image>
             <Image url="@../images/Classroom.jpeg" />
          </image>
       </ImageView>
-      <Rectangle fx:id="door" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="377.0" layoutX="1021.0" layoutY="123.0" onMouseClicked="#clickDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="144.0" />
+      <Rectangle fx:id="door" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="377.0" layoutX="947.0" layoutY="109.0" onMouseClicked="#clickDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="143.0" />
+      <ImageView fx:id="ghost1" fitHeight="288.0" fitWidth="182.0" layoutX="674.0" layoutY="20.0" opacity="0.7" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/ghost.png" />
+         </image>
+      </ImageView>
       <Label fx:id="timerLabel" alignment="CENTER" layoutX="11.0" layoutY="15.0" prefHeight="64.0" prefWidth="140.0" textFill="#fffbfb">
          <font>
             <Font size="45.0" />
          </font>
       </Label>
-      <Label fx:id="exitLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="1018.0" layoutY="28.0" opacity="0.5" prefHeight="36.0" prefWidth="98.0" style="-fx-background-color: green;" text="EXIT" textFill="WHITE">
+      <Label fx:id="messageText" alignment="CENTER" contentDisplay="CENTER" layoutX="685.0" layoutY="51.0" prefHeight="158.0" prefWidth="107.0" text="ESCAPE OR ELSE!" textAlignment="CENTER" textFill="WHITE" visible="false" wrapText="true">
+         <font>
+            <Font name="Luminari" size="25.0" />
+         </font>
+         <effect>
+            <InnerShadow blurType="GAUSSIAN" />
+         </effect>
+      </Label>
+      <Label fx:id="exitLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="945.0" layoutY="28.0" opacity="0.5" prefHeight="36.0" prefWidth="98.0" style="-fx-background-color: green;" text="EXIT" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="27.0" />
          </font>
       </Label>
-      <Ellipse fx:id="mapEllipse" fill="DODGERBLUE" layoutX="290.0" layoutY="250.0" onMouseClicked="#clickMap" opacity="0.0" radiusX="186.0" radiusY="99.0" stroke="BLACK" strokeType="INSIDE" />
-      <Rectangle fx:id="mapRectangleOne" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="180.0" layoutX="105.0" layoutY="161.0" onMouseClicked="#clickMap" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="122.0" />
-      <Rectangle fx:id="mapRectangleTwo" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="220.0" layoutX="316.0" layoutY="130.0" onMouseClicked="#clickMap" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="160.0" />
+      <Ellipse fx:id="mapEllipse" fill="DODGERBLUE" layoutX="277.0" layoutY="230.0" onMouseClicked="#clickMap" opacity="0.0" radiusX="178.0" radiusY="99.0" stroke="BLACK" strokeType="INSIDE" />
+      <Rectangle fx:id="mapRectangleOne" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="184.0" layoutX="87.0" layoutY="143.0" onMouseClicked="#clickMap" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="140.0" />
+      <Rectangle fx:id="mapRectangleTwo" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="198.0" layoutX="288.0" layoutY="130.0" onMouseClicked="#clickMap" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="156.0" />
       <ImageView fx:id="mapImage" fitHeight="854.0" fitWidth="1452.0" layoutX="-61.0" layoutY="-47.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/maps/allBlueMap.png" />
@@ -116,10 +130,27 @@
       <Rectangle fx:id="indiaMapTwo" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="56.0" layoutX="748.0" layoutY="358.0" onMouseEntered="#indiaEnter" onMouseExited="#indiaExit" opacity="0.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="38.0" />
       <Rectangle fx:id="indiaMapThree" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="17.0" layoutX="751.0" layoutY="333.0" onMouseEntered="#indiaEnter" onMouseExited="#indiaExit" opacity="0.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="11.0" />
       <Rectangle fx:id="indiaMapFour" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="8.0" layoutX="759.0" layoutY="342.0" onMouseEntered="#indiaEnter" onMouseExited="#indiaExit" opacity="0.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="13.0" />
-      <Label fx:id="goBackLabel" layoutX="546.0" layoutY="31.0" onMouseClicked="#exitMap" text="Go Back" textFill="WHITE" visible="false">
+      <Label fx:id="goBackLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="492.5" layoutY="31.0" onMouseClicked="#exitMap" prefHeight="39.0" prefWidth="115.0" styleClass="backButton" stylesheets="@../css/stylesheet.css" text="Go Back" textFill="WHITE" visible="false">
          <font>
-            <Font size="24.0" />
+            <Font name="Palatino" size="30.0" />
          </font>
       </Label>
+      <ImageView fx:id="ghost" fitHeight="269.0" fitWidth="182.0" layoutX="1.0" layoutY="377.0" onMouseEntered="#onEnterGhost" onMouseExited="#onExitGhost" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/ghost.png" />
+         </image>
+      </ImageView>
+      <Pane fx:id="chatContainer" layoutX="1100.0" prefHeight="702.0" prefWidth="240.0" />
+      <Pane fx:id="blackboardContainer" layoutY="619.0" prefHeight="83.0" prefWidth="1100.0">
+         <children>
+            <ImageView fx:id="chatButton" fitHeight="80.0" fitWidth="110.0" layoutX="1005.0" layoutY="7.0" onMouseEntered="#enterChatButton" onMouseExited="#releaseChat" onMousePressed="#onClickChat" onMouseReleased="#releaseChat" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/SpeechBubble.png" />
+               </image>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </ImageView>
+         </children></Pane>
    </children>
 </Pane>

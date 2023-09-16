@@ -3,18 +3,13 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import nz.ac.auckland.se206.App;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.SceneManager;
-import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -26,10 +21,7 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 public class ChatController {
   @FXML private TextArea chatTextArea;
   @FXML private TextField inputText;
-  @FXML private Button sendButton;
-  @FXML private Button goBackButton;
-  @FXML private Label timerLabel;
-  private Timer timer;
+  @FXML private AnchorPane chatPane;
 
   private ChatCompletionRequest chatCompletionRequest;
   private ChatMessage chatMsg;
@@ -43,6 +35,7 @@ public class ChatController {
    */
   @FXML
   public void initialize() throws ApiProxyException {
+    GameState.chatController = this;
     country = countryChooser.chooseCountry();
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
@@ -69,7 +62,9 @@ public class ChatController {
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
   private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
-
+    if (GameState.isChatOpen) {
+      responseLoading();
+    }
     // GPT Task
     Task<Void> askGPT =
         new Task<Void>() {
@@ -92,9 +87,9 @@ public class ChatController {
                         && result.getChatMessage().getContent().startsWith("Correct")) {
                       GameState.isRiddleResolved = true;
                     }
-                    // Enabling Buttons after API has finished loading
-                    sendButton.setDisable(false);
-                    goBackButton.setDisable(false);
+                    if (GameState.isChatOpen) {
+                      responseLoaded();
+                    }
                     inputText.setDisable(false);
                   });
             } catch (Exception e) {
@@ -111,50 +106,34 @@ public class ChatController {
               askGPT.run();
             });
     gptThread.start();
-    // Disabling Buttons while API is loading
-    sendButton.setDisable(true);
-    goBackButton.setDisable(true);
     inputText.setDisable(true);
     return chatMsg;
   }
 
-  /**
-   * Sends a message to the GPT model.
-   *
-   * @param event the action event triggered by the send button
-   * @throws ApiProxyException if there is an error communicating with the API proxy
-   * @throws IOException if there is an I/O error
-   */
   @FXML
-  private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
-    String message = inputText.getText();
-    if (message.trim().isEmpty()) {
-      return;
+  private void onEnterPressed(KeyEvent event) throws ApiProxyException, IOException {
+    if (event.getCode().toString().equals("ENTER")) {
+      String message = inputText.getText();
+      if (message.trim().isEmpty()) {
+        return;
+      }
+      inputText.clear();
+      ChatMessage msg = new ChatMessage("user", message);
+      appendChatMessage(msg);
+      runGpt(msg);
     }
-    inputText.clear();
-    ChatMessage msg = new ChatMessage("user", message);
-    appendChatMessage(msg);
-    runGpt(msg);
   }
 
-  /**
-   * Navigates back to the previous view.
-   *
-   * @param event the action event triggered by the go back button
-   * @throws ApiProxyException if there is an error communicating with the API proxy
-   * @throws IOException if there is an I/O error
-   */
-  @FXML
-  private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
-    Button button = (Button) event.getSource();
-    Scene sceneButtonIsIn = button.getScene();
-    // Switching Scenes to the room
-    // Needs to be changed later on so that it goes back to the most recent room
-    try {
-      sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+  public void closeChat() {
+    Stage stage = (Stage) chatPane.getScene().getWindow();
+    stage.setWidth(1100);
+    stage.centerOnScreen();
+  }
+
+  public void openChat() {
+    Stage stage = (Stage) chatPane.getScene().getWindow();
+    stage.setWidth(1340);
+    stage.centerOnScreen();
   }
 
   /**
@@ -167,55 +146,38 @@ public class ChatController {
     // When enter is clicked the user sends their message
     if (event.getCode().toString().equals("ENTER")) {
       try {
-        onSendMessage(null);
+        onEnterPressed(event);
       } catch (Exception e) {
         e.printStackTrace();
       }
     }
   }
 
-  private void updateTimer() {
-    // Update the timer label every second
-    Task<Void> updateLabelTask =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            while (!GameState.isTimeReached) {
-              Platform.runLater(
-                  () ->
-                      timerLabel.setText(
-                          String.format(
-                              "%d:%02d", timer.getCounter() / 60, timer.getCounter() % 60)));
-              ;
-              Thread.sleep(1000); // Wait for 1 second
-            }
-            if (GameState.isTimeReached) {
-              switchToEndScene();
-            }
-            return null;
-          }
-        };
-
-    // Create a new thread for the update task and start it
-    Thread updateThread = new Thread(updateLabelTask);
-    updateThread.setDaemon(true);
-    updateThread.start();
+  public AnchorPane getChatPane() {
+    return chatPane;
   }
 
-  private void switchToEndScene() {
-    Platform.runLater(
-        () -> {
-          Scene currentScene = timerLabel.getScene();
-          if (currentScene != null) {
-            try {
-              SceneManager.addUi(AppUi.END, App.loadFxml("end"));
-            } catch (IOException e) {
-              // TODO Auto-generated catch block
-              e.printStackTrace();
-            }
-            currentScene.setRoot(SceneManager.getUiRoot(AppUi.END));
-            currentScene.getWindow().sizeToScene();
-          }
-        });
+  private void responseLoaded() {
+    if (GameState.chatInGym) {
+      // GameState.gymController.responseLoaded();
+    } else if (GameState.chatInRoom) {
+      GameState.roomController.responseLoaded();
+    } else if (GameState.chatInLocker) {
+      // GameState.lockerController.responseLoaded();
+    } else if (GameState.chatInHall) {
+      // GameState.hallwayController.responseLoaded();
+    }
+  }
+
+  private void responseLoading() {
+    if (GameState.chatInGym) {
+      // GameState.gymController.responseLoading();
+    } else if (GameState.chatInRoom) {
+      GameState.roomController.responseLoading();
+    } else if (GameState.chatInLocker) {
+      // GameState.lockerController.responseLoading();
+    } else if (GameState.chatInHall) {
+      // GameState.hallwayController.responseLoading();
+    }
   }
 }

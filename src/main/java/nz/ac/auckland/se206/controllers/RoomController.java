@@ -1,17 +1,20 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.util.Random;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.effect.Glow;
+import javafx.scene.effect.Shadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
-import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -22,6 +25,7 @@ public class RoomController {
   @FXML private Pane room;
   @FXML private Rectangle door;
   @FXML private Label timerLabel;
+  @FXML private Pane chatContainer;
   @FXML private ImageView mapImage;
   @FXML private Ellipse mapEllipse;
   @FXML private Rectangle mapRectangleOne;
@@ -70,6 +74,14 @@ public class RoomController {
   @FXML private Rectangle indiaMapTwo;
   @FXML private Rectangle indiaMapThree;
   @FXML private Rectangle indiaMapFour;
+  @FXML private Label messageText;
+  @FXML private ImageView ghost;
+  @FXML private Label exitLabel;
+  @FXML private ImageView ghost1;
+  @FXML private Pane blackboardContainer;
+  @FXML private ImageView chatButton;
+  private Shadow shadow = new Shadow(10, Color.BLACK);
+  private Glow glow = new Glow(0.8);
 
   /**
    * Initializes the room view, it is called when the room loads.
@@ -78,10 +90,49 @@ public class RoomController {
    */
   public void initialize() throws IOException {
     // Initialization code goes here
+    GameState.roomController = this;
     // Adding timerLabel to synched timer
     GameState.timer.setClass(timerLabel);
     timerLabel.setText(String.format("%02d:%02d", GameState.totalTime / 60, 0));
-    SceneManager.addUi(AppUi.CHAT, App.loadFxml("chat"));
+    addBlackboard();
+  }
+
+  public void addBlackboard() {
+    // Adding the blackboard to the scene
+    blackboardContainer.getChildren().add(GameState.blackboardController.getPane());
+    chatButton.toFront();
+  }
+
+  public void responseLoading() {
+    ghost.setEffect(shadow);
+    Random random = new Random();
+    int randomNumber = random.nextInt(3); // Generates a random number 0, 1, or 2
+
+    switch (randomNumber) {
+      case 0:
+        // Apply the effect to 'room'
+        room.setEffect(glow);
+        break;
+      case 1:
+        // Apply the shadow effect to 'exitLabel'
+        exitLabel.setEffect(glow);
+        ghost1.setVisible(true);
+        break;
+      case 2:
+        // Make the escape message visible
+        messageText.setVisible(true);
+        break;
+      default:
+        break;
+    }
+  }
+
+  public void responseLoaded() {
+    ghost.setEffect(null);
+    messageText.setVisible(false);
+    room.setEffect(null);
+    exitLabel.setEffect(null);
+    ghost1.setVisible(false);
   }
 
   /**
@@ -128,13 +179,81 @@ public class RoomController {
   public void clickDoor(MouseEvent event) {
     System.out.println("hallway door clicked");
 
+    if (GameState.isChatOpen) {
+      GameState.hallController.openChat();
+    }
+
     // Switching to hallway scene
     Rectangle rectangle = (Rectangle) event.getSource();
     Scene sceneRectangleIsIn = rectangle.getScene();
     sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.HALLWAY));
 
-    // Resizing the window so the larger scene fits
-    sceneRectangleIsIn.getWindow().sizeToScene();
+    if (!GameState.isChatOpen) {
+      // Resizing the window so the scene fits
+      sceneRectangleIsIn.getWindow().sizeToScene();
+    }
+
+    GameState.hallController.addBlackboard();
+  }
+
+  @FXML
+  private void onClickChat() {
+    System.out.println("chat clicked");
+    chatButton.setOpacity(0.5);
+    // Add the chat to the chat container
+    if (!GameState.chatInRoom) {
+      openChat();
+    }
+
+    if (GameState.isChatOpen) {
+      GameState.chatController.closeChat();
+      GameState.isChatOpen = false;
+    } else {
+      GameState.chatController.openChat();
+      GameState.isChatOpen = true;
+    }
+  }
+
+  @FXML
+  private void releaseChat() {
+    chatButton.setOpacity(1);
+  }
+
+  @FXML
+  private void enterChatButton() {
+    chatButton.setOpacity(0.5);
+  }
+
+  @FXML
+  private void onEnterGhost() {
+    System.out.println("hover on ghost");
+    ghost.setEffect(shadow);
+  }
+
+  @FXML
+  private void onExitGhost() {
+    System.out.println("hover off ghost");
+    ghost.setEffect(null);
+  }
+
+  public void openChat() {
+    GameState.chatInGym = false;
+    GameState.chatInHall = false;
+    GameState.chatInLocker = false;
+    chatContainer.getChildren().add(GameState.chatController.getChatPane());
+    GameState.chatInRoom = true;
+  }
+
+  @FXML
+  private void enterBackButton()  {
+    System.out.println("hover on back button");
+    goBackLabel.setOpacity(0.5);
+  }
+
+  @FXML
+  private void exitBackButton() {
+    System.out.println("hover off back button");
+    goBackLabel.setOpacity(1);
   }
 
   @FXML

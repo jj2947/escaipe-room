@@ -62,10 +62,12 @@ public class App extends Application {
             });
     loadRoom.start();
 
+    SceneManager.addUi(AppUi.BLACKBOARD, loadFxml("blackboard"));
     SceneManager.addUi(AppUi.HALLWAY, App.loadFxml("hallway"));
     SceneManager.addUi(AppUi.GYMNASIUM, App.loadFxml("gymnasium"));
     SceneManager.addUi(AppUi.STARTSCREEN, loadFxml("startScreen"));
     SceneManager.addUi(AppUi.LOCKER, App.loadFxml("locker"));
+    SceneManager.addUi(AppUi.CHAT, loadFxml("chat"));
 
     scene = new Scene(SceneManager.getUiRoot(AppUi.STARTSCREEN));
     stage.setScene(scene);
