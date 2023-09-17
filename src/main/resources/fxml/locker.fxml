@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -10,7 +11,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="702.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.LockerController">
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="702.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.LockerController">
    <children>
       <Pane fx:id="lockerPane" prefHeight="702.0" prefWidth="868.0">
          <children>
@@ -114,17 +115,12 @@
                   <Font size="45.0" />
                </font>
             </Button>
-            <ImageView fx:id="ghost" fitHeight="192.0" fitWidth="191.0" layoutX="658.0" layoutY="254.0" onMouseEntered="#onEnterGhost" onMouseExited="#onExitGhost" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ghost" fitHeight="192.0" fitWidth="191.0" layoutX="658.0" layoutY="254.0" onMouseEntered="#onEnterGhost" onMouseExited="#onExitGhost" opacity="0.7" pickOnBounds="true">
                <image>
                   <Image url="@../images/ghost.png" />
                </image>
             </ImageView>
-            <Label fx:id="messageBox" alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="216.0" prefHeight="204.0" prefWidth="221.0" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-               <font>
-                  <Font name="Chalkduster" size="24.0" />
-               </font>
-            </Label>
-            <ImageView fx:id="chatButton" fitHeight="80.0" fitWidth="110.0" layoutX="782.0" layoutY="202.0" onMouseEntered="#enterChatButton" onMouseExited="#releaseChat" onMousePressed="#onClickChat" onMouseReleased="#releaseChat" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="chatButton" fitHeight="80.0" fitWidth="110.0" layoutX="782.0" layoutY="181.0" onMouseEntered="#enterChatButton" onMouseExited="#releaseChat" onMousePressed="#onClickChat" onMouseReleased="#releaseChat" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/SpeechBubble.png" />
                </image>
@@ -133,7 +129,31 @@
                </effect>
             </ImageView>
          </children>
+         <effect>
+            <Glow level="0.0" />
+         </effect>
       </Pane>
+      <Label fx:id="messageText" alignment="CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="400.0" prefHeight="214.0" prefWidth="173.0" text="The Clock is Ticking" textAlignment="CENTER" textFill="RED" visible="false" wrapText="true">
+         <font>
+            <Font name="Chalkduster" size="38.0" />
+         </font>
+         <effect>
+            <Glow level="1.0" />
+         </effect>
+      </Label>
+      <Label fx:id="messageBox" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="200.0" prefHeight="204.0" prefWidth="221.0" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Chalkduster" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="messageText1" alignment="CENTER" contentDisplay="CENTER" layoutX="705.0" layoutY="15.0" prefHeight="158.0" prefWidth="164.0" text="ESCAPE OR ELSE" textAlignment="CENTER" textFill="RED" visible="false" wrapText="true">
+         <font>
+            <Font name="Chalkduster" size="38.0" />
+         </font>
+         <effect>
+            <Glow level="1.0" />
+         </effect>
+      </Label>
       <Label fx:id="timerLabel" alignment="CENTER" layoutX="11.0" layoutY="15.0" prefHeight="64.0" prefWidth="140.0" textFill="WHITE">
          <font>
             <Font size="45.0" />

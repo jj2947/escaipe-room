@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.util.Random;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -43,6 +44,10 @@ public class LockerController {
   @FXML private Pane chatContainer;
   @FXML private Label messageBox;
   @FXML private ImageView chatButton;
+  @FXML private Pane lockerPane;
+  @FXML private Label messageText;
+  @FXML private Label messageText1;
+  @FXML private Pane pane;
   private int numsEntered = 0;
   private int randNum;
   private int randNum1 = 0;
@@ -304,5 +309,39 @@ public class LockerController {
 
   private String stripString(String str) {
     return str.replaceAll("[^a-zA-Z0-9]", "");
+  }
+
+  public void responseLoading() {
+    ghost.setEffect(shadow);
+    Random random = new Random();
+    int randomNumber = random.nextInt(3); // Generates a random number 0, 1, or 2
+
+    switch (randomNumber) {
+      case 0:
+        // Apply the effect to 'room'
+        pane.setEffect(glow);
+        break;
+      case 1:
+        messageText.setVisible(true);
+        messageText1.setVisible(true);
+        messageText1.setEffect(shadow);
+        break;
+      case 2:
+        messageText1.setVisible(true);
+        messageText.setVisible(true);
+        messageText.setEffect(shadow);
+        break;
+      default:
+        break;
+    }
+  }
+
+  public void responseLoaded() {
+    ghost.setEffect(null);
+    pane.setEffect(null);
+    messageText.setVisible(false);
+    messageText.setEffect(glow);
+    messageText1.setVisible(false);
+    messageText1.setEffect(glow);
   }
 }

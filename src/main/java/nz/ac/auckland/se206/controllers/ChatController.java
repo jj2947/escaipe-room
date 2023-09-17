@@ -48,7 +48,7 @@ public class ChatController {
    * @param msg the chat message to append
    */
   private void appendChatMessage(ChatMessage msg) {
-    chatTextArea.appendText(msg.getRole() + ": " + msg.getContent() + "\n\n");
+    chatTextArea.appendText(msg.getContent() + "\n\n");
   }
 
   /**
@@ -156,25 +156,25 @@ public class ChatController {
 
   private void responseLoaded() {
     if (GameState.chatInGym) {
-      // GameState.gymController.responseLoaded();
+      GameState.gymController.responseLoaded();
     } else if (GameState.chatInRoom) {
       GameState.roomController.responseLoaded();
     } else if (GameState.chatInLocker) {
-      // GameState.lockerController.responseLoaded();
+      GameState.lockerController.responseLoaded();
     } else if (GameState.chatInHall) {
-      // GameState.hallwayController.responseLoaded();
+      GameState.hallController.responseLoaded();
     }
   }
 
   private void responseLoading() {
     if (GameState.chatInGym) {
-      // GameState.gymController.responseLoading();
+      GameState.gymController.responseLoading();
     } else if (GameState.chatInRoom) {
       GameState.roomController.responseLoading();
     } else if (GameState.chatInLocker) {
-      // GameState.lockerController.responseLoading();
+      GameState.lockerController.responseLoading();
     } else if (GameState.chatInHall) {
-      // GameState.hallwayController.responseLoading();
+      GameState.hallController.responseLoading();
     }
   }
 }
