@@ -129,6 +129,7 @@ public class LockerController {
   private void onClickBasketball() {
     System.out.println("basketball clicked");
     GameState.basketballCollected = true;
+    GameState.blackboardController.showBasketball();
     basketballImg.setVisible(false);
   }
 

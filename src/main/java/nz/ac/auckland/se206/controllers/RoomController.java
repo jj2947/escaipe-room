@@ -431,10 +431,14 @@ public class RoomController {
   }
 
   @FXML
-  public void greenlandClicked() {}
+  public void greenlandClicked() {
+    if (isTheCountry("Greenland")) {}
+  }
 
   @FXML
-  public void indiaClicked() {}
+  public void indiaClicked() {
+    if (isTheCountry("India")) {}
+  }
 
   public void showWhenOnMap() {
     mapImage.setVisible(true);
@@ -555,6 +559,7 @@ public class RoomController {
         && !GameState.countryIsFound
         && GameState.countryToFind.equals(country)) {
       GameState.countryIsFound = true;
+      GameState.blackboardController.showHallpass();
       return true;
     }
     return false;

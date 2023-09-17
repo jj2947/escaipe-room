@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane fx:id="blackboardPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="83.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.BlackboardController">
@@ -11,5 +15,22 @@
             <Bloom threshold="0.75" />
          </effect>
       </TextField>
+      <Label fx:id="objectiveLabel" layoutX="18.0" layoutY="26.0" text="Objective:" textFill="WHITE">
+         <stylesheets>
+            <URL value="@../css/blackboardStylesheet.css" />
+            <URL value="@../css/blackboardStylesheet.css" />
+         </stylesheets>
+      </Label>
+      <ImageView fx:id="basketballImage" fitHeight="70.0" fitWidth="76.0" layoutX="903.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/ball.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="hallpassImage" fitHeight="103.0" fitWidth="142.0" layoutX="774.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/HallPass.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="677.0" layoutY="26.0" stylesheets="@../css/blackboardStylesheet.css" text="Items:" />
    </children>
 </AnchorPane>
