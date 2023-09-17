@@ -20,15 +20,15 @@
             <Font size="45.0" />
          </font>
       </Label>
-      <Rectangle fx:id="classroomDoor" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="407.0" layoutX="46.0" layoutY="188.0" onMouseClicked="#clickClassroomDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="191.0" />
-      <Rectangle fx:id="gymDoor" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="91.0" layoutX="608.0" layoutY="310.0" onMouseClicked="#clickGymDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="53.0" />
+      <Rectangle fx:id="classroomDoor" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="407.0" layoutX="46.0" layoutY="188.0" onMouseClicked="#clickClassroomDoor" onMouseEntered="#classroomDoorEntered" onMouseExited="#classroomDoorExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="191.0" />
+      <Rectangle fx:id="gymDoor" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="91.0" layoutX="608.0" layoutY="310.0" onMouseClicked="#clickGymDoor" onMouseEntered="#gymDoorEntered" onMouseExited="#gymDoorExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="53.0" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="558.0" layoutY="283.0" opacity="0.5" prefHeight="19.0" prefWidth="154.0" style="-fx-background-color: blue; -fx-text-fill: white;" styleClass="roomLabel" text="GYMNASIUM" textFill="BLUE">
          <font>
             <Font name="Palatino" size="15.0" />
          </font>
       </Label>
-      <Rectangle fx:id="locker1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="293.0" layoutX="242.0" layoutY="233.0" onMouseClicked="#clickLocker" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="191.0" />
-      <Rectangle fx:id="locker2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="221.0" layoutX="786.0" layoutY="272.0" onMouseClicked="#clickLocker" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="147.0" />
+      <Rectangle fx:id="locker1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="293.0" layoutX="242.0" layoutY="233.0" onMouseClicked="#clickLocker" onMouseEntered="#lockerEntered" onMouseExited="#lockerExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="191.0" />
+      <Rectangle fx:id="locker2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="221.0" layoutX="786.0" layoutY="272.0" onMouseClicked="#clickLocker" onMouseEntered="#lockerEntered" onMouseExited="#lockerExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="147.0" />
       <Pane fx:id="chatContainer" layoutX="1100.0" prefHeight="702.0" prefWidth="240.0">
       </Pane>
       <ImageView fx:id="ghost" fitHeight="192.0" fitWidth="191.0" layoutX="939.0" layoutY="406.0" onMouseEntered="#onEnterGhost" onMouseExited="#onExitGhost" opacity="0.8" pickOnBounds="true" preserveRatio="true">

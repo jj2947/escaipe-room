@@ -158,4 +158,34 @@ public class HallwayController {
     System.out.println("hover off ghost");
     ghost.setEffect(null);
   }
+
+  @FXML
+  public void classroomDoorEntered() {
+    GameState.blackboardController.setHoverText("Classroom Door");
+  }
+
+  @FXML
+  public void classroomDoorExited() {
+    GameState.blackboardController.setHoverText("");
+  }
+
+  @FXML
+  public void gymDoorEntered() {
+    GameState.blackboardController.setHoverText("Gym Door");
+  }
+
+  @FXML
+  public void gymDoorExited() {
+    GameState.blackboardController.setHoverText("");
+  }
+
+  @FXML
+  public void lockerEntered() {
+    GameState.blackboardController.setHoverText("Locker");
+  }
+
+  @FXML
+  public void lockerExited() {
+    GameState.blackboardController.setHoverText("");
+  }
 }

@@ -440,6 +440,26 @@ public class RoomController {
     if (isTheCountry("India")) {}
   }
 
+  @FXML
+  public void doorEntered() {
+    GameState.blackboardController.setHoverText("Hallway Door");
+  }
+
+  @FXML
+  public void doorExited() {
+    GameState.blackboardController.setHoverText("");
+  }
+
+  @FXML
+  public void mapEntered() {
+    GameState.blackboardController.setHoverText("Map");
+  }
+
+  @FXML
+  public void mapExited() {
+    GameState.blackboardController.setHoverText("");
+  }
+
   public void showWhenOnMap() {
     mapImage.setVisible(true);
     classroomImage.setOpacity(0.5);
@@ -560,6 +580,8 @@ public class RoomController {
         && GameState.countryToFind.equals(country)) {
       GameState.countryIsFound = true;
       GameState.blackboardController.showHallpass();
+      GameState.blackboardController.showItemLabel();
+      GameState.blackboardController.setObjectiveText("Objective: What's in the hallways?");
       return true;
     }
     return false;

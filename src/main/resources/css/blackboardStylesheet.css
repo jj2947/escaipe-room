@@ -1,7 +1,5 @@
 .label {
     -fx-control-inner-background: #203112;
-    -fx-text-fill: #ffffff;
     -fx-font-family: "chalkduster";
     -fx-prompt-text-fill: #ffffff36;
-    -fx-font-size: 25;
 }

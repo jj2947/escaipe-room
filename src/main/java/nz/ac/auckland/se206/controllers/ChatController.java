@@ -84,6 +84,8 @@ public class ChatController {
                     if (result.getChatMessage().getRole().equals("assistant")
                         && result.getChatMessage().getContent().startsWith("Correct")) {
                       GameState.isRiddleResolved = true;
+                      GameState.blackboardController.setObjectiveText(
+                          "Objective: Where can I find this country?");
                     }
                     if (GameState.isChatOpen) {
                       responseLoaded();

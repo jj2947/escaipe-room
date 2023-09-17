@@ -130,6 +130,7 @@ public class LockerController {
     System.out.println("basketball clicked");
     GameState.basketballCollected = true;
     GameState.blackboardController.showBasketball();
+    GameState.blackboardController.setObjectiveText("Objective: What new things can I reach now?");
     basketballImg.setVisible(false);
   }
 
