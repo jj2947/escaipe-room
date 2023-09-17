@@ -11,7 +11,6 @@ import javafx.scene.effect.Shadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
@@ -19,10 +18,9 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class LockerController {
   @FXML private Label timerLabel;
-  @FXML private ImageView basketballImg;
   @FXML private ImageView note1;
   @FXML private ImageView note2;
-  @FXML private Rectangle basketball;
+  @FXML private ImageView basketball;
   @FXML private Button oneButton;
   @FXML private Button twoButton;
   @FXML private Button threeButton;
@@ -48,6 +46,8 @@ public class LockerController {
   @FXML private Label messageText;
   @FXML private Label messageText1;
   @FXML private Pane pane;
+  @FXML private Label noteLabel1;
+  @FXML private Label noteLabel2;
   private int numsEntered = 0;
   private int randNum;
   private int randNum1 = 0;
@@ -134,7 +134,23 @@ public class LockerController {
   private void onClickBasketball() {
     System.out.println("basketball clicked");
     GameState.basketballCollected = true;
-    basketballImg.setVisible(false);
+    basketball.setVisible(false);
+    note1.setVisible(true);
+    note2.setVisible(true);
+    noteLabel1.setVisible(true);
+    noteLabel2.setVisible(true);
+  }
+
+  @FXML
+  private void enterBasketball() {
+    System.out.println("basketball entered");
+    basketball.setOpacity(0.4);
+  }
+
+  @FXML
+  private void exitBasketball() {
+    System.out.println("basketball exited");
+    basketball.setOpacity(1);
   }
 
   @FXML
@@ -267,10 +283,8 @@ public class LockerController {
     if (input.equals(answerString)) {
       // Open Locker
       pinpad.setVisible(false);
-      basketballImg.setVisible(true);
+      basketball.setVisible(true);
       basketball.toFront();
-      note1.setVisible(true);
-      note2.setVisible(true);
     } else {
       // Incorrect answer
       numsEntered = 0;
