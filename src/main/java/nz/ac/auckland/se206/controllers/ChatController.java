@@ -59,6 +59,7 @@ public class ChatController {
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
   private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
+    appendChatMessage(new ChatMessage("assistant", "Ghost is Writing..."));
     if (GameState.isChatOpen) {
       responseLoading();
     }
@@ -77,17 +78,18 @@ public class ChatController {
               chatMsg = result.getChatMessage();
               Platform.runLater(
                   () -> {
-                    // After Message is recieved adding it to the chat box
-                    appendChatMessage(result.getChatMessage());
+                    // Replacing the "Ghost is Writing..." with the response
+                    replaceLoadingMessageWithResponse(chatMsg.getContent());
+                    // Stop the loading effects
+                    if (GameState.isChatOpen) {
+                      responseLoaded();
+                    }
+                    inputText.setDisable(false);
                     // Checking to see if the riddle has been solved and changing the game state
                     if (result.getChatMessage().getRole().equals("assistant")
                         && result.getChatMessage().getContent().startsWith("Correct")) {
                       GameState.isRiddleResolved = true;
                     }
-                    if (GameState.isChatOpen) {
-                      responseLoaded();
-                    }
-                    inputText.setDisable(false);
                   });
             } catch (Exception e) {
               e.printStackTrace();
@@ -175,6 +177,20 @@ public class ChatController {
       GameState.lockerController.responseLoading();
     } else if (GameState.chatInHall) {
       GameState.hallController.responseLoading();
+    }
+  }
+
+  private void replaceLoadingMessageWithResponse(String response) {
+    String loadingMessage = "Ghost is Writing...";
+    String content = chatTextArea.getText();
+
+    // Find the index of the last occurrence of "Ghost is Writing...." in the chatTextArea
+    int lastLoadingIndex = content.lastIndexOf(loadingMessage);
+
+    // If "Ghost is Writing..." is found, replace it with the GPT response
+    if (lastLoadingIndex != -1) {
+      chatTextArea.replaceText(
+          lastLoadingIndex, lastLoadingIndex + loadingMessage.length(), response);
     }
   }
 }
