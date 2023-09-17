@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -16,12 +18,28 @@
             <Image url="@../images/Classroom.jpeg" />
          </image>
       </ImageView>
-      <Rectangle fx:id="door" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="377.0" layoutX="947.0" layoutY="109.0" onMouseClicked="#clickDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="143.0" />
-      <ImageView fx:id="ghost1" fitHeight="288.0" fitWidth="182.0" layoutX="674.0" layoutY="20.0" opacity="0.7" pickOnBounds="true" preserveRatio="true" visible="false">
+      <Label fx:id="messageText1" alignment="CENTER" contentDisplay="CENTER" layoutX="486.0" layoutY="101.0" prefHeight="64.0" prefWidth="103.0" text="HELP" textAlignment="CENTER" textFill="WHITE" visible="false" wrapText="true">
+         <font>
+            <Font name="Luminari" size="25.0" />
+         </font>
+         <effect>
+            <Glow level="1.0" />
+         </effect>
+      </Label>
+      <ImageView fx:id="ghost2" fitHeight="204.0" fitWidth="226.0" layoutX="451.0" layoutY="30.0" opacity="0.8" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/ghost1.png" />
+         </image>
+         <effect>
+            <Shadow />
+         </effect>
+      </ImageView>
+      <ImageView fx:id="ghost1" fitHeight="265.0" fitWidth="272.0" layoutX="815.0" layoutY="201.0" opacity="0.7" pickOnBounds="true" visible="false">
          <image>
             <Image url="@../images/ghost.png" />
          </image>
       </ImageView>
+      <Rectangle fx:id="door" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="377.0" layoutX="947.0" layoutY="109.0" onMouseClicked="#clickDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="143.0" />
       <Label fx:id="timerLabel" alignment="CENTER" layoutX="11.0" layoutY="15.0" prefHeight="64.0" prefWidth="140.0" textFill="#fffbfb">
          <font>
             <Font size="45.0" />
@@ -32,7 +50,7 @@
             <Font name="Luminari" size="25.0" />
          </font>
          <effect>
-            <InnerShadow blurType="GAUSSIAN" />
+            <Glow level="1.0" />
          </effect>
       </Label>
       <Label fx:id="exitLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="945.0" layoutY="28.0" opacity="0.5" prefHeight="36.0" prefWidth="98.0" style="-fx-background-color: green;" text="EXIT" textFill="WHITE">
@@ -135,7 +153,7 @@
             <Font name="Palatino" size="30.0" />
          </font>
       </Label>
-      <ImageView fx:id="ghost" fitHeight="269.0" fitWidth="182.0" layoutX="1.0" layoutY="377.0" onMouseEntered="#onEnterGhost" onMouseExited="#onExitGhost" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ghost" fitHeight="237.0" fitWidth="230.0" layoutX="1.0" layoutY="377.0" onMouseEntered="#onEnterGhost" onMouseExited="#onExitGhost" opacity="0.7" pickOnBounds="true">
          <image>
             <Image url="@../images/ghost.png" />
          </image>

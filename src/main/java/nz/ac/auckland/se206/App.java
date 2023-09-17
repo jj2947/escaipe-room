@@ -71,6 +71,7 @@ public class App extends Application {
 
     scene = new Scene(SceneManager.getUiRoot(AppUi.STARTSCREEN));
     stage.setScene(scene);
+    stage.setResizable(false);
     stage.show();
   }
 }
