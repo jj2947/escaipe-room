@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.util.Random;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,7 +11,6 @@ import javafx.scene.effect.Shadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
@@ -18,10 +18,9 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class LockerController {
   @FXML private Label timerLabel;
-  @FXML private ImageView basketballImg;
   @FXML private ImageView note1;
   @FXML private ImageView note2;
-  @FXML private Rectangle basketball;
+  @FXML private ImageView basketball;
   @FXML private Button oneButton;
   @FXML private Button twoButton;
   @FXML private Button threeButton;
@@ -43,6 +42,12 @@ public class LockerController {
   @FXML private Pane chatContainer;
   @FXML private Label messageBox;
   @FXML private ImageView chatButton;
+  @FXML private Pane lockerPane;
+  @FXML private Label messageText;
+  @FXML private Label messageText1;
+  @FXML private Pane pane;
+  @FXML private Label noteLabel1;
+  @FXML private Label noteLabel2;
   private int numsEntered = 0;
   private int randNum;
   private int randNum1 = 0;
@@ -133,9 +138,29 @@ public class LockerController {
   private void onClickBasketball() {
     System.out.println("basketball clicked");
     GameState.basketballCollected = true;
+
     GameState.blackboardController.showBasketball();
     GameState.blackboardController.setObjectiveText("Objective: What new things can I reach now?");
     basketballImg.setVisible(false);
+
+    basketball.setVisible(false);
+    note1.setVisible(true);
+    note2.setVisible(true);
+    noteLabel1.setVisible(true);
+    noteLabel2.setVisible(true);
+  }
+
+  @FXML
+  private void enterBasketball() {
+    System.out.println("basketball entered");
+    basketball.setOpacity(0.4);
+  }
+
+  @FXML
+  private void exitBasketball() {
+    System.out.println("basketball exited");
+    basketball.setOpacity(1);
+
   }
 
   @FXML
@@ -278,10 +303,8 @@ public class LockerController {
     if (input.equals(answerString)) {
       // Open Locker
       pinpad.setVisible(false);
-      basketballImg.setVisible(true);
+      basketball.setVisible(true);
       basketball.toFront();
-      note1.setVisible(true);
-      note2.setVisible(true);
     } else {
       // Incorrect answer
       numsEntered = 0;
@@ -326,7 +349,42 @@ public class LockerController {
     return str.replaceAll("[^a-zA-Z0-9]", "");
   }
 
+
   public void setQuestion() {
     chatLabel.setText("What is " + randNum1 + " + " + randNum + "?");
+
+  public void responseLoading() {
+    ghost.setEffect(shadow);
+    Random random = new Random();
+    int randomNumber = random.nextInt(3); // Generates a random number 0, 1, or 2
+
+    switch (randomNumber) {
+      case 0:
+        // Apply the effect to 'room'
+        pane.setEffect(glow);
+        break;
+      case 1:
+        messageText.setVisible(true);
+        messageText1.setVisible(true);
+        messageText1.setEffect(shadow);
+        break;
+      case 2:
+        messageText1.setVisible(true);
+        messageText.setVisible(true);
+        messageText.setEffect(shadow);
+        break;
+      default:
+        break;
+    }
+  }
+
+  public void responseLoaded() {
+    ghost.setEffect(null);
+    pane.setEffect(null);
+    messageText.setVisible(false);
+    messageText.setEffect(glow);
+    messageText1.setVisible(false);
+    messageText1.setEffect(glow);
+
   }
 }

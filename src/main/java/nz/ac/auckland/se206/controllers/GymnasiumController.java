@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.util.Random;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -24,6 +25,9 @@ public class GymnasiumController {
   @FXML private Pane chatContainer;
   @FXML private Pane blackboardContainer;
   @FXML private ImageView chatButton;
+  @FXML private ImageView ghost1;
+  @FXML private ImageView ghost2;
+  @FXML private Pane room;
   private Shadow shadow = new Shadow(10, Color.BLACK);
   private Glow glow = new Glow(0.8);
   private int goalCount = 0;
@@ -161,5 +165,39 @@ public class GymnasiumController {
     // Adding the blackboard to the scene
     blackboardContainer.getChildren().add(GameState.blackboardController.getPane());
     chatButton.toFront();
+  }
+
+  public void responseLoading() {
+    ghost.setEffect(shadow);
+    Random random = new Random();
+    int randomNumber = random.nextInt(3); // Generates a random number 0, 1, or 2
+
+    switch (randomNumber) {
+      case 0:
+        // Apply the glow effect to 'room'
+        room.setEffect(glow);
+        break;
+      case 1:
+        // Make the ghosts visible
+        ghost1.setVisible(true);
+        ghost2.setVisible(true);
+        break;
+      case 2:
+        // Make the ghost's shadows visible
+        ghost1.setVisible(true);
+        ghost2.setVisible(true);
+        ghost1.setEffect(shadow);
+        break;
+      default:
+        break;
+    }
+  }
+
+  public void responseLoaded() {
+    ghost.setEffect(null);
+    ghost1.setEffect(null);
+    ghost1.setVisible(false);
+    ghost2.setVisible(false);
+    room.setEffect(null);
   }
 }

@@ -49,7 +49,11 @@ public class ChatController {
    * @param msg the chat message to append
    */
   private void appendChatMessage(ChatMessage msg) {
-    chatTextArea.appendText(msg.getRole() + ": " + msg.getContent() + "\n\n");
+    if (msg.getRole() == "user") {
+      chatTextArea.appendText("Me: " + msg.getContent() + "\n\n");
+    } else {
+      chatTextArea.appendText(msg.getContent() + "\n\n");
+    }
   }
 
   /**
@@ -60,6 +64,7 @@ public class ChatController {
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
   private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
+    appendChatMessage(new ChatMessage("assistant", "Ghost is Writing..."));
     if (GameState.isChatOpen) {
       responseLoading();
     }
@@ -91,7 +96,22 @@ public class ChatController {
                       responseLoaded();
                     }
                     inputText.setDisable(false);
+
+                    // Replacing the "Ghost is Writing..." with the response
+                    replaceLoadingMessageWithResponse(chatMsg.getContent());
                   });
+              // Stop the loading effects
+              if (GameState.isChatOpen) {
+                responseLoaded();
+              }
+              inputText.setDisable(false);
+              // Checking to see if the riddle has been solved and changing the game state
+              if (result.getChatMessage().getRole().equals("assistant")
+                  && result.getChatMessage().getContent().startsWith("Correct")) {
+                GameState.isRiddleResolved = true;
+                System.out.println("Riddle Resolved");
+              }
+
             } catch (Exception e) {
               e.printStackTrace();
               return null;
@@ -159,25 +179,39 @@ public class ChatController {
 
   private void responseLoaded() {
     if (GameState.chatInGym) {
-      // GameState.gymController.responseLoaded();
+      GameState.gymController.responseLoaded();
     } else if (GameState.chatInRoom) {
       GameState.roomController.responseLoaded();
     } else if (GameState.chatInLocker) {
-      // GameState.lockerController.responseLoaded();
+      GameState.lockerController.responseLoaded();
     } else if (GameState.chatInHall) {
-      // GameState.hallwayController.responseLoaded();
+      GameState.hallController.responseLoaded();
     }
   }
 
   private void responseLoading() {
     if (GameState.chatInGym) {
-      // GameState.gymController.responseLoading();
+      GameState.gymController.responseLoading();
     } else if (GameState.chatInRoom) {
       GameState.roomController.responseLoading();
     } else if (GameState.chatInLocker) {
-      // GameState.lockerController.responseLoading();
+      GameState.lockerController.responseLoading();
     } else if (GameState.chatInHall) {
-      // GameState.hallwayController.responseLoading();
+      GameState.hallController.responseLoading();
+    }
+  }
+
+  private void replaceLoadingMessageWithResponse(String response) {
+    String loadingMessage = "Ghost is Writing...";
+    String content = chatTextArea.getText();
+
+    // Find the index of the last occurrence of "Ghost is Writing...." in the chatTextArea
+    int lastLoadingIndex = content.lastIndexOf(loadingMessage);
+
+    // If "Ghost is Writing..." is found, replace it with the GPT response
+    if (lastLoadingIndex != -1) {
+      chatTextArea.replaceText(
+          lastLoadingIndex, lastLoadingIndex + loadingMessage.length(), "Ghost: " + response);
     }
   }
 }

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Random;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
 import javafx.scene.effect.Shadow;
@@ -80,6 +79,8 @@ public class RoomController {
   @FXML private ImageView ghost1;
   @FXML private Pane blackboardContainer;
   @FXML private ImageView chatButton;
+  @FXML private ImageView ghost2;
+  @FXML private Label messageText1;
   private Shadow shadow = new Shadow(10, Color.BLACK);
   private Glow glow = new Glow(0.8);
 
@@ -114,13 +115,15 @@ public class RoomController {
         room.setEffect(glow);
         break;
       case 1:
-        // Apply the shadow effect to 'exitLabel'
+        // Apply the glow effect to 'exitLabel'
         exitLabel.setEffect(glow);
         ghost1.setVisible(true);
+        ghost2.setVisible(true);
         break;
       case 2:
         // Make the escape message visible
         messageText.setVisible(true);
+        messageText1.setVisible(true);
         break;
       default:
         break;
@@ -133,6 +136,8 @@ public class RoomController {
     room.setEffect(null);
     exitLabel.setEffect(null);
     ghost1.setVisible(false);
+    ghost2.setVisible(false);
+    messageText1.setVisible(false);
   }
 
   /**
@@ -153,21 +158,6 @@ public class RoomController {
   @FXML
   public void onKeyReleased(KeyEvent event) {
     System.out.println("key " + event.getCode() + " released");
-  }
-
-  /**
-   * Displays a dialog box with the given title, header text, and message.
-   *
-   * @param title the title of the dialog box
-   * @param headerText the header text of the dialog box
-   * @param message the message content of the dialog box
-   */
-  private void showDialog(String title, String headerText, String message) {
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    alert.setTitle(title);
-    alert.setHeaderText(headerText);
-    alert.setContentText(message);
-    alert.showAndWait();
   }
 
   /**
