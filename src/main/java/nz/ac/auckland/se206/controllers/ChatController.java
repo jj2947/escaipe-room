@@ -83,8 +83,8 @@ public class ChatController {
               chatMsg = result.getChatMessage();
               Platform.runLater(
                   () -> {
-                    // After Message is recieved adding it to the chat box
-                    appendChatMessage(result.getChatMessage());
+                    // Replacing the "Ghost is Writing..." with the response
+                    replaceLoadingMessageWithResponse(chatMsg.getContent());
                     // Checking to see if the riddle has been solved and changing the game state
                     if (result.getChatMessage().getRole().equals("assistant")
                         && result.getChatMessage().getContent().startsWith("Correct")) {
@@ -96,9 +96,6 @@ public class ChatController {
                       responseLoaded();
                     }
                     inputText.setDisable(false);
-
-                    // Replacing the "Ghost is Writing..." with the response
-                    replaceLoadingMessageWithResponse(chatMsg.getContent());
                   });
               // Stop the loading effects
               if (GameState.isChatOpen) {

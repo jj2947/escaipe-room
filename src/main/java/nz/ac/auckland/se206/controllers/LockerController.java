@@ -141,7 +141,6 @@ public class LockerController {
 
     GameState.blackboardController.showBasketball();
     GameState.blackboardController.setObjectiveText("Objective: What new things can I reach now?");
-    basketballImg.setVisible(false);
 
     basketball.setVisible(false);
     note1.setVisible(true);
@@ -160,7 +159,6 @@ public class LockerController {
   private void exitBasketball() {
     System.out.println("basketball exited");
     basketball.setOpacity(1);
-
   }
 
   @FXML
@@ -349,9 +347,9 @@ public class LockerController {
     return str.replaceAll("[^a-zA-Z0-9]", "");
   }
 
-
   public void setQuestion() {
     chatLabel.setText("What is " + randNum1 + " + " + randNum + "?");
+  }
 
   public void responseLoading() {
     ghost.setEffect(shadow);
@@ -385,6 +383,5 @@ public class LockerController {
     messageText.setEffect(glow);
     messageText1.setVisible(false);
     messageText1.setEffect(glow);
-
   }
 }

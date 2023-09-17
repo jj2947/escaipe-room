@@ -49,7 +49,6 @@ public class GameState {
   public static boolean chatInRoom = false;
 
   public static boolean chatInHall = false;
-  ;
 
   public static boolean chatInLocker = false;
 

@@ -166,7 +166,6 @@ public class HallwayController {
     ghost.setEffect(null);
   }
 
-
   @FXML
   public void classroomDoorEntered() {
     GameState.blackboardController.setHoverText("Classroom Door");
@@ -195,6 +194,7 @@ public class HallwayController {
   @FXML
   public void lockerExited() {
     GameState.blackboardController.setHoverText("");
+  }
 
   public void responseLoading() {
     ghost.setEffect(shadow);
@@ -230,6 +230,5 @@ public class HallwayController {
     ghost1.setEffect(null);
     ghost2.setVisible(false);
     messageText.setVisible(false);
-
   }
 }
