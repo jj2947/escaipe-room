@@ -1,0 +1,5 @@
+.label {
+    -fx-control-inner-background: #203112;
+    -fx-font-family: "chalkduster";
+    -fx-prompt-text-fill: #ffffff36;
+}

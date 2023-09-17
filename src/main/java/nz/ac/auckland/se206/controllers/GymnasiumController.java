@@ -113,6 +113,46 @@ public class GymnasiumController {
     ghost.setEffect(null);
   }
 
+  @FXML
+  public void hallwayDoorEntered() {
+    GameState.blackboardController.setHoverText("Hallway Door");
+  }
+
+  @FXML
+  public void hallwayDoorExited() {
+    GameState.blackboardController.setHoverText("");
+  }
+
+  @FXML
+  public void backboardEntered() {
+    GameState.blackboardController.setHoverText("Backboard");
+  }
+
+  @FXML
+  public void backboardExited() {
+    GameState.blackboardController.setHoverText("");
+  }
+
+  @FXML
+  public void buttonEntered() {
+    GameState.blackboardController.setHoverText("Button");
+  }
+
+  @FXML
+  public void buttonExited() {
+    GameState.blackboardController.setHoverText("");
+  }
+
+  @FXML
+  public void exitDoorEntered() {
+    GameState.blackboardController.setHoverText("Exit Door");
+  }
+
+  @FXML
+  public void exitDoorExited() {
+    GameState.blackboardController.setHoverText("");
+  }
+
   public void openChat() {
     GameState.chatInHall = false;
     GameState.chatInRoom = false;

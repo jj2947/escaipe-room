@@ -380,6 +380,76 @@ public class RoomController {
     mapImage.setVisible(true);
   }
 
+  @FXML
+  public void nzClicked() {
+    if (isTheCountry("New Zealand")) {}
+  }
+
+  @FXML
+  public void australiaClicked() {
+    if (isTheCountry("Australia")) {}
+  }
+
+  @FXML
+  public void argentinaClicked() {
+    if (isTheCountry("Argentina")) {}
+  }
+
+  @FXML
+  public void usaClicked() {
+    if (isTheCountry("USA")) {}
+  }
+
+  @FXML
+  public void canadaClicked() {
+    if (isTheCountry("Canada")) {}
+  }
+
+  @FXML
+  public void brazilClicked() {
+    if (isTheCountry("Brazil")) {}
+  }
+
+  @FXML
+  public void chinaClicked() {
+    if (isTheCountry("China")) {}
+  }
+
+  @FXML
+  public void russiaClicked() {
+    if (isTheCountry("Russia")) {}
+  }
+
+  @FXML
+  public void greenlandClicked() {
+    if (isTheCountry("Greenland")) {}
+  }
+
+  @FXML
+  public void indiaClicked() {
+    if (isTheCountry("India")) {}
+  }
+
+  @FXML
+  public void doorEntered() {
+    GameState.blackboardController.setHoverText("Hallway Door");
+  }
+
+  @FXML
+  public void doorExited() {
+    GameState.blackboardController.setHoverText("");
+  }
+
+  @FXML
+  public void mapEntered() {
+    GameState.blackboardController.setHoverText("Map");
+  }
+
+  @FXML
+  public void mapExited() {
+    GameState.blackboardController.setHoverText("");
+  }
+
   public void showWhenOnMap() {
     mapImage.setVisible(true);
     classroomImage.setOpacity(0.5);
@@ -492,5 +562,19 @@ public class RoomController {
     russiaMapFive.setVisible(false);
     russiaMapSix.setVisible(false);
     russiaMapSeven.setVisible(false);
+  }
+
+  public boolean isTheCountry(String country) {
+    if (GameState.isRiddleResolved
+        && !GameState.countryIsFound
+        && GameState.countryToFind.equals(country)) {
+      GameState.countryIsFound = true;
+      GameState.blackboardController.showHallpass();
+      GameState.blackboardController.showItemLabel();
+      GameState.blackboardController.setObjectiveText("Objective: What's in the hallways?");
+      GameState.lockerController.setQuestion();
+      return true;
+    }
+    return false;
   }
 }

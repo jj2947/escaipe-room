@@ -166,6 +166,36 @@ public class HallwayController {
     ghost.setEffect(null);
   }
 
+  @FXML
+  public void classroomDoorEntered() {
+    GameState.blackboardController.setHoverText("Classroom Door");
+  }
+
+  @FXML
+  public void classroomDoorExited() {
+    GameState.blackboardController.setHoverText("");
+  }
+
+  @FXML
+  public void gymDoorEntered() {
+    GameState.blackboardController.setHoverText("Gym Door");
+  }
+
+  @FXML
+  public void gymDoorExited() {
+    GameState.blackboardController.setHoverText("");
+  }
+
+  @FXML
+  public void lockerEntered() {
+    GameState.blackboardController.setHoverText("Locker");
+  }
+
+  @FXML
+  public void lockerExited() {
+    GameState.blackboardController.setHoverText("");
+  }
+
   public void responseLoading() {
     ghost.setEffect(shadow);
     Random random = new Random();

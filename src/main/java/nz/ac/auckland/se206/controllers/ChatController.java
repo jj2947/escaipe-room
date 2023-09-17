@@ -37,6 +37,7 @@ public class ChatController {
   public void initialize() throws ApiProxyException {
     GameState.chatController = this;
     country = countryChooser.chooseCountry();
+    GameState.countryToFind = country;
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
     runGpt(new ChatMessage("user", GptPromptEngineering.initRiddleAndMaster(country)));
@@ -84,6 +85,17 @@ public class ChatController {
                   () -> {
                     // Replacing the "Ghost is Writing..." with the response
                     replaceLoadingMessageWithResponse(chatMsg.getContent());
+                    // Checking to see if the riddle has been solved and changing the game state
+                    if (result.getChatMessage().getRole().equals("assistant")
+                        && result.getChatMessage().getContent().startsWith("Correct")) {
+                      GameState.isRiddleResolved = true;
+                      GameState.blackboardController.setObjectiveText(
+                          "Objective: Where can I find this country?");
+                    }
+                    if (GameState.isChatOpen) {
+                      responseLoaded();
+                    }
+                    inputText.setDisable(false);
                   });
               // Stop the loading effects
               if (GameState.isChatOpen) {

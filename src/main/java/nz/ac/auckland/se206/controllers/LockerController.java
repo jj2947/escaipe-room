@@ -63,7 +63,11 @@ public class LockerController {
       randNum1 = (int) (Math.random() * 10000);
     }
     GameState.lockerController = this;
-    chatLabel.setText("What is " + randNum1 + " + " + randNum + "?");
+    if (GameState.countryIsFound) {
+      chatLabel.setText("What is " + randNum1 + " + " + randNum + "?");
+    } else {
+      chatLabel.setText("Hallpass Needed");
+    }
   }
 
   @FXML
@@ -134,6 +138,10 @@ public class LockerController {
   private void onClickBasketball() {
     System.out.println("basketball clicked");
     GameState.basketballCollected = true;
+
+    GameState.blackboardController.showBasketball();
+    GameState.blackboardController.setObjectiveText("Objective: What new things can I reach now?");
+
     basketball.setVisible(false);
     note1.setVisible(true);
     note2.setVisible(true);
@@ -156,6 +164,10 @@ public class LockerController {
   @FXML
   private void onClickHelp() {
     System.out.println("help button clicked");
+
+    if (!GameState.countryIsFound) {
+      return;
+    }
 
     textField.setText("");
     numsEntered = 0;
@@ -214,6 +226,9 @@ public class LockerController {
   }
 
   private void updateTextField(String number) {
+    if (!GameState.countryIsFound) {
+      return;
+    }
     chatLabel.setText("");
 
     // Change the buttons enabled based on the number of digits entered
@@ -274,6 +289,9 @@ public class LockerController {
 
   @FXML
   private void onEnter() {
+    if (!GameState.countryIsFound) {
+      return;
+    }
     // Get the answer
     int answer = randNum1 + randNum;
     String answerString = Integer.toString(answer);
@@ -316,6 +334,10 @@ public class LockerController {
 
   @FXML
   private void onClear() {
+    if (!GameState.countryIsFound) {
+      return;
+    }
+
     numsEntered = 0;
     textField.setText("_ _ _ _");
     updateTextField(null);
@@ -323,6 +345,10 @@ public class LockerController {
 
   private String stripString(String str) {
     return str.replaceAll("[^a-zA-Z0-9]", "");
+  }
+
+  public void setQuestion() {
+    chatLabel.setText("What is " + randNum1 + " + " + randNum + "?");
   }
 
   public void responseLoading() {
