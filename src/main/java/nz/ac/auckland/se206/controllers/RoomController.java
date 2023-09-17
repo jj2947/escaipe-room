@@ -582,6 +582,7 @@ public class RoomController {
       GameState.blackboardController.showHallpass();
       GameState.blackboardController.showItemLabel();
       GameState.blackboardController.setObjectiveText("Objective: What's in the hallways?");
+      GameState.lockerController.setQuestion();
       return true;
     }
     return false;
