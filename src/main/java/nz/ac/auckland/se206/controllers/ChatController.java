@@ -48,7 +48,11 @@ public class ChatController {
    * @param msg the chat message to append
    */
   private void appendChatMessage(ChatMessage msg) {
-    chatTextArea.appendText(msg.getContent() + "\n\n");
+    if (msg.getRole() == "user") {
+      chatTextArea.appendText("Me: " + msg.getContent() + "\n\n");
+    } else {
+      chatTextArea.appendText(msg.getContent() + "\n\n");
+    }
   }
 
   /**
@@ -80,17 +84,19 @@ public class ChatController {
                   () -> {
                     // Replacing the "Ghost is Writing..." with the response
                     replaceLoadingMessageWithResponse(chatMsg.getContent());
-                    // Stop the loading effects
-                    if (GameState.isChatOpen) {
-                      responseLoaded();
-                    }
-                    inputText.setDisable(false);
-                    // Checking to see if the riddle has been solved and changing the game state
-                    if (result.getChatMessage().getRole().equals("assistant")
-                        && result.getChatMessage().getContent().startsWith("Correct")) {
-                      GameState.isRiddleResolved = true;
-                    }
                   });
+              // Stop the loading effects
+              if (GameState.isChatOpen) {
+                responseLoaded();
+              }
+              inputText.setDisable(false);
+              // Checking to see if the riddle has been solved and changing the game state
+              if (result.getChatMessage().getRole().equals("assistant")
+                  && result.getChatMessage().getContent().startsWith("Correct")) {
+                GameState.isRiddleResolved = true;
+                System.out.println("Riddle Resolved");
+              }
+
             } catch (Exception e) {
               e.printStackTrace();
               return null;
@@ -190,7 +196,7 @@ public class ChatController {
     // If "Ghost is Writing..." is found, replace it with the GPT response
     if (lastLoadingIndex != -1) {
       chatTextArea.replaceText(
-          lastLoadingIndex, lastLoadingIndex + loadingMessage.length(), response);
+          lastLoadingIndex, lastLoadingIndex + loadingMessage.length(), "Ghost: " + response);
     }
   }
 }
