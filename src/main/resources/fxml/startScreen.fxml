@@ -44,9 +44,9 @@
             <Label text="DIFFICULTY:" />
             <HBox alignment="CENTER" prefHeight="58.0" prefWidth="1100.0" spacing="40.0">
                <children>
-                  <Button fx:id="easyButton" mnemonicParsing="false" onAction="#onEasy" text="EASY" />
-                  <Button fx:id="mediumButton" mnemonicParsing="false" onAction="#onMedium" text="MEDIUM" />
-                  <Button fx:id="hardButton" mnemonicParsing="false" onAction="#onHard" text="HARD" />
+                  <Button fx:id="easyButton" mnemonicParsing="false" onAction="#onClickEasy" text="EASY" />
+                  <Button fx:id="mediumButton" mnemonicParsing="false" onAction="#onClickMedium" text="MEDIUM" />
+                  <Button fx:id="hardButton" mnemonicParsing="false" onAction="#onClickHard" text="HARD" />
                </children>
             </HBox>
          </children>
@@ -56,9 +56,9 @@
             <Label text="TIME IN MINUTES:" />
             <HBox alignment="CENTER" prefHeight="64.0" prefWidth="1100.0" spacing="40.0">
                <children>
-                  <Button fx:id="twoButton" mnemonicParsing="false" onAction="#onTwo" text="2" />
-                  <Button fx:id="fourButton" mnemonicParsing="false" onAction="#onFour" text="4" />
-                  <Button fx:id="sixButton" mnemonicParsing="false" onAction="#onSix" text="6" />
+                  <Button fx:id="twoButton" mnemonicParsing="false" onAction="#onClickTwo" text="2" />
+                  <Button fx:id="fourButton" mnemonicParsing="false" onAction="#onClickFour" text="4" />
+                  <Button fx:id="sixButton" mnemonicParsing="false" onAction="#onClickSix" text="6" />
                </children>
             </HBox>
          </children>

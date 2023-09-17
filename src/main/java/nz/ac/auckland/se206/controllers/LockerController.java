@@ -234,17 +234,7 @@ public class LockerController {
     // Change the buttons enabled based on the number of digits entered
     if (number == null) {
       // Clear button was pressed
-      enterButton.disableProperty().setValue(true);
-      oneButton.disableProperty().setValue(false);
-      twoButton.disableProperty().setValue(false);
-      threeButton.disableProperty().setValue(false);
-      fourButton.disableProperty().setValue(false);
-      fiveButton.disableProperty().setValue(false);
-      sixButton.disableProperty().setValue(false);
-      sevenButton.disableProperty().setValue(false);
-      eightButton.disableProperty().setValue(false);
-      nineButton.disableProperty().setValue(false);
-      zeroButton.disableProperty().setValue(false);
+      updateButtons();
       return;
     }
     numsEntered++;
@@ -273,18 +263,22 @@ public class LockerController {
       zeroButton.disableProperty().setValue(true);
     } else {
       numsEntered = 0;
-      enterButton.disableProperty().setValue(true);
-      oneButton.disableProperty().setValue(false);
-      twoButton.disableProperty().setValue(false);
-      threeButton.disableProperty().setValue(false);
-      fourButton.disableProperty().setValue(false);
-      fiveButton.disableProperty().setValue(false);
-      sixButton.disableProperty().setValue(false);
-      sevenButton.disableProperty().setValue(false);
-      eightButton.disableProperty().setValue(false);
-      nineButton.disableProperty().setValue(false);
-      zeroButton.disableProperty().setValue(false);
+      updateButtons();
     }
+  }
+
+  private void updateButtons() {
+    enterButton.disableProperty().setValue(true);
+    oneButton.disableProperty().setValue(false);
+    twoButton.disableProperty().setValue(false);
+    threeButton.disableProperty().setValue(false);
+    fourButton.disableProperty().setValue(false);
+    fiveButton.disableProperty().setValue(false);
+    sixButton.disableProperty().setValue(false);
+    sevenButton.disableProperty().setValue(false);
+    eightButton.disableProperty().setValue(false);
+    nineButton.disableProperty().setValue(false);
+    zeroButton.disableProperty().setValue(false);
   }
 
   @FXML
