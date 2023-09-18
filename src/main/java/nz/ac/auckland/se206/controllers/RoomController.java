@@ -18,6 +18,7 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
+import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 
 /** Controller class for the room view. */
 public class RoomController {
@@ -572,10 +573,13 @@ public class RoomController {
       GameState.countryIsFound = true;
       GameState.blackboardController.showHallpass();
       GameState.blackboardController.showItemLabel();
-      GameState.blackboardController.setObjectiveText("Objective: What's in the hallways?");
+      GameState.blackboardController.setObjectiveText("Objective: Look around the School");
       GameState.lockerController.setQuestion();
       ChatMessage toAppend = new ChatMessage("dev", "*HALLPASS FOUND*");
       GameState.chatController.appendChatMessage(toAppend);
+      GameState.chatController.changeChatAndSend(
+          new ChatCompletionRequest().setN(1).setTemperature(0.5).setTopP(0.3).setMaxTokens(100),
+          "state3");
       if (!GameState.isChatOpen) {
         onClickChat();
       }

@@ -16,6 +16,7 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
+import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 
 public class LockerController {
   @FXML private Label timerLabel;
@@ -147,6 +148,9 @@ public class LockerController {
     if (!GameState.isChatOpen) {
       onClickChat();
     }
+    GameState.chatController.changeChatAndSend(
+        new ChatCompletionRequest().setN(1).setTemperature(0.5).setTopP(0.3).setMaxTokens(100),
+        "state4");
     basketball.setVisible(false);
     note1.setVisible(true);
     note2.setVisible(true);
