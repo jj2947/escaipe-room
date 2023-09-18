@@ -2,6 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -9,39 +11,66 @@
 
 <Pane fx:id="startScreen" prefHeight="702.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StartScreenController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutY="14.0" prefHeight="27.0" prefWidth="1100.0">
+      <TextField fx:id="blackboard" alignment="CENTER" editable="false" prefHeight="702.0" prefWidth="1100.0" style="-fx-border-width: 15;" styleClass="textField" stylesheets="@../css/chatStylesheet.css">
+         <effect>
+            <Glow level="0.4" />
+         </effect>
+      </TextField>
+      <VBox alignment="TOP_CENTER" layoutY="30.0" prefHeight="51.0" prefWidth="1100.0">
          <children>
-            <Label fx:id="titleLabel" alignment="TOP_LEFT" text="WELCOME TO THE ESCAPE ROOM" />
+            <Label fx:id="titleLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="42.0" prefWidth="646.0" text="Welcome To EscAIpe Room" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Chalkduster" size="30.0" />
+               </font></Label>
          </children>
       </VBox>
-      <VBox alignment="CENTER" layoutY="63.0" prefHeight="117.0" prefWidth="1100.0" spacing="10.0">
+      <VBox alignment="CENTER" layoutY="75.0" prefHeight="249.0" prefWidth="1100.0" spacing="10.0">
          <children>
-            <Label fx:id="titleLabel1" alignment="TOP_LEFT" text="You are stuck at school and are going to miss the only bus home, you better hurry" wrapText="true" />
-            <Label text="Difficulty:" />
-            <Label text="Easy: Unlimited Hints" />
-            <Label text="Medium: 5 Hints" />
-            <Label text="Hard: No Hints" />
-            <Label fx:id="titleLabel11" alignment="TOP_LEFT" text="Select a Difficulty and Time" wrapText="true" />
+            <Label fx:id="titleLabel1" alignment="CENTER" contentDisplay="CENTER" prefHeight="122.0" prefWidth="1034.0" text="You have overslept in class and woken up to an abandoned school. It's getting dark outside, you should be heading home now." textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Chalkduster" size="25.0" />
+               </font></Label>
+            <Label text="Difficulty" textFill="WHITE">
+               <font>
+                  <Font name="Courier New Bold" size="25.0" />
+               </font></Label>
+            <Label text="Easy: Unlimited Hints" textFill="WHITE">
+               <font>
+                  <Font name="Courier New Bold" size="20.0" />
+               </font></Label>
+            <Label text="Medium: 5 Hints" textFill="WHITE">
+               <font>
+                  <Font name="Courier New Bold" size="20.0" />
+               </font></Label>
+            <Label text="Hard: No Hints" textFill="WHITE">
+               <font>
+                  <Font name="Courier New Bold" size="20.0" />
+               </font></Label>
          </children>
+         <effect>
+            <Glow />
+         </effect>
       </VBox>
-      <Button fx:id="startButton" disable="true" layoutX="167.0" layoutY="606.0" mnemonicParsing="false" onAction="#onStart" text="START">
+      <Button fx:id="startButton" disable="true" layoutX="875.0" layoutY="620.0" mnemonicParsing="false" onAction="#onStart" prefHeight="48.0" prefWidth="116.0" stylesheets="@../css/start.css" text="START">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Button fx:id="exitButton" layoutX="876.0" layoutY="609.0" mnemonicParsing="false" onAction="#onExit" text="EXIT">
+      <Button fx:id="exitButton" layoutX="120.0" layoutY="618.0" mnemonicParsing="false" onAction="#onExit" prefHeight="48.0" prefWidth="116.0" stylesheets="@../css/start.css" text="EXIT">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <VBox alignment="TOP_CENTER" layoutY="518.0" prefHeight="27.0" prefWidth="1100.0">
+      <VBox alignment="TOP_CENTER" layoutY="570.0" prefHeight="26.0" prefWidth="1100.0">
          <children>
-            <Label fx:id="toDoLabel" alignment="TOP_LEFT" text="Please Select Time and Difficulty" />
+            <Label fx:id="toDoLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="1079.0" text="Please Select Time and Difficulty" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Courier New Bold" size="20.0" />
+               </font></Label>
          </children>
       </VBox>
-      <VBox alignment="CENTER" layoutY="250.0" prefHeight="64.0" prefWidth="1100.0" spacing="30.0">
+      <VBox alignment="CENTER" layoutY="345.0" prefHeight="50.0" prefWidth="1100.0" spacing="30.0">
          <children>
-            <Label text="DIFFICULTY:" />
             <HBox alignment="CENTER" prefHeight="58.0" prefWidth="1100.0" spacing="40.0">
                <children>
                   <Button fx:id="easyButton" mnemonicParsing="false" onAction="#onClickEasy" text="EASY" />
@@ -51,10 +80,13 @@
             </HBox>
          </children>
       </VBox>
-      <VBox alignment="CENTER" layoutY="370.0" prefHeight="91.0" prefWidth="1100.0" spacing="30.0">
+      <VBox alignment="CENTER" layoutY="428.0" prefHeight="100.0" prefWidth="1100.0" spacing="30.0">
          <children>
-            <Label text="TIME IN MINUTES:" />
-            <HBox alignment="CENTER" prefHeight="64.0" prefWidth="1100.0" spacing="40.0">
+            <Label prefHeight="2.0" prefWidth="226.0" text="TIME IN MINUTES" textFill="WHITE">
+               <font>
+                  <Font name="Courier New Bold" size="25.0" />
+               </font></Label>
+            <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1100.0" spacing="40.0">
                <children>
                   <Button fx:id="twoButton" mnemonicParsing="false" onAction="#onClickTwo" text="2" />
                   <Button fx:id="fourButton" mnemonicParsing="false" onAction="#onClickFour" text="4" />

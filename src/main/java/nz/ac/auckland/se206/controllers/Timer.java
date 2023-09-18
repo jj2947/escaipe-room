@@ -12,6 +12,7 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public class Timer {
   private int counter = -1;
@@ -20,6 +21,8 @@ public class Timer {
   private Label hallwayLabel;
   private Label gymLabel;
   private Label lockerLabel;
+  private boolean timerStarted = false;
+  private TextToSpeech textToSpeech = new TextToSpeech();
 
   // Everyone second the timerlabels in the different scenes are updated
   private Timeline timeline =
@@ -31,15 +34,18 @@ public class Timer {
                   GameState.isTimeReached = true;
                   timeIsUp();
                 }
+                if (timerStarted) {
+                  startTextToSpeech();
+                }
                 updateLabels();
+                
+                ;
               }));
 
   public void startTimer() {
+    timerStarted = true;
     counter =
         GameState.totalTime; // Setting value to the number of time choosen at the start of the game
-    // updateLabel();
-    counter--;
-
     Task<Void> backgroundTask =
         new Task<Void>() {
 
@@ -137,5 +143,41 @@ public class Timer {
           currentScene.setRoot(SceneManager.getUiRoot(AppUi.END));
           currentScene.getWindow().sizeToScene();
         });
+    textToSpeech.terminate();
+  }
+
+  private void startTextToSpeech() {
+    if ((counter % 30 == 0 && counter != 0) || counter == 10 || counter == 5) {
+      Task<Void> speakTask =
+          new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+              // The code for generating the sentence (as shown in the previous response)
+              String sentence;
+
+              int minutes = counter / 60;
+              int seconds = counter % 60;
+
+              String minuteString = (minutes == 1) ? "minute" : "minutes";
+
+              if (minutes > 0 && seconds > 0) {
+                sentence = minutes + " " + minuteString + " " + seconds + " seconds";
+              } else if (minutes > 0) {
+                sentence = minutes + " " + minuteString;
+              } else {
+                sentence = seconds + " seconds";
+              }
+
+              textToSpeech.speak(sentence);
+              return null;
+            }
+          };
+
+      // Start textToSpeech task in a new thread
+      Thread speakThread = new Thread(speakTask);
+      speakThread.setDaemon(true);
+      speakThread.start();
+      speakThread.interrupt();
+    }
   }
 }
