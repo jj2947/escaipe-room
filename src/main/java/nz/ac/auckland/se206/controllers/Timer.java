@@ -38,7 +38,7 @@ public class Timer {
                   startTextToSpeech();
                 }
                 updateLabels();
-                
+
                 ;
               }));
 
@@ -120,6 +120,7 @@ public class Timer {
   }
 
   public void timeIsUp() {
+    timeline.stop();
     // Finding out which scene we are currently in
     if (classroomLabel.getScene() != null) {
       currentScene = classroomLabel.getScene();
@@ -130,7 +131,6 @@ public class Timer {
     } else if (lockerLabel.getScene() != null) {
       currentScene = lockerLabel.getScene();
     }
-
     // Switching to the end scene
     Platform.runLater(
         () -> {

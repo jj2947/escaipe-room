@@ -112,7 +112,7 @@ public class GptPromptEngineering {
             + GameState.numberOfHints
             + " hints. If the user is out of hints let them know. If the user gives up or doesn't"
             + " know what to do tell them they are febble and do not give them a hint. Hints should"
-            + " point the user towards scoring a certain amount of goals and hitting a button in"
+            + " point the user towards scoring a certain amount of goals and escaping out of"
             + " one of the rooms, hints should not be direct but vauge. Hints given should start"
             + " with \"Hint:\". You must make all responses very short - 50 words or under";
     if (gamestate.equals("state1")) {

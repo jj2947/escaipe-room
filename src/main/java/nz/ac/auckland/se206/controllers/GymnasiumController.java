@@ -28,6 +28,8 @@ public class GymnasiumController {
   @FXML private ImageView chatButton;
   @FXML private ImageView ghost1;
   @FXML private ImageView ghost2;
+  @FXML private ImageView redButton;
+  @FXML private Rectangle exitDoor;
   @FXML private Pane room;
   private Shadow shadow = new Shadow(10, Color.BLACK);
   private Glow glow = new Glow(0.8);
@@ -76,11 +78,22 @@ public class GymnasiumController {
       if (!GameState.isChatOpen) {
         onClickChat();
       }
+      if (goalCount == 24) {
+        redButton.setOpacity(1);
+        redButton.setEffect(new Glow(1));
+      } else {
+        redButton.setEffect(null);
+        redButton.setOpacity(0.6);
+      }
     }
   }
 
   @FXML
-  public void clickRedButton() {}
+  public void exitDoorClicked() {
+    if (goalCount == 24) {
+      GameState.timer.timeIsUp();
+    }
+  }
 
   @FXML
   private void onClickChat() {
@@ -139,16 +152,6 @@ public class GymnasiumController {
 
   @FXML
   public void backboardExited() {
-    GameState.blackboardController.setHoverText("");
-  }
-
-  @FXML
-  public void buttonEntered() {
-    GameState.blackboardController.setHoverText("Button");
-  }
-
-  @FXML
-  public void buttonExited() {
     GameState.blackboardController.setHoverText("");
   }
 

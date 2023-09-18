@@ -51,7 +51,7 @@
          </children>
       </HBox>
       <Rectangle fx:id="backboard" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="52.0" layoutX="508.0" layoutY="333.0" onMouseClicked="#clickBackboard" onMouseEntered="#backboardEntered" onMouseExited="#backboardExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-      <ImageView fx:id="redButton" fitHeight="24.0" fitWidth="20.0" layoutX="719.0" layoutY="305.0" onMouseClicked="#clickRedButton" onMouseEntered="#buttonEntered" onMouseExited="#buttonExited" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="redButton" fitHeight="24.0" fitWidth="20.0" layoutX="822.0" layoutY="349.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/RedButton.png" />
          </image>
@@ -73,6 +73,21 @@
             <Image url="@../images/ghost.png" />
          </image>
       </ImageView>
-      <Rectangle fx:id="exitDoor" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="99.0" layoutX="806.0" layoutY="384.0" onMouseEntered="#exitDoorEntered" onMouseExited="#exitDoorExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+      <Rectangle fx:id="exitDoor" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="99.0" layoutX="806.0" layoutY="384.0" onMouseClicked="#exitDoorClicked" onMouseEntered="#exitDoorEntered" onMouseExited="#exitDoorExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+      <ImageView fitHeight="30.0" fitWidth="39.0" layoutX="529.0" layoutY="252.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/arrowOne.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="36.0" fitWidth="32.0" layoutX="450.0" layoutY="250.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/arrowTwo.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="33.0" fitWidth="39.0" layoutX="494.0" layoutY="156.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/arrowThree.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

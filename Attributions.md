@@ -21,3 +21,6 @@ TextBox.jpeg
 
 RedButton.png
 <a href="https://www.freepik.com/free-vector/set-4-coloured-buttons-black-background_1126539.htm#page=2&query=red%20button&position=3&from_view=search&track=ais">Image by ibrandify</a> on Freepik
+
+arrowOne.png, arrowTwo.png, arrowThree.png
+Image by <a href="https://www.freepik.com/free-vector/red-arrows-set_25557273.htm#page=3&query=arrow&position=6&from_view=search&track=sph">Freepik</a>
