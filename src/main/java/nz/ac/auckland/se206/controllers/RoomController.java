@@ -17,6 +17,7 @@ import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.gpt.ChatMessage;
 
 /** Controller class for the room view. */
 public class RoomController {
@@ -573,6 +574,11 @@ public class RoomController {
       GameState.blackboardController.showItemLabel();
       GameState.blackboardController.setObjectiveText("Objective: What's in the hallways?");
       GameState.lockerController.setQuestion();
+      ChatMessage toAppend = new ChatMessage("dev", "*HALLPASS FOUND*");
+      GameState.chatController.appendChatMessage(toAppend);
+      if (!GameState.isChatOpen) {
+        onClickChat();
+      }
       return true;
     }
     return false;

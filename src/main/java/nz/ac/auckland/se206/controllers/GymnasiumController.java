@@ -15,6 +15,7 @@ import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.gpt.ChatMessage;
 
 public class GymnasiumController {
 
@@ -64,9 +65,17 @@ public class GymnasiumController {
   @FXML
   public void clickBackboard() {
     if (GameState.basketballCollected) {
+      if (goalCount == 30) {
+        goalCount = 0;
+      }
       goalCount += 3;
       String toAdd = String.format("%02d", goalCount);
       goalLabel.setText(toAdd);
+      ChatMessage toAppend = new ChatMessage("dev", "*3 POINTER*");
+      GameState.chatController.appendChatMessage(toAppend);
+      if (!GameState.isChatOpen) {
+        onClickChat();
+      }
     }
   }
 

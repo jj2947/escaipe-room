@@ -48,7 +48,7 @@ public class ChatController {
    *
    * @param msg the chat message to append
    */
-  private void appendChatMessage(ChatMessage msg) {
+  public void appendChatMessage(ChatMessage msg) {
     if (msg.getRole() == "user") {
       chatTextArea.appendText("Me: " + msg.getContent() + "\n\n");
     } else {
