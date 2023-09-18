@@ -40,7 +40,7 @@ public class ChatController {
     GameState.countryToFind = country;
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
-    runGpt(new ChatMessage("user", GptPromptEngineering.initRiddleAndMaster(country)));
+    runGpt(new ChatMessage("user", GptPromptEngineering.getGameStateWithLimitedHints("state1")));
   }
 
   /**
@@ -83,14 +83,27 @@ public class ChatController {
               chatMsg = result.getChatMessage();
               Platform.runLater(
                   () -> {
-                    // Replacing the "Ghost is Writing..." with the response
-                    replaceLoadingMessageWithResponse(chatMsg.getContent());
                     // Checking to see if the riddle has been solved and changing the game state
                     if (result.getChatMessage().getRole().equals("assistant")
                         && result.getChatMessage().getContent().startsWith("Correct")) {
                       GameState.isRiddleResolved = true;
                       GameState.blackboardController.setObjectiveText(
                           "Objective: Where can I find this country?");
+                      replaceLoadingMessageWithResponse("");
+                      changeChatAndSend(
+                          new ChatCompletionRequest()
+                              .setN(1)
+                              .setTemperature(0.2)
+                              .setTopP(0.5)
+                              .setMaxTokens(100),
+                          "state2");
+                    } else {
+                      // Replacing the "Ghost is Writing..." with the response
+                      replaceLoadingMessageWithResponse(chatMsg.getContent());
+                    }
+                    if (result.getChatMessage().getRole().equals("assistant")
+                        && result.getChatMessage().getContent().startsWith("Hint:")) {
+                      GameState.numberOfHints--;
                     }
                     if (GameState.isChatOpen) {
                       responseLoaded();
@@ -207,8 +220,21 @@ public class ChatController {
 
     // If "Ghost is Writing..." is found, replace it with the GPT response
     if (lastLoadingIndex != -1) {
-      chatTextArea.replaceText(
-          lastLoadingIndex, lastLoadingIndex + loadingMessage.length(), "Ghost: " + response);
+      if (response.equals("")) {
+        chatTextArea.replaceText(lastLoadingIndex, lastLoadingIndex + loadingMessage.length(), "");
+      } else {
+        chatTextArea.replaceText(
+            lastLoadingIndex, lastLoadingIndex + loadingMessage.length(), "Ghost: " + response);
+      }
+    }
+  }
+
+  public void changeChatAndSend(ChatCompletionRequest chat, String state) {
+    chatCompletionRequest = chat;
+    try {
+      runGpt(new ChatMessage("user", GptPromptEngineering.getGameStateWithLimitedHints(state)));
+    } catch (ApiProxyException e) {
+      e.printStackTrace();
     }
   }
 }

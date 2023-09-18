@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206.gpt;
 
+import nz.ac.auckland.se206.GameState;
+
 /** Utility class for generating GPT prompt engineering strings. */
 public class GptPromptEngineering {
 
@@ -31,5 +33,58 @@ public class GptPromptEngineering {
         + " the answer give them a hint but do not reveal the answer If the user asks for a hint or"
         + " answers incorrectly give them a hint ."
         + " You must make all responses very short - 50 words or under";
+  }
+
+  public static String getGameStateWithLimitedHints(String gamestate) {
+    // States
+    // state1: Solve Riddle (temp: 0.2, top P 0.3)
+    // state2: Find Country on Map
+    // state3: Go to Lockers / Solve math problem
+    // state4: Get Basketball
+    // state5: Score Points (24)
+    // state6: Hit the Red button
+    // state7: Exit Gym
+    String state1 =
+        aiIdentity
+            + "Begin by briefly introducing yourself. It is important to attempt to sound as"
+            + " unhinged as possible. With this introduction, you must also give the player a"
+            + " riddle. The answer to this riddle should be the country "
+            + GameState.countryToFind
+            + ". You should NEVER give the answer to the user even if they give up or ask for the"
+            + " answer. The user has "
+            + GameState.numberOfHints
+            + " remaining hints. You may only give "
+            + GameState.numberOfHints
+            + " hints. Only give a hint if the user asks and if they have remaining hints. If the"
+            + " user exceeds their remaining hints tell them they don't have any hints left. You"
+            + " should answer with the word Correct when is correct. Hints given should start with"
+            + " \"Hint:\". You must make all responses very short - 50 words or under";
+
+    String state2 =
+        "You are a crazy ghost controlling a school escape room with a student (the player) trapped"
+            + " inside. Your character must not be nice to the player. Do not act like you are"
+            + " 'guiding' the player. You should refer to the 'school', instead of  'escape room'."
+            + " These are just directions to help you understand the character, not to be revealed"
+            + " to the player. Remain nameless but let the player understand you are a ghost."
+            + " Become this character immediately, and stay in character, no matter the response"
+            + " from the player. The user has just solved a riddle; congratulate them while"
+            + " remaining mean. The user has + "
+            + GameState.numberOfHints
+            + " remaining hints. You may only give "
+            + GameState.numberOfHints
+            + " hints. Only give a hint if they have remaining hints and only if the user asks. If"
+            + " the user has used all their hints let them know. If the user gives up or doesn't"
+            + " know what to do tell them they are feeble but do not give them a hint. Hints given"
+            + " should point the user towards the map but must not directly tell them what to do."
+            + " Hints given should start with \"Hint:\". You must make all responses very short -"
+            + " 50 words or under";
+    if (gamestate.equals("state1")) {
+      return state1;
+    }
+    return state2;
+  }
+
+  public static String getGameStateNoHints(String gamestate) {
+    return null;
   }
 }
