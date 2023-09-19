@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
@@ -21,24 +22,28 @@ public class Timer {
   private Label hallwayLabel;
   private Label gymLabel;
   private Label lockerLabel;
-  private TextToSpeech textToSpeech = new TextToSpeech();
+  private Timeline timeline;
+  private Thread countdownThread;
+  private TextToSpeech textToSpeech;
 
-  // Everyone second the timerlabels in the different scenes are updated
-  private Timeline timeline =
-      new Timeline(
-          new KeyFrame(
-              Duration.seconds(1),
-              e -> {
-                if (counter == 0) {
-                  GameState.isTimeReached = true;
-                  timeIsUp();
-                }
-                updateLabels();
-              }));
+  public Timer() {
+    textToSpeech = new TextToSpeech();
+    // Everyone second the timerlabels in the different scenes are updated
+    timeline =
+        new Timeline(
+            new KeyFrame(
+                Duration.seconds(1),
+                e -> {
+                  if (counter == 0) {
+                    GameState.isTimeReached = true;
+                    timeIsUp();
+                  }
+                  updateLabels();
+                }));
+  }
 
   public void startTimer() {
-    counter =
-        GameState.totalTime; // Setting value to the number of time choosen at the start of the game
+    counter = 60; // Setting value to the number of time choosen at the start of the game
     counter--;
     Task<Void> backgroundTask =
         new Task<Void>() {
@@ -57,7 +62,7 @@ public class Timer {
         };
 
     // Create a new thread for the countdown and start it
-    Thread countdownThread = new Thread(backgroundTask);
+    countdownThread = new Thread(backgroundTask);
     countdownThread.start();
   }
 
@@ -137,8 +142,9 @@ public class Timer {
           }
           currentScene.setRoot(SceneManager.getUiRoot(AppUi.END));
           currentScene.getWindow().sizeToScene();
+          Stage stage = (Stage) currentScene.getWindow();
+          stage.centerOnScreen();
         });
-    textToSpeech.terminate();
   }
 
   private void startTextToSpeech() {
@@ -172,7 +178,22 @@ public class Timer {
       Thread speakThread = new Thread(speakTask);
       speakThread.setDaemon(true);
       speakThread.start();
-      speakThread.interrupt();
+    }
+  }
+
+  public void reset() {
+    counter = -1;
+    if (countdownThread != null && countdownThread.isAlive()) {
+      countdownThread.interrupt();
+    }
+    if (timeline != null) {
+      timeline.stop();
+    }
+  }
+
+  public void exitGame() {
+    if (textToSpeech != null) {
+      textToSpeech.terminate();
     }
   }
 }
