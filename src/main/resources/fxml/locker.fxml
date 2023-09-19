@@ -48,47 +48,47 @@
       </Pane>
       <Pane fx:id="pinpad" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="702.0" prefWidth="869.0" styleClass="pane" stylesheets="@../css/pinpadStylesheet.css">
          <children>
-            <Button fx:id="oneButton" layoutX="257.0" layoutY="162.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickOne" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="1">
+            <Button fx:id="oneButton" layoutX="257.0" layoutY="178.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickOne" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="1">
                <font>
                   <Font size="45.0" />
                </font>
             </Button>
-            <Button fx:id="twoButton" layoutX="398.0" layoutY="162.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickTwo" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="2">
+            <Button fx:id="twoButton" layoutX="398.0" layoutY="178.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickTwo" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="2">
                <font>
                   <Font size="45.0" />
                </font>
             </Button>
-            <Button fx:id="threeButton" layoutX="537.0" layoutY="162.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickThree" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="3">
+            <Button fx:id="threeButton" layoutX="537.0" layoutY="178.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickThree" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="3">
                <font>
                   <Font size="45.0" />
                </font>
             </Button>
-            <Button fx:id="fourButton" layoutX="257.0" layoutY="279.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickFour" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="4">
+            <Button fx:id="fourButton" layoutX="257.0" layoutY="293.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickFour" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="4">
                <font>
                   <Font size="45.0" />
                </font>
             </Button>
-            <Button fx:id="fiveButton" layoutX="398.0" layoutY="279.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickFive" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="5">
+            <Button fx:id="fiveButton" layoutX="398.0" layoutY="293.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickFive" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="5">
                <font>
                   <Font size="45.0" />
                </font>
             </Button>
-            <Button fx:id="sixButton" layoutX="537.0" layoutY="279.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickSix" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="6">
+            <Button fx:id="sixButton" layoutX="537.0" layoutY="293.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickSix" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="6">
                <font>
                   <Font size="45.0" />
                </font>
             </Button>
-            <Button fx:id="sevenButton" layoutX="257.0" layoutY="395.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickSeven" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="7">
+            <Button fx:id="sevenButton" layoutX="257.0" layoutY="407.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickSeven" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="7">
                <font>
                   <Font size="45.0" />
                </font>
             </Button>
-            <Button fx:id="eightButton" layoutX="398.0" layoutY="395.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickEight" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="8">
+            <Button fx:id="eightButton" layoutX="398.0" layoutY="407.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickEight" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="8">
                <font>
                   <Font size="45.0" />
                </font>
             </Button>
-            <Button fx:id="nineButton" layoutX="537.0" layoutY="395.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickNine" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="9">
+            <Button fx:id="nineButton" layoutX="537.0" layoutY="407.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickNine" prefHeight="100.0" prefWidth="100.0" stylesheets="@../css/pinpadStylesheet.css" text="9">
                <font>
                   <Font size="45.0" />
                </font>
@@ -167,11 +167,11 @@
             <Font size="45.0" />
          </font>
       </Label>
-      <Button fx:id="backButton" layoutX="27.0" layoutY="75.0" mnemonicParsing="false" onAction="#onBack" prefHeight="49.0" prefWidth="109.0" styleClass="backButton" stylesheets="@../css/stylesheet.css" text="Back" textFill="WHITE">
+      <Pane fx:id="chatContainer" layoutX="869.0" prefHeight="702.0" prefWidth="240.0" />
+      <Button fx:id="backButton" layoutX="38.0" layoutY="194.0" mnemonicParsing="false" onAction="#onBack" prefHeight="66.0" prefWidth="129.0" style="-fx-background-color: #ffff; -fx-border-color: BLACK; -fx-border-width: 4;" styleClass="backButton" stylesheets="@../css/stylesheet.css" text="BACK">
          <font>
-            <Font name="Courier" size="26.0" />
+            <Font size="26.0" />
          </font>
       </Button>
-      <Pane fx:id="chatContainer" layoutX="869.0" prefHeight="702.0" prefWidth="240.0" />
    </children>
 </Pane>
