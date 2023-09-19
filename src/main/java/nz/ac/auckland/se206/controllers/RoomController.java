@@ -91,12 +91,12 @@ public class RoomController {
    * @throws IOException
    */
   public void initialize() throws IOException {
-    // Initialization code goes here
-    GameState.roomController = this;
     // Adding timerLabel to synched timer
     GameState.timer.setClass(timerLabel);
     timerLabel.setText(String.format("%02d:%02d", GameState.totalTime / 60, 0));
     addBlackboard();
+    // Initialization code goes here
+    GameState.roomController = this;
   }
 
   public void addBlackboard() {

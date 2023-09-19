@@ -24,7 +24,7 @@ public class GameState {
   public static int numberOfHints;
 
   /** The time choosen by the user, set early for some reason cant remember rn */
-  public static int totalTime = 10000;
+  public static int totalTime;
 
   public static String countryToFind;
 
