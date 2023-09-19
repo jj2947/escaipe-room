@@ -76,6 +76,7 @@ public class StartScreenController {
   @FXML
   private void onEasy() {
     difButtonClicked(easyButton);
+    GameState.numberOfHints = -1;
   }
 
   /** Setting difficulty to medium */

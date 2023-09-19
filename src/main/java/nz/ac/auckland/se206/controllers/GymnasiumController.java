@@ -81,9 +81,11 @@ public class GymnasiumController {
       if (goalCount == 24) {
         redButton.setOpacity(1);
         redButton.setEffect(new Glow(1));
+        exitDoor.setEffect(glow);
       } else {
         redButton.setEffect(null);
         redButton.setOpacity(0.6);
+        exitDoor.setEffect(null);
       }
     }
   }
