@@ -21,17 +21,17 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <ImageView fx:id="basketballImage" fitHeight="70.0" fitWidth="76.0" layoutX="938.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="basketballImage" fitHeight="70.0" fitWidth="76.0" layoutX="925.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/ball.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="hallpassImage" fitHeight="103.0" fitWidth="142.0" layoutX="822.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="hallpassImage" fitHeight="103.0" fitWidth="142.0" layoutX="806.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/HallPass.png" />
          </image>
       </ImageView>
-      <Label fx:id="itemLabel" layoutX="750.0" layoutY="23.0" prefHeight="28.0" prefWidth="73.0" stylesheets="@../css/blackboardStylesheet.css" text="Items:" textFill="WHITE" visible="false">
+      <Label fx:id="itemLabel" layoutX="749.0" layoutY="28.0" prefHeight="28.0" prefWidth="73.0" stylesheets="@../css/blackboardStylesheet.css" text="Items:" textFill="WHITE" visible="false">
          <font>
             <Font size="20.0" />
          </font></Label>

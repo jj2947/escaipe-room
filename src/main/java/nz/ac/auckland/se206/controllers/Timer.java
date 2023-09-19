@@ -21,7 +21,6 @@ public class Timer {
   private Label hallwayLabel;
   private Label gymLabel;
   private Label lockerLabel;
-  private boolean timerStarted = false;
   private TextToSpeech textToSpeech = new TextToSpeech();
 
   // Everyone second the timerlabels in the different scenes are updated
@@ -34,18 +33,13 @@ public class Timer {
                   GameState.isTimeReached = true;
                   timeIsUp();
                 }
-                if (timerStarted) {
-                  startTextToSpeech();
-                }
                 updateLabels();
-                
-                ;
               }));
 
   public void startTimer() {
-    timerStarted = true;
     counter =
         GameState.totalTime; // Setting value to the number of time choosen at the start of the game
+    counter--;
     Task<Void> backgroundTask =
         new Task<Void>() {
 
@@ -55,6 +49,7 @@ public class Timer {
             while (counter > 0 && !GameState.isTimeReached) {
               Thread.sleep(1000); // Wait for 1 second
               counter--;
+              startTextToSpeech();
             }
 
             return null;
@@ -161,11 +156,11 @@ public class Timer {
               String minuteString = (minutes == 1) ? "minute" : "minutes";
 
               if (minutes > 0 && seconds > 0) {
-                sentence = minutes + " " + minuteString + " " + seconds + " seconds";
+                sentence = String.format("%d %s %d seconds", minutes, minuteString, seconds);
               } else if (minutes > 0) {
-                sentence = minutes + " " + minuteString;
+                sentence = String.format("%d %s", minutes, minuteString);
               } else {
-                sentence = seconds + " seconds";
+                sentence = String.format("%d seconds", seconds);
               }
 
               textToSpeech.speak(sentence);
