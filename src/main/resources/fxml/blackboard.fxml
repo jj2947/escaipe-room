@@ -18,28 +18,28 @@
       </TextField>
       <Label fx:id="objectiveLabel" layoutX="14.0" layoutY="31.0" stylesheets="@../css/blackboardStylesheet.css" text="Objective: Talk to mysterious prescence" textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font size="15.0" />
          </font>
       </Label>
-      <ImageView fx:id="basketballImage" fitHeight="70.0" fitWidth="76.0" layoutX="903.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="basketballImage" fitHeight="70.0" fitWidth="76.0" layoutX="925.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/ball.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="hallpassImage" fitHeight="103.0" fitWidth="142.0" layoutX="774.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="hallpassImage" fitHeight="103.0" fitWidth="142.0" layoutX="806.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/HallPass.png" />
          </image>
       </ImageView>
-      <Label fx:id="itemLabel" layoutX="710.0" layoutY="31.0" stylesheets="@../css/blackboardStylesheet.css" text="Items:" textFill="WHITE" visible="false">
+      <Label fx:id="itemLabel" layoutX="749.0" layoutY="28.0" prefHeight="28.0" prefWidth="73.0" stylesheets="@../css/blackboardStylesheet.css" text="Items:" textFill="WHITE" visible="false">
          <font>
-            <Font size="18.0" />
+            <Font size="20.0" />
          </font></Label>
-      <HBox alignment="CENTER" layoutX="379.0" layoutY="31.0" prefHeight="24.0" prefWidth="319.0">
+      <HBox alignment="CENTER" layoutX="421.0" layoutY="-6.0" prefHeight="87.0" prefWidth="302.0">
          <children>
             <Label fx:id="hoverLabel" stylesheets="@../css/blackboardStylesheet.css" textFill="RED">
                <font>
-                  <Font size="18.0" />
+                  <Font size="30.0" />
                </font>
             </Label>
          </children>

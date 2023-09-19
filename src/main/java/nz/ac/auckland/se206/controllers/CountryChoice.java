@@ -3,6 +3,8 @@ package nz.ac.auckland.se206.controllers;
 import java.util.Map;
 
 public class CountryChoice {
+  protected static String countryChoice;
+  private int random;
 
   // Initialising Map of countries
   private Map<Integer, String> countries =
@@ -17,8 +19,6 @@ public class CountryChoice {
           8, "India",
           9, "Greenland",
           10, "Argentina");
-  protected static String countryChoice;
-  private int random;
 
   public String chooseCountry() {
     if (countryChoice == null) {

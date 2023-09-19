@@ -206,6 +206,14 @@ public class RoomController {
     }
   }
 
+  public void openChat() {
+    GameState.chatInGym = false;
+    GameState.chatInHall = false;
+    GameState.chatInLocker = false;
+    chatContainer.getChildren().add(GameState.chatController.getChatPane());
+    GameState.chatInRoom = true;
+  }
+
   @FXML
   private void releaseChat() {
     chatButton.setOpacity(1);
@@ -216,24 +224,16 @@ public class RoomController {
     chatButton.setOpacity(0.5);
   }
 
-  @FXML
-  private void onEnterGhost() {
-    System.out.println("hover on ghost");
-    ghost.setEffect(shadow);
-  }
-
-  @FXML
+   @FXML
   private void onExitGhost() {
     System.out.println("hover off ghost");
     ghost.setEffect(null);
   }
 
-  public void openChat() {
-    GameState.chatInGym = false;
-    GameState.chatInHall = false;
-    GameState.chatInLocker = false;
-    chatContainer.getChildren().add(GameState.chatController.getChatPane());
-    GameState.chatInRoom = true;
+  @FXML
+  private void onEnterGhost() {
+    System.out.println("hover on ghost");
+    ghost.setEffect(shadow);
   }
 
   @FXML

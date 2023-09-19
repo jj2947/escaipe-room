@@ -69,7 +69,7 @@ public class ChatController {
       responseLoading();
     }
     // GPT Task
-    Task<Void> askGPT =
+    Task<Void> askGpt =
         new Task<Void>() {
 
           @Override
@@ -133,7 +133,7 @@ public class ChatController {
     Thread gptThread =
         new Thread(
             () -> {
-              askGPT.run();
+              askGpt.run();
             });
     gptThread.start();
     inputText.setDisable(true);
