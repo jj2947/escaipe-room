@@ -73,9 +73,9 @@
          <children>
             <HBox alignment="CENTER" prefHeight="58.0" prefWidth="1100.0" spacing="40.0">
                <children>
-                  <Button fx:id="easyButton" mnemonicParsing="false" onAction="#onEasy" stylesheets="@../css/start.css" text="EASY" />
-                  <Button fx:id="mediumButton" mnemonicParsing="false" onAction="#onMedium" stylesheets="@../css/start.css" text="MEDIUM" />
-                  <Button fx:id="hardButton" mnemonicParsing="false" onAction="#onHard" stylesheets="@../css/start.css" text="HARD" />
+                  <Button fx:id="easyButton" mnemonicParsing="false" onAction="#onClickEasy" stylesheets="@../css/start.css" text="EASY" />
+                  <Button fx:id="mediumButton" mnemonicParsing="false" onAction="#onClickMedium" stylesheets="@../css/start.css" text="MEDIUM" />
+                  <Button fx:id="hardButton" mnemonicParsing="false" onAction="#onClickHard" stylesheets="@../css/start.css" text="HARD" />
                </children>
             </HBox>
          </children>
@@ -88,9 +88,9 @@
                </font></Label>
             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1100.0" spacing="40.0">
                <children>
-                  <Button fx:id="twoButton" mnemonicParsing="false" onAction="#onTwo" stylesheets="@../css/start.css" text="2" />
-                  <Button fx:id="fourButton" mnemonicParsing="false" onAction="#onFour" stylesheets="@../css/start.css" text="4" />
-                  <Button fx:id="sixButton" mnemonicParsing="false" onAction="#onSix" stylesheets="@../css/start.css" text="6" />
+                   <Button fx:id="twoButton" mnemonicParsing="false" onAction="#onClickTwo" stylesheets="@../css/start.css" text="2" />
+                  <Button fx:id="fourButton" mnemonicParsing="false" onAction="#onClickFour" stylesheets="@../css/start.css" text="4" />
+                  <Button fx:id="sixButton" mnemonicParsing="false" onAction="#onClickSix" stylesheets="@../css/start.css" text="6" />
                </children>
             </HBox>
          </children>

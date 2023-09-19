@@ -72,39 +72,39 @@ public class StartScreenController {
 
   /** Setting difficulty to easy */
   @FXML
-  private void onEasy() {
+  private void onClickEasy() {
     difButtonClicked(easyButton);
   }
 
   /** Setting difficulty to medium */
   @FXML
-  private void onMedium() {
+  private void onClickMedium() {
     difButtonClicked(mediumButton);
   }
 
   /** Setting difficulty to hard */
   @FXML
-  private void onHard() {
+  private void onClickHard() {
     difButtonClicked(hardButton);
   }
 
   /** Setting time to Two */
   @FXML
-  private void onTwo() {
+  private void onClickTwo() {
     timeButtonClicked(twoButton);
     GameState.timer.setCounter(120);
   }
 
   /** Setting time to Four */
   @FXML
-  private void onFour() {
+  private void onClickFour() {
     timeButtonClicked(fourButton);
     GameState.timer.setCounter(240);
   }
 
   /** Setting time to Six */
   @FXML
-  private void onSix() {
+  private void onClickSix() {
     timeButtonClicked(sixButton);
     GameState.timer.setCounter(360);
   }
