@@ -4,6 +4,7 @@ import java.io.IOException;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -24,6 +25,7 @@ public class ChatController {
   @FXML private TextField inputText;
   @FXML private AnchorPane chatPane;
   @FXML private Label hintLabel;
+  @FXML private Button hintButton;
 
   private ChatCompletionRequest chatCompletionRequest;
   private ChatMessage chatMsg;
@@ -244,7 +246,7 @@ public class ChatController {
 
   private void updateHintCounter() {
     if (GameState.numberOfHints == -1) {
-      hintLabel.setText("Hints: Unlimited");
+      hintLabel.setText("Hints: ∞");
     } else {
       hintLabel.setText("Hints: " + GameState.numberOfHints);
     }
