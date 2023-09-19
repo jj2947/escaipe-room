@@ -81,6 +81,7 @@ public class RoomController {
   @FXML private ImageView chatButton;
   @FXML private ImageView ghost2;
   @FXML private Label messageText1;
+  @FXML private Rectangle backRect;
   private Shadow shadow = new Shadow(10, Color.BLACK);
   private Glow glow = new Glow(0.8);
 
@@ -222,7 +223,7 @@ public class RoomController {
     chatButton.setOpacity(0.5);
   }
 
-   @FXML
+  @FXML
   private void onExitGhost() {
     System.out.println("hover off ghost");
     ghost.setEffect(null);
@@ -238,12 +239,14 @@ public class RoomController {
   private void enterBackButton() {
     System.out.println("hover on back button");
     goBackLabel.setOpacity(0.5);
+    backRect.setOpacity(0.1);
   }
 
   @FXML
   private void exitBackButton() {
     System.out.println("hover off back button");
     goBackLabel.setOpacity(1);
+    backRect.setOpacity(0.5);
   }
 
   @FXML
@@ -454,12 +457,14 @@ public class RoomController {
     mapImage.setVisible(true);
     classroomImage.setOpacity(0.5);
     goBackLabel.setVisible(true);
+    backRect.setVisible(true);
   }
 
   public void hideAfterMap() {
     mapImage.setVisible(false);
     classroomImage.setOpacity(1);
     goBackLabel.setVisible(false);
+    backRect.setVisible(false);
   }
 
   public void disableWhileMapOpen() {
