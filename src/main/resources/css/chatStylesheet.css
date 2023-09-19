@@ -1,6 +1,7 @@
 .textArea,
-.textField {
+.textField, .label {
     -fx-control-inner-background: #203112;
+    -fx-background-color: #203112;
     -fx-border-color: rgb(138, 76, 31);
     -fx-text-fill: #ffffff;
     -fx-border-width: 5;
@@ -14,4 +15,8 @@
 
 .textField {
     -fx-font-size: 25;
+}
+
+.label {
+    -fx-font-size: 20;
 }

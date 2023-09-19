@@ -4,6 +4,7 @@ import java.io.IOException;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -22,6 +23,7 @@ public class ChatController {
   @FXML private TextArea chatTextArea;
   @FXML private TextField inputText;
   @FXML private AnchorPane chatPane;
+  @FXML private Label hintLabel;
 
   private ChatCompletionRequest chatCompletionRequest;
   private ChatMessage chatMsg;
@@ -41,6 +43,7 @@ public class ChatController {
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.1).setTopP(0.3).setMaxTokens(100);
     runGpt(new ChatMessage("user", GptPromptEngineering.getGameStateWithLimitedHints("state1")));
+    updateHintCounter();
   }
 
   /**
@@ -104,6 +107,7 @@ public class ChatController {
                     if (result.getChatMessage().getRole().equals("assistant")
                         && result.getChatMessage().getContent().startsWith("Hint:")) {
                       GameState.numberOfHints--;
+                      updateHintCounter();
                     }
                     if (GameState.isChatOpen) {
                       responseLoaded();
@@ -235,6 +239,14 @@ public class ChatController {
       runGpt(new ChatMessage("user", GptPromptEngineering.getGameStateWithLimitedHints(state)));
     } catch (ApiProxyException e) {
       e.printStackTrace();
+    }
+  }
+
+  private void updateHintCounter() {
+    if (GameState.numberOfHints == -1) {
+      hintLabel.setText("Hints: Unlimited");
+    } else {
+      hintLabel.setText("Hints: " + GameState.numberOfHints);
     }
   }
 }

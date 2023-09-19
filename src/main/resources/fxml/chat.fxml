@@ -9,7 +9,7 @@
 
 <AnchorPane fx:id="chatPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#onKeyReleased" prefHeight="702.0" prefWidth="240.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChatController">
   <children>
-    <TextArea fx:id="chatTextArea" editable="false" layoutX="2.0" layoutY="2.0" prefHeight="653.0" prefWidth="236.0" styleClass="textArea" stylesheets="@../css/chatStylesheet.css" wrapText="true">
+    <TextArea fx:id="chatTextArea" editable="false" layoutX="2.0" layoutY="53.0" prefHeight="602.0" prefWidth="236.0" styleClass="textArea" stylesheets="@../css/chatStylesheet.css" wrapText="true">
          <font>
             <Font name="Chalkduster" size="16.0" />
          </font>
@@ -25,5 +25,6 @@
             <Font size="45.0" />
          </font>
       </Label>
+      <Label fx:id="hintLabel" layoutX="2.0" layoutY="3.0" prefHeight="47.0" prefWidth="236.0" stylesheets="@../css/chatStylesheet.css" />
   </children>
 </AnchorPane>
