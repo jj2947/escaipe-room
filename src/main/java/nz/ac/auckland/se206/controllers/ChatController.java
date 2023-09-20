@@ -124,7 +124,9 @@ public class ChatController {
                     }
                     newStateHint();
                     inputText.setDisable(false);
-                    hintButton.setDisable(false);
+                    if (GameState.numberOfHints != 0) {
+                      hintButton.setDisable(false);
+                    }
                   });
               // Stop the loading effects
               if (GameState.isChatOpen) {
