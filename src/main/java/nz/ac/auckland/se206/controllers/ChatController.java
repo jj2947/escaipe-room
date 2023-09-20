@@ -162,11 +162,13 @@ public class ChatController {
 
   @FXML
   private void onEnterPressed(KeyEvent event) throws ApiProxyException, IOException {
+    // When enter is clicked the user sends their message
     if (event.getCode().toString().equals("ENTER")) {
       String message = inputText.getText();
       if (message.trim().isEmpty()) {
         return;
       }
+      // Clear the input text field and add the message to the chat text area
       inputText.clear();
       ChatMessage msg = new ChatMessage("user", message);
       appendChatMessage(msg);
@@ -208,6 +210,7 @@ public class ChatController {
   }
 
   private void responseLoaded() {
+    // Stop the loading effects when the response is loaded
     if (GameState.chatInGym) {
       GameState.gymController.responseLoaded();
     } else if (GameState.chatInRoom) {
@@ -220,6 +223,7 @@ public class ChatController {
   }
 
   private void responseLoading() {
+    // Start the loading effects while the response is being generated
     if (GameState.chatInGym) {
       GameState.gymController.responseLoading();
     } else if (GameState.chatInRoom) {

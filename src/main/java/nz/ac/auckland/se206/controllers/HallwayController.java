@@ -222,6 +222,7 @@ public class HallwayController {
   }
 
   public void responseLoaded() {
+    // Remove the effects when the response is loaded
     ghost.setEffect(null);
     room.setEffect(null);
     gymLabel.setEffect(null);
