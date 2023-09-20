@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -55,11 +56,6 @@ public class StartScreenController {
       GameState.totalTime = 360;
     }
     // Switching Scenes to the room
-
-    // Starting the timer
-    // THE GAME WILL CRASH IF THE USER SELECTS TIME AND DIFFICULTY BEFORE THE ROOM HAS LOADED
-    // A FIX NEEDS TO BE IN PLACE
-    GameState.timer.startTimer();
     fadeOut();
   }
 
@@ -172,8 +168,18 @@ public class StartScreenController {
     fadeTransition.setToValue(0);
     fadeTransition.setOnFinished(
         (ActionEvent event) -> {
-          sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
-          sceneButtonIsIn.getWindow().sizeToScene();
+          try {
+            // Starting the timer
+            // THE GAME WILL CRASH IF THE USER SELECTS TIME AND DIFFICULTY BEFORE THE ROOM HAS
+            // LOADED
+            // A FIX NEEDS TO BE IN PLACE
+            GameState.timer.startTimer();
+            SceneManager.addUi(AppUi.CHAT, App.loadFxml("chat"));
+            sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
+            sceneButtonIsIn.getWindow().sizeToScene();
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
           GameState.roomController.fadeIn();
         });
     fadeTransition.play();
