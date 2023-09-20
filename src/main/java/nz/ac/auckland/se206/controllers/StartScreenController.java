@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -63,6 +64,7 @@ public class StartScreenController {
       // THE GAME WILL CRASH IF THE USER SELECTS TIME AND DIFFICULTY BEFORE THE ROOM HAS LOADED
       // A FIX NEEDS TO BE IN PLACE
       GameState.timer.startTimer();
+      SceneManager.addUi(AppUi.CHAT, App.loadFxml("chat"));
       sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
       sceneButtonIsIn.getWindow().sizeToScene();
     } catch (Exception e) {
@@ -83,18 +85,22 @@ public class StartScreenController {
   @FXML
   private void onClickEasy() {
     difButtonClicked(easyButton);
+    GameState.numberOfHints = -1;
+    GameState.difficulty = "EASY";
   }
 
   /** Setting difficulty to medium */
   @FXML
   private void onClickMedium() {
     difButtonClicked(mediumButton);
+    GameState.difficulty = "MEDIUM";
   }
 
   /** Setting difficulty to hard */
   @FXML
   private void onClickHard() {
     difButtonClicked(hardButton);
+    GameState.difficulty = "HARD";
   }
 
   /** Setting time to Two */

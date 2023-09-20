@@ -19,6 +19,9 @@ RedButton.png
 ball.png
 <a href="https://www.freepik.com/free-vector/ball_3077534.htm">Image by brgfx</a> on Freepik
 
+arrowOne.png, arrowTwo.png, arrowThree.png
+Image by <a href="https://www.freepik.com/free-vector/red-arrows-set_25557273.htm#page=3&query=arrow&position=6&from_view=search&track=sph">Freepik</a>
+
 ghost.jpg, ghost1.jpg
 <a href="https://www.freepik.com/free-vector/hand-drawn-halloween-ghosts-collection_18953723.htm">Image by pikisuperstar</a> on Freepik
 

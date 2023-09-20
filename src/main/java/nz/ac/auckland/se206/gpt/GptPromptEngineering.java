@@ -1,32 +1,131 @@
 package nz.ac.auckland.se206.gpt;
 
+import nz.ac.auckland.se206.GameState;
+
 /** Utility class for generating GPT prompt engineering strings. */
 public class GptPromptEngineering {
+  private static String aiIdentity =
+      "You are a crazy ghost controlling a school escape room with a student (the player) trapped"
+          + " inside. Your character must not be nice to the player. Do not act like you are"
+          + " 'guiding' the player. You should refer to the 'school' instead of  'escape room'."
+          + " (The school has three rooms, classroom, hallway and gymnasium). These are just"
+          + " directions to help you understand the character, not to be revealed to the player."
+          + " Let the player understand you are a ghost. Become this character immediately, and"
+          + " stay in character, no matter the response from the player. ";
 
-  /**
-   * Generates a GPT prompt engineering string for a riddle with the given word.
-   *
-   * @param wordToGuess the word to be guessed in the riddle
-   * @return the generated prompt engineering string
-   */
-  public static String initRiddleAndMaster(String country) {
-    return "let's play a game. You are a crazy ghost controlling a school escape room with a"
-        + " student (the player) trapped inside. Your character must not be nice to the"
-        + " player. Do not act like you are 'guiding' the player. You should refer to the"
-        + " 'school', instead of  'escape room'. These are just directions to help you"
-        + " understand the character, not to be revealed to the player. Remain nameless but"
-        + " let the player understand you are a ghost. When the chat opens, become this"
-        + " character immediately, and stay in character, no matter the response from the"
-        + " player. Do not refer to yourself as 'crazy', instead show it by how you act."
-        + " Begin by briefly introducing yourself. It is important to attempt to sound as"
-        + " unhingedas possible. With this introduction, you must also give the player a"
-        + " riddle. The answer to this riddle should be the country "
-        + country
-        + ". You should answer with the word Correct when is correct, ask them what they think they"
-        + " can do with this now when correct. The player will talk to you throughout the game. You"
-        + " should NEVER give the answer to the user even if they give up. if the user doesnt know"
-        + " the answer give them a hint but do not reveal the answer If the user asks for a hint or"
-        + " answers incorrectly give them a hint ."
-        + " You must make all responses very short - 50 words or under";
+  public static String apiNoHints(String gamestate) {
+    // States
+    // state1: Solve Riddle
+    // state2: Find Country on Map
+    // state3: Go to Lockers / Solve math problem
+    // state4: Score points and escape
+
+    StringBuilder state1 = new StringBuilder();
+    StringBuilder state2 = new StringBuilder();
+    StringBuilder state3 = new StringBuilder();
+    StringBuilder state4 = new StringBuilder();
+
+    state1.append(
+        aiIdentity
+            + "Begin by briefly introducing yourself. With this introduction, you must also give"
+            + " the player a riddle. The answer to this riddle should be the country "
+            + GameState.countryToFind
+            + ". You should NEVER give the answer to the user, even if they give up or ask for the"
+            + " answer. ");
+
+    state2.append(
+        aiIdentity
+            + "The user has just solved your riddle; respond with bitterness. If the user gives up"
+            + " or doesn't know what to do, belittle them. ");
+
+    state3.append(
+        aiIdentity
+            + "The user has just solved the first puzzle and gotten a hall pass. Respond in"
+            + " bitterness and ask them what they can do with the hall pass now. If the user gives"
+            + " up don't let them.");
+
+    state4.append(
+        aiIdentity
+            + "The user has just found a basketball; inform the user of this and taunt them. If the"
+            + " user asks for a hint, don't give the user any. If the user gives up don't let"
+            + " them.");
+
+    if (GameState.difficulty.equals("EASY")) {
+      state1.append("Only if the user asks for a hint, point them to the hint button. ");
+      state2.append("Only if the user asks for a hint, point them to the hint button. ");
+      state3.append("Only if the user asks for a hint, point them to the hint button. ");
+      state4.append("Only if the user asks for a hint, point them to the hint button. ");
+      System.out.println("EASY");
+    } else if (GameState.difficulty.equals("MEDIUM")) {
+      state1.append(
+          "Only if the user asks for a hint, point them towards the hint button and remind them"
+              + " that hints are limited");
+      state2.append(
+          "Only if the user asks for a hint, point them towards the hint button and remind them"
+              + " that hints are limited");
+      state3.append(
+          "Only if the user asks for a hint, point them towards the hint button and remind them"
+              + " that hints are limited");
+      state4.append(
+          "Only if the user asks for a hint, point them towards the hint button and remind them"
+              + " that hints are limited");
+      System.out.println("MEDIUM");
+    } else {
+      state1.append("If the user asks for a hint, tell them that you will not give any hints.");
+      state2.append("If the user asks for a hint, tell them that you will not give any hints.");
+      state3.append("If the user asks for a hint, tell them that you will not give any hints.");
+      state4.append("If the user asks for a hint, tell them that you will not give any hints.");
+      System.out.println("HARD");
+    }
+
+    state1.append(
+        "You should answer with the word Correct when is correct. You must make"
+            + " all responses very short - 30 words or under");
+    state2.append(" You must make all responses very short - 30 words or under");
+    state3.append(" You must make all responses very short - 30 words or under");
+    state4.append(" You must make all responses very short - 30 words or under");
+
+    if (gamestate.equals("state1")) {
+      return state1.toString();
+    } else if (gamestate.equals("state2")) {
+      return state2.toString();
+    } else if (gamestate.equals("state3")) {
+      return state3.toString();
+    } else if (gamestate.equals("state4")) {
+      return state4.toString();
+    }
+    return null;
+  }
+
+  public static String apiGetHints(String gamestate) {
+    StringBuilder state1 = new StringBuilder();
+    StringBuilder state2 = new StringBuilder();
+    StringBuilder state3 = new StringBuilder();
+    StringBuilder state4 = new StringBuilder();
+
+    state1.append(
+        "Give a hint to a riddle, where the answer is "
+            + GameState.countryToFind
+            + " in 15 words or less");
+    state2.append(
+        "Give a hint that points to searching around a classroom and finding a country on a map in"
+            + " 15 words or less");
+    state3.append(
+        "Give a hint that points to searching around the school and using their hallpass to unlock"
+            + " something previously locked in 15 words or less.");
+    state4.append(
+        "Give a hint that points to finding hidden numbers, making that number and paying attention"
+            + " to their surroundings in 15 words or less.");
+
+    if (gamestate.equals("state1")) {
+      return state1.toString();
+    } else if (gamestate.equals("state2")) {
+      return state2.toString();
+    } else if (gamestate.equals("state3")) {
+      return state3.toString();
+    } else if (gamestate.equals("state4")) {
+      return state4.toString();
+    }
+    return null;
   }
 }

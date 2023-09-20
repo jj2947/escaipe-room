@@ -1,7 +1,9 @@
-.textArea, .textField {
-    -fx-control-inner-background:#203112;
-    -fx-text-fill: #ffffff;
+.textArea,
+.textField, .label {
+    -fx-control-inner-background: #203112;
+    -fx-background-color: #203112;
     -fx-border-color: rgb(138, 76, 31);
+    -fx-text-fill: #ffffff;
     -fx-border-width: 5;
     -fx-font-family: "chalkduster";
     -fx-prompt-text-fill: #ffffff36;
@@ -12,5 +14,9 @@
 }
 
 .textField {
+    -fx-font-size: 25;
+}
+
+.label {
     -fx-font-size: 25;
 }

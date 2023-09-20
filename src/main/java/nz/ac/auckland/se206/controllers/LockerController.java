@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.gpt.ChatMessage;
+import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 
 public class LockerController {
   @FXML private Label timerLabel;
@@ -141,7 +143,16 @@ public class LockerController {
 
     GameState.blackboardController.showBasketball();
     GameState.blackboardController.setObjectiveText("Objective: What new things can I reach now?");
-
+    ChatMessage toAppend = new ChatMessage("dev", "*BASKETBALL FOUND*");
+    GameState.chatController.appendChatMessage(toAppend);
+    if (!GameState.isChatOpen) {
+      onClickChat();
+    }
+    GameState.chatController.changeChatAndSend(
+        new ChatCompletionRequest().setN(1).setTemperature(.2).setTopP(0.5).setMaxTokens(100),
+        "state4");
+    GameState.currentState = "state4";
+    GameState.chatController.newStateHint();
     basketball.setVisible(false);
     note1.setVisible(true);
     note2.setVisible(true);

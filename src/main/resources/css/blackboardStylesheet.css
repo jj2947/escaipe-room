@@ -3,3 +3,18 @@
     -fx-font-family: "chalkduster";
     -fx-prompt-text-fill: #ffffff36;
 }
+
+.button {
+    -fx-background-color: none;
+    -fx-font-family: "chalkduster";
+    -fx-border-color: #203112;
+    -fx-border-width: 5;
+    -fx-text-fill: #203112;
+    -fx-border-radius: 2;
+    -fx-font-size: 16;
+}
+
+.button:hover, .button:pressed, .buttton:disabled {
+    -fx-opacity: 0.5;
+    -fx-font-size: 16;
+}

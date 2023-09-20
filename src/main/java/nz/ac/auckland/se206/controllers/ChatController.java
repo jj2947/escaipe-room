@@ -4,6 +4,8 @@ import java.io.IOException;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -22,8 +24,11 @@ public class ChatController {
   @FXML private TextArea chatTextArea;
   @FXML private TextField inputText;
   @FXML private AnchorPane chatPane;
+  @FXML private Label hintLabel;
+  @FXML private Button hintButton;
 
   private ChatCompletionRequest chatCompletionRequest;
+  private ChatCompletionRequest hintChatCompletionRequest;
   private ChatMessage chatMsg;
   private CountryChoice countryChooser = new CountryChoice();
   private String country;
@@ -40,8 +45,13 @@ public class ChatController {
     GameState.countryToFind = country;
     System.out.println(country);
     chatCompletionRequest =
-        new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
-    runGpt(new ChatMessage("user", GptPromptEngineering.initRiddleAndMaster(country)));
+        new ChatCompletionRequest().setN(1).setTemperature(.7).setTopP(0.5).setMaxTokens(100);
+    runGpt(new ChatMessage("user", GptPromptEngineering.apiNoHints("state1")), "normal");
+    newStateHint();
+    updateHintCounter();
+    if (GameState.numberOfHints == 0) {
+      hintButton.setDisable(true);
+    }
   }
 
   /**
@@ -49,7 +59,7 @@ public class ChatController {
    *
    * @param msg the chat message to append
    */
-  private void appendChatMessage(ChatMessage msg) {
+  public void appendChatMessage(ChatMessage msg) {
     if (msg.getRole() == "user") {
       chatTextArea.appendText("Me: " + msg.getContent() + "\n\n");
     } else {
@@ -64,7 +74,14 @@ public class ChatController {
    * @return the response chat message
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
-  private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
+  private ChatMessage runGpt(ChatMessage msg, String type) throws ApiProxyException {
+    ChatCompletionRequest chatToUse;
+    if (type == "normal") {
+      chatToUse = chatCompletionRequest;
+    } else {
+      chatToUse = hintChatCompletionRequest;
+    }
+
     appendChatMessage(new ChatMessage("assistant", "Ghost is Writing..."));
     if (GameState.isChatOpen) {
       responseLoading();
@@ -75,28 +92,42 @@ public class ChatController {
 
           @Override
           protected Void call() throws Exception {
-            chatCompletionRequest.addMessage(msg);
+            chatToUse.addMessage(msg);
             try {
-              ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
+              ChatCompletionResult chatCompletionResult = chatToUse.execute();
               Choice result = chatCompletionResult.getChoices().iterator().next();
-              chatCompletionRequest.addMessage(result.getChatMessage());
+              chatToUse.addMessage(result.getChatMessage());
               // The response from GPT-API
               chatMsg = result.getChatMessage();
               Platform.runLater(
                   () -> {
-                    // Replacing the "Ghost is Writing..." with the response
-                    replaceLoadingMessageWithResponse(chatMsg.getContent());
                     // Checking to see if the riddle has been solved and changing the game state
                     if (result.getChatMessage().getRole().equals("assistant")
                         && result.getChatMessage().getContent().startsWith("Correct")) {
+                      GameState.currentState = "state2";
                       GameState.isRiddleResolved = true;
                       GameState.blackboardController.setObjectiveText(
                           "Objective: Where can I find this country?");
+                      replaceLoadingMessageWithResponse("");
+                      changeChatAndSend(
+                          new ChatCompletionRequest()
+                              .setN(1)
+                              .setTemperature(.7)
+                              .setTopP(0.5)
+                              .setMaxTokens(100),
+                          "state2");
+                    } else {
+                      // Replacing the "Ghost is Writing..." with the response
+                      replaceLoadingMessageWithResponse(chatMsg.getContent());
                     }
                     if (GameState.isChatOpen) {
                       responseLoaded();
                     }
+                    newStateHint();
                     inputText.setDisable(false);
+                    if (GameState.numberOfHints != 0) {
+                      hintButton.setDisable(false);
+                    }
                   });
               // Stop the loading effects
               if (GameState.isChatOpen) {
@@ -125,6 +156,7 @@ public class ChatController {
             });
     gptThread.start();
     inputText.setDisable(true);
+    hintButton.setDisable(true);
     return chatMsg;
   }
 
@@ -138,7 +170,7 @@ public class ChatController {
       inputText.clear();
       ChatMessage msg = new ChatMessage("user", message);
       appendChatMessage(msg);
-      runGpt(msg);
+      runGpt(msg, "normal");
     }
   }
 
@@ -208,8 +240,60 @@ public class ChatController {
 
     // If "Ghost is Writing..." is found, replace it with the GPT response
     if (lastLoadingIndex != -1) {
-      chatTextArea.replaceText(
-          lastLoadingIndex, lastLoadingIndex + loadingMessage.length(), "Ghost: " + response);
+      if (response.equals("")) {
+        chatTextArea.replaceText(lastLoadingIndex, lastLoadingIndex + loadingMessage.length(), "");
+      } else {
+        chatTextArea.replaceText(
+            lastLoadingIndex, lastLoadingIndex + loadingMessage.length(), "Ghost: " + response);
+      }
     }
+  }
+
+  public void changeChatAndSend(ChatCompletionRequest chat, String state) {
+    chatCompletionRequest = chat;
+    try {
+      runGpt(new ChatMessage("user", GptPromptEngineering.apiNoHints(state)), "normal");
+    } catch (ApiProxyException e) {
+      e.printStackTrace();
+    }
+  }
+
+  private void updateHintCounter() {
+    if (GameState.numberOfHints < 0) {
+      hintLabel.setText("Hints: ∞");
+    } else {
+      hintLabel.setText("Hints: " + GameState.numberOfHints);
+    }
+  }
+
+  @FXML
+  private void hintClicked() {
+    GameState.numberOfHints--;
+    updateHintCounter();
+    if (GameState.numberOfHints == 0) {
+      hintButton.setDisable(true);
+    }
+    if (hintChatCompletionRequest.getMessages().size() < 2) {
+      // Run with prompt
+      try {
+        runGpt(
+            new ChatMessage("user", GptPromptEngineering.apiGetHints(GameState.currentState)),
+            "hints");
+      } catch (ApiProxyException e) {
+        e.printStackTrace();
+      }
+    } else {
+      // Run with user
+      try {
+        runGpt(new ChatMessage("user", "another hint"), "hints");
+      } catch (ApiProxyException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+  public void newStateHint() {
+    hintChatCompletionRequest =
+        new ChatCompletionRequest().setN(1).setTemperature(.6).setTopP(1).setMaxTokens(100);
   }
 }
