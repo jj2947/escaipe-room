@@ -6,9 +6,12 @@
 }
 
 .backButton {
-    -fx-background-color: none;
+    -fx-background-color: white;
+    -fx-opacity: 0.8;
+    -fx-border-color: black;
+    -fx-border-width: 2;
 }
 
 .backButton:hover {
-   -fx-opacity: 0.5;
+   -fx-opacity: 0.2;
 }

@@ -50,6 +50,14 @@ public class StartScreenController {
     } else {
       GameState.totalTime = 360;
     }
+    while (GameState.roomController == null) {
+      try {
+        Thread.sleep(100);
+        startButton.setDisable(true);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
     // Switching Scenes to the room
     try {
       // Starting the timer
@@ -70,6 +78,7 @@ public class StartScreenController {
     // exit application
     Platform.exit();
     System.exit(0);
+    GameState.timer.exitGame();
   }
 
   /** Setting difficulty to easy */

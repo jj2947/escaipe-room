@@ -83,6 +83,7 @@ public class RoomController {
   @FXML private ImageView chatButton;
   @FXML private ImageView ghost2;
   @FXML private Label messageText1;
+  @FXML private Rectangle backRect;
   private Shadow shadow = new Shadow(10, Color.BLACK);
   private Glow glow = new Glow(0.8);
 
@@ -92,12 +93,12 @@ public class RoomController {
    * @throws IOException
    */
   public void initialize() throws IOException {
-    // Initialization code goes here
-    GameState.roomController = this;
     // Adding timerLabel to synched timer
     GameState.timer.setClass(timerLabel);
     timerLabel.setText(String.format("%02d:%02d", GameState.totalTime / 60, 0));
     addBlackboard();
+    // Initialization code goes here
+    GameState.roomController = this;
   }
 
   public void addBlackboard() {
@@ -240,12 +241,14 @@ public class RoomController {
   private void enterBackButton() {
     System.out.println("hover on back button");
     goBackLabel.setOpacity(0.5);
+    backRect.setOpacity(0.1);
   }
 
   @FXML
   private void exitBackButton() {
     System.out.println("hover off back button");
     goBackLabel.setOpacity(1);
+    backRect.setOpacity(0.5);
   }
 
   @FXML
@@ -456,12 +459,14 @@ public class RoomController {
     mapImage.setVisible(true);
     classroomImage.setOpacity(0.5);
     goBackLabel.setVisible(true);
+    backRect.setVisible(true);
   }
 
   public void hideAfterMap() {
     mapImage.setVisible(false);
     classroomImage.setOpacity(1);
     goBackLabel.setVisible(false);
+    backRect.setVisible(false);
   }
 
   public void disableWhileMapOpen() {

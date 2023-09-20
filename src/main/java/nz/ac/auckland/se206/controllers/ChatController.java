@@ -43,6 +43,7 @@ public class ChatController {
     GameState.chatController = this;
     country = countryChooser.chooseCountry();
     GameState.countryToFind = country;
+    System.out.println(country);
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(.7).setTopP(0.5).setMaxTokens(100);
     runGpt(new ChatMessage("user", GptPromptEngineering.apiNoHints("state1")), "normal");
