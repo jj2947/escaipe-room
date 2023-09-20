@@ -28,6 +28,8 @@ public class GameState {
 
   public static String countryToFind;
 
+  public static String difficulty;
+
   public static boolean countryIsFound = false;
 
   public static boolean basketballCollected = false;

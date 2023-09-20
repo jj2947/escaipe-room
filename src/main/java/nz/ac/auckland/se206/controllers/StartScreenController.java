@@ -77,18 +77,21 @@ public class StartScreenController {
   private void onClickEasy() {
     difButtonClicked(easyButton);
     GameState.numberOfHints = -1;
+    GameState.difficulty = "EASY";
   }
 
   /** Setting difficulty to medium */
   @FXML
   private void onClickMedium() {
     difButtonClicked(mediumButton);
+    GameState.difficulty = "MEDIUM";
   }
 
   /** Setting difficulty to hard */
   @FXML
   private void onClickHard() {
     difButtonClicked(hardButton);
+    GameState.difficulty = "HARD";
   }
 
   /** Setting time to Two */

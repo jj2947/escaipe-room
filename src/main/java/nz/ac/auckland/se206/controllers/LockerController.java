@@ -149,7 +149,7 @@ public class LockerController {
       onClickChat();
     }
     GameState.chatController.changeChatAndSend(
-        new ChatCompletionRequest().setN(1).setTemperature(0.5).setTopP(0.3).setMaxTokens(100),
+        new ChatCompletionRequest().setN(1).setTemperature(.2).setTopP(0.5).setMaxTokens(100),
         "state4");
     basketball.setVisible(false);
     note1.setVisible(true);

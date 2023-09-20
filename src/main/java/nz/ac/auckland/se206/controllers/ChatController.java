@@ -43,9 +43,12 @@ public class ChatController {
     country = countryChooser.chooseCountry();
     GameState.countryToFind = country;
     chatCompletionRequest =
-        new ChatCompletionRequest().setN(1).setTemperature(0.1).setTopP(0.3).setMaxTokens(100);
-    runGpt(new ChatMessage("user", GptPromptEngineering.getGameStateWithLimitedHints("state1")));
+        new ChatCompletionRequest().setN(1).setTemperature(1).setTopP(0.5).setMaxTokens(100);
+    runGpt(new ChatMessage("user", GptPromptEngineering.apiNoHints("state1")));
     updateHintCounter();
+    if (GameState.numberOfHints == 0) {
+      hintButton.setDisable(true);
+    }
   }
 
   /**
@@ -98,18 +101,13 @@ public class ChatController {
                       changeChatAndSend(
                           new ChatCompletionRequest()
                               .setN(1)
-                              .setTemperature(0.2)
+                              .setTemperature(1)
                               .setTopP(0.5)
                               .setMaxTokens(100),
                           "state2");
                     } else {
                       // Replacing the "Ghost is Writing..." with the response
                       replaceLoadingMessageWithResponse(chatMsg.getContent());
-                    }
-                    if (result.getChatMessage().getRole().equals("assistant")
-                        && result.getChatMessage().getContent().startsWith("Hint:")) {
-                      GameState.numberOfHints--;
-                      updateHintCounter();
                     }
                     if (GameState.isChatOpen) {
                       responseLoaded();
@@ -238,17 +236,26 @@ public class ChatController {
   public void changeChatAndSend(ChatCompletionRequest chat, String state) {
     chatCompletionRequest = chat;
     try {
-      runGpt(new ChatMessage("user", GptPromptEngineering.getGameStateWithLimitedHints(state)));
+      runGpt(new ChatMessage("user", GptPromptEngineering.apiNoHints(state)));
     } catch (ApiProxyException e) {
       e.printStackTrace();
     }
   }
 
   private void updateHintCounter() {
-    if (GameState.numberOfHints == -1) {
+    if (GameState.numberOfHints < 0) {
       hintLabel.setText("Hints: ∞");
     } else {
       hintLabel.setText("Hints: " + GameState.numberOfHints);
+    }
+  }
+
+  @FXML
+  private void hintClicked() {
+    GameState.numberOfHints--;
+    updateHintCounter();
+    if (GameState.numberOfHints == 0) {
+      hintButton.setDisable(true);
     }
   }
 }

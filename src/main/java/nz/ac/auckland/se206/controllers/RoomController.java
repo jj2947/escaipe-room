@@ -224,7 +224,7 @@ public class RoomController {
     chatButton.setOpacity(0.5);
   }
 
-   @FXML
+  @FXML
   private void onExitGhost() {
     System.out.println("hover off ghost");
     ghost.setEffect(null);
@@ -578,7 +578,7 @@ public class RoomController {
       ChatMessage toAppend = new ChatMessage("dev", "*HALLPASS FOUND*");
       GameState.chatController.appendChatMessage(toAppend);
       GameState.chatController.changeChatAndSend(
-          new ChatCompletionRequest().setN(1).setTemperature(0.5).setTopP(0.3).setMaxTokens(100),
+          new ChatCompletionRequest().setN(1).setTemperature(1).setTopP(0.5).setMaxTokens(100),
           "state3");
       if (!GameState.isChatOpen) {
         onClickChat();

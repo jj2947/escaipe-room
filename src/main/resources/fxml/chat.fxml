@@ -22,7 +22,7 @@
             <Bloom threshold="0.75" />
          </effect></TextField>
       <Label fx:id="hintLabel" layoutX="90.0" layoutY="2.0" prefHeight="44.0" prefWidth="148.0" stylesheets="@../css/chatStylesheet.css" />
-      <Button fx:id="hintButton" layoutX="2.0" layoutY="2.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="84.0" stylesheets="@../css/blackboardStylesheet.css" text="Hint">
+      <Button fx:id="hintButton" layoutX="2.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#hintClicked" prefHeight="44.0" prefWidth="84.0" stylesheets="@../css/blackboardStylesheet.css" text="Hint">
          <font>
             <Font name="Chalkduster" size="16.0" />
          </font>
