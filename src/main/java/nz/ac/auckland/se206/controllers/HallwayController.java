@@ -2,6 +2,8 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.Random;
+import javafx.animation.FadeTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -13,6 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -34,6 +37,7 @@ public class HallwayController {
   @FXML private ImageView ghost1;
   @FXML private ImageView ghost2;
   @FXML private Label messageText;
+  private Scene sceneRectangleIsIn;
   private Shadow shadow = new Shadow(10, Color.BLACK);
   private Glow glow = new Glow(0.8);
 
@@ -58,18 +62,11 @@ public class HallwayController {
     if (GameState.isChatOpen) {
       GameState.roomController.openChat();
     }
-
-    // Switching to hallway scene
+    // Switching to classroom scene
     Rectangle rectangle = (Rectangle) event.getSource();
-    Scene sceneRectangleIsIn = rectangle.getScene();
-    sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
+    sceneRectangleIsIn = rectangle.getScene();
 
-    if (!GameState.isChatOpen) {
-      // Resizing the window so the scene fits
-      sceneRectangleIsIn.getWindow().sizeToScene();
-    }
-
-    GameState.roomController.addBlackboard();
+    fadeOutRoom();
   }
 
   @FXML
@@ -80,17 +77,11 @@ public class HallwayController {
       GameState.gymController.openChat();
     }
 
-    // Switching to hallway scene
+    // Switching to gym scene
     Rectangle rectangle = (Rectangle) event.getSource();
-    Scene sceneRectangleIsIn = rectangle.getScene();
-    sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.GYMNASIUM));
+    sceneRectangleIsIn = rectangle.getScene();
 
-    if (!GameState.isChatOpen) {
-      // Resizing the window so the scene fits
-      sceneRectangleIsIn.getWindow().sizeToScene();
-    }
-
-    GameState.gymController.addBlackboard();
+    fadeOutGym();
   }
 
   @FXML
@@ -104,18 +95,10 @@ public class HallwayController {
       GameState.lockerController.openChat();
     }
 
-    // Switching to hallway scene
+    // Switching to locker scene
     Rectangle rectangle = (Rectangle) event.getSource();
-    Scene sceneRectangleIsIn = rectangle.getScene();
-    sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.LOCKER));
-
-    if (!GameState.isChatOpen) {
-      // Resizing the window so the scene fits
-      sceneRectangleIsIn.getWindow().sizeToScene();
-      // Get the stage after switching the scene
-      Stage stage = (Stage) sceneRectangleIsIn.getWindow();
-      stage.centerOnScreen();
-    }
+    sceneRectangleIsIn = rectangle.getScene();
+    fadeOutLocker();
   }
 
   @FXML
@@ -230,5 +213,73 @@ public class HallwayController {
     ghost1.setEffect(null);
     ghost2.setVisible(false);
     messageText.setVisible(false);
+  }
+
+  public void fadeOutRoom() {
+    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), room);
+    fadeTransition.setFromValue(1);
+    fadeTransition.setToValue(0);
+    fadeTransition.setOnFinished(
+        (ActionEvent event) -> {
+          sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
+
+          if (!GameState.isChatOpen) {
+            // Resizing the window so the scene fits
+            sceneRectangleIsIn.getWindow().sizeToScene();
+          }
+          room.setOpacity(1);
+          GameState.roomController.addBlackboard();
+          GameState.roomController.fadeIn();
+        });
+    fadeTransition.play();
+  }
+
+  public void fadeOutGym() {
+    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), room);
+    fadeTransition.setFromValue(1);
+    fadeTransition.setToValue(0);
+    fadeTransition.setOnFinished(
+        (ActionEvent event) -> {
+          sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.GYMNASIUM));
+          GameState.gymController.fadeIn();
+
+          if (!GameState.isChatOpen) {
+            // Resizing the window so the scene fits
+            sceneRectangleIsIn.getWindow().sizeToScene();
+          }
+          room.setOpacity(1);
+          GameState.gymController.addBlackboard();
+        });
+    fadeTransition.play();
+  }
+
+  public void fadeOutLocker() {
+    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), room);
+    fadeTransition.setFromValue(1);
+    fadeTransition.setToValue(0);
+    fadeTransition.setOnFinished(
+        (ActionEvent event) -> {
+          sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.LOCKER));
+          GameState.lockerController.fadeIn();
+
+          if (!GameState.isChatOpen) {
+            // Resizing the window so the scene fits
+            sceneRectangleIsIn.getWindow().sizeToScene();
+            // Get the stage after switching the scene
+            Stage stage = (Stage) sceneRectangleIsIn.getWindow();
+            stage.centerOnScreen();
+            room.setOpacity(1);
+          }
+        });
+    fadeTransition.play();
+  }
+
+  /** Fades the scene in */
+  public void fadeIn() {
+    FadeTransition fadeTransitionIn = new FadeTransition(Duration.seconds(1), room);
+    room.setOpacity(0);
+    fadeTransitionIn.setFromValue(0);
+    fadeTransitionIn.setToValue(1);
+    fadeTransitionIn.play();
   }
 }

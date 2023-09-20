@@ -1,6 +1,8 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.util.Random;
+import javafx.animation.FadeTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -53,6 +56,7 @@ public class LockerController {
   private int randNum1 = 0;
   private Shadow shadow = new Shadow(10, Color.BLACK);
   private Glow glow = new Glow(0.8);
+  private Scene currentScene;
 
   public void initialize() {
     // Initialization code goes here
@@ -314,16 +318,8 @@ public class LockerController {
       GameState.hallController.openChat();
     }
 
-    Scene currentScene = timerLabel.getScene();
-    currentScene.setRoot(SceneManager.getUiRoot(AppUi.HALLWAY));
-
-    if (!GameState.isChatOpen) {
-      // Resizing the window so the scene fits
-      currentScene.getWindow().sizeToScene();
-      // Get the stage after switching the scene
-      Stage stage = (Stage) currentScene.getWindow();
-      stage.centerOnScreen();
-    }
+    currentScene = timerLabel.getScene();
+    fadeOut();
   }
 
   @FXML
@@ -377,5 +373,36 @@ public class LockerController {
     messageText.setEffect(glow);
     messageText1.setVisible(false);
     messageText1.setEffect(glow);
+  }
+
+  /** Fades the scene out */
+  public void fadeOut() {
+    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), pane);
+    fadeTransition.setFromValue(1);
+    fadeTransition.setToValue(0);
+    fadeTransition.setOnFinished(
+        (ActionEvent event) -> {
+          currentScene.setRoot(SceneManager.getUiRoot(AppUi.HALLWAY));
+          GameState.hallController.fadeIn();
+
+          if (!GameState.isChatOpen) {
+            // Resizing the window so the scene fits
+            currentScene.getWindow().sizeToScene();
+            // Get the stage after switching the scene
+            Stage stage = (Stage) currentScene.getWindow();
+            stage.centerOnScreen();
+            pane.setOpacity(1);
+          }
+        });
+    fadeTransition.play();
+  }
+
+  /** Fades the scene in */
+  public void fadeIn() {
+    FadeTransition fadeTransitionIn = new FadeTransition(Duration.seconds(1), pane);
+    pane.setOpacity(0);
+    fadeTransitionIn.setFromValue(0);
+    fadeTransitionIn.setToValue(1);
+    fadeTransitionIn.play();
   }
 }

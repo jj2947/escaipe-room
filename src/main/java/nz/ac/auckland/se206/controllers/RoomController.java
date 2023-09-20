@@ -2,6 +2,8 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.Random;
+import javafx.animation.FadeTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -14,6 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -83,6 +86,7 @@ public class RoomController {
   @FXML private Label messageText1;
   private Shadow shadow = new Shadow(10, Color.BLACK);
   private Glow glow = new Glow(0.8);
+  private Scene sceneRectangleIsIn;
 
   /**
    * Initializes the room view, it is called when the room loads.
@@ -173,17 +177,11 @@ public class RoomController {
       GameState.hallController.openChat();
     }
 
+    fadeOut();
+
     // Switching to hallway scene
     Rectangle rectangle = (Rectangle) event.getSource();
-    Scene sceneRectangleIsIn = rectangle.getScene();
-    sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.HALLWAY));
-
-    if (!GameState.isChatOpen) {
-      // Resizing the window so the scene fits
-      sceneRectangleIsIn.getWindow().sizeToScene();
-    }
-
-    GameState.hallController.addBlackboard();
+    sceneRectangleIsIn = rectangle.getScene();
   }
 
   @FXML
@@ -222,7 +220,7 @@ public class RoomController {
     chatButton.setOpacity(0.5);
   }
 
-   @FXML
+  @FXML
   private void onExitGhost() {
     System.out.println("hover off ghost");
     ghost.setEffect(null);
@@ -576,5 +574,35 @@ public class RoomController {
       return true;
     }
     return false;
+  }
+
+  /** Fades the scene out */
+  public void fadeOut() {
+    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), room);
+    fadeTransition.setFromValue(1);
+    fadeTransition.setToValue(0);
+
+    fadeTransition.setOnFinished(
+        (ActionEvent event) -> {
+          sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.HALLWAY));
+
+          if (!GameState.isChatOpen) {
+            // Resizing the window so the scene fits
+            sceneRectangleIsIn.getWindow().sizeToScene();
+          }
+          room.setOpacity(1);
+          GameState.hallController.addBlackboard();
+          GameState.hallController.fadeIn();
+        });
+    fadeTransition.play();
+  }
+
+  /** Fades the scene in */
+  public void fadeIn() {
+    FadeTransition fadeTransitionIn = new FadeTransition(Duration.seconds(1), room);
+    room.setOpacity(0);
+    fadeTransitionIn.setFromValue(0);
+    fadeTransitionIn.setToValue(1);
+    fadeTransitionIn.play();
   }
 }

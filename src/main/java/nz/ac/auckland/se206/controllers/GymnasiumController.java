@@ -2,6 +2,8 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.Random;
+import javafx.animation.FadeTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -12,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -31,6 +34,7 @@ public class GymnasiumController {
   private Shadow shadow = new Shadow(10, Color.BLACK);
   private Glow glow = new Glow(0.8);
   private int goalCount = 0;
+  private Scene sceneRectangleIsIn;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
@@ -50,15 +54,8 @@ public class GymnasiumController {
 
     // Switching to hallway scene
     Rectangle rectangle = (Rectangle) event.getSource();
-    Scene sceneRectangleIsIn = rectangle.getScene();
-    sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.HALLWAY));
-
-    if (!GameState.isChatOpen) {
-      // Resizing the window so the scene fits
-      sceneRectangleIsIn.getWindow().sizeToScene();
-    }
-
-    GameState.hallController.addBlackboard();
+    sceneRectangleIsIn = rectangle.getScene();
+    fadeOut();
   }
 
   @FXML
@@ -199,5 +196,34 @@ public class GymnasiumController {
     ghost1.setVisible(false);
     ghost2.setVisible(false);
     room.setEffect(null);
+  }
+
+  /** Fades the scene out */
+  public void fadeOut() {
+    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), room);
+    fadeTransition.setFromValue(1);
+    fadeTransition.setToValue(0);
+    fadeTransition.setOnFinished(
+        (ActionEvent event) -> {
+          sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.HALLWAY));
+
+          if (!GameState.isChatOpen) {
+            // Resizing the window so the scene fits
+            sceneRectangleIsIn.getWindow().sizeToScene();
+          }
+          room.setOpacity(1);
+          GameState.hallController.addBlackboard();
+          GameState.hallController.fadeIn();
+        });
+    fadeTransition.play();
+  }
+
+  /** Fades the scene in */
+  public void fadeIn() {
+    FadeTransition fadeTransitionIn = new FadeTransition(Duration.seconds(1), room);
+    room.setOpacity(0);
+    fadeTransitionIn.setFromValue(0);
+    fadeTransitionIn.setToValue(1);
+    fadeTransitionIn.play();
   }
 }
