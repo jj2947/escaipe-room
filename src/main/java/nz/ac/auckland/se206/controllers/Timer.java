@@ -43,7 +43,8 @@ public class Timer {
   }
 
   public void startTimer() {
-    counter = GameState.totalTime; // Setting value to the number of time choosen at the start of the game
+    counter =
+        GameState.totalTime; // Setting value to the number of time choosen at the start of the game
     counter--;
     Task<Void> backgroundTask =
         new Task<Void>() {

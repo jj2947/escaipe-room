@@ -134,6 +134,7 @@ public class RoomController {
   }
 
   public void responseLoaded() {
+    // Remove all the effects from room
     ghost.setEffect(null);
     messageText.setVisible(false);
     room.setEffect(null);
@@ -387,52 +388,52 @@ public class RoomController {
 
   @FXML
   public void nzClicked() {
-    if (isTheCountry("New Zealand")) {}
+    isTheCountry("New Zealand");
   }
 
   @FXML
   public void australiaClicked() {
-    if (isTheCountry("Australia")) {}
+    isTheCountry("Australia");
   }
 
   @FXML
   public void argentinaClicked() {
-    if (isTheCountry("Argentina")) {}
+    isTheCountry("Argentina");
   }
 
   @FXML
   public void usaClicked() {
-    if (isTheCountry("USA")) {}
+    isTheCountry("USA");
   }
 
   @FXML
   public void canadaClicked() {
-    if (isTheCountry("Canada")) {}
+    isTheCountry("Canada");
   }
 
   @FXML
   public void brazilClicked() {
-    if (isTheCountry("Brazil")) {}
+    isTheCountry("Brazil");
   }
 
   @FXML
   public void chinaClicked() {
-    if (isTheCountry("China")) {}
+    isTheCountry("China");
   }
 
   @FXML
   public void russiaClicked() {
-    if (isTheCountry("Russia")) {}
+    isTheCountry("Russia");
   }
 
   @FXML
   public void greenlandClicked() {
-    if (isTheCountry("Greenland")) {}
+    isTheCountry("Greenland");
   }
 
   @FXML
   public void indiaClicked() {
-    if (isTheCountry("India")) {}
+    isTheCountry("India");
   }
 
   @FXML
@@ -484,40 +485,41 @@ public class RoomController {
   }
 
   public void enableCountries() {
+
     nzMap.setVisible(true);
 
     australiaMap.setVisible(true);
-
+    // Enabling argentina
     argentinaMapOne.setVisible(true);
     argentinaMapTwo.setVisible(true);
-
+    // Enabling india
     indiaMapOne.setVisible(true);
     indiaMapTwo.setVisible(true);
     indiaMapThree.setVisible(true);
     indiaMapFour.setVisible(true);
-
+    // Enabling greenland
     greenlandMapOne.setVisible(true);
     greenlandMapTwo.setVisible(true);
-
+    // Enabling brazil
     brazilMapOne.setVisible(true);
     brazilMapTwo.setVisible(true);
     brazilMapThree.setVisible(true);
-
+    // Enabling canada
     canadaMapOne.setVisible(true);
     canadaMapTwo.setVisible(true);
     canadaMapThree.setVisible(true);
     canadaMapFour.setVisible(true);
-
+    // Enabling usa
     usaMapOne.setVisible(true);
     usaMapTwo.setVisible(true);
     usaMapThree.setVisible(true);
     usaMapFour.setVisible(true);
-
+    // Enabling china
     chinaMapOne.setVisible(true);
     chinaMapTwo.setVisible(true);
     chinaMapThree.setVisible(true);
     chinaMapFour.setVisible(true);
-
+    // Enabling russia
     russiaMapOne.setVisible(true);
     russiaMapTwo.setVisible(true);
     russiaMapThree.setVisible(true);
@@ -528,40 +530,41 @@ public class RoomController {
   }
 
   public void disableCounties() {
+    // Disabling New Zealand
     nzMap.setVisible(false);
-
+    // Disabling australia
     australiaMap.setVisible(false);
-
+    // Disabling argentina
     argentinaMapOne.setVisible(false);
     argentinaMapTwo.setVisible(false);
-
+    // Disabling india
     indiaMapOne.setVisible(false);
     indiaMapTwo.setVisible(false);
     indiaMapThree.setVisible(false);
     indiaMapFour.setVisible(false);
-
+    // Disabling greenland
     greenlandMapOne.setVisible(false);
     greenlandMapTwo.setVisible(false);
-
+    // Disabling brazil
     brazilMapOne.setVisible(false);
     brazilMapTwo.setVisible(false);
     brazilMapThree.setVisible(false);
-
+    // Disabling canada
     canadaMapOne.setVisible(false);
     canadaMapTwo.setVisible(false);
     canadaMapThree.setVisible(false);
     canadaMapFour.setVisible(false);
-
+    // Disabling usa
     usaMapOne.setVisible(false);
     usaMapTwo.setVisible(false);
     usaMapThree.setVisible(false);
     usaMapFour.setVisible(false);
-
+    // Disabling china
     chinaMapOne.setVisible(false);
     chinaMapTwo.setVisible(false);
     chinaMapThree.setVisible(false);
     chinaMapFour.setVisible(false);
-
+    // Disabling russia
     russiaMapOne.setVisible(false);
     russiaMapTwo.setVisible(false);
     russiaMapThree.setVisible(false);
@@ -572,16 +575,19 @@ public class RoomController {
   }
 
   public boolean isTheCountry(String country) {
+    // Checking to see if the country is the one to find
     if (GameState.isRiddleResolved
         && !GameState.countryIsFound
         && GameState.countryToFind.equals(country)) {
       GameState.countryIsFound = true;
+      // Updating the game play to reflect the country being found
       GameState.blackboardController.showHallpass();
       GameState.blackboardController.showItemLabel();
       GameState.blackboardController.setObjectiveText("Objective: Look around the School");
       GameState.lockerController.setQuestion();
       ChatMessage toAppend = new ChatMessage("dev", "*HALLPASS FOUND*");
       GameState.chatController.appendChatMessage(toAppend);
+      // Changing the chat to the next state
       GameState.chatController.changeChatAndSend(
           new ChatCompletionRequest().setN(1).setTemperature(.7).setTopP(0.5).setMaxTokens(100),
           "state3");

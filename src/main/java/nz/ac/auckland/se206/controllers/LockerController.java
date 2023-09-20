@@ -140,19 +140,22 @@ public class LockerController {
   private void onClickBasketball() {
     System.out.println("basketball clicked");
     GameState.basketballCollected = true;
-
+    // Remove the basketball from the scene
     GameState.blackboardController.showBasketball();
+    // Update the game to reflect the basketball being found
     GameState.blackboardController.setObjectiveText("Objective: What new things can I reach now?");
     ChatMessage toAppend = new ChatMessage("dev", "*BASKETBALL FOUND*");
     GameState.chatController.appendChatMessage(toAppend);
     if (!GameState.isChatOpen) {
       onClickChat();
     }
+    // Change the chat to the next state
     GameState.chatController.changeChatAndSend(
         new ChatCompletionRequest().setN(1).setTemperature(.2).setTopP(0.5).setMaxTokens(100),
         "state4");
     GameState.currentState = "state4";
     GameState.chatController.newStateHint();
+    // Remove the basketball from the locker and make the notes visible
     basketball.setVisible(false);
     note1.setVisible(true);
     note2.setVisible(true);
@@ -175,11 +178,11 @@ public class LockerController {
   @FXML
   private void onClickHelp() {
     System.out.println("help button clicked");
-
+    // If the country hasn't been found yet, don't do anything
     if (!GameState.countryIsFound) {
       return;
     }
-
+    // Show the question on the label
     textField.setText("");
     numsEntered = 0;
     String sentence = "What is " + randNum1 + " + " + randNum + "?";
@@ -279,6 +282,7 @@ public class LockerController {
   }
 
   private void updateButtons() {
+    // Update the buttons to disable the numbers when 4 numbers have already been entered
     enterButton.disableProperty().setValue(true);
     oneButton.disableProperty().setValue(false);
     twoButton.disableProperty().setValue(false);

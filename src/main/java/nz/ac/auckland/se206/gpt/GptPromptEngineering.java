@@ -98,11 +98,13 @@ public class GptPromptEngineering {
   }
 
   public static String apiGetHints(String gamestate) {
+    // Create states
     StringBuilder state1 = new StringBuilder();
     StringBuilder state2 = new StringBuilder();
     StringBuilder state3 = new StringBuilder();
     StringBuilder state4 = new StringBuilder();
 
+    // Add ai prompts for each state
     state1.append(
         "Give a hint to a riddle, where the answer is "
             + GameState.countryToFind
@@ -117,6 +119,7 @@ public class GptPromptEngineering {
         "Give a hint that points to finding hidden numbers, making that number and paying attention"
             + " to their surroundings in 15 words or less.");
 
+    // Return the correct state
     if (gamestate.equals("state1")) {
       return state1.toString();
     } else if (gamestate.equals("state2")) {
