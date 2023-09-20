@@ -50,6 +50,8 @@ public class GameState {
 
   public static BlackboardController blackboardController;
 
+  public static String currentState = "state1";
+
   public static boolean chatInRoom = false;
 
   public static boolean chatInHall = false;

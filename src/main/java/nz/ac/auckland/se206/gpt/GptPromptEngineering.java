@@ -97,7 +97,35 @@ public class GptPromptEngineering {
     return null;
   }
 
-  public static String getGameStateNoHints(String gamestate) {
+  public static String apiGetHints(String gamestate) {
+    StringBuilder state1 = new StringBuilder();
+    StringBuilder state2 = new StringBuilder();
+    StringBuilder state3 = new StringBuilder();
+    StringBuilder state4 = new StringBuilder();
+
+    state1.append(
+        "Give a hint to a riddle, where the answer is "
+            + GameState.countryToFind
+            + " in 15 words or less");
+    state2.append(
+        "Give a hint that points to searching around a classroom and finding a country on a map in"
+            + " 15 words or less");
+    state3.append(
+        "Give a hint that points to searching around the school and using their hallpass to unlock"
+            + " something previously locked in 15 words or less.");
+    state4.append(
+        "Give a hint that points to finding hidden numbers, making that number and paying attention"
+            + " to their surroundings in 15 words or less.");
+
+    if (gamestate.equals("state1")) {
+      return state1.toString();
+    } else if (gamestate.equals("state2")) {
+      return state2.toString();
+    } else if (gamestate.equals("state3")) {
+      return state3.toString();
+    } else if (gamestate.equals("state4")) {
+      return state4.toString();
+    }
     return null;
   }
 }

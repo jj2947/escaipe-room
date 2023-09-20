@@ -28,6 +28,7 @@ public class ChatController {
   @FXML private Button hintButton;
 
   private ChatCompletionRequest chatCompletionRequest;
+  private ChatCompletionRequest hintChatCompletionRequest;
   private ChatMessage chatMsg;
   private CountryChoice countryChooser = new CountryChoice();
   private String country;
@@ -43,8 +44,9 @@ public class ChatController {
     country = countryChooser.chooseCountry();
     GameState.countryToFind = country;
     chatCompletionRequest =
-        new ChatCompletionRequest().setN(1).setTemperature(1).setTopP(0.5).setMaxTokens(100);
-    runGpt(new ChatMessage("user", GptPromptEngineering.apiNoHints("state1")));
+        new ChatCompletionRequest().setN(1).setTemperature(.7).setTopP(0.5).setMaxTokens(100);
+    runGpt(new ChatMessage("user", GptPromptEngineering.apiNoHints("state1")), "normal");
+    newStateHint();
     updateHintCounter();
     if (GameState.numberOfHints == 0) {
       hintButton.setDisable(true);
@@ -71,7 +73,14 @@ public class ChatController {
    * @return the response chat message
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
-  private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
+  private ChatMessage runGpt(ChatMessage msg, String type) throws ApiProxyException {
+    ChatCompletionRequest chatToUse;
+    if (type == "normal") {
+      chatToUse = chatCompletionRequest;
+    } else {
+      chatToUse = hintChatCompletionRequest;
+    }
+
     appendChatMessage(new ChatMessage("assistant", "Ghost is Writing..."));
     if (GameState.isChatOpen) {
       responseLoading();
@@ -82,11 +91,11 @@ public class ChatController {
 
           @Override
           protected Void call() throws Exception {
-            chatCompletionRequest.addMessage(msg);
+            chatToUse.addMessage(msg);
             try {
-              ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
+              ChatCompletionResult chatCompletionResult = chatToUse.execute();
               Choice result = chatCompletionResult.getChoices().iterator().next();
-              chatCompletionRequest.addMessage(result.getChatMessage());
+              chatToUse.addMessage(result.getChatMessage());
               // The response from GPT-API
               chatMsg = result.getChatMessage();
               Platform.runLater(
@@ -94,6 +103,7 @@ public class ChatController {
                     // Checking to see if the riddle has been solved and changing the game state
                     if (result.getChatMessage().getRole().equals("assistant")
                         && result.getChatMessage().getContent().startsWith("Correct")) {
+                      GameState.currentState = "state2";
                       GameState.isRiddleResolved = true;
                       GameState.blackboardController.setObjectiveText(
                           "Objective: Where can I find this country?");
@@ -101,7 +111,7 @@ public class ChatController {
                       changeChatAndSend(
                           new ChatCompletionRequest()
                               .setN(1)
-                              .setTemperature(1)
+                              .setTemperature(.7)
                               .setTopP(0.5)
                               .setMaxTokens(100),
                           "state2");
@@ -112,7 +122,9 @@ public class ChatController {
                     if (GameState.isChatOpen) {
                       responseLoaded();
                     }
+                    newStateHint();
                     inputText.setDisable(false);
+                    hintButton.setDisable(false);
                   });
               // Stop the loading effects
               if (GameState.isChatOpen) {
@@ -141,6 +153,7 @@ public class ChatController {
             });
     gptThread.start();
     inputText.setDisable(true);
+    hintButton.setDisable(true);
     return chatMsg;
   }
 
@@ -154,7 +167,7 @@ public class ChatController {
       inputText.clear();
       ChatMessage msg = new ChatMessage("user", message);
       appendChatMessage(msg);
-      runGpt(msg);
+      runGpt(msg, "normal");
     }
   }
 
@@ -236,7 +249,7 @@ public class ChatController {
   public void changeChatAndSend(ChatCompletionRequest chat, String state) {
     chatCompletionRequest = chat;
     try {
-      runGpt(new ChatMessage("user", GptPromptEngineering.apiNoHints(state)));
+      runGpt(new ChatMessage("user", GptPromptEngineering.apiNoHints(state)), "normal");
     } catch (ApiProxyException e) {
       e.printStackTrace();
     }
@@ -257,5 +270,27 @@ public class ChatController {
     if (GameState.numberOfHints == 0) {
       hintButton.setDisable(true);
     }
+    if (hintChatCompletionRequest.getMessages().size() < 2) {
+      // Run with prompt
+      try {
+        runGpt(
+            new ChatMessage("user", GptPromptEngineering.apiGetHints(GameState.currentState)),
+            "hints");
+      } catch (ApiProxyException e) {
+        e.printStackTrace();
+      }
+    } else {
+      // Run with user
+      try {
+        runGpt(new ChatMessage("user", "another hint"), "hints");
+      } catch (ApiProxyException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+  public void newStateHint() {
+    hintChatCompletionRequest =
+        new ChatCompletionRequest().setN(1).setTemperature(.6).setTopP(1).setMaxTokens(100);
   }
 }

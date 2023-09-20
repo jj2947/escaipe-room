@@ -578,8 +578,10 @@ public class RoomController {
       ChatMessage toAppend = new ChatMessage("dev", "*HALLPASS FOUND*");
       GameState.chatController.appendChatMessage(toAppend);
       GameState.chatController.changeChatAndSend(
-          new ChatCompletionRequest().setN(1).setTemperature(1).setTopP(0.5).setMaxTokens(100),
+          new ChatCompletionRequest().setN(1).setTemperature(.7).setTopP(0.5).setMaxTokens(100),
           "state3");
+      GameState.currentState = "state3";
+      GameState.chatController.newStateHint();
       if (!GameState.isChatOpen) {
         onClickChat();
       }
