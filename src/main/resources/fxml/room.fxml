@@ -153,8 +153,8 @@
       <Rectangle fx:id="indiaMapTwo" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="56.0" layoutX="748.0" layoutY="358.0" onMouseClicked="#indiaClicked" onMouseEntered="#indiaEnter" onMouseExited="#indiaExit" opacity="0.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="38.0" />
       <Rectangle fx:id="indiaMapThree" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="17.0" layoutX="751.0" layoutY="333.0" onMouseClicked="#indiaClicked" onMouseEntered="#indiaEnter" onMouseExited="#indiaExit" opacity="0.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="11.0" />
       <Rectangle fx:id="indiaMapFour" arcHeight="5.0" arcWidth="5.0" fill="#e3ff1f" height="8.0" layoutX="759.0" layoutY="342.0" onMouseClicked="#indiaClicked" onMouseEntered="#indiaEnter" onMouseExited="#indiaExit" opacity="0.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="13.0" />
-      <Rectangle fx:id="backRect" arcHeight="5.0" arcWidth="5.0" fill="#aaacae" height="55.0" layoutX="491.0" layoutY="28.0" opacity="0.5" stroke="#8f8a8a" strokeType="INSIDE" visible="false" width="115.0" />
-      <Label fx:id="goBackLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="492.5" layoutY="31.0" onMouseClicked="#exitMap" prefHeight="39.0" prefWidth="115.0" styleClass="backButton" stylesheets="@../css/stylesheet.css" text="BACK" textFill="WHITE" visible="false">
+      <Rectangle fx:id="backRect" arcHeight="5.0" arcWidth="5.0" fill="#aaacae" height="42.0" layoutX="491.0" layoutY="28.0" opacity="0.5" stroke="#8f8a8a" strokeType="INSIDE" visible="false" width="115.0" />
+      <Label fx:id="goBackLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="491.0" layoutY="30.0" onMouseClicked="#exitMap" onMouseEntered="#enterBackButton" onMouseExited="#exitBackButton" prefHeight="31.0" prefWidth="115.0" styleClass="backButton" text="BACK" textFill="WHITE" visible="false">
          <font>
             <Font name="Palatino" size="30.0" />
          </font>

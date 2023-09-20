@@ -31,14 +31,14 @@ public class EndController {
   }
 
   @FXML
-  private void clickExit() {
+  private void onExit() {
     Platform.exit();
     System.exit(0);
     GameState.timer.exitGame();
   }
 
   @FXML
-  private void clickRestart() throws IOException {
+  private void onRestart() throws IOException {
     // Remove scenes that need to be cleared
     SceneManager.removeUi(AppUi.ROOM);
     SceneManager.removeUi(AppUi.BLACKBOARD);

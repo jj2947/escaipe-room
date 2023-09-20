@@ -20,8 +20,8 @@ public class CountryChoice {
           10, "Argentina");
 
   public String chooseCountry() {
-      random = (int) (Math.random() * 10) + 1; // Getting random number between 1 and 10
-      String countryChoice = countries.get(random); // Getting country name from map
-      return countryChoice;
+    random = (int) (Math.random() * 10) + 1; // Getting random number between 1 and 10
+    String countryChoice = countries.get(random); // Getting country name from map
+    return countryChoice;
   }
 }
