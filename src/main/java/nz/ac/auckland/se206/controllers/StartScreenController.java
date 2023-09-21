@@ -1,11 +1,14 @@
 package nz.ac.auckland.se206.controllers;
 
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
@@ -21,6 +24,8 @@ public class StartScreenController {
   @FXML private Button fourButton;
   @FXML private Button sixButton;
   @FXML private Label toDoLabel;
+  @FXML private Pane startScreen;
+  private Scene sceneButtonIsIn;
 
   private Button difficulty = null;
   private Button time = null;
@@ -33,7 +38,7 @@ public class StartScreenController {
   @FXML
   private void onStart(ActionEvent event) {
     Button button = (Button) event.getSource();
-    Scene sceneButtonIsIn = button.getScene();
+    sceneButtonIsIn = button.getScene();
     // Updating gamestate on number of hints
     if (difficulty.equals(easyButton)) {
       GameState.numberOfHints = -1;
@@ -59,17 +64,7 @@ public class StartScreenController {
       }
     }
     // Switching Scenes to the room
-    try {
-      // Starting the timer
-      // THE GAME WILL CRASH IF THE USER SELECTS TIME AND DIFFICULTY BEFORE THE ROOM HAS LOADED
-      // A FIX NEEDS TO BE IN PLACE
-      GameState.timer.startTimer();
-      SceneManager.addUi(AppUi.CHAT, App.loadFxml("chat"));
-      sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
-      sceneButtonIsIn.getWindow().sizeToScene();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    fadeOut();
   }
 
   /** Called when the exit button is clicked */
@@ -177,5 +172,29 @@ public class StartScreenController {
     time = button;
     time.setDisable(true);
     updateToDo();
+  }
+
+  /** Fades the scene out */
+  public void fadeOut() {
+    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), startScreen);
+    fadeTransition.setFromValue(1);
+    fadeTransition.setToValue(0);
+    fadeTransition.setOnFinished(
+        (ActionEvent event) -> {
+          try {
+            // Starting the timer
+            // THE GAME WILL CRASH IF THE USER SELECTS TIME AND DIFFICULTY BEFORE THE ROOM HAS
+            // LOADED
+            // A FIX NEEDS TO BE IN PLACE
+            GameState.timer.startTimer();
+            SceneManager.addUi(AppUi.CHAT, App.loadFxml("chat"));
+            sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
+            sceneButtonIsIn.getWindow().sizeToScene();
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
+          GameState.roomController.fadeIn();
+        });
+    fadeTransition.play();
   }
 }

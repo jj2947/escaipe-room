@@ -1,7 +1,10 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import javafx.util.Duration;
 import java.util.Random;
+
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -599,5 +602,14 @@ public class RoomController {
       return true;
     }
     return false;
+  }
+
+  /** Fades the scene in */
+  public void fadeIn() {
+    FadeTransition fadeTransitionIn = new FadeTransition(Duration.seconds(1), room);
+    room.setOpacity(0);
+    fadeTransitionIn.setFromValue(0);
+    fadeTransitionIn.setToValue(1);
+    fadeTransitionIn.play();
   }
 }
