@@ -13,11 +13,20 @@ allBlueMap.png, argentinaView.png, australiaView.png, brazilView.png, canadaView
 Created with <a href="https://www.mapchart.net/world.html">MapChart </a> 
 licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
 
-Man.png
-<a href="https://www.freepik.com/free-vector/anonymous-worker_931287.htm#query=mysterious%20man&position=8&from_view=search&track=ais">Image by ibrandify</a> on Freepik
-
-TextBox.jpeg
-<a href="https://www.freepik.com/free-vector/message-bubbles-set-outline-style_50417468.htm#query=pixel%20speech%20bubble&position=14&from_view=search&track=ais">Image by juicy_fish</a> on Freepik
-
 RedButton.png
 <a href="https://www.freepik.com/free-vector/set-4-coloured-buttons-black-background_1126539.htm#page=2&query=red%20button&position=3&from_view=search&track=ais">Image by ibrandify</a> on Freepik
+
+ball.png
+<a href="https://www.freepik.com/free-vector/ball_3077534.htm">Image by brgfx</a> on Freepik
+
+arrowOne.png, arrowTwo.png, arrowThree.png
+Image by <a href="https://www.freepik.com/free-vector/red-arrows-set_25557273.htm#page=3&query=arrow&position=6&from_view=search&track=sph">Freepik</a>
+
+ghost.jpg, ghost1.jpg
+<a href="https://www.freepik.com/free-vector/hand-drawn-halloween-ghosts-collection_18953723.htm">Image by pikisuperstar</a> on Freepik
+
+note.png, note1.png
+<a href="https://www.freepik.com/free-vector/blank-writing-paper-collection_3760097.htm">Image by rawpixel.com</a> on Freepik
+
+locker.jpeg
+<a href="https://www.freepik.com/free-vector/blue-locker-closed-cabinet-with-locks-doors-storage-clothes-public-sport-gym-school-office-security-closet-wardrobe-cupboard-isolated-white_28945982.htm#query=locker&position=9&from_view=search&track=sph">Image by studio4rt</a> on Freepik

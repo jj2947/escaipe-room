@@ -55,6 +55,14 @@ public class StartScreenController {
     } else {
       GameState.totalTime = 360;
     }
+    while (GameState.roomController == null) {
+      try {
+        Thread.sleep(100);
+        startButton.setDisable(true);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
     // Switching Scenes to the room
     fadeOut();
   }
@@ -65,24 +73,29 @@ public class StartScreenController {
     // exit application
     Platform.exit();
     System.exit(0);
+    GameState.timer.exitGame();
   }
 
   /** Setting difficulty to easy */
   @FXML
   private void onClickEasy() {
     difButtonClicked(easyButton);
+    GameState.numberOfHints = -1;
+    GameState.difficulty = "EASY";
   }
 
   /** Setting difficulty to medium */
   @FXML
   private void onClickMedium() {
     difButtonClicked(mediumButton);
+    GameState.difficulty = "MEDIUM";
   }
 
   /** Setting difficulty to hard */
   @FXML
   private void onClickHard() {
     difButtonClicked(hardButton);
+    GameState.difficulty = "HARD";
   }
 
   /** Setting time to Two */

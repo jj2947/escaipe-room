@@ -1,9 +1,10 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import javafx.util.Duration;
 import java.util.Random;
+
 import javafx.animation.FadeTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -16,10 +17,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.gpt.ChatMessage;
+import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 
 /** Controller class for the room view. */
 public class RoomController {
@@ -84,9 +86,9 @@ public class RoomController {
   @FXML private ImageView chatButton;
   @FXML private ImageView ghost2;
   @FXML private Label messageText1;
+  @FXML private Rectangle backRect;
   private Shadow shadow = new Shadow(10, Color.BLACK);
   private Glow glow = new Glow(0.8);
-  private Scene sceneRectangleIsIn;
 
   /**
    * Initializes the room view, it is called when the room loads.
@@ -94,12 +96,12 @@ public class RoomController {
    * @throws IOException
    */
   public void initialize() throws IOException {
-    // Initialization code goes here
-    GameState.roomController = this;
     // Adding timerLabel to synched timer
     GameState.timer.setClass(timerLabel);
     timerLabel.setText(String.format("%02d:%02d", GameState.totalTime / 60, 0));
     addBlackboard();
+    // Initialization code goes here
+    GameState.roomController = this;
   }
 
   public void addBlackboard() {
@@ -135,6 +137,7 @@ public class RoomController {
   }
 
   public void responseLoaded() {
+    // Remove all the effects from room
     ghost.setEffect(null);
     messageText.setVisible(false);
     room.setEffect(null);
@@ -177,11 +180,17 @@ public class RoomController {
       GameState.hallController.openChat();
     }
 
-    fadeOut();
-
     // Switching to hallway scene
     Rectangle rectangle = (Rectangle) event.getSource();
-    sceneRectangleIsIn = rectangle.getScene();
+    Scene sceneRectangleIsIn = rectangle.getScene();
+    sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.HALLWAY));
+
+    if (!GameState.isChatOpen) {
+      // Resizing the window so the scene fits
+      sceneRectangleIsIn.getWindow().sizeToScene();
+    }
+
+    GameState.hallController.addBlackboard();
   }
 
   @FXML
@@ -236,12 +245,14 @@ public class RoomController {
   private void enterBackButton() {
     System.out.println("hover on back button");
     goBackLabel.setOpacity(0.5);
+    backRect.setOpacity(0.1);
   }
 
   @FXML
   private void exitBackButton() {
     System.out.println("hover off back button");
     goBackLabel.setOpacity(1);
+    backRect.setOpacity(0.5);
   }
 
   @FXML
@@ -380,52 +391,52 @@ public class RoomController {
 
   @FXML
   public void nzClicked() {
-    if (isTheCountry("New Zealand")) {}
+    isTheCountry("New Zealand");
   }
 
   @FXML
   public void australiaClicked() {
-    if (isTheCountry("Australia")) {}
+    isTheCountry("Australia");
   }
 
   @FXML
   public void argentinaClicked() {
-    if (isTheCountry("Argentina")) {}
+    isTheCountry("Argentina");
   }
 
   @FXML
   public void usaClicked() {
-    if (isTheCountry("USA")) {}
+    isTheCountry("USA");
   }
 
   @FXML
   public void canadaClicked() {
-    if (isTheCountry("Canada")) {}
+    isTheCountry("Canada");
   }
 
   @FXML
   public void brazilClicked() {
-    if (isTheCountry("Brazil")) {}
+    isTheCountry("Brazil");
   }
 
   @FXML
   public void chinaClicked() {
-    if (isTheCountry("China")) {}
+    isTheCountry("China");
   }
 
   @FXML
   public void russiaClicked() {
-    if (isTheCountry("Russia")) {}
+    isTheCountry("Russia");
   }
 
   @FXML
   public void greenlandClicked() {
-    if (isTheCountry("Greenland")) {}
+    isTheCountry("Greenland");
   }
 
   @FXML
   public void indiaClicked() {
-    if (isTheCountry("India")) {}
+    isTheCountry("India");
   }
 
   @FXML
@@ -452,12 +463,14 @@ public class RoomController {
     mapImage.setVisible(true);
     classroomImage.setOpacity(0.5);
     goBackLabel.setVisible(true);
+    backRect.setVisible(true);
   }
 
   public void hideAfterMap() {
     mapImage.setVisible(false);
     classroomImage.setOpacity(1);
     goBackLabel.setVisible(false);
+    backRect.setVisible(false);
   }
 
   public void disableWhileMapOpen() {
@@ -475,40 +488,41 @@ public class RoomController {
   }
 
   public void enableCountries() {
+
     nzMap.setVisible(true);
 
     australiaMap.setVisible(true);
-
+    // Enabling argentina
     argentinaMapOne.setVisible(true);
     argentinaMapTwo.setVisible(true);
-
+    // Enabling india
     indiaMapOne.setVisible(true);
     indiaMapTwo.setVisible(true);
     indiaMapThree.setVisible(true);
     indiaMapFour.setVisible(true);
-
+    // Enabling greenland
     greenlandMapOne.setVisible(true);
     greenlandMapTwo.setVisible(true);
-
+    // Enabling brazil
     brazilMapOne.setVisible(true);
     brazilMapTwo.setVisible(true);
     brazilMapThree.setVisible(true);
-
+    // Enabling canada
     canadaMapOne.setVisible(true);
     canadaMapTwo.setVisible(true);
     canadaMapThree.setVisible(true);
     canadaMapFour.setVisible(true);
-
+    // Enabling usa
     usaMapOne.setVisible(true);
     usaMapTwo.setVisible(true);
     usaMapThree.setVisible(true);
     usaMapFour.setVisible(true);
-
+    // Enabling china
     chinaMapOne.setVisible(true);
     chinaMapTwo.setVisible(true);
     chinaMapThree.setVisible(true);
     chinaMapFour.setVisible(true);
-
+    // Enabling russia
     russiaMapOne.setVisible(true);
     russiaMapTwo.setVisible(true);
     russiaMapThree.setVisible(true);
@@ -519,40 +533,41 @@ public class RoomController {
   }
 
   public void disableCounties() {
+    // Disabling New Zealand
     nzMap.setVisible(false);
-
+    // Disabling australia
     australiaMap.setVisible(false);
-
+    // Disabling argentina
     argentinaMapOne.setVisible(false);
     argentinaMapTwo.setVisible(false);
-
+    // Disabling india
     indiaMapOne.setVisible(false);
     indiaMapTwo.setVisible(false);
     indiaMapThree.setVisible(false);
     indiaMapFour.setVisible(false);
-
+    // Disabling greenland
     greenlandMapOne.setVisible(false);
     greenlandMapTwo.setVisible(false);
-
+    // Disabling brazil
     brazilMapOne.setVisible(false);
     brazilMapTwo.setVisible(false);
     brazilMapThree.setVisible(false);
-
+    // Disabling canada
     canadaMapOne.setVisible(false);
     canadaMapTwo.setVisible(false);
     canadaMapThree.setVisible(false);
     canadaMapFour.setVisible(false);
-
+    // Disabling usa
     usaMapOne.setVisible(false);
     usaMapTwo.setVisible(false);
     usaMapThree.setVisible(false);
     usaMapFour.setVisible(false);
-
+    // Disabling china
     chinaMapOne.setVisible(false);
     chinaMapTwo.setVisible(false);
     chinaMapThree.setVisible(false);
     chinaMapFour.setVisible(false);
-
+    // Disabling russia
     russiaMapOne.setVisible(false);
     russiaMapTwo.setVisible(false);
     russiaMapThree.setVisible(false);
@@ -563,38 +578,30 @@ public class RoomController {
   }
 
   public boolean isTheCountry(String country) {
+    // Checking to see if the country is the one to find
     if (GameState.isRiddleResolved
         && !GameState.countryIsFound
         && GameState.countryToFind.equals(country)) {
       GameState.countryIsFound = true;
+      // Updating the game play to reflect the country being found
       GameState.blackboardController.showHallpass();
       GameState.blackboardController.showItemLabel();
-      GameState.blackboardController.setObjectiveText("Objective: What's in the hallways?");
+      GameState.blackboardController.setObjectiveText("Objective: Look around the School");
       GameState.lockerController.setQuestion();
+      ChatMessage toAppend = new ChatMessage("dev", "*HALLPASS FOUND*");
+      GameState.chatController.appendChatMessage(toAppend);
+      // Changing the chat to the next state
+      GameState.chatController.changeChatAndSend(
+          new ChatCompletionRequest().setN(1).setTemperature(.7).setTopP(0.5).setMaxTokens(100),
+          "state3");
+      GameState.currentState = "state3";
+      GameState.chatController.newStateHint();
+      if (!GameState.isChatOpen) {
+        onClickChat();
+      }
       return true;
     }
     return false;
-  }
-
-  /** Fades the scene out */
-  public void fadeOut() {
-    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), room);
-    fadeTransition.setFromValue(1);
-    fadeTransition.setToValue(0);
-
-    fadeTransition.setOnFinished(
-        (ActionEvent event) -> {
-          sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.HALLWAY));
-
-          if (!GameState.isChatOpen) {
-            // Resizing the window so the scene fits
-            sceneRectangleIsIn.getWindow().sizeToScene();
-          }
-          room.setOpacity(1);
-          GameState.hallController.addBlackboard();
-          GameState.hallController.fadeIn();
-        });
-    fadeTransition.play();
   }
 
   /** Fades the scene in */

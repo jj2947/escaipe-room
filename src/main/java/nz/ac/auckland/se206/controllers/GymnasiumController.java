@@ -2,8 +2,6 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.Random;
-import javafx.animation.FadeTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -14,10 +12,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.gpt.ChatMessage;
 
 public class GymnasiumController {
 
@@ -30,11 +28,12 @@ public class GymnasiumController {
   @FXML private ImageView chatButton;
   @FXML private ImageView ghost1;
   @FXML private ImageView ghost2;
+  @FXML private ImageView redButton;
+  @FXML private Rectangle exitDoor;
   @FXML private Pane room;
   private Shadow shadow = new Shadow(10, Color.BLACK);
   private Glow glow = new Glow(0.8);
   private int goalCount = 0;
-  private Scene sceneRectangleIsIn;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
@@ -54,21 +53,49 @@ public class GymnasiumController {
 
     // Switching to hallway scene
     Rectangle rectangle = (Rectangle) event.getSource();
-    sceneRectangleIsIn = rectangle.getScene();
-    fadeOut();
+    Scene sceneRectangleIsIn = rectangle.getScene();
+    sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.HALLWAY));
+
+    if (!GameState.isChatOpen) {
+      // Resizing the window so the scene fits
+      sceneRectangleIsIn.getWindow().sizeToScene();
+    }
+
+    GameState.hallController.addBlackboard();
   }
 
   @FXML
   public void clickBackboard() {
     if (GameState.basketballCollected) {
+      if (goalCount == 30) {
+        goalCount = 0;
+      }
       goalCount += 3;
       String toAdd = String.format("%02d", goalCount);
       goalLabel.setText(toAdd);
+      ChatMessage toAppend = new ChatMessage("dev", "*3 POINTER*");
+      GameState.chatController.appendChatMessage(toAppend);
+      if (!GameState.isChatOpen) {
+        onClickChat();
+      }
+      if (goalCount == 24) {
+        redButton.setOpacity(1);
+        redButton.setEffect(new Glow(1));
+        exitDoor.setEffect(glow);
+      } else {
+        redButton.setEffect(null);
+        redButton.setOpacity(0.6);
+        exitDoor.setEffect(null);
+      }
     }
   }
 
   @FXML
-  public void clickRedButton() {}
+  public void exitDoorClicked() {
+    if (goalCount == 24) {
+      GameState.timer.timeIsUp();
+    }
+  }
 
   @FXML
   private void onClickChat() {
@@ -131,16 +158,6 @@ public class GymnasiumController {
   }
 
   @FXML
-  public void buttonEntered() {
-    GameState.blackboardController.setHoverText("Button");
-  }
-
-  @FXML
-  public void buttonExited() {
-    GameState.blackboardController.setHoverText("");
-  }
-
-  @FXML
   public void exitDoorEntered() {
     GameState.blackboardController.setHoverText("Exit Door");
   }
@@ -196,34 +213,5 @@ public class GymnasiumController {
     ghost1.setVisible(false);
     ghost2.setVisible(false);
     room.setEffect(null);
-  }
-
-  /** Fades the scene out */
-  public void fadeOut() {
-    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), room);
-    fadeTransition.setFromValue(1);
-    fadeTransition.setToValue(0);
-    fadeTransition.setOnFinished(
-        (ActionEvent event) -> {
-          sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.HALLWAY));
-
-          if (!GameState.isChatOpen) {
-            // Resizing the window so the scene fits
-            sceneRectangleIsIn.getWindow().sizeToScene();
-          }
-          room.setOpacity(1);
-          GameState.hallController.addBlackboard();
-          GameState.hallController.fadeIn();
-        });
-    fadeTransition.play();
-  }
-
-  /** Fades the scene in */
-  public void fadeIn() {
-    FadeTransition fadeTransitionIn = new FadeTransition(Duration.seconds(1), room);
-    room.setOpacity(0);
-    fadeTransitionIn.setFromValue(0);
-    fadeTransitionIn.setToValue(1);
-    fadeTransitionIn.play();
   }
 }

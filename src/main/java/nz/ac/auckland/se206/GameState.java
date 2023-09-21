@@ -24,13 +24,17 @@ public class GameState {
   public static int numberOfHints;
 
   /** The time choosen by the user, set early for some reason cant remember rn */
-  public static int totalTime = 10000;
+  public static int totalTime;
 
   public static String countryToFind;
+
+  public static String difficulty;
 
   public static boolean countryIsFound = false;
 
   public static boolean basketballCollected = false;
+
+  public static boolean redButtonClicked = false;
 
   public static Timer timer;
 
@@ -45,6 +49,8 @@ public class GameState {
   public static LockerController lockerController;
 
   public static BlackboardController blackboardController;
+
+  public static String currentState = "state1";
 
   public static boolean chatInRoom = false;
 

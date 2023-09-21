@@ -1,8 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.util.Random;
-import javafx.animation.FadeTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,10 +12,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.gpt.ChatMessage;
+import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 
 public class LockerController {
   @FXML private Label timerLabel;
@@ -56,7 +55,6 @@ public class LockerController {
   private int randNum1 = 0;
   private Shadow shadow = new Shadow(10, Color.BLACK);
   private Glow glow = new Glow(0.8);
-  private Scene currentScene;
 
   public void initialize() {
     // Initialization code goes here
@@ -142,10 +140,22 @@ public class LockerController {
   private void onClickBasketball() {
     System.out.println("basketball clicked");
     GameState.basketballCollected = true;
-
+    // Remove the basketball from the scene
     GameState.blackboardController.showBasketball();
+    // Update the game to reflect the basketball being found
     GameState.blackboardController.setObjectiveText("Objective: What new things can I reach now?");
-
+    ChatMessage toAppend = new ChatMessage("dev", "*BASKETBALL FOUND*");
+    GameState.chatController.appendChatMessage(toAppend);
+    if (!GameState.isChatOpen) {
+      onClickChat();
+    }
+    // Change the chat to the next state
+    GameState.chatController.changeChatAndSend(
+        new ChatCompletionRequest().setN(1).setTemperature(.2).setTopP(0.5).setMaxTokens(100),
+        "state4");
+    GameState.currentState = "state4";
+    GameState.chatController.newStateHint();
+    // Remove the basketball from the locker and make the notes visible
     basketball.setVisible(false);
     note1.setVisible(true);
     note2.setVisible(true);
@@ -168,11 +178,11 @@ public class LockerController {
   @FXML
   private void onClickHelp() {
     System.out.println("help button clicked");
-
+    // If the country hasn't been found yet, don't do anything
     if (!GameState.countryIsFound) {
       return;
     }
-
+    // Show the question on the label
     textField.setText("");
     numsEntered = 0;
     String sentence = "What is " + randNum1 + " + " + randNum + "?";
@@ -272,6 +282,7 @@ public class LockerController {
   }
 
   private void updateButtons() {
+    // Update the buttons to disable the numbers when 4 numbers have already been entered
     enterButton.disableProperty().setValue(true);
     oneButton.disableProperty().setValue(false);
     twoButton.disableProperty().setValue(false);
@@ -318,8 +329,16 @@ public class LockerController {
       GameState.hallController.openChat();
     }
 
-    currentScene = timerLabel.getScene();
-    fadeOut();
+    Scene currentScene = timerLabel.getScene();
+    currentScene.setRoot(SceneManager.getUiRoot(AppUi.HALLWAY));
+
+    if (!GameState.isChatOpen) {
+      // Resizing the window so the scene fits
+      currentScene.getWindow().sizeToScene();
+      // Get the stage after switching the scene
+      Stage stage = (Stage) currentScene.getWindow();
+      stage.centerOnScreen();
+    }
   }
 
   @FXML
@@ -373,36 +392,5 @@ public class LockerController {
     messageText.setEffect(glow);
     messageText1.setVisible(false);
     messageText1.setEffect(glow);
-  }
-
-  /** Fades the scene out */
-  public void fadeOut() {
-    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), pane);
-    fadeTransition.setFromValue(1);
-    fadeTransition.setToValue(0);
-    fadeTransition.setOnFinished(
-        (ActionEvent event) -> {
-          currentScene.setRoot(SceneManager.getUiRoot(AppUi.HALLWAY));
-          GameState.hallController.fadeIn();
-
-          if (!GameState.isChatOpen) {
-            // Resizing the window so the scene fits
-            currentScene.getWindow().sizeToScene();
-            // Get the stage after switching the scene
-            Stage stage = (Stage) currentScene.getWindow();
-            stage.centerOnScreen();
-            pane.setOpacity(1);
-          }
-        });
-    fadeTransition.play();
-  }
-
-  /** Fades the scene in */
-  public void fadeIn() {
-    FadeTransition fadeTransitionIn = new FadeTransition(Duration.seconds(1), pane);
-    pane.setOpacity(0);
-    fadeTransitionIn.setFromValue(0);
-    fadeTransitionIn.setToValue(1);
-    fadeTransitionIn.play();
   }
 }
