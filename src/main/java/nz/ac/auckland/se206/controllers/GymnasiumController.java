@@ -1,7 +1,9 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -40,6 +42,7 @@ public class GymnasiumController {
   private Glow glow = new Glow(0.8);
   private int goalCount = 0;
   private int numbersFound = 0;
+  private Set<Integer> goalsAleady = new HashSet<>();
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
@@ -180,9 +183,9 @@ public class GymnasiumController {
     if (!GameState.isChatOpen) {
       onClickChat();
     }
-    if (GameState.numberSet.contains(goalCount)) {
+    if (GameState.numberSet.contains(goalCount) && !goalsAleady.contains(goalCount)) {
       numbersFound++;
-      GameState.numberSet.remove(goalCount);
+      goalsAleady.add(goalCount);
       if (numbersFound == 1) {
         redButtonOne.setOpacity(1);
         redButtonOne.setEffect(new Glow(1));
@@ -195,6 +198,15 @@ public class GymnasiumController {
         exitDoor.setEffect(new Glow(1));
         GameState.userWins = true;
       }
+    } else {
+      numbersFound = 0;
+      goalsAleady.clear();
+      redButtonOne.setEffect(null);
+      redButtonTwo.setEffect(null);
+      redButtonThree.setEffect(null);
+      redButtonOne.setOpacity(0.6);
+      redButtonTwo.setOpacity(0.6);
+      redButtonThree.setOpacity(0.6);
     }
     goalCount = 0;
     String toAdd = String.format("%02d", goalCount);

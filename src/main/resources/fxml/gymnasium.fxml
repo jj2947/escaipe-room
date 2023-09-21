@@ -36,16 +36,8 @@
          </font>
       </Label>
       <Rectangle fx:id="hallwayDoor" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="93.0" layoutX="212.0" layoutY="383.0" onMouseClicked="#clickHallDoor" onMouseEntered="#hallwayDoorEntered" onMouseExited="#hallwayDoorExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="78.0" />
-      <Label fx:id="hiddenNumberOne" layoutX="287.0" layoutY="113.0" opacity="0.71" stylesheets="@../css/blackboardStylesheet.css" textFill="#d2bfdb">
-         <font>
-            <Font size="11.0" />
-         </font>
-      </Label>
-      <Label fx:id="hiddenNumberTwo" layoutX="803.0" layoutY="113.0" opacity="0.69" stylesheets="@../css/blackboardStylesheet.css" textFill="#d2bfdb">
-         <font>
-            <Font size="11.0" />
-         </font>
-      </Label>
+      <Label fx:id="hiddenNumberOne" layoutX="287.0" layoutY="113.0" opacity="0.71" stylesheets="@../css/blackboardStylesheet.css" textFill="#d2bfdb" />
+      <Label fx:id="hiddenNumberTwo" layoutX="803.0" layoutY="113.0" opacity="0.69" stylesheets="@../css/blackboardStylesheet.css" textFill="#d2bfdb" />
       <Label fx:id="exitLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="227.0" layoutY="365.0" opacity="0.5" prefHeight="14.0" prefWidth="51.0" style="-fx-background-color: green;" text="EXIT" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="12.0" />

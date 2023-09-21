@@ -67,6 +67,7 @@ public class EndController {
     // Reset the existing Timer instance (if needed)
     if (GameState.timer != null) {
       GameState.timer.reset();
+      GameState.timer = new Timer();
     }
 
     // Use a thread pool to load resources in parallel
