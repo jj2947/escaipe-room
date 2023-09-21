@@ -105,7 +105,7 @@
             </ImageView>
          </children>
       </HBox>
-      <ImageView fx:id="greenButton" fitHeight="16.0" fitWidth="26.0" layoutX="776.0" layoutY="430.0" onMouseClicked="#greenButtonClicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="greenButton" fitHeight="16.0" fitWidth="26.0" layoutX="776.0" layoutY="430.0" onMouseClicked="#greenButtonClicked" onMouseEntered="#greenEntered" onMouseExited="#greenExited" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/greenButton.png" />
          </image>

@@ -116,8 +116,8 @@ public class GptPromptEngineering {
         "Give a hint that points to searching around the school and using their hallpass to unlock"
             + " something previously locked in 15 words or less.");
     state4.append(
-        "Give a hint that points to finding hidden numbers, making that number and paying attention"
-            + " to their surroundings in 15 words or less.");
+        "Give a hint that points to finding hidden numbers, scoring that number, paying"
+            + " attention to their surroundings and locate the check button in 15 words or less");
 
     // Return the correct state
     if (gamestate.equals("state1")) {

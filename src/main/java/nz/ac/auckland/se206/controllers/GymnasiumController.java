@@ -177,6 +177,18 @@ public class GymnasiumController {
   }
 
   @FXML
+  public void greenEntered() {
+    GameState.blackboardController.setHoverText("Check Button");
+    greenButton.setOpacity(0.5);
+  }
+
+  @FXML
+  public void greenExited() {
+    GameState.blackboardController.setHoverText("");
+    greenButton.setOpacity(1);
+  }
+
+  @FXML
   public void greenButtonClicked() {
     ChatMessage toAppend = new ChatMessage("dev", "*COMPUTING*");
     GameState.chatController.appendChatMessage(toAppend);
@@ -207,6 +219,7 @@ public class GymnasiumController {
       redButtonOne.setOpacity(0.6);
       redButtonTwo.setOpacity(0.6);
       redButtonThree.setOpacity(0.6);
+      GameState.userWins = false;
     }
     goalCount = 0;
     String toAdd = String.format("%02d", goalCount);
