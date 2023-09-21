@@ -29,9 +29,12 @@ public class ChatController {
 
   private ChatCompletionRequest chatCompletionRequest;
   private ChatCompletionRequest hintChatCompletionRequest;
+  private ChatCompletionRequest factChatCompletionRequest =
+      new ChatCompletionRequest().setN(1).setTemperature(1).setTopP(0.5).setMaxTokens(100);
   private ChatMessage chatMsg;
   private CountryChoice countryChooser = new CountryChoice();
   private String country;
+  private boolean isFunFact = false;
 
   /**
    * Initializes the chat view, loading the riddle.
@@ -75,11 +78,15 @@ public class ChatController {
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
   private ChatMessage runGpt(ChatMessage msg, String type) throws ApiProxyException {
+    isFunFact = false;
     ChatCompletionRequest chatToUse;
     if (type == "normal") {
       chatToUse = chatCompletionRequest;
-    } else {
+    } else if (type == "hints") {
       chatToUse = hintChatCompletionRequest;
+    } else {
+      chatToUse = factChatCompletionRequest;
+      isFunFact = true;
     }
 
     appendChatMessage(new ChatMessage("assistant", "Ghost is Writing..."));
@@ -108,7 +115,7 @@ public class ChatController {
                       GameState.isRiddleResolved = true;
                       GameState.blackboardController.setObjectiveText(
                           "Objective: Where can I find this country?");
-                      replaceLoadingMessageWithResponse("");
+                      replaceLoadingMessageWithResponse("", false);
                       changeChatAndSend(
                           new ChatCompletionRequest()
                               .setN(1)
@@ -118,7 +125,7 @@ public class ChatController {
                           "state2");
                     } else {
                       // Replacing the "Ghost is Writing..." with the response
-                      replaceLoadingMessageWithResponse(chatMsg.getContent());
+                      replaceLoadingMessageWithResponse(chatMsg.getContent(), isFunFact);
                     }
                     if (GameState.isChatOpen) {
                       responseLoaded();
@@ -127,6 +134,16 @@ public class ChatController {
                     inputText.setDisable(false);
                     if (GameState.numberOfHints != 0) {
                       hintButton.setDisable(false);
+                    }
+                    // If gpt has just given a fun fact run the new prompt for new state
+                    if (isFunFact) {
+                      changeChatAndSend(
+                          new ChatCompletionRequest()
+                              .setN(1)
+                              .setTemperature(.7)
+                              .setTopP(0.5)
+                              .setMaxTokens(100),
+                          "state3");
                     }
                   });
               // Stop the loading effects
@@ -235,7 +252,7 @@ public class ChatController {
     }
   }
 
-  private void replaceLoadingMessageWithResponse(String response) {
+  private void replaceLoadingMessageWithResponse(String response, boolean isFunFact) {
     String loadingMessage = "Ghost is Writing...";
     String content = chatTextArea.getText();
 
@@ -246,9 +263,12 @@ public class ChatController {
     if (lastLoadingIndex != -1) {
       if (response.equals("")) {
         chatTextArea.replaceText(lastLoadingIndex, lastLoadingIndex + loadingMessage.length(), "");
-      } else {
+      } else if (!isFunFact) {
         chatTextArea.replaceText(
             lastLoadingIndex, lastLoadingIndex + loadingMessage.length(), "Ghost: " + response);
+      } else {
+        chatTextArea.replaceText(
+            lastLoadingIndex, lastLoadingIndex + loadingMessage.length(), "FUN FACT: " + response);
       }
     }
   }
@@ -299,5 +319,13 @@ public class ChatController {
   public void newStateHint() {
     hintChatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(.6).setTopP(1).setMaxTokens(100);
+  }
+
+  public void sayFact() {
+    try {
+      runGpt(new ChatMessage("user", GptPromptEngineering.funFact()), "fact");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }

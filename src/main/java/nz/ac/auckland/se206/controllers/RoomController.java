@@ -20,7 +20,6 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
-import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 
 /** Controller class for the room view. */
 public class RoomController {
@@ -590,9 +589,7 @@ public class RoomController {
       ChatMessage toAppend = new ChatMessage("dev", "*HALLPASS FOUND*");
       GameState.chatController.appendChatMessage(toAppend);
       // Changing the chat to the next state
-      GameState.chatController.changeChatAndSend(
-          new ChatCompletionRequest().setN(1).setTemperature(.7).setTopP(0.5).setMaxTokens(100),
-          "state3");
+      GameState.chatController.sayFact();
       GameState.currentState = "state3";
       GameState.chatController.newStateHint();
       if (!GameState.isChatOpen) {
