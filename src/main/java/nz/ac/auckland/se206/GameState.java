@@ -1,5 +1,9 @@
 package nz.ac.auckland.se206;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import nz.ac.auckland.se206.controllers.BlackboardController;
 import nz.ac.auckland.se206.controllers.ChatController;
 import nz.ac.auckland.se206.controllers.GymnasiumController;
@@ -61,4 +65,10 @@ public class GameState {
   public static boolean chatInGym = false;
 
   public static boolean isChatOpen = false;
+
+  public static List<Integer> numbersToFind = new ArrayList<>();
+
+  public static Set<Integer> numberSet = new HashSet<>();
+
+  public static boolean userWins = false;
 }

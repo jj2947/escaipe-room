@@ -28,19 +28,25 @@ public class GymnasiumController {
   @FXML private ImageView chatButton;
   @FXML private ImageView ghost1;
   @FXML private ImageView ghost2;
-  @FXML private ImageView redButton;
+  @FXML private ImageView redButtonOne;
+  @FXML private ImageView redButtonTwo;
+  @FXML private ImageView redButtonThree;
   @FXML private Rectangle exitDoor;
   @FXML private Pane room;
+  @FXML private Label hiddenNumberOne;
+  @FXML private Label hiddenNumberTwo;
+  @FXML private ImageView greenButton;
   private Shadow shadow = new Shadow(10, Color.BLACK);
   private Glow glow = new Glow(0.8);
   private int goalCount = 0;
+  private int numbersFound = 0;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
     // Initialization code goes here
     GameState.gymController = this;
     // Adding timer label to synced timer
-    GameState.timer.setGym(timerLabel);
+    GameState.timer.setGym(timerLabel, hiddenNumberOne, hiddenNumberTwo);
   }
 
   @FXML
@@ -68,28 +74,22 @@ public class GymnasiumController {
   public void clickBackboard() {
     // Updating the backboard with the score
     if (GameState.basketballCollected) {
-      if (goalCount == 30) {
+      if (goalCount == 51) {
         goalCount = 0;
       }
       goalCount += 3;
       String toAdd = String.format("%02d", goalCount);
       goalLabel.setText(toAdd);
-      // Adding messages to the chat
-      ChatMessage toAppend = new ChatMessage("dev", "*3 POINTER*");
-      GameState.chatController.appendChatMessage(toAppend);
-      if (!GameState.isChatOpen) {
-        onClickChat();
-      }
       // Checking if the game is won and switching to the end scene if so
-      if (goalCount == 24) {
-        redButton.setOpacity(1);
-        redButton.setEffect(new Glow(1));
-        exitDoor.setEffect(new Glow(1));
-      } else { // Removing the glow effect from the exit door when the game is not won
-        redButton.setEffect(null);
-        redButton.setOpacity(0.6);
-        exitDoor.setEffect(null);
-      }
+      // if (goalCount == 24) {
+      //   redButton.setOpacity(1);
+      //   redButton.setEffect(new Glow(1));
+      //   exitDoor.setEffect(new Glow(1));
+      // } else { // Removing the glow effect from the exit door when the game is not won
+      //   redButton.setEffect(null);
+      //   redButton.setOpacity(0.6);
+      //   exitDoor.setEffect(null);
+      // }
     } else {
       ChatMessage toAppend = new ChatMessage("dev", "*TOO HIGH TO REACH*");
       GameState.chatController.appendChatMessage(toAppend);
@@ -101,7 +101,7 @@ public class GymnasiumController {
 
   @FXML
   public void exitDoorClicked() {
-    if (goalCount == 24) {
+    if (GameState.userWins) {
       GameState.timer.timeIsUp();
     } else {
       // Showing the user that have interacted with door and nothing is happening
@@ -181,6 +181,33 @@ public class GymnasiumController {
   @FXML
   public void exitDoorExited() {
     GameState.blackboardController.setHoverText("");
+  }
+
+  @FXML
+  public void greenButtonClicked() {
+    ChatMessage toAppend = new ChatMessage("dev", "*COMPUTING*");
+    GameState.chatController.appendChatMessage(toAppend);
+    if (!GameState.isChatOpen) {
+      onClickChat();
+    }
+    if (GameState.numberSet.contains(goalCount)) {
+      goalCount = 0;
+      String toAdd = String.format("%02d", goalCount);
+      goalLabel.setText(toAdd);
+      numbersFound++;
+      GameState.numberSet.remove(goalCount);
+      if (numbersFound == 1) {
+        redButtonOne.setOpacity(1);
+        redButtonOne.setEffect(new Glow(1));
+      } else if (numbersFound == 2) {
+        redButtonTwo.setOpacity(1);
+        redButtonTwo.setEffect(new Glow(1));
+      } else {
+        redButtonThree.setOpacity(1);
+        redButtonThree.setEffect(new Glow(1));
+        GameState.userWins = true;
+      }
+    }
   }
 
   public void openChat() {

@@ -1,6 +1,8 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -25,6 +27,7 @@ public class Timer {
   private Timeline timeline;
   private Thread countdownThread;
   private TextToSpeech textToSpeech;
+  private List<Label> placesToHide = new ArrayList<>();
 
   public Timer() {
     textToSpeech = new TextToSpeech();
@@ -80,21 +83,27 @@ public class Timer {
     counter = time;
   }
 
-  public void setClass(Label lab) {
+  public void setClass(Label lab, Label lab2, Label lab3) {
     // Timerlabel in Classroom
     classroomLabel = lab;
+    placesToHide.add(lab2);
+    placesToHide.add(lab3);
     update();
   }
 
-  public void setHall(Label lab) {
+  public void setHall(Label lab, Label lab2, Label lab3) {
     // Timerlabel in Hallway
     hallwayLabel = lab;
+    placesToHide.add(lab2);
+    placesToHide.add(lab3);
     update();
   }
 
-  public void setGym(Label lab) {
+  public void setGym(Label lab, Label lab2, Label lab3) {
     // Timerlabel in Gym
     gymLabel = lab;
+    placesToHide.add(lab2);
+    placesToHide.add(lab3);
     update();
   }
 
@@ -106,6 +115,12 @@ public class Timer {
   public void update() {
     // If all three rooms have been loaded the timeline is started synching there label changes
     if (classroomLabel != null && hallwayLabel != null && gymLabel != null && lockerLabel != null) {
+      int randomNum1 = (int) Math.floor(Math.random() * (2 - 0 + 1) + 0);
+      int randomNum2 = (int) Math.floor(Math.random() * (5 - 3 + 1) + 3);
+      System.out.println("first val: " + randomNum1);
+      System.out.println("sec val: " + randomNum2);
+      placesToHide.get(randomNum1).setText(Integer.toString(GameState.numbersToFind.get(0)));
+      placesToHide.get(randomNum2).setText(Integer.toString(GameState.numbersToFind.get(1)));
       timeline.setCycleCount(Timeline.INDEFINITE);
       timeline.play();
     }
@@ -138,7 +153,6 @@ public class Timer {
           try {
             SceneManager.addUi(AppUi.END, App.loadFxml("end"));
           } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
           }
           currentScene.setRoot(SceneManager.getUiRoot(AppUi.END));

@@ -63,6 +63,15 @@
             <Font name="Arial Rounded MT Bold" size="27.0" />
          </font>
       </Label>
+      <Label fx:id="hiddenNumberOne" layoutX="491.0" layoutY="159.0" opacity="0.52" stylesheets="@../css/blackboardStylesheet.css" textFill="WHITE">
+         <font>
+            <Font size="10.0" />
+         </font></Label>
+      <Label fx:id="hiddenNumberTwo" layoutX="526.0" layoutY="394.0" opacity="0.52" stylesheets="@../css/blackboardStylesheet.css" textFill="WHITE">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
       <Ellipse fx:id="mapEllipse" fill="DODGERBLUE" layoutX="277.0" layoutY="230.0" onMouseClicked="#clickMap" onMouseEntered="#mapEntered" onMouseExited="#mapExited" opacity="0.0" radiusX="178.0" radiusY="99.0" stroke="BLACK" strokeType="INSIDE" />
       <Rectangle fx:id="mapRectangleOne" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="184.0" layoutX="87.0" layoutY="143.0" onMouseClicked="#clickMap" onMouseEntered="#mapEntered" onMouseExited="#mapExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="140.0" />
       <Rectangle fx:id="mapRectangleTwo" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="198.0" layoutX="288.0" layoutY="130.0" onMouseClicked="#clickMap" onMouseEntered="#mapEntered" onMouseExited="#mapExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="156.0" />

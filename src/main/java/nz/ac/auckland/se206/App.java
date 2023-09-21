@@ -49,6 +49,16 @@ public class App extends Application {
     // Timer for the whole game
     GameState.timer = new Timer();
 
+    int randomNum1 = (int) Math.floor(Math.random() * (7 - 1 + 1) + 1);
+    int randomNum2 = (int) Math.floor(Math.random() * (15 - 10 + 1) + 10);
+    System.out.println(randomNum1);
+    System.out.println(randomNum2);
+    GameState.numbersToFind.add(randomNum1 * 3);
+    GameState.numbersToFind.add(randomNum2 * 3);
+    GameState.numberSet.add(randomNum1 * 3);
+    GameState.numberSet.add(randomNum2 * 3);
+    GameState.numberSet.add(24);
+
     // Thread to load the room
     // CHANCE OF ERROR IF THE USER STARTS CLICKING STUFF FAST
     Thread loadRoom =

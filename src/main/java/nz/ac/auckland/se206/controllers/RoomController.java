@@ -85,6 +85,8 @@ public class RoomController {
   @FXML private ImageView ghost2;
   @FXML private Label messageText1;
   @FXML private Rectangle backRect;
+  @FXML private Label hiddenNumberOne;
+  @FXML private Label hiddenNumberTwo;
   private Shadow shadow = new Shadow(10, Color.BLACK);
   private Glow glow = new Glow(0.8);
 
@@ -95,7 +97,7 @@ public class RoomController {
    */
   public void initialize() throws IOException {
     // Adding timerLabel to synched timer
-    GameState.timer.setClass(timerLabel);
+    GameState.timer.setClass(timerLabel, hiddenNumberOne, hiddenNumberTwo);
     timerLabel.setText(String.format("%02d:%02d", GameState.totalTime / 60, 0));
     addBlackboard();
     // Initialization code goes here

@@ -36,6 +36,16 @@
          </font>
       </Label>
       <Rectangle fx:id="hallwayDoor" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="93.0" layoutX="212.0" layoutY="383.0" onMouseClicked="#clickHallDoor" onMouseEntered="#hallwayDoorEntered" onMouseExited="#hallwayDoorExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="78.0" />
+      <Label fx:id="hiddenNumberOne" layoutX="287.0" layoutY="113.0" opacity="0.71" stylesheets="@../css/blackboardStylesheet.css" textFill="#d2bfdb">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Label fx:id="hiddenNumberTwo" layoutX="803.0" layoutY="113.0" opacity="0.69" stylesheets="@../css/blackboardStylesheet.css" textFill="#d2bfdb">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
       <Label fx:id="exitLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="227.0" layoutY="365.0" opacity="0.5" prefHeight="14.0" prefWidth="51.0" style="-fx-background-color: green;" text="EXIT" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="12.0" />
@@ -51,11 +61,6 @@
          </children>
       </HBox>
       <Rectangle fx:id="backboard" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="52.0" layoutX="508.0" layoutY="333.0" onMouseClicked="#clickBackboard" onMouseEntered="#backboardEntered" onMouseExited="#backboardExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-      <ImageView fx:id="redButton" fitHeight="24.0" fitWidth="20.0" layoutX="822.0" layoutY="349.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/RedButton.png" />
-         </image>
-      </ImageView>
       <Pane fx:id="chatContainer" layoutX="1100.0" prefHeight="702.0" prefWidth="240.0" />
       <Pane fx:id="blackboardContainer" layoutY="619.0" prefHeight="83.0" prefWidth="1100.0">
          <children>
@@ -87,6 +92,30 @@
       <ImageView fitHeight="33.0" fitWidth="39.0" layoutX="494.0" layoutY="156.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/arrowThree.png" />
+         </image>
+      </ImageView>
+      <HBox layoutX="804.0" layoutY="351.0">
+         <children>
+            <ImageView fx:id="redButtonOne" fitHeight="24.0" fitWidth="20.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/RedButton.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="redButtonTwo" fitHeight="24.0" fitWidth="20.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/RedButton.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="redButtonThree" fitHeight="24.0" fitWidth="20.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/RedButton.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <ImageView fx:id="greenButton" fitHeight="16.0" fitWidth="26.0" layoutX="776.0" layoutY="430.0" onMouseClicked="#greenButtonClicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/greenButton.png" />
          </image>
       </ImageView>
    </children>
