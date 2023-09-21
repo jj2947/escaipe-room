@@ -66,6 +66,7 @@ public class GymnasiumController {
 
   @FXML
   public void clickBackboard() {
+    // Updating the backboard with the score
     if (GameState.basketballCollected) {
       if (goalCount == 30) {
         goalCount = 0;
@@ -73,16 +74,18 @@ public class GymnasiumController {
       goalCount += 3;
       String toAdd = String.format("%02d", goalCount);
       goalLabel.setText(toAdd);
+      // Adding messages to the chat
       ChatMessage toAppend = new ChatMessage("dev", "*3 POINTER*");
       GameState.chatController.appendChatMessage(toAppend);
       if (!GameState.isChatOpen) {
         onClickChat();
       }
+      // Checking if the game is won and switching to the end scene if so
       if (goalCount == 24) {
         redButton.setOpacity(1);
         redButton.setEffect(new Glow(1));
         exitDoor.setEffect(glow);
-      } else {
+      } else { // Removing the glow effect from the exit door when the game is not won
         redButton.setEffect(null);
         redButton.setOpacity(0.6);
         exitDoor.setEffect(null);
