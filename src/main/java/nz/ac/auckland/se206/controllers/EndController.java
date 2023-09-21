@@ -66,15 +66,7 @@ public class EndController {
     GameState.userWins = false;
     GameState.numbersToFind.clear();
     GameState.numberSet.clear();
-    int randomNum1 = (int) Math.floor(Math.random() * (7 - 1 + 1) + 1);
-    int randomNum2 = (int) Math.floor(Math.random() * (15 - 10 + 1) + 10);
-    System.out.println(randomNum1);
-    System.out.println(randomNum2);
-    GameState.numbersToFind.add(randomNum1 * 3);
-    GameState.numbersToFind.add(randomNum2 * 3);
-    GameState.numberSet.add(randomNum1 * 3);
-    GameState.numberSet.add(randomNum2 * 3);
-    GameState.numberSet.add(24);
+    GameState.setNewNumbers();
 
     // Reset the existing Timer instance (if needed)
     if (GameState.timer != null) {
