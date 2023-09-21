@@ -80,16 +80,6 @@ public class GymnasiumController {
       goalCount += 3;
       String toAdd = String.format("%02d", goalCount);
       goalLabel.setText(toAdd);
-      // Checking if the game is won and switching to the end scene if so
-      // if (goalCount == 24) {
-      //   redButton.setOpacity(1);
-      //   redButton.setEffect(new Glow(1));
-      //   exitDoor.setEffect(new Glow(1));
-      // } else { // Removing the glow effect from the exit door when the game is not won
-      //   redButton.setEffect(null);
-      //   redButton.setOpacity(0.6);
-      //   exitDoor.setEffect(null);
-      // }
     } else {
       ChatMessage toAppend = new ChatMessage("dev", "*TOO HIGH TO REACH*");
       GameState.chatController.appendChatMessage(toAppend);
@@ -191,9 +181,6 @@ public class GymnasiumController {
       onClickChat();
     }
     if (GameState.numberSet.contains(goalCount)) {
-      goalCount = 0;
-      String toAdd = String.format("%02d", goalCount);
-      goalLabel.setText(toAdd);
       numbersFound++;
       GameState.numberSet.remove(goalCount);
       if (numbersFound == 1) {
@@ -205,9 +192,13 @@ public class GymnasiumController {
       } else {
         redButtonThree.setOpacity(1);
         redButtonThree.setEffect(new Glow(1));
+        exitDoor.setEffect(new Glow(1));
         GameState.userWins = true;
       }
     }
+    goalCount = 0;
+    String toAdd = String.format("%02d", goalCount);
+    goalLabel.setText(toAdd);
   }
 
   public void openChat() {

@@ -62,6 +62,7 @@ public class EndController {
     GameState.chatInGym = false;
     GameState.isChatOpen = false;
     GameState.roomController = null;
+    GameState.currentState = "state1";
 
     // Reset the existing Timer instance (if needed)
     if (GameState.timer != null) {
