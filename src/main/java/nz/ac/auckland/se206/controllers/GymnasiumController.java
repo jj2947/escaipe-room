@@ -84,11 +84,17 @@ public class GymnasiumController {
       if (goalCount == 24) {
         redButton.setOpacity(1);
         redButton.setEffect(new Glow(1));
-        exitDoor.setEffect(glow);
+        exitDoor.setEffect(new Glow(1));
       } else { // Removing the glow effect from the exit door when the game is not won
         redButton.setEffect(null);
         redButton.setOpacity(0.6);
         exitDoor.setEffect(null);
+      }
+    } else {
+      ChatMessage toAppend = new ChatMessage("dev", "*TOO HIGH TO REACH*");
+      GameState.chatController.appendChatMessage(toAppend);
+      if (!GameState.isChatOpen) {
+        onClickChat();
       }
     }
   }
@@ -97,6 +103,13 @@ public class GymnasiumController {
   public void exitDoorClicked() {
     if (goalCount == 24) {
       GameState.timer.timeIsUp();
+    } else {
+      // Showing the user that have interacted with door and nothing is happening
+      ChatMessage toAppend = new ChatMessage("dev", "*DOOR IS LOCKED*");
+      GameState.chatController.appendChatMessage(toAppend);
+      if (!GameState.isChatOpen) {
+        onClickChat();
+      }
     }
   }
 
