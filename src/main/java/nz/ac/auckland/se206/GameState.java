@@ -38,8 +38,6 @@ public class GameState {
 
   public static boolean basketballCollected = false;
 
-  public static boolean redButtonClicked = false;
-
   public static Timer timer;
 
   public static ChatController chatController;

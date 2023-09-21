@@ -64,6 +64,8 @@ public class EndController {
     GameState.roomController = null;
     GameState.currentState = "state1";
     GameState.userWins = false;
+    GameState.numbersToFind.clear();
+    GameState.numberSet.clear();
 
     // Reset the existing Timer instance (if needed)
     if (GameState.timer != null) {
