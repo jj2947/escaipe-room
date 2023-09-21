@@ -318,7 +318,7 @@ public class ChatController {
 
   public void sayFact() {
     try {
-      runGpt(new ChatMessage("user", GptPromptEngineering.funFact()), "fact");
+      runGpt(new ChatMessage("user", GptPromptEngineering.getFunFact()), "fact");
     } catch (Exception e) {
       e.printStackTrace();
     }

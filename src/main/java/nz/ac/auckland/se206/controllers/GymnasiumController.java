@@ -190,11 +190,13 @@ public class GymnasiumController {
 
   @FXML
   public void greenButtonClicked() {
+    // Checking if the user has found the correct numbers
     ChatMessage toAppend = new ChatMessage("dev", "*COMPUTING*");
     GameState.chatController.appendChatMessage(toAppend);
     if (!GameState.isChatOpen) {
       onClickChat();
     }
+    // If user has found the correct numbers, light up the lights
     if (GameState.numberSet.contains(goalCount) && !goalsAleady.contains(goalCount)) {
       numbersFound++;
       goalsAleady.add(goalCount);
@@ -221,6 +223,7 @@ public class GymnasiumController {
       redButtonThree.setOpacity(0.6);
       GameState.userWins = false;
     }
+    // Resetting the goal count
     goalCount = 0;
     String toAdd = String.format("%02d", goalCount);
     goalLabel.setText(toAdd);

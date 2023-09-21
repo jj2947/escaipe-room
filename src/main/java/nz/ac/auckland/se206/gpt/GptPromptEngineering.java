@@ -132,7 +132,7 @@ public class GptPromptEngineering {
     return null;
   }
 
-  public static String funFact() {
+  public static String getFunFact() {
     return "Give a fun fact about " + GameState.countryToFind + " in less than 20 words";
   }
 }
