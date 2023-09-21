@@ -228,15 +228,10 @@ public class ChatController {
 
   private void responseLoaded() {
     // Stop the loading effects when the response is loaded
-    if (GameState.chatInGym) {
-      GameState.gymController.responseLoaded();
-    } else if (GameState.chatInRoom) {
-      GameState.roomController.responseLoaded();
-    } else if (GameState.chatInLocker) {
-      GameState.lockerController.responseLoaded();
-    } else if (GameState.chatInHall) {
-      GameState.hallController.responseLoaded();
-    }
+    GameState.gymController.responseLoaded();
+    GameState.roomController.responseLoaded();
+    GameState.lockerController.responseLoaded();
+    GameState.hallController.responseLoaded();
   }
 
   private void responseLoading() {
