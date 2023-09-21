@@ -143,7 +143,7 @@ public class LockerController {
     // Remove the basketball from the scene
     GameState.blackboardController.showBasketball();
     // Update the game to reflect the basketball being found
-    GameState.blackboardController.setObjectiveText("Objective: What new things can I reach now?");
+    GameState.blackboardController.setObjectiveText("Objective: How many points should I score?");
     ChatMessage toAppend = new ChatMessage("dev", "*BASKETBALL FOUND*");
     GameState.chatController.appendChatMessage(toAppend);
     if (!GameState.isChatOpen) {

@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.controllers.Timer;
@@ -48,6 +49,20 @@ public class App extends Application {
 
     // Timer for the whole game
     GameState.timer = new Timer();
+
+    stage.setTitle("EscAIpe Room");
+    Image image = new Image("/images/ghost.png");
+    stage.getIcons().add(image);
+
+    int randomNum1 = (int) Math.floor(Math.random() * (7 - 1 + 1) + 1);
+    int randomNum2 = (int) Math.floor(Math.random() * (15 - 10 + 1) + 10);
+    System.out.println(randomNum1);
+    System.out.println(randomNum2);
+    GameState.numbersToFind.add(randomNum1 * 3);
+    GameState.numbersToFind.add(randomNum2 * 3);
+    GameState.numberSet.add(randomNum1 * 3);
+    GameState.numberSet.add(randomNum2 * 3);
+    GameState.numberSet.add(24);
 
     // Thread to load the room
     // CHANCE OF ERROR IF THE USER STARTS CLICKING STUFF FAST

@@ -30,6 +30,8 @@
             <Shadow />
          </effect>
       </ImageView>
+      <Label fx:id="hiddenNumberOne" layoutX="317.0" layoutY="254.0" stylesheets="@../css/blackboardStylesheet.css" textFill="WHITE" />
+      <Label fx:id="hiddenNumberTwo" layoutX="1015.0" layoutY="179.0" stylesheets="@../css/blackboardStylesheet.css" textFill="WHITE" />
       <Label fx:id="timerLabel" alignment="CENTER" layoutX="11.0" layoutY="15.0" prefHeight="64.0" prefWidth="140.0" textFill="WHITE">
          <font>
             <Font size="45.0" />

@@ -33,6 +33,8 @@ public class HallwayController {
   @FXML private ImageView chatButton;
   @FXML private ImageView ghost1;
   @FXML private ImageView ghost2;
+  @FXML private Label hiddenNumberOne;
+  @FXML private Label hiddenNumberTwo;
   @FXML private Label messageText;
   private Shadow shadow = new Shadow(10, Color.BLACK);
   private Glow glow = new Glow(0.8);
@@ -41,7 +43,7 @@ public class HallwayController {
   public void initialize() {
     // Initialization code goes here
     // Adding timerlabel to synched timer
-    GameState.timer.setHall(timerLabel);
+    GameState.timer.setHall(timerLabel, hiddenNumberOne, hiddenNumberTwo);
     GameState.hallController = this;
   }
 

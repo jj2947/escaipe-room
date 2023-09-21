@@ -24,12 +24,17 @@
                </font></Label>
          </children>
       </VBox>
-      <VBox alignment="CENTER" layoutY="75.0" prefHeight="249.0" prefWidth="1100.0" spacing="10.0">
+      <VBox alignment="CENTER" layoutY="75.0" prefHeight="249.0" prefWidth="1100.0" spacing="7.0">
          <children>
             <Label fx:id="titleLabel1" alignment="CENTER" contentDisplay="CENTER" prefHeight="122.0" prefWidth="1034.0" text="You have overslept in class and woken up to an abandoned school. It's getting dark outside, you should be heading home now." textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Chalkduster" size="25.0" />
                </font></Label>
+            <Label text="Click the HINT button for hints" textFill="WHITE">
+               <font>
+                  <Font name="Courier New Bold" size="22.0" />
+               </font>
+            </Label>
             <Label text="Difficulty" textFill="WHITE">
                <font>
                   <Font name="Courier New Bold" size="25.0" />
