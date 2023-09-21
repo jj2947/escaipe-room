@@ -69,4 +69,18 @@ public class GameState {
   public static Set<Integer> numberSet = new HashSet<>();
 
   public static boolean userWins = false;
+
+  public static void setNewNumbers() {
+    // Generating random numbers to find
+    int randomNum1 = (int) Math.floor(Math.random() * (7 - 1 + 1) + 1);
+    int randomNum2 = (int) Math.floor(Math.random() * (15 - 10 + 1) + 10);
+    System.out.println(randomNum1);
+    System.out.println(randomNum2);
+    // Adding the numbers to find to the list and the set array
+    GameState.numbersToFind.add(randomNum1 * 3);
+    GameState.numbersToFind.add(randomNum2 * 3);
+    GameState.numberSet.add(randomNum1 * 3);
+    GameState.numberSet.add(randomNum2 * 3);
+    GameState.numberSet.add(24);
+  }
 }
