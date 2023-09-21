@@ -1,5 +1,8 @@
 package nz.ac.auckland.se206;
 
+import java.awt.Taskbar;
+import java.awt.Taskbar.Feature;
+import java.awt.Toolkit;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -53,6 +56,16 @@ public class App extends Application {
     stage.setTitle("EscAIpe Room");
     Image image = new Image("/images/ghost.png");
     stage.getIcons().add(image);
+
+    if (Taskbar.isTaskbarSupported()) {
+      var taskbar = Taskbar.getTaskbar();
+
+      if (taskbar.isSupported(Feature.ICON_IMAGE)) {
+        final Toolkit defaultToolkit = Toolkit.getDefaultToolkit();
+        var dockIcon = defaultToolkit.getImage(getClass().getResource("/images/ghost.png"));
+        taskbar.setIconImage(dockIcon);
+      }
+    }
 
     int randomNum1 = (int) Math.floor(Math.random() * (7 - 1 + 1) + 1);
     int randomNum2 = (int) Math.floor(Math.random() * (15 - 10 + 1) + 10);
