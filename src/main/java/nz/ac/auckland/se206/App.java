@@ -1,5 +1,8 @@
 package nz.ac.auckland.se206;
 
+import java.awt.Taskbar;
+import java.awt.Taskbar.Feature;
+import java.awt.Toolkit;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -56,6 +59,15 @@ public class App extends Application {
     Image image = new Image("/images/ghost.png");
     stage.getIcons().add(image);
 
+    if (Taskbar.isTaskbarSupported()) {
+      var taskbar = Taskbar.getTaskbar();
+
+      if (taskbar.isSupported(Feature.ICON_IMAGE)) {
+        final Toolkit defaultToolkit = Toolkit.getDefaultToolkit();
+        var dockIcon = defaultToolkit.getImage(getClass().getResource("/images/ghost.png"));
+        taskbar.setIconImage(dockIcon);
+      }
+    }
     // Thread to load the room
     // CHANCE OF ERROR IF THE USER STARTS CLICKING STUFF FAST
     Thread loadRoom =
