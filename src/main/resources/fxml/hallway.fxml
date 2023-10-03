@@ -47,8 +47,6 @@
 
       <Rectangle fx:id="classroomDoor" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="407.0" layoutX="46.0" layoutY="188.0" onMouseClicked="#clickClassroomDoor" onMouseEntered="#classroomDoorEntered" onMouseExited="#classroomDoorExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="191.0" />
       <Rectangle fx:id="gymDoor" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="91.0" layoutX="608.0" layoutY="310.0" onMouseClicked="#clickGymDoor" onMouseEntered="#gymDoorEntered" onMouseExited="#gymDoorExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="53.0" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="558.0" layoutY="283.0" opacity="0.5" prefHeight="19.0" prefWidth="154.0" style="-fx-background-color: blue; -fx-text-fill: white;" styleClass="roomLabel" text="GYMNASIUM" textFill="BLUE">
-      </Label>
       <Label fx:id="messageText" alignment="CENTER" contentDisplay="CENTER" layoutX="427.0" layoutY="352.0" prefHeight="147.0" prefWidth="396.0" text="The Clock is Ticking" textAlignment="CENTER" textFill="RED" visible="false" wrapText="true">
          <font>
             <Font name="Chalkduster" size="38.0" />
@@ -67,7 +65,7 @@
       <Rectangle fx:id="locker2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="221.0" layoutX="786.0" layoutY="272.0" onMouseClicked="#clickLocker" onMouseEntered="#locker2Entered" onMouseExited="#lockerExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="147.0" />
       <Pane fx:id="chatContainer" layoutX="1100.0" prefHeight="702.0" prefWidth="240.0">
       </Pane>
-      <ImageView fx:id="ghost" fitHeight="181.0" fitWidth="187.0" layoutX="906.0" layoutY="436.0" onMouseEntered="#onEnterGhost" onMouseExited="#onExitGhost" opacity="0.65" pickOnBounds="true">
+      <ImageView fx:id="ghost" fitHeight="181.0" fitWidth="187.0" layoutX="906.0" layoutY="436.0" onMouseClicked="#onClickGhost" onMouseEntered="#onEnterGhost" onMouseExited="#onExitGhost" opacity="0.65" pickOnBounds="true">
          <image>
             <Image url="@../images/ghost.png" />
          </image>

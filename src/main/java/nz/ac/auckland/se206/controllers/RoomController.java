@@ -89,7 +89,7 @@ public class RoomController {
   @FXML private Label hiddenNumberOne;
   @FXML private Label hiddenNumberTwo;
   @FXML private Polyline doorRectangle;
-  @FXML private Polyline mapRectangle; 
+  @FXML private Polyline mapRectangle;
   private Shadow shadow = new Shadow(10, Color.BLACK);
   private Glow glow = new Glow(0.8);
 
@@ -230,6 +230,13 @@ public class RoomController {
   @FXML
   private void enterChatButton() {
     chatButton.setOpacity(0.5);
+  }
+
+  @FXML
+  private void onClickGhost() {
+    if (!GameState.isChatOpen) {
+      onClickChat();
+    }
   }
 
   @FXML

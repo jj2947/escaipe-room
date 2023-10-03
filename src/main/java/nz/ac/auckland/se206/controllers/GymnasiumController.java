@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
@@ -38,6 +39,9 @@ public class GymnasiumController {
   @FXML private Label hiddenNumberOne;
   @FXML private Label hiddenNumberTwo;
   @FXML private ImageView greenButton;
+  @FXML private Polyline hallwayDoorRectangle;
+  @FXML private Polyline backboardRectangle;
+  @FXML private Polyline exitDoorRectangle;
   private Shadow shadow = new Shadow(10, Color.BLACK);
   private Glow glow = new Glow(0.8);
   private int goalCount = 0;
@@ -109,7 +113,7 @@ public class GymnasiumController {
   @FXML
   private void onClickChat() {
     System.out.println("chat clicked");
-    chatButton.setOpacity(0.5);
+
     // Add the chat to the chat container
     if (!GameState.chatInGym) {
       openChat();
@@ -134,6 +138,13 @@ public class GymnasiumController {
     chatButton.setOpacity(0.5);
   }
 
+  @FXML 
+  private void onClickGhost() {
+    if (!GameState.isChatOpen) {
+      onClickChat();
+    }
+  }
+
   @FXML
   private void onEnterGhost() {
     System.out.println("hover on ghost");
@@ -149,31 +160,37 @@ public class GymnasiumController {
   @FXML
   public void hallwayDoorEntered() {
     GameState.blackboardController.setHoverText("Hallway Door");
+    hallwayDoorRectangle.setVisible(true);
   }
 
   @FXML
   public void hallwayDoorExited() {
     GameState.blackboardController.setHoverText("");
+    hallwayDoorRectangle.setVisible(false);
   }
 
   @FXML
   public void backboardEntered() {
     GameState.blackboardController.setHoverText("Backboard");
+    backboardRectangle.setVisible(true);
   }
 
   @FXML
   public void backboardExited() {
     GameState.blackboardController.setHoverText("");
+    backboardRectangle.setVisible(false);
   }
 
   @FXML
   public void exitDoorEntered() {
     GameState.blackboardController.setHoverText("Exit Door");
+    exitDoorRectangle.setVisible(true);
   }
 
   @FXML
   public void exitDoorExited() {
     GameState.blackboardController.setHoverText("");
+    exitDoorRectangle.setVisible(false);
   }
 
   @FXML

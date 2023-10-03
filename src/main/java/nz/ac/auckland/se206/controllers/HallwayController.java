@@ -132,7 +132,7 @@ public class HallwayController {
   @FXML
   private void onClickChat() {
     System.out.println("chat clicked");
-    chatButton.setOpacity(0.5);
+
     // Add the chat to the chat container
     if (!GameState.chatInHall) {
       openChat();
@@ -175,6 +175,13 @@ public class HallwayController {
   private void onExitGhost() {
     System.out.println("hover off ghost");
     ghost.setEffect(null);
+  }
+
+  @FXML 
+  private void onClickGhost() {
+    if (!GameState.isChatOpen) {
+      onClickChat();
+    }
   }
 
   @FXML
