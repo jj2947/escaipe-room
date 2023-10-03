@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.GameState;
@@ -36,6 +37,12 @@ public class HallwayController {
   @FXML private Label hiddenNumberOne;
   @FXML private Label hiddenNumberTwo;
   @FXML private Label messageText;
+  @FXML private Polyline classroomDoorRectangle;
+  @FXML private Polyline gymDoorRectangle;
+  @FXML private Polyline lockerRectangle;
+  @FXML private Polyline lockerRectangle2;
+  @FXML private Polyline lockerRectangle3;
+  @FXML private Polyline lockerRectangle4;
   private Shadow shadow = new Shadow(10, Color.BLACK);
   private Glow glow = new Glow(0.8);
 
@@ -173,35 +180,56 @@ public class HallwayController {
   @FXML
   public void classroomDoorEntered() {
     GameState.blackboardController.setHoverText("Classroom Door");
+    classroomDoorRectangle.setVisible(true);
   }
 
   @FXML
   public void classroomDoorExited() {
     GameState.blackboardController.setHoverText("");
+    classroomDoorRectangle.setVisible(false);
   }
 
   @FXML
   public void gymDoorEntered() {
     GameState.blackboardController.setHoverText("Gym Door");
+    gymDoorRectangle.setVisible(true);
   }
 
   @FXML
   public void gymDoorExited() {
     GameState.blackboardController.setHoverText("");
+    gymDoorRectangle.setVisible(false);
   }
 
   @FXML
-  public void lockerEntered() {
+  public void locker1Entered() {
     if (GameState.countryIsFound) {
       GameState.blackboardController.setHoverText("Locker");
     } else {
       GameState.blackboardController.setHoverText("Locker is locked");
     }
+    lockerRectangle.setVisible(true);
+    lockerRectangle2.setVisible(true);
+  }
+
+  @FXML
+  public void locker2Entered() {
+    if (GameState.countryIsFound) {
+      GameState.blackboardController.setHoverText("Locker");
+    } else {
+      GameState.blackboardController.setHoverText("Locker is locked");
+    }
+    lockerRectangle3.setVisible(true);
+    lockerRectangle4.setVisible(true);
   }
 
   @FXML
   public void lockerExited() {
     GameState.blackboardController.setHoverText("");
+    lockerRectangle.setVisible(false);
+    lockerRectangle2.setVisible(false);
+    lockerRectangle3.setVisible(false);
+    lockerRectangle4.setVisible(false);
   }
 
   public void responseLoading() {

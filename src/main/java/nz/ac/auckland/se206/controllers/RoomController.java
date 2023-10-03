@@ -199,7 +199,7 @@ public class RoomController {
   @FXML
   private void onClickChat() {
     System.out.println("chat clicked");
-    chatButton.setOpacity(0.5);
+
     // Add the chat to the chat container
     if (!GameState.chatInRoom) {
       openChat();
