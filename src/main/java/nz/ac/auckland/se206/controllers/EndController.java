@@ -52,7 +52,6 @@ public class EndController {
     System.out.println("Scenes removed.");
 
     GameState.isRiddleResolved = false;
-    GameState.isKeyFound = false;
     GameState.isTimeReached = false;
     GameState.countryIsFound = false;
     GameState.basketballCollected = false;

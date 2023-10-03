@@ -8,6 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Ellipse?>
+<?import javafx.scene.shape.Polyline?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -18,6 +19,8 @@
             <Image url="@../images/Classroom.jpeg" />
          </image>
       </ImageView>
+      <Polyline fx:id="doorRectangle" fill="WHITE" layoutX="969.0" layoutY="163.0" opacity="0.5" points="113.0, -45.0, 113.0, 262.0, -16.0, 314.0, -22.0, -45.0" stroke="WHITE" strokeType="INSIDE" />
+      <Polyline fx:id="mapRectangle" fill="WHITE" layoutX="135.0" layoutY="171.0" opacity="0.5" points="-48.00000762939453, -28.000015258789062, 330.66534423828125, -65.79191589355469, 330.66534423828125, 184.56680297851562, -47.997535705566406, 166.14447021484375" stroke="WHITE" strokeType="INSIDE" visible="false" />
 
       <Rectangle fx:id="door" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="377.0" layoutX="947.0" layoutY="109.0" onMouseClicked="#clickDoor" onMouseEntered="#doorEntered" onMouseExited="#doorExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="143.0" />
 

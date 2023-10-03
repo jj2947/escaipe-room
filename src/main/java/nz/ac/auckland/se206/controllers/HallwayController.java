@@ -99,24 +99,26 @@ public class HallwayController {
   public void clickLocker(MouseEvent event) throws IOException {
     System.out.println("locker clicked");
 
-    if (GameState.isChatOpen) {
-      Stage stage = (Stage) chatContainer.getScene().getWindow();
-      stage.setWidth(1109);
-      stage.centerOnScreen();
-      GameState.lockerController.openChat();
-    }
+    if (GameState.countryIsFound) {
+      if (GameState.isChatOpen) {
+        Stage stage = (Stage) chatContainer.getScene().getWindow();
+        stage.setWidth(1109);
+        stage.centerOnScreen();
+        GameState.lockerController.openChat();
+      }
 
-    // Switching to hallway scene
-    Rectangle rectangle = (Rectangle) event.getSource();
-    Scene sceneRectangleIsIn = rectangle.getScene();
-    sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.LOCKER));
+      // Switching to hallway scene
+      Rectangle rectangle = (Rectangle) event.getSource();
+      Scene sceneRectangleIsIn = rectangle.getScene();
+      sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.LOCKER));
 
-    if (!GameState.isChatOpen) {
-      // Resizing the window so the scene fits
-      sceneRectangleIsIn.getWindow().sizeToScene();
-      // Get the stage after switching the scene
-      Stage stage = (Stage) sceneRectangleIsIn.getWindow();
-      stage.centerOnScreen();
+      if (!GameState.isChatOpen) {
+        // Resizing the window so the scene fits
+        sceneRectangleIsIn.getWindow().sizeToScene();
+        // Get the stage after switching the scene
+        Stage stage = (Stage) sceneRectangleIsIn.getWindow();
+        stage.centerOnScreen();
+      }
     }
   }
 
@@ -190,7 +192,11 @@ public class HallwayController {
 
   @FXML
   public void lockerEntered() {
-    GameState.blackboardController.setHoverText("Locker");
+    if (GameState.countryIsFound) {
+      GameState.blackboardController.setHoverText("Locker");
+    } else {
+      GameState.blackboardController.setHoverText("Locker is locked");
+    }
   }
 
   @FXML
