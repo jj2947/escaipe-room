@@ -6,7 +6,7 @@ Gym.jpg
 Hallway.jpg
 <a href="https://www.freepik.com/free-vector/basketball-court-empty-dark-interior-stadium_8433561.htm">Basketball court empty dark interior stadium - Designed by upklyak / Freepik</a>
 
-Classroom.jpg
+Classroom.jpeg, Classroom1.jpeg
 <a href="https://slidesdocs.com/background/classroom-geography-lesson-powerpoint-background_07073ef910">Classroom Geography Lesson Background - Slidesdocs</a>
 
 allBlueMap.png, argentinaView.png, australiaView.png, brazilView.png, canadaView.png, chinaView.png, greenlandView.png, indiaView.png, nzView.png, russiaView.png, usaView.png
