@@ -7,16 +7,23 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Polyline?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <Pane fx:id="room" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="702.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.HallwayController">
    <children>
-      <ImageView fitHeight="700.0" fitWidth="1100.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="lockerRectangle1" fitHeight="700.0" fitWidth="1100.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Hallway.jpg" />
          </image>
       </ImageView>
+      <Polyline fx:id="lockerRectangle2" fill="WHITE" layoutX="324.0" layoutY="355.0" opacity="0.5" points="-17.9677734375, -122.0, -11.60784912109375, 171.0, -81.99998474121094, 171.0, -81.99998474121094, -116.42645263671875" stroke="WHITE" strokeType="INSIDE" visible="false" />
+      <Polyline fx:id="lockerRectangle" fill="WHITE" layoutX="392.0" layoutY="359.0" opacity="0.5" points="43.047607421875, -70.45571899414062, 43.047607421875, 113.07318115234375, -81.42495727539062, 167.58673095703125, -87.78488159179688, -126.0" stroke="WHITE" strokeType="INSIDE" visible="false" />
+      <Polyline fx:id="lockerRectangle3" fill="WHITE" layoutX="845.0" layoutY="335.0" opacity="0.5" points="41.15771484375, -62.587890625, 36.58489990234375, 158.0, -59.0, 116.28146362304688, -57.95361328125, -22.2874755859375" stroke="WHITE" strokeType="INSIDE" visible="false" />
+      <Polyline fx:id="lockerRectangle4" fill="WHITE" layoutX="869.0" layoutY="379.0" opacity="0.5" points="64.0, -102.88690185546875, 64.0, 114.0, 12.04718017578125, 114.0, 16.693115234375, -106.587890625" stroke="WHITE" strokeType="INSIDE" visible="false" />
+      <Polyline fx:id="gymDoorRectangle" fill="WHITE" layoutX="106.0" layoutY="236.0" opacity="0.2" points="555.0, 74.0, 555.0, 165.0, 503.10174560546875, 165.0, 502.0, 74.0" stroke="WHITE" strokeType="INSIDE" visible="false" />
+      <Polyline fx:id="classroomDoorRectangle" fill="WHITE" layoutX="96.0" layoutY="226.0" opacity="0.4" points="135.0, -38.0, 135.0, 340.0, -50.0, 346.0, -50.0, -38.0" stroke="WHITE" strokeType="INSIDE" visible="false" />
       <ImageView fx:id="ghost1" fitHeight="233.0" fitWidth="233.0" layoutX="215.0" layoutY="61.0" opacity="0.8" pickOnBounds="true" visible="false">
          <image>
             <Image url="@../images/ghost.png" />
@@ -40,8 +47,6 @@
 
       <Rectangle fx:id="classroomDoor" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="407.0" layoutX="46.0" layoutY="188.0" onMouseClicked="#clickClassroomDoor" onMouseEntered="#classroomDoorEntered" onMouseExited="#classroomDoorExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="191.0" />
       <Rectangle fx:id="gymDoor" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="91.0" layoutX="608.0" layoutY="310.0" onMouseClicked="#clickGymDoor" onMouseEntered="#gymDoorEntered" onMouseExited="#gymDoorExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="53.0" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="558.0" layoutY="283.0" opacity="0.5" prefHeight="19.0" prefWidth="154.0" style="-fx-background-color: blue; -fx-text-fill: white;" styleClass="roomLabel" text="GYMNASIUM" textFill="BLUE">
-      </Label>
       <Label fx:id="messageText" alignment="CENTER" contentDisplay="CENTER" layoutX="427.0" layoutY="352.0" prefHeight="147.0" prefWidth="396.0" text="The Clock is Ticking" textAlignment="CENTER" textFill="RED" visible="false" wrapText="true">
          <font>
             <Font name="Chalkduster" size="38.0" />
@@ -56,11 +61,11 @@
             <Font name="Palatino" size="15.0" />
          </font>
       </Label>
-      <Rectangle fx:id="locker1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="293.0" layoutX="242.0" layoutY="233.0" onMouseClicked="#clickLocker" onMouseEntered="#lockerEntered" onMouseExited="#lockerExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="191.0" />
-      <Rectangle fx:id="locker2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="221.0" layoutX="786.0" layoutY="272.0" onMouseClicked="#clickLocker" onMouseEntered="#lockerEntered" onMouseExited="#lockerExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="147.0" />
+      <Rectangle fx:id="locker1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="293.0" layoutX="242.0" layoutY="233.0" onMouseClicked="#clickLocker" onMouseEntered="#locker1Entered" onMouseExited="#lockerExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="191.0" />
+      <Rectangle fx:id="locker2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="221.0" layoutX="786.0" layoutY="272.0" onMouseClicked="#clickLocker" onMouseEntered="#locker2Entered" onMouseExited="#lockerExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="147.0" />
       <Pane fx:id="chatContainer" layoutX="1100.0" prefHeight="702.0" prefWidth="240.0">
       </Pane>
-      <ImageView fx:id="ghost" fitHeight="192.0" fitWidth="191.0" layoutX="900.0" layoutY="403.0" onMouseEntered="#onEnterGhost" onMouseExited="#onExitGhost" opacity="0.8" pickOnBounds="true">
+      <ImageView fx:id="ghost" fitHeight="181.0" fitWidth="187.0" layoutX="906.0" layoutY="436.0" onMouseClicked="#onClickGhost" onMouseEntered="#onEnterGhost" onMouseExited="#onExitGhost" opacity="0.65" pickOnBounds="true">
          <image>
             <Image url="@../images/ghost.png" />
          </image>

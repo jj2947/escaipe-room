@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.GameState;
@@ -36,6 +37,12 @@ public class HallwayController {
   @FXML private Label hiddenNumberOne;
   @FXML private Label hiddenNumberTwo;
   @FXML private Label messageText;
+  @FXML private Polyline classroomDoorRectangle;
+  @FXML private Polyline gymDoorRectangle;
+  @FXML private Polyline lockerRectangle;
+  @FXML private Polyline lockerRectangle2;
+  @FXML private Polyline lockerRectangle3;
+  @FXML private Polyline lockerRectangle4;
   private Shadow shadow = new Shadow(10, Color.BLACK);
   private Glow glow = new Glow(0.8);
 
@@ -99,31 +106,33 @@ public class HallwayController {
   public void clickLocker(MouseEvent event) throws IOException {
     System.out.println("locker clicked");
 
-    if (GameState.isChatOpen) {
-      Stage stage = (Stage) chatContainer.getScene().getWindow();
-      stage.setWidth(1109);
-      stage.centerOnScreen();
-      GameState.lockerController.openChat();
-    }
+    if (GameState.countryIsFound) {
+      if (GameState.isChatOpen) {
+        Stage stage = (Stage) chatContainer.getScene().getWindow();
+        stage.setWidth(1109);
+        stage.centerOnScreen();
+        GameState.lockerController.openChat();
+      }
 
-    // Switching to hallway scene
-    Rectangle rectangle = (Rectangle) event.getSource();
-    Scene sceneRectangleIsIn = rectangle.getScene();
-    sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.LOCKER));
+      // Switching to hallway scene
+      Rectangle rectangle = (Rectangle) event.getSource();
+      Scene sceneRectangleIsIn = rectangle.getScene();
+      sceneRectangleIsIn.setRoot(SceneManager.getUiRoot(AppUi.LOCKER));
 
-    if (!GameState.isChatOpen) {
-      // Resizing the window so the scene fits
-      sceneRectangleIsIn.getWindow().sizeToScene();
-      // Get the stage after switching the scene
-      Stage stage = (Stage) sceneRectangleIsIn.getWindow();
-      stage.centerOnScreen();
+      if (!GameState.isChatOpen) {
+        // Resizing the window so the scene fits
+        sceneRectangleIsIn.getWindow().sizeToScene();
+        // Get the stage after switching the scene
+        Stage stage = (Stage) sceneRectangleIsIn.getWindow();
+        stage.centerOnScreen();
+      }
     }
   }
 
   @FXML
   private void onClickChat() {
     System.out.println("chat clicked");
-    chatButton.setOpacity(0.5);
+
     // Add the chat to the chat container
     if (!GameState.chatInHall) {
       openChat();
@@ -168,34 +177,66 @@ public class HallwayController {
     ghost.setEffect(null);
   }
 
+  @FXML 
+  private void onClickGhost() {
+    if (!GameState.isChatOpen) {
+      onClickChat();
+    }
+  }
+
   @FXML
   public void classroomDoorEntered() {
     GameState.blackboardController.setHoverText("Classroom Door");
+    classroomDoorRectangle.setVisible(true);
   }
 
   @FXML
   public void classroomDoorExited() {
     GameState.blackboardController.setHoverText("");
+    classroomDoorRectangle.setVisible(false);
   }
 
   @FXML
   public void gymDoorEntered() {
     GameState.blackboardController.setHoverText("Gym Door");
+    gymDoorRectangle.setVisible(true);
   }
 
   @FXML
   public void gymDoorExited() {
     GameState.blackboardController.setHoverText("");
+    gymDoorRectangle.setVisible(false);
   }
 
   @FXML
-  public void lockerEntered() {
-    GameState.blackboardController.setHoverText("Locker");
+  public void locker1Entered() {
+    if (GameState.countryIsFound) {
+      GameState.blackboardController.setHoverText("Locker");
+    } else {
+      GameState.blackboardController.setHoverText("Locker is locked");
+    }
+    lockerRectangle.setVisible(true);
+    lockerRectangle2.setVisible(true);
+  }
+
+  @FXML
+  public void locker2Entered() {
+    if (GameState.countryIsFound) {
+      GameState.blackboardController.setHoverText("Locker");
+    } else {
+      GameState.blackboardController.setHoverText("Locker is locked");
+    }
+    lockerRectangle3.setVisible(true);
+    lockerRectangle4.setVisible(true);
   }
 
   @FXML
   public void lockerExited() {
     GameState.blackboardController.setHoverText("");
+    lockerRectangle.setVisible(false);
+    lockerRectangle2.setVisible(false);
+    lockerRectangle3.setVisible(false);
+    lockerRectangle4.setVisible(false);
   }
 
   public void responseLoading() {

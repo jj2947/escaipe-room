@@ -75,7 +75,7 @@ public class LockerController {
   @FXML
   private void onClickChat() {
     System.out.println("chat clicked");
-    chatButton.setOpacity(0.5);
+
     // Add the chat to the chat container
     if (!GameState.chatInLocker) {
       openChat();
@@ -114,6 +114,13 @@ public class LockerController {
   @FXML
   private void releaseChat() {
     chatButton.setOpacity(1);
+  }
+
+  @FXML 
+  private void onClickGhost() {
+    if (!GameState.isChatOpen) {
+      onClickChat();
+    }
   }
 
   public void openChat() {

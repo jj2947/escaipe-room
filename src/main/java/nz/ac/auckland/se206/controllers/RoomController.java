@@ -14,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
+import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
@@ -87,6 +88,8 @@ public class RoomController {
   @FXML private Rectangle backRect;
   @FXML private Label hiddenNumberOne;
   @FXML private Label hiddenNumberTwo;
+  @FXML private Polyline doorRectangle;
+  @FXML private Polyline mapRectangle;
   private Shadow shadow = new Shadow(10, Color.BLACK);
   private Glow glow = new Glow(0.8);
 
@@ -196,7 +199,7 @@ public class RoomController {
   @FXML
   private void onClickChat() {
     System.out.println("chat clicked");
-    chatButton.setOpacity(0.5);
+
     // Add the chat to the chat container
     if (!GameState.chatInRoom) {
       openChat();
@@ -227,6 +230,13 @@ public class RoomController {
   @FXML
   private void enterChatButton() {
     chatButton.setOpacity(0.5);
+  }
+
+  @FXML
+  private void onClickGhost() {
+    if (!GameState.isChatOpen) {
+      onClickChat();
+    }
   }
 
   @FXML
@@ -442,21 +452,25 @@ public class RoomController {
   @FXML
   public void doorEntered() {
     GameState.blackboardController.setHoverText("Hallway Door");
+    doorRectangle.setVisible(true);
   }
 
   @FXML
   public void doorExited() {
     GameState.blackboardController.setHoverText("");
+    doorRectangle.setVisible(false);
   }
 
   @FXML
   public void mapEntered() {
     GameState.blackboardController.setHoverText("Map");
+    mapRectangle.setVisible(true);
   }
 
   @FXML
   public void mapExited() {
     GameState.blackboardController.setHoverText("");
+    mapRectangle.setVisible(false);
   }
 
   public void showWhenOnMap() {
