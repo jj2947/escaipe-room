@@ -1,6 +1,9 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.util.Random;
+import javafx.animation.PathTransition;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,11 +14,12 @@ import javafx.scene.effect.Shadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Path;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
-import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 
 public class LockerController {
@@ -50,9 +54,11 @@ public class LockerController {
   @FXML private Pane pane;
   @FXML private Label noteLabel1;
   @FXML private Label noteLabel2;
+  @FXML private Path path;
   private int numsEntered = 0;
   private int randNum;
   private int randNum1 = 0;
+  private boolean isGhostMoving;
   private Shadow shadow = new Shadow(10, Color.BLACK);
   private Glow glow = new Glow(0.8);
 
@@ -65,10 +71,9 @@ public class LockerController {
       randNum1 = (int) (Math.random() * 10000);
     }
     GameState.lockerController = this;
-    if (GameState.countryIsFound) {
-      chatLabel.setText("What is " + randNum1 + " + " + randNum + "?");
-    } else {
-      chatLabel.setText("Hallpass Needed");
+    chatLabel.setText("What is " + randNum1 + " + " + randNum + "?");
+    if (GameState.numberOfHints == 0) {
+      helpButton.setDisable(true);
     }
   }
 
@@ -97,13 +102,26 @@ public class LockerController {
   @FXML
   private void onEnterGhost() {
     System.out.println("hover on ghost");
-    ghost.setEffect(shadow);
+    isGhostMoving = false;
+    Platform.runLater(() -> ghost.setEffect(shadow));
+  }
+
+  @FXML
+  private void onClickGhost() {
+    if (!GameState.isChatOpen) {
+      onClickChat();
+      Platform.runLater(() -> moveGhost());
+    } else {
+      Platform.runLater(() -> moveGhost());
+      isGhostMoving = true;
+    }
   }
 
   @FXML
   private void onExitGhost() {
-    System.out.println("hover off ghost");
-    ghost.setEffect(null);
+    if (isGhostMoving == false) {
+      Platform.runLater(() -> ghost.setEffect(null));
+    }
   }
 
   @FXML
@@ -114,13 +132,6 @@ public class LockerController {
   @FXML
   private void releaseChat() {
     chatButton.setOpacity(1);
-  }
-
-  @FXML 
-  private void onClickGhost() {
-    if (!GameState.isChatOpen) {
-      onClickChat();
-    }
   }
 
   public void openChat() {
@@ -151,8 +162,7 @@ public class LockerController {
     GameState.blackboardController.showBasketball();
     // Update the game to reflect the basketball being found
     GameState.blackboardController.setObjectiveText("Objective: How many points should I score?");
-    ChatMessage toAppend = new ChatMessage("dev", "*BASKETBALL FOUND*");
-    GameState.chatController.appendChatMessage(toAppend);
+    GameState.textFlow.getChildren().clear();
     if (!GameState.isChatOpen) {
       onClickChat();
     }
@@ -164,8 +174,6 @@ public class LockerController {
     GameState.chatController.newStateHint();
     // Remove the basketball from the locker and make the notes visible
     basketball.setVisible(false);
-    note1.setVisible(true);
-    note2.setVisible(true);
     noteLabel1.setVisible(true);
     noteLabel2.setVisible(true);
   }
@@ -185,15 +193,13 @@ public class LockerController {
   @FXML
   private void onClickHelp() {
     System.out.println("help button clicked");
-    // If the country hasn't been found yet, don't do anything
-    if (!GameState.countryIsFound) {
-      return;
+    if (!GameState.isChatOpen) {
+      onClickChat();
     }
-    // Show the question on the label
-    textField.setText("");
-    numsEntered = 0;
-    String sentence = "What is " + randNum1 + " + " + randNum + "?";
-    chatLabel.setText(sentence);
+    GameState.chatController.hintClicked();
+    if (GameState.numberOfHints == 0) {
+      helpButton.setDisable(true);
+    }
   }
 
   @FXML
@@ -250,7 +256,6 @@ public class LockerController {
     if (!GameState.countryIsFound) {
       return;
     }
-    chatLabel.setText("");
 
     // Change the buttons enabled based on the number of digits entered
     if (number == null) {
@@ -318,12 +323,21 @@ public class LockerController {
       // Open Locker
       pinpad.setVisible(false);
       basketball.setVisible(true);
+      note1.setVisible(true);
+      note2.setVisible(true);
       basketball.toFront();
     } else {
       // Incorrect answer
       numsEntered = 0;
+      // Create a PauseTransition for 5 seconds
+      PauseTransition pause = new PauseTransition(Duration.seconds(2));
+      pause.setOnFinished(
+          event -> {
+            textField.setText("_ _ _ _");
+            updateTextField(null);
+          });
       textField.setText("Incorrect");
-      updateTextField(null);
+      pause.play();
     }
   }
 
@@ -370,7 +384,7 @@ public class LockerController {
   public void responseLoading() {
     ghost.setEffect(shadow);
     Random random = new Random();
-    int randomNumber = random.nextInt(3); // Generates a random number 0, 1, or 2
+    int randomNumber = random.nextInt(4); // Generates a random number 0, 1, 2, 3
 
     switch (randomNumber) {
       case 0:
@@ -387,6 +401,8 @@ public class LockerController {
         messageText.setVisible(true);
         messageText.setEffect(shadow);
         break;
+      case 3:
+        Platform.runLater(() -> moveGhost());
       default:
         break;
     }
@@ -399,5 +415,37 @@ public class LockerController {
     messageText.setEffect(glow);
     messageText1.setVisible(false);
     messageText1.setEffect(glow);
+  }
+
+  private void moveGhost() {
+    ghost.setEffect(shadow);
+    chatButton.setVisible(false);
+    PathTransition pathTransition = new PathTransition();
+    double width = ghost.getLayoutBounds().getWidth();
+    double height = ghost.getLayoutBounds().getHeight();
+
+    path.setLayoutX(-ghost.getLayoutX() + width / 2 + 50);
+    path.setLayoutY(ghost.getLayoutY() - height / 2 - 55);
+
+    // Set the path and node for the PathTransition
+    pathTransition.setPath(path);
+    pathTransition.setNode(ghost);
+
+    // Set the duration of the animation (3000 milliseconds)
+    pathTransition.setDuration(Duration.millis(3000));
+
+    // Set the cycle count to 2
+    pathTransition.setCycleCount(2);
+    pathTransition.setAutoReverse(true);
+
+    // Set the action to be performed when the animation finishes
+    pathTransition.setOnFinished(
+        event -> {
+          ghost.setEffect(null); // Set the shadow effect to null
+          chatButton.setVisible(true);
+        });
+
+    // Play the animation
+    pathTransition.play();
   }
 }
