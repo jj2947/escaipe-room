@@ -28,7 +28,7 @@
             <Bloom threshold="0.0" />
          </effect>
       </Button>
-      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hmax="0.0" layoutX="2.0" layoutY="49.0" prefHeight="608.0" prefWidth="236.0">
+      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hmax="0.0" layoutX="2.0" layoutY="49.0" pannable="true" prefHeight="608.0" prefWidth="236.0" vvalue="1.0">
          <content>
             <TextFlow fx:id="chatTextFlow" prefHeight="606.0" prefWidth="234.0" styleClass="textFlow" stylesheets="@../css/chatStylesheet.css">
                <padding>

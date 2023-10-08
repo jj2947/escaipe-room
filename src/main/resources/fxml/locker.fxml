@@ -8,6 +8,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.LineTo?>
+<?import javafx.scene.shape.MoveTo?>
+<?import javafx.scene.shape.Path?>
+<?import javafx.scene.shape.QuadCurveTo?>
 <?import javafx.scene.text.Font?>
 
 <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="702.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.LockerController">
@@ -93,7 +97,7 @@
                   <Font size="45.0" />
                </font>
             </Button>
-            <TextField fx:id="textField" alignment="CENTER" editable="false" layoutX="191.0" layoutY="9.0" prefHeight="143.0" prefWidth="509.0">
+            <TextField fx:id="textField" alignment="CENTER" editable="false" layoutX="191.0" layoutY="9.0" prefHeight="143.0" prefWidth="509.0" text="_ _ _ _">
                <font>
                   <Font size="75.0" />
                </font>
@@ -103,12 +107,12 @@
                   <Font name="System Font" size="29.0" />
                </font>
             </Button>
-            <Button fx:id="helpButton" layoutX="651.0" layoutY="627.0" mnemonicParsing="false" onAction="#onClickHelp" prefHeight="55.0" prefWidth="180.0" stylesheets="@../css/pinpadStylesheet.css" text="Question">
+            <Button fx:id="helpButton" layoutX="651.0" layoutY="627.0" mnemonicParsing="false" onAction="#onClickHelp" prefHeight="55.0" prefWidth="180.0" stylesheets="@../css/pinpadStylesheet.css" text="Hint">
                <font>
                   <Font size="28.0" />
                </font>
             </Button>
-            <Label fx:id="chatLabel" alignment="CENTER" layoutX="193.0" layoutY="10.0" prefHeight="142.0" prefWidth="507.0" textAlignment="CENTER" wrapText="true">
+            <Label fx:id="chatLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="193.0" layoutY="10.0" prefHeight="44.0" prefWidth="507.0" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="Courier Bold" size="23.0" />
                </font>
@@ -136,19 +140,6 @@
             <Glow level="1.0" />
          </effect>
       </Label>
-      <ImageView fx:id="ghost" fitHeight="192.0" fitWidth="191.0" layoutX="650.0" layoutY="260.0" onMouseClicked="#onClickGhost" onMouseEntered="#onEnterGhost" onMouseExited="#onExitGhost" opacity="0.7" pickOnBounds="true">
-         <image>
-            <Image url="@../images/ghost.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="chatButton" fitHeight="80.0" fitWidth="110.0" layoutX="780.0" layoutY="200.0" onMouseEntered="#enterChatButton" onMouseExited="#releaseChat" onMousePressed="#onClickChat" onMouseReleased="#releaseChat" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/SpeechBubble.png" />
-         </image>
-         <effect>
-            <InnerShadow />
-         </effect>
-      </ImageView>
       <Label fx:id="messageBox" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="200.0" prefHeight="204.0" prefWidth="221.0" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="Chalkduster" size="24.0" />
@@ -172,6 +163,26 @@
             <Font name="System Bold" size="26.0" />
          </font>
       </Button>
+      <ImageView fx:id="ghost" fitHeight="192.0" fitWidth="191.0" layoutX="651.0" layoutY="254.0" onMouseClicked="#onClickGhost" onMouseEntered="#onEnterGhost" onMouseExited="#onExitGhost" opacity="0.7" pickOnBounds="true">
+         <image>
+            <Image url="@../images/ghost.png" />
+         </image>
+      </ImageView>
+      <Path fx:id="path" fill="#1f93ff00" layoutX="300.0" layoutY="250.0" stroke="BLACK" strokeType="INSIDE" visible="false">
+          <elements>
+              <MoveTo x="600.0" />
+              <LineTo x="500.0" y="150.0" />
+              <QuadCurveTo controlX="300.0" controlY="300.0" />
+          </elements>
+      </Path>
       <Pane fx:id="chatContainer" layoutX="869.0" prefHeight="702.0" prefWidth="240.0" />
+      <ImageView fx:id="chatButton" fitHeight="80.0" fitWidth="110.0" layoutX="780.0" layoutY="217.0" onMouseEntered="#enterChatButton" onMouseExited="#releaseChat" onMousePressed="#onClickChat" onMouseReleased="#releaseChat" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/SpeechBubble.png" />
+         </image>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </ImageView>
    </children>
 </Pane>
