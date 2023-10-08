@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -13,8 +15,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Path;
 import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -42,6 +46,12 @@ public class GymnasiumController {
   @FXML private Polyline hallwayDoorRectangle;
   @FXML private Polyline backboardRectangle;
   @FXML private Polyline exitDoorRectangle;
+  @FXML private Path path;
+  @FXML private ImageView ghostSpeechBubble;
+  @FXML private Label speechBubbleLabel;
+  private boolean playForward = true;
+  private boolean ghostMoving = false;
+  private boolean isSpeechBubbleShowing = false;
   private Shadow shadow = new Shadow(10, Color.BLACK);
   private Glow glow = new Glow(0.8);
   private int goalCount = 0;
@@ -88,8 +98,26 @@ public class GymnasiumController {
       String toAdd = String.format("%02d", goalCount);
       goalLabel.setText(toAdd);
     } else {
-      ChatMessage toAppend = new ChatMessage("dev", "*TOO HIGH TO REACH*");
-      GameState.chatController.appendChatMessage(toAppend);
+      GameState.isGhostTalking = true;
+      if (!playForward) {
+        Platform.runLater(
+            () -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
+        isSpeechBubbleShowing = true;
+        // Create a PauseTransition for 4 seconds
+        PauseTransition pause = new PauseTransition(Duration.seconds(4));
+        pause.setOnFinished(
+            event -> {
+              // After 4 seconds, set speech bubble
+              setSpeechBubble("Too high to reach");
+              GameState.isGhostTalking = false;
+            });
+
+        // Start the pause transition
+        pause.play();
+      } else {
+        setSpeechBubble("Too high to reach");
+        GameState.isGhostTalking = false;
+      }
       if (!GameState.isChatOpen) {
         onClickChat();
       }
@@ -102,8 +130,26 @@ public class GymnasiumController {
       GameState.timer.timeIsUp();
     } else {
       // Showing the user that have interacted with door and nothing is happening
-      ChatMessage toAppend = new ChatMessage("dev", "*DOOR IS LOCKED*");
-      GameState.chatController.appendChatMessage(toAppend);
+      GameState.isGhostTalking = true;
+      if (!playForward) {
+        Platform.runLater(
+            () -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
+        isSpeechBubbleShowing = true;
+        // Create a PauseTransition for 4 seconds
+        PauseTransition pause = new PauseTransition(Duration.seconds(4));
+        pause.setOnFinished(
+            event -> {
+              // After 4 seconds, set speech bubble
+              setSpeechBubble("Door is locked");
+              GameState.isGhostTalking = false;
+            });
+
+        // Start the pause transition
+        pause.play();
+      } else {
+        setSpeechBubble("Door is locked");
+        GameState.isGhostTalking = false;
+      }
       if (!GameState.isChatOpen) {
         onClickChat();
       }
@@ -138,23 +184,28 @@ public class GymnasiumController {
     chatButton.setOpacity(0.5);
   }
 
-  @FXML 
+  @FXML
   private void onClickGhost() {
     if (!GameState.isChatOpen) {
       onClickChat();
+      Platform.runLater(() -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
+    } else if (!isSpeechBubbleShowing) {
+      Platform.runLater(() -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
+      ghostMoving = true;
+    }
+  }
+
+  @FXML
+  private void onExitGhost() {
+    if (ghostMoving == false) {
+      ghost.setEffect(null);
     }
   }
 
   @FXML
   private void onEnterGhost() {
-    System.out.println("hover on ghost");
+    ghostMoving = false;
     ghost.setEffect(shadow);
-  }
-
-  @FXML
-  private void onExitGhost() {
-    System.out.println("hover off ghost");
-    ghost.setEffect(null);
   }
 
   @FXML
@@ -263,24 +314,41 @@ public class GymnasiumController {
   public void responseLoading() {
     ghost.setEffect(shadow);
     Random random = new Random();
-    int randomNumber = random.nextInt(3); // Generates a random number 0, 1, or 2
+    int randomNumber; // The random number to be generated
+    // If the speech bubble is showing, the ghost will not move
+    if (isSpeechBubbleShowing) {
+      randomNumber = random.nextInt(3);
+      System.out.println("Not moving ghost ");
+    } else { // If the speech bubble is not showing, the ghost can move
+      randomNumber = random.nextInt(4); // Generates a random number 0, 1, 2, 3
+      System.out.println("Moving ghost ");
+    }
 
     switch (randomNumber) {
       case 0:
         // Apply the glow effect to 'room'
-        room.setEffect(glow);
+        Platform.runLater(() -> room.setEffect(glow));
         break;
       case 1:
         // Make the ghosts visible
-        ghost1.setVisible(true);
-        ghost2.setVisible(true);
+        Platform.runLater(
+            () -> {
+              ghost1.setVisible(true);
+              ghost2.setVisible(true);
+            });
         break;
       case 2:
         // Make the ghost's shadows visible
-        ghost1.setVisible(true);
-        ghost2.setVisible(true);
-        ghost1.setEffect(shadow);
+        Platform.runLater(
+            () -> {
+              ghost1.setVisible(true);
+              ghost2.setVisible(true);
+              ghost1.setEffect(shadow);
+            });
         break;
+      case 3:
+        Platform.runLater(
+            () -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
       default:
         break;
     }
@@ -292,5 +360,31 @@ public class GymnasiumController {
     ghost1.setVisible(false);
     ghost2.setVisible(false);
     room.setEffect(null);
+  }
+
+  private void setSpeechBubble(String text) {
+    isSpeechBubbleShowing = true;
+    Platform.runLater(
+        () -> {
+          speechBubbleLabel.setText(text);
+          ghostSpeechBubble.toFront();
+          speechBubbleLabel.toFront();
+        });
+
+    // Create a PauseTransition for 4 seconds
+    PauseTransition pause = new PauseTransition(Duration.seconds(8));
+    pause.setOnFinished(
+        event -> {
+          // After 4 seconds, send the speech bubble and label to the back
+          Platform.runLater(
+              () -> {
+                ghostSpeechBubble.toBack();
+                speechBubbleLabel.toBack();
+                isSpeechBubbleShowing = false;
+              });
+        });
+
+    // Start the pause transition
+    pause.play();
   }
 }

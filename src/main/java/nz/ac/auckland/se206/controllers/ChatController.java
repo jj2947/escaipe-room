@@ -60,6 +60,7 @@ public class ChatController {
     if (GameState.numberOfHints == 0) {
       hintButton.setDisable(true);
     }
+    GameState.textFlow = chatTextFlow;
   }
 
   /**
@@ -104,7 +105,7 @@ public class ChatController {
     }
 
     appendChatMessage(new ChatMessage("assistant", "Ghost is Writing..."));
-    if (GameState.isChatOpen) {
+    if (GameState.isChatOpen && !GameState.isGhostTalking) {
       responseLoading();
     }
 
@@ -143,7 +144,7 @@ public class ChatController {
                       // Replacing the "Ghost is Writing..." with the response
                       replaceLoadingMessageWithResponse(chatMsg.getContent(), isFunFact);
                     }
-                    if (GameState.isChatOpen) {
+                    if (GameState.isChatOpen && !GameState.isGhostTalking) {
                       responseLoaded();
                     }
 
@@ -309,7 +310,7 @@ public class ChatController {
   }
 
   @FXML
-  private void hintClicked() {
+  public void hintClicked() {
     GameState.numberOfHints--;
     updateHintCounter();
     if (GameState.numberOfHints == 0) {
