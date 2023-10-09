@@ -65,6 +65,7 @@ public class LockerController {
   private Shadow shadow = new Shadow(10, Color.BLACK);
   private Glow glow = new Glow(0.8);
 
+  /** Called when the locker scene is loaded. It initializes this scene. */
   public void initialize() {
     // Initialization code goes here
     GameState.timer.setLocker(timerLabel);
@@ -80,6 +81,7 @@ public class LockerController {
     }
   }
 
+  /** Called when the chat button is clicked. */
   @FXML
   private void onClickChat() {
     System.out.println("chat clicked");
@@ -109,12 +111,17 @@ public class LockerController {
     Platform.runLater(() -> ghost.setEffect(shadow));
   }
 
+  /**
+   * Called when the ghost is clicked. If the chat is not open, open the chat and move the ghost. If
+   * the chat is open, just move th ghost.
+   */
   @FXML
   private void onClickGhost() {
+    // If the chat is not open, open the chat and move the ghost
     if (!GameState.isChatOpen) {
       onClickChat();
       Platform.runLater(() -> moveGhost());
-    } else {
+    } else { // If the chat is open, just move the ghost
       Platform.runLater(() -> moveGhost());
       isGhostMoving = true;
     }
@@ -137,6 +144,10 @@ public class LockerController {
     chatButton.setOpacity(1);
   }
 
+  /**
+   * Called when the chat is opened. It adds the chat to the chat container and sets the chatInRoom
+   * variable.
+   */
   public void openChat() {
     GameState.chatInGym = false;
     GameState.chatInHall = false;
@@ -157,6 +168,10 @@ public class LockerController {
     backButton.setOpacity(1);
   }
 
+  /**
+   * Called when the basketball is clicked. It updates the game state to reflect the basketball
+   * being clicked.
+   */
   @FXML
   private void onClickBasketball() {
     System.out.println("basketball clicked");
@@ -193,14 +208,16 @@ public class LockerController {
     basketball.setOpacity(1);
   }
 
+  /** Called when the hint button is clicked. It gives the user a hint. */
   @FXML
   private void onClickHelp() {
     System.out.println("help button clicked");
-    if (!GameState.isChatOpen) {
+    if (!GameState.isChatOpen) { // If the chat is not open, open the chat
       onClickChat();
     }
+    // Send a hint to the chat
     GameState.chatController.hintClicked();
-    if (GameState.numberOfHints == 0) {
+    if (GameState.numberOfHints == 0) { // If there are no more hints, disable the hint button
       helpButton.setDisable(true);
     }
   }
@@ -255,6 +272,11 @@ public class LockerController {
     updateTextField("0");
   }
 
+  /**
+   * Method to update the text field based on the number entered.
+   *
+   * @param number the number entered by the user
+   */
   private void updateTextField(String number) {
     if (!GameState.countryIsFound) {
       return;
@@ -296,6 +318,7 @@ public class LockerController {
     }
   }
 
+  /** Method to update the buttons based on the number of digits entered. */
   private void updateButtons() {
     // Update the buttons to disable the numbers when 4 numbers have already been entered
     enterButton.disableProperty().setValue(true);
@@ -311,6 +334,10 @@ public class LockerController {
     zeroButton.disableProperty().setValue(false);
   }
 
+  /**
+   * Called when the enter button is clicked. It checks if the answer is correct and unlocks the
+   * locker is correct.
+   */
   @FXML
   private void onEnter() {
     if (!GameState.countryIsFound) {
@@ -344,6 +371,7 @@ public class LockerController {
     }
   }
 
+  /** Called when the back button is clicked. It returns the user to the hallway scene. */
   @FXML
   private void onBack() {
     if (GameState.isChatOpen) {
@@ -365,6 +393,10 @@ public class LockerController {
     }
   }
 
+  /**
+   * Called when the clear button is clicked. It clears the text field and resets the numbers
+   * entered.
+   */
   @FXML
   private void onClear() {
     if (!GameState.countryIsFound) {
@@ -384,6 +416,7 @@ public class LockerController {
     chatLabel.setText("What is " + randNum1 + " + " + randNum + "?");
   }
 
+  /** Called when GPT is loading. It sets the effects in the room. */
   public void responseLoading() {
     ghost.setEffect(shadow);
     Random random = new Random();
@@ -411,6 +444,7 @@ public class LockerController {
     }
   }
 
+  /** Called when GPT is done loading. It removes the effects in the room. */
   public void responseLoaded() {
     ghost.setEffect(null);
     pane.setEffect(null);
@@ -420,6 +454,7 @@ public class LockerController {
     messageText1.setEffect(glow);
   }
 
+  /** Called when the ghost is moving. It moves the ghost and sets the shadow effect. */
   private void moveGhost() {
     ghost.setEffect(shadow);
     chatButton.setVisible(false);

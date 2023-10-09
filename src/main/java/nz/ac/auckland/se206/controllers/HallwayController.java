@@ -70,6 +70,12 @@ public class HallwayController {
     chatButton.toFront();
   }
 
+  /**
+   * Called when the classroom door is clicked. It switches the scene to the classroom.
+   *
+   * @param event the event that triggered this method
+   * @throws IOException
+   */
   @FXML
   public void clickClassroomDoor(MouseEvent event) throws IOException {
     System.out.println("classroom door clicked");
@@ -91,6 +97,12 @@ public class HallwayController {
     GameState.roomController.addBlackboard();
   }
 
+  /**
+   * Called when the gym door is clicked. It switches the scene to the gym.
+   *
+   * @param event the event that triggered this method
+   * @throws IOException
+   */
   @FXML
   public void clickGymDoor(MouseEvent event) throws IOException {
     System.out.println("gym door clicked");
@@ -112,6 +124,12 @@ public class HallwayController {
     GameState.gymController.addBlackboard();
   }
 
+  /**
+   * Called when the locker is clicked. It switches the scene to the locker.
+   *
+   * @param event the event that triggered this method
+   * @throws IOException
+   */
   @FXML
   public void clickLocker(MouseEvent event) throws IOException {
     System.out.println("locker clicked");
@@ -143,6 +161,7 @@ public class HallwayController {
     }
   }
 
+  /** Called when the chat button is clicked. It opens the chat. */
   @FXML
   private void onClickChat() {
     System.out.println("chat clicked");
@@ -171,6 +190,7 @@ public class HallwayController {
     chatButton.setOpacity(1);
   }
 
+  /** Called when the chat button is clicked. It opens the chat. */
   public void openChat() {
     GameState.chatInGym = false;
     GameState.chatInRoom = false;
@@ -192,12 +212,15 @@ public class HallwayController {
     ghost.setEffect(shadow);
   }
 
+  /** Called when the ghost is clicked. It moves the ghost. */
   @FXML
   private void onClickGhost() {
+    // If the chat is not open, open it and move the ghost
     if (!GameState.isChatOpen) {
       onClickChat();
       Platform.runLater(() -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
-    } else if (!isSpeechBubbleShowing) {
+    } else if (!isSpeechBubbleShowing) { // If the chat is open, but the speech bubble is not
+      // showing, move the ghost
       Platform.runLater(() -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
       ghostMoving = true;
     }
@@ -227,28 +250,34 @@ public class HallwayController {
     gymDoorRectangle.setVisible(false);
   }
 
+  /** Called when the locker is entered. It makes the locker visible and sets the hover text. */
   @FXML
   public void locker1Entered() {
-    if (GameState.countryIsFound) {
+    if (GameState.countryIsFound) { // If the country is found, the locker is unlocked
       GameState.blackboardController.setHoverText("Locker");
     } else {
       GameState.blackboardController.setHoverText("Locker is locked");
     }
+    // Make the locker visible
     lockerRectangle.setVisible(true);
     lockerRectangle2.setVisible(true);
   }
 
+  /** Called when the locker is exited. It makes the locker invisible and removes the hover text. */
   @FXML
   public void locker2Entered() {
+    // If the country is found, the locker is unlocked
     if (GameState.countryIsFound) {
       GameState.blackboardController.setHoverText("Locker");
     } else {
       GameState.blackboardController.setHoverText("Locker is locked");
     }
+    // Make the locker visible
     lockerRectangle3.setVisible(true);
     lockerRectangle4.setVisible(true);
   }
 
+  /** Called when the locker is exited. It makes the locker invisible and removes the hover text. */
   @FXML
   public void lockerExited() {
     GameState.blackboardController.setHoverText("");
@@ -258,6 +287,7 @@ public class HallwayController {
     lockerRectangle4.setVisible(false);
   }
 
+  /** Called when the response is loading. It sets the effects in the room. */
   public void responseLoading() {
     ghost.setEffect(shadow);
     Random random = new Random();
@@ -286,6 +316,7 @@ public class HallwayController {
     }
   }
 
+  /** Called when the response is loaded. It removes the effects in the room. */
   public void responseLoaded() {
     // Remove the effects when the response is loaded
     Platform.runLater(

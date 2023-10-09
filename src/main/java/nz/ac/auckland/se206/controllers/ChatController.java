@@ -196,6 +196,13 @@ public class ChatController {
     return chatMsg;
   }
 
+  /**
+   * Handles the enter pressed event.
+   * 
+   * @param event the key event
+   * @throws ApiProxyException if there is an error communicating with the API proxy
+   * @throws IOException if there is an error loading the fxml file
+   */
   @FXML
   private void onEnterPressed(KeyEvent event) throws ApiProxyException, IOException {
     // When enter is clicked the user sends their message
@@ -245,6 +252,9 @@ public class ChatController {
     return chatPane;
   }
 
+  /**
+   * Adds the loading effects to the room the chat is in.
+   */
   private void responseLoaded() {
     // Stop the loading effects when the response is loaded
     GameState.gymController.responseLoaded();
@@ -253,6 +263,9 @@ public class ChatController {
     GameState.hallController.responseLoaded();
   }
 
+  /**
+   * Removes the loading effects in the room.
+   */
   private void responseLoading() {
     // Start the loading effects while the response is being generated
     if (GameState.chatInGym) {
@@ -266,6 +279,12 @@ public class ChatController {
     }
   }
 
+  /**
+   * Replaces the loading message with the response from GPT.
+   *
+   * @param response the response from GPT
+   * @param isFunFact whether the response is a fun fact
+   */
   private void replaceLoadingMessageWithResponse(String response, boolean isFunFact) {
     String loadingMessage = "Ghost is Writing...";
     // Iterate through the children of chatTextFlow to find the last occurrence of the loading
@@ -292,6 +311,11 @@ public class ChatController {
     }
   }
 
+  /**
+   * Changes the chat and sends a message.
+   * @param chat the chat to change to
+   * @param state the state to change to
+   */
   public void changeChatAndSend(ChatCompletionRequest chat, String state) {
     chatCompletionRequest = chat;
     try {
@@ -301,6 +325,9 @@ public class ChatController {
     }
   }
 
+  /**
+   * Updates the hint counter.
+   */
   private void updateHintCounter() {
     if (GameState.numberOfHints < 0) {
       hintLabel.setText("Hints: ∞");
@@ -309,6 +336,9 @@ public class ChatController {
     }
   }
 
+  /**
+   * Handles the hint button being clicked.
+   */
   @FXML
   public void hintClicked() {
     GameState.numberOfHints--;
@@ -340,6 +370,9 @@ public class ChatController {
         new ChatCompletionRequest().setN(1).setTemperature(.6).setTopP(1).setMaxTokens(100);
   }
 
+  /**
+   * Method that returns the fact.
+   */
   public void sayFact() {
     try {
       runGpt(new ChatMessage("user", GptPromptEngineering.getFunFact()), "fact");
