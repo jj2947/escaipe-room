@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.MoveTo?>
 <?import javafx.scene.shape.Path?>
 <?import javafx.scene.shape.Polyline?>
@@ -96,5 +98,14 @@
             <Image url="@../images/ghost.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="speaker" fitHeight="83.0" fitWidth="218.0" layoutX="14.0" layoutY="61.0" onMouseClicked="#clickSpeaker" onMouseEntered="#enterSpeaker" onMouseExited="#exitSpeaker" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/speaker.png" />
+         </image>
+         <effect>
+            <ColorAdjust brightness="1.0" />
+         </effect>
+      </ImageView>
+      <Line fx:id="line" endX="22.97205352783203" endY="18.766563415527344" fill="RED" layoutX="55.0" layoutY="103.0" startX="-20.241931915283203" startY="-30.252281188964844" stroke="RED" strokeWidth="5.0" visible="false" />
    </children>
 </Pane>

@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Path;
 import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
@@ -46,6 +47,8 @@ public class HallwayController {
   @FXML private Polyline lockerRectangle3;
   @FXML private Polyline lockerRectangle4;
   @FXML private Path path;
+  @FXML private ImageView speaker;
+  @FXML private Line line;
   private boolean playForward = true;
   private boolean ghostMoving = false;
   private boolean isSpeechBubbleShowing = false;
@@ -275,8 +278,9 @@ public class HallwayController {
         ghost1.setEffect(shadow);
         messageText.toFront();
         break;
-        case 3:
-        Platform.runLater(() -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
+      case 3:
+        Platform.runLater(
+            () -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
       default:
         break;
     }
@@ -295,5 +299,24 @@ public class HallwayController {
           ghost2.toBack();
           messageText.toBack();
         });
+  }
+
+  @FXML
+  private void enterSpeaker() {
+    speaker.setOpacity(0.5);
+  }
+
+  @FXML
+  private void exitSpeaker() {
+    speaker.setOpacity(1);
+  }
+
+  @FXML
+  private void clickSpeaker() {
+    GameState.clickSpeaker();
+  }
+
+  public Line getLine() {
+    return line;
   }
 }

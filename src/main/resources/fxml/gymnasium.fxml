@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.LineTo?>
 <?import javafx.scene.shape.MoveTo?>
 <?import javafx.scene.shape.Path?>
@@ -41,7 +43,7 @@
          </image>
       </ImageView>
       <Polyline fx:id="backboardRectangle" fill="WHITE" layoutX="261.0" layoutY="430.0" opacity="0.4" points="327.3681640625, -95.7230224609375, 327.3681640625, -45.673248291015625, 249.56805419921875, -45.673248291015625, 249.56805419921875, -95.7230224609375" stroke="WHITE" strokeType="INSIDE" visible="false" />
-      <Polyline fx:id="exitDoorRectangle" fill="WHITE" layoutX="271.0" layoutY="440.0" opacity="0.4" points="585.9520263671875, -57.159881591796875, 585.9520263671875, 41.4530029296875, 536.3977661132812, 41.4530029296875, 536.3977661132812, -57.159881591796875" stroke="WHITE" strokeType="INSIDE" visible="false" />
+      <Polyline fx:id="exitDoorRectangle" fill="WHITE" layoutX="271.0" layoutY="440.0" opacity="0.5" points="585.9520263671875, -57.159881591796875, 585.9520263671875, 41.4530029296875, 536.3977661132812, 41.4530029296875, 536.3977661132812, -57.159881591796875" stroke="WHITE" strokeType="INSIDE" visible="false" />
       <Polyline fx:id="hallwayDoorRectangle" fill="WHITE" layoutX="251.0" layoutY="420.0" opacity="0.5" points="39.547332763671875, -39.637603759765625, 36.574066162109375, 56.002044677734375, -35.77508544921875, 56.002044677734375, -35.77508544921875, -39.637603759765625" stroke="WHITE" strokeType="INSIDE" visible="false" />
       <ImageView fx:id="ghost2" fitHeight="204.0" fitWidth="226.0" layoutX="145.0" layoutY="275.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
@@ -136,5 +138,14 @@
             <Image url="@../images/ghost.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="speaker" fitHeight="83.0" fitWidth="218.0" layoutX="14.0" layoutY="61.0" onMouseClicked="#clickSpeaker" onMouseEntered="#enterSpeaker" onMouseExited="#exitSpeaker" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/speaker.png" />
+         </image>
+         <effect>
+            <ColorAdjust brightness="1.0" />
+         </effect>
+      </ImageView>
+      <Line fx:id="line" endX="22.97205352783203" endY="18.766563415527344" fill="RED" layoutX="55.0" layoutY="103.0" startX="-20.241931915283203" startY="-30.252281188964844" stroke="RED" strokeWidth="5.0" visible="false" />
    </children>
 </Pane>
