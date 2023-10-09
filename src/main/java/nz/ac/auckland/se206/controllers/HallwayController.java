@@ -73,7 +73,7 @@ public class HallwayController {
   /**
    * Called when the classroom door is clicked. It switches the scene to the classroom.
    *
-   * @param event
+   * @param event the event that triggered this method
    * @throws IOException
    */
   @FXML
@@ -100,7 +100,7 @@ public class HallwayController {
   /**
    * Called when the gym door is clicked. It switches the scene to the gym.
    *
-   * @param event
+   * @param event the event that triggered this method
    * @throws IOException
    */
   @FXML
@@ -127,7 +127,7 @@ public class HallwayController {
   /**
    * Called when the locker is clicked. It switches the scene to the locker.
    *
-   * @param event
+   * @param event the event that triggered this method
    * @throws IOException
    */
   @FXML

@@ -69,6 +69,12 @@ public class GymnasiumController {
     GameState.timer.setGym(timerLabel, hiddenNumberOne, hiddenNumberTwo);
   }
 
+  /**
+   * Called when the hallway door is clicked. Switches to the hallway scene.
+   *
+   * @param event the event that triggered this method
+   * @throws IOException
+   */
   @FXML
   public void clickHallDoor(MouseEvent event) throws IOException {
     System.out.println("hallway door clicked");
@@ -90,6 +96,7 @@ public class GymnasiumController {
     GameState.hallController.addBlackboard();
   }
 
+  /** Called when the backboard is clicked. Updates the score. */
   @FXML
   public void clickBackboard() {
     // Updating the backboard with the score
@@ -127,6 +134,10 @@ public class GymnasiumController {
     }
   }
 
+  /**
+   * Called when the exit door is clicked. If the user has found the correct numbers, the exit door
+   * can be opened.
+   */
   @FXML
   public void exitDoorClicked() {
     if (GameState.userWins) {
@@ -159,6 +170,10 @@ public class GymnasiumController {
     }
   }
 
+  /**
+   * Called when the user clicks the chat button. Opens the chat if it is not already open, closes
+   * chat if already open.
+   */
   @FXML
   private void onClickChat() {
     System.out.println("chat clicked");
@@ -177,6 +192,10 @@ public class GymnasiumController {
     }
   }
 
+  /**
+   * Called when the user clicks the ghost. Moves the ghost if the chat is not open, otherwise opens
+   * the chat too.
+   */
   @FXML
   private void onClickGhost() {
     // If the chat is not open, open it and move the ghost
@@ -260,6 +279,7 @@ public class GymnasiumController {
     greenButton.setOpacity(1);
   }
 
+  /** Called when the green button is clicked. Checks if the user has found the correct numbers. */
   @FXML
   public void greenButtonClicked() {
     // Checking if the user has found the correct numbers
@@ -301,6 +321,7 @@ public class GymnasiumController {
     goalLabel.setText(toAdd);
   }
 
+  /** Opens the chat in this scene. */
   public void openChat() {
     GameState.chatInHall = false;
     GameState.chatInRoom = false;
@@ -315,6 +336,7 @@ public class GymnasiumController {
     chatButton.toFront();
   }
 
+  /** Method that adds the effects for when GPT is loading. */
   public void responseLoading() {
     ghost.setEffect(shadow);
     Random random = new Random();
@@ -358,6 +380,7 @@ public class GymnasiumController {
     }
   }
 
+  /** Method that removes the effects for when GPT is loading. */
   public void responseLoaded() {
     ghost.setEffect(null);
     ghost1.setEffect(null);
@@ -366,6 +389,11 @@ public class GymnasiumController {
     room.setEffect(null);
   }
 
+  /**
+   * Sets the speech bubble to the given text for 4 seconds.
+   *
+   * @param text the text to set the speech bubble to
+   */
   private void setSpeechBubble(String text) {
     isSpeechBubbleShowing = true;
     Platform.runLater(

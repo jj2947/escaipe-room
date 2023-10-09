@@ -275,7 +275,7 @@ public class LockerController {
   /**
    * Method to update the text field based on the number entered.
    *
-   * @param number
+   * @param number the number entered by the user
    */
   private void updateTextField(String number) {
     if (!GameState.countryIsFound) {

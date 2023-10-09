@@ -79,6 +79,7 @@ public class GameState {
 
   public static boolean isMuted = false;
 
+  /** Sets the new numbers to find. */
   public static void setNewNumbers() {
     // Generating random numbers to find
     int randomNum1 = (int) Math.floor(Math.random() * (7 - 1 + 1) + 1);
@@ -93,6 +94,15 @@ public class GameState {
     GameState.numberSet.add(24);
   }
 
+  /**
+   * Moves the ghost along the path.
+   *
+   * @param ghost The ghost to move
+   * @param path The path to move the ghost along
+   * @param playForward Whether to play the animation forward or not
+   * @param shadow The shadow effect to apply to the ghost
+   * @return Whether the animation is playing forward or not
+   */
   public static boolean moveGhost(ImageView ghost, Path path, boolean playForward, Shadow shadow) {
     ghost.setEffect(shadow);
     PathTransition pathTransition = new PathTransition();
@@ -131,6 +141,7 @@ public class GameState {
     return playForward;
   }
 
+  /** Mutes or unmutes the game. */
   public static void clickSpeaker() {
     if (GameState.isMuted) { // Unmutes the game
       System.out.println("Unmuted");

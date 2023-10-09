@@ -31,7 +31,7 @@ public class StartScreenController {
   private Button time = null;
 
   /**
-   * Called when the start button is clicked
+   * Called when the start button is clicked.
    *
    * @param event the event that triggered this method
    */
@@ -67,7 +67,7 @@ public class StartScreenController {
     fadeOut();
   }
 
-  /** Called when the exit button is clicked */
+  /** Called when the exit button is clicked. */
   @FXML
   private void onExit() {
     // exit application
@@ -76,7 +76,7 @@ public class StartScreenController {
     GameState.timer.exitGame();
   }
 
-  /** Setting difficulty to easy */
+  /** Setting difficulty to easy. */
   @FXML
   private void onClickEasy() {
     difButtonClicked(easyButton);
@@ -84,42 +84,42 @@ public class StartScreenController {
     GameState.difficulty = "EASY";
   }
 
-  /** Setting difficulty to medium */
+  /** Setting difficulty to medium. */
   @FXML
   private void onClickMedium() {
     difButtonClicked(mediumButton);
     GameState.difficulty = "MEDIUM";
   }
 
-  /** Setting difficulty to hard */
+  /** Setting difficulty to hard. */
   @FXML
   private void onClickHard() {
     difButtonClicked(hardButton);
     GameState.difficulty = "HARD";
   }
 
-  /** Setting time to Two */
+  /** Setting time to Two. */
   @FXML
   private void onClickTwo() {
     timeButtonClicked(twoButton);
     GameState.timer.setCounter(120);
   }
 
-  /** Setting time to Four */
+  /** Setting time to Four. */
   @FXML
   private void onClickFour() {
     timeButtonClicked(fourButton);
     GameState.timer.setCounter(240);
   }
 
-  /** Setting time to Six */
+  /** Setting time to Six. */
   @FXML
   private void onClickSix() {
     timeButtonClicked(sixButton);
     GameState.timer.setCounter(360);
   }
 
-  /** Depending on current state label text is changed */
+  /** Depending on current state label text is changed. */
   private void updateToDo() {
     if (difficulty == null && time == null) {
       // None have been selected
@@ -143,7 +143,7 @@ public class StartScreenController {
   }
 
   /**
-   * A difficulty button has been clicked, updating gamestate
+   * A difficulty button has been clicked, updating gamestate.
    *
    * @param button which difficulty button has been clicked
    */
@@ -159,7 +159,7 @@ public class StartScreenController {
   }
 
   /**
-   * A time button has been clicked, updating gamestate
+   * A time button has been clicked, updating gamestate.
    *
    * @param button which time button has been clicked
    */
@@ -174,7 +174,7 @@ public class StartScreenController {
     updateToDo();
   }
 
-  /** Fades the scene out */
+  /** Fades the scene out. */
   public void fadeOut() {
     FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), startScreen);
     fadeTransition.setFromValue(1);

@@ -695,7 +695,7 @@ public class RoomController {
   /**
    * Sets the speech bubble to the input text.
    *
-   * @param text
+   * @param text the text to set the speech bubble to
    */
   private void setSpeechBubble(String text) {
     isSpeechBubbleShowing = true;

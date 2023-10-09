@@ -97,6 +97,12 @@ public class GptPromptEngineering {
     return null;
   }
 
+  /**
+   * Generates a prompt for the GPT-3 API to use when the user has used all their hints.
+   *
+   * @param gamestate the current gamestate
+   * @return a prompt for the GPT-3 API to use
+   */
   public static String apiGetHints(String gamestate) {
     // Create states
     StringBuilder state1 = new StringBuilder();

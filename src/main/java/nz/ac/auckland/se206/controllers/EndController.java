@@ -21,6 +21,7 @@ public class EndController {
     updateLabel();
   }
 
+  /** Updates the label depending on whether the user won or lost. */
   @FXML
   public void updateLabel() {
     if (GameState.isTimeReached) {
@@ -37,6 +38,11 @@ public class EndController {
     GameState.timer.exitGame();
   }
 
+  /**
+   * Restarts the game.
+   *
+   * @throws IOException if an error occurs when loading the fxml file
+   */
   @FXML
   private void onRestart() throws IOException {
     // Remove scenes that need to be cleared
@@ -98,7 +104,12 @@ public class EndController {
     System.out.println("STARTSCREEN added.");
   }
 
-  // Method to load a scene asynchronously
+  /**
+   * Loads a scene asynchronously.
+   *
+   * @param ui AppUi enum
+   * @param fxmlFileName name of fxml file
+   */
   private void loadSceneAsync(AppUi ui, String fxmlFileName) {
     try {
       SceneManager.addUi(ui, App.loadFxml(fxmlFileName));
