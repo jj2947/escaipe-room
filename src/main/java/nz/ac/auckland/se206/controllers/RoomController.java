@@ -3,6 +3,8 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import java.util.Random;
 import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -14,13 +16,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
+import javafx.scene.shape.Path;
 import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
-import nz.ac.auckland.se206.gpt.ChatMessage;
 
 /** Controller class for the room view. */
 public class RoomController {
@@ -90,8 +92,14 @@ public class RoomController {
   @FXML private Label hiddenNumberTwo;
   @FXML private Polyline doorRectangle;
   @FXML private Polyline mapRectangle;
+  @FXML private Path path;
+  @FXML private ImageView ghostSpeechBubble;
+  @FXML private Label speechBubbleLabel;
   private Shadow shadow = new Shadow(10, Color.BLACK);
   private Glow glow = new Glow(0.8);
+  private boolean playForward = true;
+  private boolean ghostMoving = false;
+  private boolean isSpeechBubbleShowing = false;
 
   /**
    * Initializes the room view, it is called when the room loads.
@@ -116,7 +124,14 @@ public class RoomController {
   public void responseLoading() {
     ghost.setEffect(shadow);
     Random random = new Random();
-    int randomNumber = random.nextInt(3); // Generates a random number 0, 1, or 2
+    int randomNumber;
+    if (isSpeechBubbleShowing) {
+      randomNumber = random.nextInt(3);
+      System.out.println("Not moving ghost ");
+    } else {
+      randomNumber = random.nextInt(4); // Generates a random number 0, 1, 2, 3
+      System.out.println("Moving ghost ");
+    }
 
     switch (randomNumber) {
       case 0:
@@ -125,15 +140,28 @@ public class RoomController {
         break;
       case 1:
         // Apply the glow effect to 'exitLabel'
-        exitLabel.setEffect(glow);
-        ghost1.setVisible(true);
-        ghost2.setVisible(true);
+        Platform.runLater(
+            () -> {
+              exitLabel.setEffect(glow);
+              ghost1.setVisible(true);
+              ghost2.setVisible(true);
+              ghost1.toFront();
+              ghost2.toFront();
+            });
         break;
       case 2:
         // Make the escape message visible
-        messageText.setVisible(true);
-        messageText1.setVisible(true);
+        Platform.runLater(
+            () -> {
+              messageText.setVisible(true);
+              messageText1.setVisible(true);
+              messageText.toFront();
+              messageText1.toFront();
+            });
         break;
+      case 3:
+        Platform.runLater(
+            () -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
       default:
         break;
     }
@@ -141,13 +169,20 @@ public class RoomController {
 
   public void responseLoaded() {
     // Remove all the effects from room
-    ghost.setEffect(null);
-    messageText.setVisible(false);
-    room.setEffect(null);
-    exitLabel.setEffect(null);
-    ghost1.setVisible(false);
-    ghost2.setVisible(false);
-    messageText1.setVisible(false);
+    Platform.runLater(
+        () -> {
+          ghost.setEffect(null);
+          messageText.setVisible(false);
+          room.setEffect(null);
+          exitLabel.setEffect(null);
+          ghost1.setVisible(false);
+          ghost2.setVisible(false);
+          messageText1.setVisible(false);
+          messageText.toBack();
+          messageText1.toBack();
+          ghost1.toBack();
+          ghost2.toBack();
+        });
   }
 
   /**
@@ -177,7 +212,6 @@ public class RoomController {
    */
   @FXML
   public void clickDoor(MouseEvent event) {
-    System.out.println("hallway door clicked");
 
     if (GameState.isChatOpen) {
       GameState.hallController.openChat();
@@ -198,7 +232,6 @@ public class RoomController {
 
   @FXML
   private void onClickChat() {
-    System.out.println("chat clicked");
 
     // Add the chat to the chat container
     if (!GameState.chatInRoom) {
@@ -236,31 +269,34 @@ public class RoomController {
   private void onClickGhost() {
     if (!GameState.isChatOpen) {
       onClickChat();
+      Platform.runLater(() -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
+    } else if (!isSpeechBubbleShowing) {
+      Platform.runLater(() -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
+      ghostMoving = true;
     }
   }
 
   @FXML
   private void onExitGhost() {
-    System.out.println("hover off ghost");
-    ghost.setEffect(null);
+    if (ghostMoving == false) {
+      ghost.setEffect(null);
+    }
   }
 
   @FXML
   private void onEnterGhost() {
-    System.out.println("hover on ghost");
+    ghostMoving = false;
     ghost.setEffect(shadow);
   }
 
   @FXML
   private void enterBackButton() {
-    System.out.println("hover on back button");
     goBackLabel.setOpacity(0.5);
     backRect.setOpacity(0.1);
   }
 
   @FXML
   private void exitBackButton() {
-    System.out.println("hover off back button");
     goBackLabel.setOpacity(1);
     backRect.setOpacity(0.5);
   }
@@ -598,12 +634,30 @@ public class RoomController {
         && GameState.countryToFind.equals(country)) {
       GameState.countryIsFound = true;
       // Updating the game play to reflect the country being found
+      GameState.textFlow.getChildren().clear();
       GameState.blackboardController.showHallpass();
       GameState.blackboardController.showItemLabel();
       GameState.blackboardController.setObjectiveText("Objective: Look around the School");
       GameState.lockerController.setQuestion();
-      ChatMessage toAppend = new ChatMessage("dev", "*HALLPASS FOUND*");
-      GameState.chatController.appendChatMessage(toAppend);
+      GameState.isGhostTalking = true;
+      if (!playForward) {
+        Platform.runLater(
+            () -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
+        isSpeechBubbleShowing = true;
+        // Create a PauseTransition for 4 seconds
+        PauseTransition pause = new PauseTransition(Duration.seconds(4));
+        pause.setOnFinished(
+            event -> {
+              // After 4 seconds, set speech bubble
+              setSpeechBubble("Hallpass Found");
+              GameState.isGhostTalking = false;
+            });
+
+        // Start the pause transition
+        pause.play();
+      } else {
+        setSpeechBubble("Hallpass Found");
+      }
       // Changing the chat to the next state
       GameState.chatController.sayFact();
       GameState.currentState = "state3";
@@ -611,9 +665,40 @@ public class RoomController {
       if (!GameState.isChatOpen) {
         onClickChat();
       }
+      GameState.isGhostTalking = false;
       return true;
     }
     return false;
+  }
+
+  private void setSpeechBubble(String text) {
+    isSpeechBubbleShowing = true;
+    Platform.runLater(
+        () -> {
+          speechBubbleLabel.setText(text);
+          ghostSpeechBubble.toFront();
+          speechBubbleLabel.toFront();
+          ghostSpeechBubble.setVisible(true);
+          speechBubbleLabel.setVisible(true);
+        });
+
+    // Create a PauseTransition for 4 seconds
+    PauseTransition pause = new PauseTransition(Duration.seconds(8));
+    pause.setOnFinished(
+        event -> {
+          // After 4 seconds, send the speech bubble and label to the back
+          Platform.runLater(
+              () -> {
+                ghostSpeechBubble.toBack();
+                speechBubbleLabel.toBack();
+                ghostSpeechBubble.setVisible(false);
+                speechBubbleLabel.setVisible(false);
+                isSpeechBubbleShowing = false;
+              });
+        });
+
+    // Start the pause transition
+    pause.play();
   }
 
   /** Fades the scene in */

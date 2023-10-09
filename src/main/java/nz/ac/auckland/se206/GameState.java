@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javafx.animation.PathTransition;
+import javafx.scene.effect.Shadow;
+import javafx.scene.image.ImageView;
+import javafx.scene.shape.Path;
+import javafx.scene.text.TextFlow;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.controllers.BlackboardController;
 import nz.ac.auckland.se206.controllers.ChatController;
 import nz.ac.auckland.se206.controllers.GymnasiumController;
@@ -67,6 +73,10 @@ public class GameState {
 
   public static boolean userWins = false;
 
+  public static boolean isGhostTalking = false;
+
+  public static TextFlow textFlow;
+
   public static void setNewNumbers() {
     // Generating random numbers to find
     int randomNum1 = (int) Math.floor(Math.random() * (7 - 1 + 1) + 1);
@@ -79,5 +89,43 @@ public class GameState {
     GameState.numberSet.add(randomNum1 * 3);
     GameState.numberSet.add(randomNum2 * 3);
     GameState.numberSet.add(24);
+  }
+
+  public static boolean moveGhost(ImageView ghost, Path path, boolean playForward, Shadow shadow) {
+    ghost.setEffect(shadow);
+    PathTransition pathTransition = new PathTransition();
+    double width = ghost.getLayoutBounds().getWidth();
+    double height = ghost.getLayoutBounds().getHeight();
+
+    path.setLayoutX(-ghost.getLayoutX() + width / 2);
+    path.setLayoutY(-ghost.getLayoutY() + height / 2);
+
+    // Set the path and node for the PathTransition
+    pathTransition.setPath(path);
+    pathTransition.setNode(ghost);
+
+    // Set the duration of the animation (4000 milliseconds)
+    pathTransition.setDuration(Duration.millis(4000));
+
+    // Set the cycle count to 1 (plays the animation once)
+    pathTransition.setCycleCount(1);
+
+    // Toggle the animation direction if playForward is false
+    if (!playForward) {
+      pathTransition.setRate(-1); // Reverse direction
+    }
+
+    // Set the action to be performed when the animation finishes
+    pathTransition.setOnFinished(
+        event -> {
+          ghost.setEffect(null); // Set the shadow effect to null
+        });
+
+    // Play the animation
+    pathTransition.play();
+
+    // Toggle the playForward flag for the next call
+    playForward = !playForward;
+    return playForward;
   }
 }

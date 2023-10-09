@@ -1,31 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.TextFlow?>
 
 <AnchorPane fx:id="chatPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#onKeyReleased" prefHeight="702.0" prefWidth="240.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChatController">
   <children>
-    <TextArea fx:id="chatTextArea" editable="false" layoutX="2.0" layoutY="49.0" prefHeight="606.0" prefWidth="236.0" styleClass="textArea" stylesheets="@../css/chatStylesheet.css" wrapText="true">
-         <font>
-            <Font name="Chalkduster" size="16.0" />
-         </font>
+    <TextField fx:id="inputText" layoutX="2.0" layoutY="659.0" onKeyPressed="#onEnterPressed" prefHeight="29.0" prefWidth="236.0" promptText="Write Here..." styleClass="textField" stylesheets="@../css/chatStylesheet.css">
          <effect>
-            <Bloom threshold="0.75" />
-         </effect></TextArea>
-    <TextField fx:id="inputText" layoutX="2.0" layoutY="659.0" onKeyPressed="#onEnterPressed" prefHeight="29.0" prefWidth="236.0" promptText="Write Here..." styleClass="textArea" stylesheets="@../css/chatStylesheet.css">
-         <effect>
-            <Bloom threshold="0.75" />
+            <Bloom threshold="0.4" />
          </effect></TextField>
-      <Label fx:id="hintLabel" layoutX="90.0" layoutY="2.0" prefHeight="44.0" prefWidth="148.0" stylesheets="@../css/chatStylesheet.css" />
-      <Button fx:id="hintButton" layoutX="2.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#hintClicked" prefHeight="44.0" prefWidth="84.0" stylesheets="@../css/blackboardStylesheet.css" text="Hint">
+      <Label fx:id="hintLabel" alignment="CENTER" layoutX="90.0" layoutY="2.0" prefHeight="44.0" prefWidth="148.0" stylesheets="@../css/chatStylesheet.css" text="Hints:5" textFill="#00eaff">
+         <effect>
+            <Bloom threshold="0.5" />
+         </effect></Label>
+      <Button fx:id="hintButton" alignment="CENTER" layoutX="2.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#hintClicked" prefHeight="44.0" prefWidth="84.0" stylesheets="@../css/chatStylesheet.css" text="Hint" textFill="#203012">
          <font>
-            <Font name="Chalkduster" size="16.0" />
+            <Font name="Palatino" size="28.0" />
          </font>
+         <effect>
+            <Bloom threshold="0.0" />
+         </effect>
       </Button>
+      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hmax="0.0" layoutX="2.0" layoutY="49.0" pannable="true" prefHeight="608.0" prefWidth="236.0" vvalue="1.0">
+         <content>
+            <TextFlow fx:id="chatTextFlow" prefHeight="606.0" prefWidth="234.0" styleClass="textFlow" stylesheets="@../css/chatStylesheet.css">
+               <padding>
+                  <Insets bottom="3.0" left="5.0" right="7.0" top="3.0" />
+               </padding>
+               <effect>
+                  <Bloom threshold="0.4" />
+               </effect>
+            </TextFlow>
+         </content>
+      </ScrollPane>
   </children>
 </AnchorPane>

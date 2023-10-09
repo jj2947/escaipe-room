@@ -7,12 +7,43 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.MoveTo?>
+<?import javafx.scene.shape.Path?>
 <?import javafx.scene.shape.Polyline?>
+<?import javafx.scene.shape.QuadCurveTo?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <Pane fx:id="room" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="702.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.HallwayController">
    <children>
+      <Path fx:id="path" fill="#1f93ff00" layoutX="515.0" layoutY="110.0" rotate="180.0" stroke="BLACK" strokeType="INSIDE" visible="false">
+         <elements>
+            <MoveTo x="300.0" />
+            <QuadCurveTo y="200.0" />
+            <QuadCurveTo controlX="500.0" controlY="500.0" y="400.0" />
+         </elements>
+      </Path>
+      <ImageView fx:id="ghost1" fitHeight="233.0" fitWidth="233.0" layoutX="215.0" layoutY="61.0" opacity="0.8" pickOnBounds="true">
+         <image>
+            <Image url="@../images/ghost.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="ghost2" fitHeight="213.0" fitWidth="247.0" layoutX="598.0" layoutY="295.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/ghost1.png" />
+         </image>
+         <effect>
+            <Shadow />
+         </effect>
+      </ImageView>
+      <Label fx:id="messageText" alignment="CENTER" contentDisplay="CENTER" layoutX="427.0" layoutY="352.0" prefHeight="147.0" prefWidth="396.0" text="The Clock is Ticking" textAlignment="CENTER" textFill="RED" wrapText="true">
+         <font>
+            <Font name="Chalkduster" size="38.0" />
+         </font>
+         <effect>
+            <Reflection bottomOpacity="0.21" fraction="1.0" topOffset="-10.0" topOpacity="0.46" />
+         </effect>
+      </Label>
       <ImageView fx:id="lockerRectangle1" fitHeight="700.0" fitWidth="1100.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Hallway.jpg" />
@@ -24,19 +55,6 @@
       <Polyline fx:id="lockerRectangle4" fill="WHITE" layoutX="869.0" layoutY="379.0" opacity="0.5" points="64.0, -102.88690185546875, 64.0, 114.0, 12.04718017578125, 114.0, 16.693115234375, -106.587890625" stroke="WHITE" strokeType="INSIDE" visible="false" />
       <Polyline fx:id="gymDoorRectangle" fill="WHITE" layoutX="106.0" layoutY="236.0" opacity="0.2" points="555.0, 74.0, 555.0, 165.0, 503.10174560546875, 165.0, 502.0, 74.0" stroke="WHITE" strokeType="INSIDE" visible="false" />
       <Polyline fx:id="classroomDoorRectangle" fill="WHITE" layoutX="96.0" layoutY="226.0" opacity="0.4" points="135.0, -38.0, 135.0, 340.0, -50.0, 346.0, -50.0, -38.0" stroke="WHITE" strokeType="INSIDE" visible="false" />
-      <ImageView fx:id="ghost1" fitHeight="233.0" fitWidth="233.0" layoutX="215.0" layoutY="61.0" opacity="0.8" pickOnBounds="true" visible="false">
-         <image>
-            <Image url="@../images/ghost.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ghost2" fitHeight="213.0" fitWidth="247.0" layoutX="598.0" layoutY="295.0" opacity="0.8" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../images/ghost1.png" />
-         </image>
-         <effect>
-            <Shadow />
-         </effect>
-      </ImageView>
       <Label fx:id="hiddenNumberOne" layoutX="317.0" layoutY="254.0" stylesheets="@../css/blackboardStylesheet.css" textFill="WHITE" />
       <Label fx:id="hiddenNumberTwo" layoutX="1015.0" layoutY="179.0" stylesheets="@../css/blackboardStylesheet.css" textFill="WHITE" />
       <Label fx:id="timerLabel" alignment="CENTER" layoutX="11.0" layoutY="15.0" prefHeight="64.0" prefWidth="140.0" textFill="WHITE">
@@ -47,14 +65,6 @@
 
       <Rectangle fx:id="classroomDoor" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="407.0" layoutX="46.0" layoutY="188.0" onMouseClicked="#clickClassroomDoor" onMouseEntered="#classroomDoorEntered" onMouseExited="#classroomDoorExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="191.0" />
       <Rectangle fx:id="gymDoor" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="91.0" layoutX="608.0" layoutY="310.0" onMouseClicked="#clickGymDoor" onMouseEntered="#gymDoorEntered" onMouseExited="#gymDoorExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="53.0" />
-      <Label fx:id="messageText" alignment="CENTER" contentDisplay="CENTER" layoutX="427.0" layoutY="352.0" prefHeight="147.0" prefWidth="396.0" text="The Clock is Ticking" textAlignment="CENTER" textFill="RED" visible="false" wrapText="true">
-         <font>
-            <Font name="Chalkduster" size="38.0" />
-         </font>
-         <effect>
-            <Reflection bottomOpacity="0.21" fraction="1.0" topOffset="-10.0" topOpacity="0.46" />
-         </effect>
-      </Label>
       <Label fx:id="gymLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="558.0" layoutY="283.0" opacity="0.5" prefHeight="19.0" prefWidth="154.0" style="-fx-background-color: blue; -fx-text-fill: white;" styleClass="roomLabel" text="GYMNASIUM" textFill="BLUE">
 
          <font>
@@ -65,11 +75,6 @@
       <Rectangle fx:id="locker2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="221.0" layoutX="786.0" layoutY="272.0" onMouseClicked="#clickLocker" onMouseEntered="#locker2Entered" onMouseExited="#lockerExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="147.0" />
       <Pane fx:id="chatContainer" layoutX="1100.0" prefHeight="702.0" prefWidth="240.0">
       </Pane>
-      <ImageView fx:id="ghost" fitHeight="181.0" fitWidth="187.0" layoutX="906.0" layoutY="436.0" onMouseClicked="#onClickGhost" onMouseEntered="#onEnterGhost" onMouseExited="#onExitGhost" opacity="0.65" pickOnBounds="true">
-         <image>
-            <Image url="@../images/ghost.png" />
-         </image>
-      </ImageView>
       <Label fx:id="geographyLabel" alignment="CENTER" layoutX="65.0" layoutY="208.0" opacity="0.5" prefHeight="28.0" prefWidth="136.0" styleClass="roomLabel" stylesheets="@../css/stylesheet.css" text="GEOGRAPHY" textFill="WHITE">
          <font>
             <Font name="Chalkduster" size="28.0" />
@@ -86,5 +91,10 @@
                </effect>
             </ImageView>
          </children></Pane>
+      <ImageView fx:id="ghost" fitHeight="181.0" fitWidth="187.0" layoutX="5.0" layoutY="425.0" onMouseClicked="#onClickGhost" onMouseEntered="#onEnterGhost" onMouseExited="#onExitGhost" opacity="0.5" pickOnBounds="true">
+         <image>
+            <Image url="@../images/ghost.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

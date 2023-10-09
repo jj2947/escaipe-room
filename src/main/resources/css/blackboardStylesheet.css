@@ -14,7 +14,7 @@
     -fx-font-size: 16;
 }
 
-.button:hover, .button:pressed, .buttton:disabled {
+.button:hover, .button:active, .buttton:disabled {
     -fx-opacity: 0.5;
     -fx-font-size: 16;
 }

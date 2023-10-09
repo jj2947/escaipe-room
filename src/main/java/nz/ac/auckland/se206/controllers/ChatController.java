@@ -4,12 +4,16 @@ import java.io.IOException;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.gpt.ChatMessage;
@@ -21,11 +25,12 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
 /** Controller class for the chat view. */
 public class ChatController {
-  @FXML private TextArea chatTextArea;
   @FXML private TextField inputText;
   @FXML private AnchorPane chatPane;
   @FXML private Label hintLabel;
   @FXML private Button hintButton;
+  @FXML private TextFlow chatTextFlow;
+  @FXML private ScrollPane scrollPane;
 
   private ChatCompletionRequest chatCompletionRequest;
   private ChatCompletionRequest hintChatCompletionRequest;
@@ -55,6 +60,7 @@ public class ChatController {
     if (GameState.numberOfHints == 0) {
       hintButton.setDisable(true);
     }
+    GameState.textFlow = chatTextFlow;
   }
 
   /**
@@ -63,11 +69,20 @@ public class ChatController {
    * @param msg the chat message to append
    */
   public void appendChatMessage(ChatMessage msg) {
-    if (msg.getRole() == "user") {
-      chatTextArea.appendText("Me: " + msg.getContent() + "\n\n");
+    Text messageText = new Text(msg.getContent() + "\n\n");
+    if (msg.getRole().equals("user")) {
+      messageText.setText("Me: " + messageText.getText());
+      messageText.setFill(Color.rgb(5, 236, 253));
     } else {
-      chatTextArea.appendText(msg.getContent() + "\n\n");
+      messageText.setFill(Color.WHITE);
     }
+
+    // Bind the vvalue before adding the message to the TextFlow
+    Platform.runLater(
+        () -> {
+          scrollPane.vvalueProperty().bind(chatTextFlow.heightProperty()); // Scroll to the bottom
+          chatTextFlow.getChildren().add(messageText);
+        });
   }
 
   /**
@@ -90,9 +105,10 @@ public class ChatController {
     }
 
     appendChatMessage(new ChatMessage("assistant", "Ghost is Writing..."));
-    if (GameState.isChatOpen) {
+    if (GameState.isChatOpen && !GameState.isGhostTalking) {
       responseLoading();
     }
+
     // GPT Task
     Task<Void> askGpt =
         new Task<Void>() {
@@ -116,6 +132,7 @@ public class ChatController {
                       GameState.blackboardController.setObjectiveText(
                           "Objective: Where can I find this country?");
                       replaceLoadingMessageWithResponse("", false);
+
                       changeChatAndSend(
                           new ChatCompletionRequest()
                               .setN(1)
@@ -127,9 +144,10 @@ public class ChatController {
                       // Replacing the "Ghost is Writing..." with the response
                       replaceLoadingMessageWithResponse(chatMsg.getContent(), isFunFact);
                     }
-                    if (GameState.isChatOpen) {
+                    if (GameState.isChatOpen && !GameState.isGhostTalking) {
                       responseLoaded();
                     }
+
                     newStateHint();
                     inputText.setDisable(false);
                     if (GameState.numberOfHints != 0) {
@@ -150,6 +168,7 @@ public class ChatController {
               if (GameState.isChatOpen) {
                 responseLoaded();
               }
+
               inputText.setDisable(false);
               // Checking to see if the riddle has been solved and changing the game state
               if (result.getChatMessage().getRole().equals("assistant")
@@ -249,21 +268,26 @@ public class ChatController {
 
   private void replaceLoadingMessageWithResponse(String response, boolean isFunFact) {
     String loadingMessage = "Ghost is Writing...";
-    String content = chatTextArea.getText();
+    // Iterate through the children of chatTextFlow to find the last occurrence of the loading
+    // message
+    for (int i = chatTextFlow.getChildren().size() - 1; i >= 0; i--) {
+      Node child = chatTextFlow.getChildren().get(i);
+      if (child instanceof Text) {
+        Text text = (Text) child;
+        text.setFill(Color.WHITE);
+        String content = text.getText();
 
-    // Find the index of the last occurrence of "Ghost is Writing...." in the chatTextArea
-    int lastLoadingIndex = content.lastIndexOf(loadingMessage);
+        int lastLoadingIndex = content.lastIndexOf(loadingMessage);
 
-    // If "Ghost is Writing..." is found, replace it with the GPT response
-    if (lastLoadingIndex != -1) {
-      if (response.equals("")) {
-        chatTextArea.replaceText(lastLoadingIndex, lastLoadingIndex + loadingMessage.length(), "");
-      } else if (!isFunFact) {
-        chatTextArea.replaceText(
-            lastLoadingIndex, lastLoadingIndex + loadingMessage.length(), "Ghost: " + response);
-      } else {
-        chatTextArea.replaceText(
-            lastLoadingIndex, lastLoadingIndex + loadingMessage.length(), "FUN FACT: " + response);
+        // If "Ghost is Writing..." is found, replace it with the GPT response
+        if (lastLoadingIndex != -1) {
+          String newText =
+              response.equals("")
+                  ? ""
+                  : (!isFunFact ? "Ghost: " + response : "FUN FACT: " + response);
+          text.setText(content.substring(0, lastLoadingIndex) + newText + "\n\n");
+          break; // Stop after replacing the last occurrence
+        }
       }
     }
   }
@@ -286,7 +310,7 @@ public class ChatController {
   }
 
   @FXML
-  private void hintClicked() {
+  public void hintClicked() {
     GameState.numberOfHints--;
     updateHintCounter();
     if (GameState.numberOfHints == 0) {

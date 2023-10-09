@@ -18,8 +18,11 @@
       </TextField>
       <Label fx:id="objectiveLabel" layoutX="14.0" layoutY="31.0" stylesheets="@../css/blackboardStylesheet.css" text="Objective: Talk to mysterious prescence" textFill="WHITE">
          <font>
-            <Font size="15.0" />
+            <Font size="16.0" />
          </font>
+         <effect>
+            <Bloom threshold="0.9" />
+         </effect>
       </Label>
       <ImageView fx:id="basketballImage" fitHeight="70.0" fitWidth="76.0" layoutX="925.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
@@ -34,8 +37,11 @@
       <Label fx:id="itemLabel" layoutX="749.0" layoutY="28.0" prefHeight="28.0" prefWidth="73.0" stylesheets="@../css/blackboardStylesheet.css" text="Items:" textFill="WHITE" visible="false">
          <font>
             <Font size="20.0" />
-         </font></Label>
-      <HBox alignment="CENTER" layoutX="421.0" layoutY="-6.0" prefHeight="87.0" prefWidth="302.0">
+         </font>
+         <effect>
+            <Bloom threshold="0.9" />
+         </effect></Label>
+      <HBox alignment="CENTER" layoutX="421.0" prefHeight="83.0" prefWidth="302.0">
          <children>
             <Label fx:id="hoverLabel" stylesheets="@../css/blackboardStylesheet.css" textFill="RED">
                <font>

@@ -7,12 +7,34 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.LineTo?>
+<?import javafx.scene.shape.MoveTo?>
+<?import javafx.scene.shape.Path?>
 <?import javafx.scene.shape.Polyline?>
+<?import javafx.scene.shape.QuadCurveTo?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <Pane fx:id="room" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="702.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GymnasiumController">
    <children>
+      <ImageView fx:id="ghostSpeechBubble" fitHeight="300.0" fitWidth="300.0" layoutX="714.0" layoutY="17.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/speechBubble2.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="speechBubbleLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="739.0" layoutY="29.0" prefHeight="158.0" prefWidth="240.0" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="Luminari" size="38.0" />
+         </font>
+      </Label>
+      <Path fx:id="path" fill="#1f93ff00" layoutX="130.0" layoutY="85.0" stroke="BLACK" strokeType="INSIDE" visible="false">
+         <elements>
+            <MoveTo x="600.0" y="200.0" />
+            <LineTo x="300.0" y="50.0" />
+            <QuadCurveTo y="200.0" />
+            <QuadCurveTo controlX="500.0" controlY="500.0" y="400.0" />
+         </elements>
+      </Path>
       <ImageView fitHeight="666.0" fitWidth="1100.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Gym.jpg" />
@@ -29,7 +51,7 @@
             <Shadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="ghost1" fitHeight="192.0" fitWidth="191.0" layoutX="597.0" layoutY="139.0" onMouseEntered="#onEnterGhost" onMouseExited="#onExitGhost" opacity="0.6" pickOnBounds="true" visible="false">
+      <ImageView fx:id="ghost1" fitHeight="192.0" fitWidth="191.0" layoutX="850.0" layoutY="50.0" onMouseEntered="#onEnterGhost" onMouseExited="#onExitGhost" opacity="0.6" pickOnBounds="true" visible="false">
          <image>
             <Image url="@../images/ghost.png" />
          </image>
@@ -69,11 +91,6 @@
                </effect>
             </ImageView>
          </children></Pane>
-      <ImageView fx:id="ghost" fitHeight="192.0" fitWidth="191.0" layoutX="881.0" layoutY="75.0" onMouseClicked="#onClickGhost" onMouseEntered="#onEnterGhost" onMouseExited="#onExitGhost" opacity="0.6" pickOnBounds="true">
-         <image>
-            <Image url="@../images/ghost.png" />
-         </image>
-      </ImageView>
       <Rectangle fx:id="exitDoor" arcHeight="5.0" arcWidth="5.0" fill="#69839a" height="99.0" layoutX="806.0" layoutY="384.0" onMouseClicked="#exitDoorClicked" onMouseEntered="#exitDoorEntered" onMouseExited="#exitDoorExited" opacity="0.3" stroke="BLACK" strokeType="INSIDE" width="51.0" />
       <ImageView fitHeight="30.0" fitWidth="39.0" layoutX="529.0" layoutY="252.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -112,6 +129,11 @@
       <ImageView fx:id="greenButton" fitHeight="16.0" fitWidth="26.0" layoutX="776.0" layoutY="430.0" onMouseClicked="#greenButtonClicked" onMouseEntered="#greenEntered" onMouseExited="#greenExited" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/greenButton.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="ghost" fitHeight="192.0" fitWidth="191.0" layoutX="600.0" layoutY="200.0" onMouseClicked="#onClickGhost" onMouseEntered="#onEnterGhost" onMouseExited="#onExitGhost" opacity="0.4" pickOnBounds="true">
+         <image>
+            <Image url="@../images/ghost.png" />
          </image>
       </ImageView>
    </children>
