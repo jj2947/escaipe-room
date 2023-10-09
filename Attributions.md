@@ -33,3 +33,6 @@ locker.jpeg
 
 greenButton.png
 <a href="https://www.freepik.com/free-vector/abstract-web-elements-set-with-colorful-blank-glossy-round-buttons-white-isolated_11242743.htm#query=green%20button&position=4&from_view=search&track=ais">Image by macrovector</a> on Freepik
+
+speaker.png
+<a href="https://thenounproject.com/icon/speaker-button-899261/">licensed under <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>
