@@ -121,6 +121,7 @@ public class RoomController {
     chatButton.toFront();
   }
 
+  /** Called while GPT is loading. It is used to add effects to the room. */
   public void responseLoading() {
     ghost.setEffect(shadow);
     Random random = new Random();
@@ -167,6 +168,7 @@ public class RoomController {
     }
   }
 
+  /** Called when the response has loaded, it is used to remove the effects from the room. */
   public void responseLoaded() {
     // Remove all the effects from room
     Platform.runLater(
@@ -230,6 +232,7 @@ public class RoomController {
     GameState.hallController.addBlackboard();
   }
 
+  /** Handles the click on the chat. */
   @FXML
   private void onClickChat() {
 
@@ -247,6 +250,7 @@ public class RoomController {
     }
   }
 
+  /** Opens the chat in this scene. */
   public void openChat() {
     GameState.chatInGym = false;
     GameState.chatInHall = false;
@@ -265,13 +269,14 @@ public class RoomController {
     chatButton.setOpacity(0.5);
   }
 
+  /** Handles the click event on the ghost. */
   @FXML
   private void onClickGhost() {
     if (!GameState.isChatOpen) { // If chat is not open, open the chat and move the ghost
       onClickChat();
       Platform.runLater(() -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
     } else if (!isSpeechBubbleShowing) { // If chat is open and speech bubble is not showing, move
-                                         // the ghost
+      // the ghost
       Platform.runLater(() -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
       ghostMoving = true;
     }
@@ -510,6 +515,7 @@ public class RoomController {
     mapRectangle.setVisible(false);
   }
 
+  /** Shows the map and hides the classroom. Used when the map is opened. */
   public void showWhenOnMap() {
     mapImage.setVisible(true);
     classroomImage.setOpacity(0.5);
@@ -517,6 +523,7 @@ public class RoomController {
     backRect.setVisible(true);
   }
 
+  /** Hides the map and shows the classroom. Used when the map is exited. */
   public void hideAfterMap() {
     mapImage.setVisible(false);
     classroomImage.setOpacity(1);
@@ -524,6 +531,7 @@ public class RoomController {
     backRect.setVisible(false);
   }
 
+  /** Disables the map and door. Used when the map is opened. */
   public void disableWhileMapOpen() {
     mapEllipse.setDisable(true);
     mapRectangleOne.setDisable(true);
@@ -531,6 +539,7 @@ public class RoomController {
     door.setDisable(true);
   }
 
+  /** Enables the map and door. Used when the map is closed. */
   public void enableWithMapClose() {
     mapEllipse.setDisable(false);
     mapRectangleOne.setDisable(false);
@@ -538,6 +547,7 @@ public class RoomController {
     door.setDisable(false);
   }
 
+  /** Enables all the countries. Used when the map is opened. */
   public void enableCountries() {
 
     nzMap.setVisible(true);
@@ -583,6 +593,7 @@ public class RoomController {
     russiaMapSeven.setVisible(true);
   }
 
+  /** Disables all the countries. Used when the map is exited. */
   public void disableCounties() {
     // Disabling New Zealand
     nzMap.setVisible(false);
@@ -628,6 +639,12 @@ public class RoomController {
     russiaMapSeven.setVisible(false);
   }
 
+  /**
+   * Checks if the country is the one to find.
+   *
+   * @param country the country to check
+   * @return true if the country is the one to find, false otherwise
+   */
   public boolean isTheCountry(String country) {
     // Checking to see if the country is the one to find
     if (GameState.isRiddleResolved
@@ -672,6 +689,11 @@ public class RoomController {
     return false;
   }
 
+  /**
+   * Sets the speech bubble to the input text.
+   *
+   * @param text
+   */
   private void setSpeechBubble(String text) {
     isSpeechBubbleShowing = true;
     Platform.runLater(
@@ -702,7 +724,7 @@ public class RoomController {
     pause.play();
   }
 
-  /** Fades the scene in */
+  /** Fades the scene in. */
   public void fadeIn() {
     FadeTransition fadeTransitionIn = new FadeTransition(Duration.seconds(1), room);
     room.setOpacity(0);
