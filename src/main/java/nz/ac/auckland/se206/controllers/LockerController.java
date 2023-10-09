@@ -450,7 +450,7 @@ public class LockerController {
     // Play the animation
     pathTransition.play();
   }
-  
+
   public void updateHintButton() {
     if (GameState.numberOfHints == 0) {
       helpButton.setDisable(true);
@@ -465,6 +465,7 @@ public class LockerController {
 
   public void enableHelpButton() {
     helpButton.setDisable(false);
+  }
 
   @FXML
   private void enterSpeaker() {
@@ -483,6 +484,5 @@ public class LockerController {
 
   public Line getLine() {
     return line;
-
   }
 }
