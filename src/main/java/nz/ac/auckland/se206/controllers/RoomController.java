@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Path;
 import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
@@ -95,6 +96,8 @@ public class RoomController {
   @FXML private Path path;
   @FXML private ImageView ghostSpeechBubble;
   @FXML private Label speechBubbleLabel;
+  @FXML private ImageView speaker;
+  @FXML private Line line;
   private Shadow shadow = new Shadow(10, Color.BLACK);
   private Glow glow = new Glow(0.8);
   private boolean playForward = true;
@@ -731,5 +734,24 @@ public class RoomController {
     fadeTransitionIn.setFromValue(0);
     fadeTransitionIn.setToValue(1);
     fadeTransitionIn.play();
+  }
+
+  @FXML
+  private void enterSpeaker() {
+    speaker.setOpacity(0.5);
+  }
+
+  @FXML
+  private void exitSpeaker() {
+    speaker.setOpacity(1);
+  }
+
+  @FXML
+  private void clickSpeaker() {
+    GameState.clickSpeaker();
+  }
+
+  public Line getLine() {
+    return line;
   }
 }

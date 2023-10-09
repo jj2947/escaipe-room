@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Path;
 import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
@@ -49,6 +50,8 @@ public class GymnasiumController {
   @FXML private Path path;
   @FXML private ImageView ghostSpeechBubble;
   @FXML private Label speechBubbleLabel;
+  @FXML private ImageView speaker;
+  @FXML private Line line;
   private boolean playForward = true;
   private boolean ghostMoving = false;
   private boolean isSpeechBubbleShowing = false;
@@ -387,5 +390,24 @@ public class GymnasiumController {
 
     // Start the pause transition
     pause.play();
+  }
+
+  @FXML
+  private void enterSpeaker() {
+    speaker.setOpacity(0.5);
+  }
+
+  @FXML
+  private void exitSpeaker() {
+    speaker.setOpacity(1);
+  }
+
+  @FXML
+  private void clickSpeaker() {
+    GameState.clickSpeaker();
+  }
+
+  public Line getLine() {
+    return line;
   }
 }
