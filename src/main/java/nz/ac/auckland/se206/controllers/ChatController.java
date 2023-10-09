@@ -36,10 +36,13 @@ public class ChatController {
   private ChatCompletionRequest hintChatCompletionRequest;
   private ChatCompletionRequest factChatCompletionRequest =
       new ChatCompletionRequest().setN(1).setTemperature(1).setTopP(0.5).setMaxTokens(100);
+  private ChatCompletionRequest digitChatCompletionRequest =
+      new ChatCompletionRequest().setN(1).setTemperature(.5).setTopP(1).setMaxTokens(100);
   private ChatMessage chatMsg;
   private CountryChoice countryChooser = new CountryChoice();
   private String country;
   private boolean isFunFact = false;
+  private boolean isDigitButton = false;
 
   /**
    * Initializes the chat view, loading the riddle.
@@ -94,14 +97,20 @@ public class ChatController {
    */
   private ChatMessage runGpt(ChatMessage msg, String type) throws ApiProxyException {
     isFunFact = false;
+    isDigitButton = false;
     ChatCompletionRequest chatToUse;
     if (type == "normal") {
       chatToUse = chatCompletionRequest;
     } else if (type == "hints") {
       chatToUse = hintChatCompletionRequest;
-    } else {
+    } else if (type == "fact") {
       chatToUse = factChatCompletionRequest;
       isFunFact = true;
+    } else if (type == "digit") {
+      chatToUse = digitChatCompletionRequest;
+      isDigitButton = true;
+    } else {
+      chatToUse = null;
     }
 
     appendChatMessage(new ChatMessage("assistant", "Ghost is Writing..."));
@@ -152,6 +161,7 @@ public class ChatController {
                     inputText.setDisable(false);
                     if (GameState.numberOfHints != 0) {
                       hintButton.setDisable(false);
+                      GameState.lockerController.enableHelpButton();
                     }
                     // If gpt has just given a fun fact run the new prompt for new state
                     if (isFunFact) {
@@ -162,6 +172,9 @@ public class ChatController {
                               .setTopP(0.5)
                               .setMaxTokens(100),
                           "state3");
+                    }
+                    if (isDigitButton) {
+                      GameState.currentState = "state3";
                     }
                   });
               // Stop the loading effects
@@ -193,6 +206,7 @@ public class ChatController {
     gptThread.start();
     inputText.setDisable(true);
     hintButton.setDisable(true);
+    GameState.lockerController.disableHelpButton();
     return chatMsg;
   }
 
@@ -311,24 +325,31 @@ public class ChatController {
 
   @FXML
   public void hintClicked() {
-    GameState.numberOfHints--;
-    updateHintCounter();
-    if (GameState.numberOfHints == 0) {
-      hintButton.setDisable(true);
-    }
+    updateGameAndGuiHints();
+    // GPT part of hint clicked
     if (hintChatCompletionRequest.getMessages().size() < 2) {
       // Run with prompt
       try {
-        runGpt(
-            new ChatMessage("user", GptPromptEngineering.apiGetHints(GameState.currentState)),
-            "hints");
+        if (GameState.currentState != "state5") {
+          runGpt(
+              new ChatMessage("user", GptPromptEngineering.apiGetHints(GameState.currentState)),
+              "hints");
+        } else {
+          runGpt(
+              new ChatMessage("user", GptPromptEngineering.apiGetHints(GameState.currentState)),
+              "digit");
+        }
       } catch (ApiProxyException e) {
         e.printStackTrace();
       }
     } else {
       // Run with user
       try {
-        runGpt(new ChatMessage("user", "another hint"), "hints");
+        if (GameState.currentState != "state5") {
+          runGpt(new ChatMessage("user", "another hint"), "hints");
+        } else {
+          runGpt(new ChatMessage("user", "another digit"), "digit");
+        }
       } catch (ApiProxyException e) {
         e.printStackTrace();
       }
@@ -345,6 +366,16 @@ public class ChatController {
       runGpt(new ChatMessage("user", GptPromptEngineering.getFunFact()), "fact");
     } catch (Exception e) {
       e.printStackTrace();
+    }
+  }
+
+  public void updateGameAndGuiHints() {
+    // GUI aspects of hint being clicked Going to be extracted to new funciton
+    GameState.numberOfHints--;
+    GameState.lockerController.updateHintButton();
+    updateHintCounter();
+    if (GameState.numberOfHints == 0) {
+      hintButton.setDisable(true);
     }
   }
 }

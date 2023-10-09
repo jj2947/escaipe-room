@@ -71,10 +71,8 @@ public class LockerController {
       randNum1 = (int) (Math.random() * 10000);
     }
     GameState.lockerController = this;
+    GameState.pinAnswer = randNum + randNum1;
     chatLabel.setText("What is " + randNum1 + " + " + randNum + "?");
-    if (GameState.numberOfHints == 0) {
-      helpButton.setDisable(true);
-    }
   }
 
   @FXML
@@ -196,6 +194,7 @@ public class LockerController {
     if (!GameState.isChatOpen) {
       onClickChat();
     }
+    GameState.currentState = "state5";
     GameState.chatController.hintClicked();
     if (GameState.numberOfHints == 0) {
       helpButton.setDisable(true);
@@ -447,5 +446,21 @@ public class LockerController {
 
     // Play the animation
     pathTransition.play();
+  }
+
+  public void updateHintButton() {
+    if (GameState.numberOfHints == 0) {
+      helpButton.setDisable(true);
+    } else {
+      helpButton.setDisable(false);
+    }
+  }
+
+  public void disableHelpButton() {
+    helpButton.setDisable(true);
+  }
+
+  public void enableHelpButton() {
+    helpButton.setDisable(false);
   }
 }
