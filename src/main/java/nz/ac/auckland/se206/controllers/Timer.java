@@ -45,6 +45,7 @@ public class Timer {
                 }));
   }
 
+  /** Starts the timer. */
   public void startTimer() {
     counter =
         GameState.totalTime; // Setting value to the number of time choosen at the start of the game
@@ -83,6 +84,13 @@ public class Timer {
     counter = time;
   }
 
+  /**
+   * Sets the timer labels in the classroom scene.
+   *
+   * @param lab the classroom timer label
+   * @param lab2 place to hide number in classroom
+   * @param lab3 place to hide number in classroom
+   */
   public void setClass(Label lab, Label lab2, Label lab3) {
     // Timerlabel in Classroom
     classroomLabel = lab;
@@ -91,6 +99,13 @@ public class Timer {
     update();
   }
 
+  /**
+   * Sets the timer labels in the hallway scene.
+   *
+   * @param lab the hallway timer label
+   * @param lab2 place to hide number in hallway
+   * @param lab3 place to hide number in hallway
+   */
   public void setHall(Label lab, Label lab2, Label lab3) {
     // Timerlabel in Hallway
     hallwayLabel = lab;
@@ -99,6 +114,13 @@ public class Timer {
     update();
   }
 
+  /**
+   * Sets the timer labels in the gym scene.
+   *
+   * @param lab the gym timer label
+   * @param lab2 place to hide number in gym
+   * @param lab3 place to hide number in gym
+   */
   public void setGym(Label lab, Label lab2, Label lab3) {
     // Timerlabel in Gym
     gymLabel = lab;
@@ -112,6 +134,7 @@ public class Timer {
     update();
   }
 
+  /** Updates the timer labels in the different scenes. */
   public void update() {
     // If all three rooms have been loaded the timeline is started synching there label changes
     if (classroomLabel != null && hallwayLabel != null && gymLabel != null && lockerLabel != null) {
@@ -126,6 +149,7 @@ public class Timer {
     }
   }
 
+  /** Updates the timer labels in the different scenes. */
   public void updateLabels() {
     // Formatted time and then setting all the timer labels to that time
     String timeCurrent = String.format("%d:%02d", counter / 60, counter % 60);
@@ -135,6 +159,7 @@ public class Timer {
     lockerLabel.setText(timeCurrent);
   }
 
+  /** Method that is called when the timer reaches 0. Switches to the end scene. */
   public void timeIsUp() {
     timeline.stop();
     // Finding out which scene we are currently in
@@ -162,6 +187,7 @@ public class Timer {
         });
   }
 
+  /** Method that controls the text to speech. */
   private void startTextToSpeech() {
     if (GameState.isMuted) {
       return;
@@ -198,6 +224,7 @@ public class Timer {
     }
   }
 
+  /** Resets the timer. */
   public void reset() {
     counter = -1;
     if (countdownThread != null && countdownThread.isAlive()) {
