@@ -73,7 +73,7 @@ public class GymnasiumController {
    * Called when the hallway door is clicked. Switches to the hallway scene.
    *
    * @param event the event that triggered this method
-   * @throws IOException
+   * @throws IOException if an error occurs when loading the fxml file
    */
   @FXML
   public void clickHallDoor(MouseEvent event) throws IOException {
@@ -209,19 +209,6 @@ public class GymnasiumController {
   }
 
   @FXML
-  private void onExitGhost() {
-    if (ghostMoving == false) {
-      ghost.setEffect(null);
-    }
-  }
-
-  @FXML
-  private void onEnterGhost() {
-    ghostMoving = false;
-    ghost.setEffect(shadow);
-  }
-
-  @FXML
   private void releaseChat() {
     chatButton.setOpacity(1);
   }
@@ -330,6 +317,7 @@ public class GymnasiumController {
     GameState.chatInGym = true;
   }
 
+  /** Adds the blackboard to the scene. */
   public void addBlackboard() {
     // Adding the blackboard to the scene
     blackboardContainer.getChildren().add(GameState.blackboardController.getPane());
@@ -375,7 +363,6 @@ public class GymnasiumController {
       case 3:
         Platform.runLater(
             () -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
-      default:
         break;
     }
   }
@@ -433,6 +420,19 @@ public class GymnasiumController {
   @FXML
   private void clickSpeaker() {
     GameState.clickSpeaker();
+  }
+
+  @FXML
+  private void onExitGhost() {
+    if (ghostMoving == false) {
+      ghost.setEffect(null);
+    }
+  }
+
+  @FXML
+  private void onEnterGhost() {
+    ghostMoving = false;
+    ghost.setEffect(shadow);
   }
 
   public Line getLine() {

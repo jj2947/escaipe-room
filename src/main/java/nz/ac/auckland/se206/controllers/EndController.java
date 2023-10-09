@@ -13,6 +13,7 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
+/** Controller for the end screen. */
 public class EndController {
 
   @FXML private Label textLabel;
@@ -39,7 +40,7 @@ public class EndController {
   }
 
   /**
-   * Restarts the game.
+   * Restarts the game. Is called when the restart button is pressed.
    *
    * @throws IOException if an error occurs when loading the fxml file
    */
@@ -105,7 +106,7 @@ public class EndController {
   }
 
   /**
-   * Loads a scene asynchronously.
+   * Loads a scene asynchronously. This is used when the user reatsrts the game.
    *
    * @param ui AppUi enum
    * @param fxmlFileName name of fxml file

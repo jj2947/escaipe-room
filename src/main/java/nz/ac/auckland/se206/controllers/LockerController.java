@@ -23,6 +23,7 @@ import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 
+/** This is the controller for the locker scene. */
 public class LockerController {
   @FXML private Label timerLabel;
   @FXML private ImageView note1;
@@ -40,7 +41,7 @@ public class LockerController {
   @FXML private Button zeroButton;
   @FXML private Button enterButton;
   @FXML private TextField textField;
-  @FXML private Button helpButton;
+  @FXML public Button helpButton;
   @FXML private Button backButton;
   @FXML private Button clearButton;
   @FXML private Label chatLabel;
@@ -76,9 +77,6 @@ public class LockerController {
     }
     GameState.lockerController = this;
     chatLabel.setText("What is " + randNum1 + " + " + randNum + "?");
-    if (GameState.numberOfHints == 0) {
-      helpButton.setDisable(true);
-    }
   }
 
   /** Called when the chat button is clicked. */
@@ -439,7 +437,6 @@ public class LockerController {
         break;
       case 3:
         Platform.runLater(() -> moveGhost());
-      default:
         break;
     }
   }

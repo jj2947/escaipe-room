@@ -2,6 +2,7 @@ package nz.ac.auckland.se206.controllers;
 
 import java.util.Map;
 
+/** This class is used to choose a random country from a map of countries. */
 public class CountryChoice {
   private int random;
 

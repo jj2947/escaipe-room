@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import nz.ac.auckland.se206.GameState;
 
+/** This is the controller for the blackboard. */
 public class BlackboardController {
 
   @FXML private AnchorPane blackboardPane;

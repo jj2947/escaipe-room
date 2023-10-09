@@ -21,6 +21,7 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
+/** This is the controller for the hallway scene. */
 public class HallwayController {
 
   @FXML private Pane room;
@@ -64,6 +65,7 @@ public class HallwayController {
     GameState.hallController = this;
   }
 
+  /** Called when the blackboard is clicked. It adds the blackboard to the scene. */
   public void addBlackboard() {
     // Adding the blackboard to the scene
     blackboardContainer.getChildren().add(GameState.blackboardController.getPane());
@@ -74,7 +76,7 @@ public class HallwayController {
    * Called when the classroom door is clicked. It switches the scene to the classroom.
    *
    * @param event the event that triggered this method
-   * @throws IOException
+   * @throws IOException if the fxml file is not found
    */
   @FXML
   public void clickClassroomDoor(MouseEvent event) throws IOException {
@@ -101,7 +103,7 @@ public class HallwayController {
    * Called when the gym door is clicked. It switches the scene to the gym.
    *
    * @param event the event that triggered this method
-   * @throws IOException
+   * @throws IOException if the fxml file is not found
    */
   @FXML
   public void clickGymDoor(MouseEvent event) throws IOException {
@@ -128,7 +130,7 @@ public class HallwayController {
    * Called when the locker is clicked. It switches the scene to the locker.
    *
    * @param event the event that triggered this method
-   * @throws IOException
+   * @throws IOException if the fxml file is not found
    */
   @FXML
   public void clickLocker(MouseEvent event) throws IOException {
@@ -138,6 +140,9 @@ public class HallwayController {
       if (isFirstTimeLockerClicked) {
         GameState.textFlow.getChildren().clear();
         isFirstTimeLockerClicked = false;
+        if (GameState.numberOfHints == 0) {
+          GameState.lockerController.helpButton.setDisable(true);
+        }
       }
       if (GameState.isChatOpen) {
         Stage stage = (Stage) chatContainer.getScene().getWindow();
@@ -311,7 +316,6 @@ public class HallwayController {
       case 3:
         Platform.runLater(
             () -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
-      default:
         break;
     }
   }
