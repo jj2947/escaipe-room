@@ -14,6 +14,7 @@ import javafx.scene.effect.Shadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Path;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -55,6 +56,8 @@ public class LockerController {
   @FXML private Label noteLabel1;
   @FXML private Label noteLabel2;
   @FXML private Path path;
+  @FXML private ImageView speaker;
+  @FXML private Line line;
   private int numsEntered = 0;
   private int randNum;
   private int randNum1 = 0;
@@ -447,7 +450,7 @@ public class LockerController {
     // Play the animation
     pathTransition.play();
   }
-
+  
   public void updateHintButton() {
     if (GameState.numberOfHints == 0) {
       helpButton.setDisable(true);
@@ -462,5 +465,24 @@ public class LockerController {
 
   public void enableHelpButton() {
     helpButton.setDisable(false);
+
+  @FXML
+  private void enterSpeaker() {
+    speaker.setOpacity(0.5);
+  }
+
+  @FXML
+  private void exitSpeaker() {
+    speaker.setOpacity(1);
+  }
+
+  @FXML
+  private void clickSpeaker() {
+    GameState.clickSpeaker();
+  }
+
+  public Line getLine() {
+    return line;
+
   }
 }

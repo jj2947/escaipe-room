@@ -79,6 +79,8 @@ public class GameState {
 
   public static TextFlow textFlow;
 
+  public static boolean isMuted = false;
+
   public static void setNewNumbers() {
     // Generating random numbers to find
     int randomNum1 = (int) Math.floor(Math.random() * (7 - 1 + 1) + 1);
@@ -129,5 +131,23 @@ public class GameState {
     // Toggle the playForward flag for the next call
     playForward = !playForward;
     return playForward;
+  }
+
+  public static void clickSpeaker() {
+    if (GameState.isMuted) { // Unmutes the game
+      System.out.println("Unmuted");
+      GameState.isMuted = false;
+      hallController.getLine().setVisible(false);
+      lockerController.getLine().setVisible(false);
+      gymController.getLine().setVisible(false);
+      roomController.getLine().setVisible(false);
+    } else { // Mutes the game
+      System.out.println("Muted");
+      GameState.isMuted = true;
+      hallController.getLine().setVisible(true);
+      lockerController.getLine().setVisible(true);
+      gymController.getLine().setVisible(true);
+      roomController.getLine().setVisible(true);
+    }
   }
 }
