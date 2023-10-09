@@ -163,6 +163,9 @@ public class Timer {
   }
 
   private void startTextToSpeech() {
+    if (GameState.isMuted) {
+      return;
+    }
     if ((counter % 30 == 0 && counter != 0) || counter == 10 || counter == 5) {
       Task<Void> speakTask =
           new Task<Void>() {
@@ -183,7 +186,6 @@ public class Timer {
               } else {
                 sentence = String.format("%d seconds", seconds);
               }
-
               textToSpeech.speak(sentence);
               return null;
             }
