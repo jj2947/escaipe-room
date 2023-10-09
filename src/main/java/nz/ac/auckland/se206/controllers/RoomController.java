@@ -25,7 +25,7 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
-/** Controller class for the room view. */
+/** This is the Controller class for the room view. */
 public class RoomController {
 
   @FXML private Pane room;
@@ -166,7 +166,6 @@ public class RoomController {
       case 3:
         Platform.runLater(
             () -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
-      default:
         break;
     }
   }

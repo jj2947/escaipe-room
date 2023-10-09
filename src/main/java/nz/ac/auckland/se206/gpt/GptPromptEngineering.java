@@ -13,6 +13,12 @@ public class GptPromptEngineering {
           + " Let the player understand you are a ghost. Become this character immediately, and"
           + " stay in character, no matter the response from the player. ";
 
+  /**
+   * Generates a prompt for the GPT-3 API to use when the user has used all their hints.
+   *
+   * @param gamestate the current gamestate
+   * @return a prompt for the GPT-3 API to use
+   */
   public static String apiNoHints(String gamestate) {
     // States
     // state1: Solve Riddle

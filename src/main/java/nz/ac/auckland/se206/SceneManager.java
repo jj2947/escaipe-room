@@ -3,8 +3,10 @@ package nz.ac.auckland.se206;
 import java.util.HashMap;
 import javafx.scene.Parent;
 
+/** This class is used to manage the different scenes in the game. */
 public class SceneManager {
 
+  /** An enum that represents the different scenes in the game. */
   public enum AppUi {
     CHAT,
     ROOM,
