@@ -108,10 +108,11 @@ public class LockerController {
 
   @FXML
   private void onClickGhost() {
+    // If the chat is not open, open the chat and move the ghost
     if (!GameState.isChatOpen) {
       onClickChat();
       Platform.runLater(() -> moveGhost());
-    } else {
+    } else { // If the chat is open, just move the ghost
       Platform.runLater(() -> moveGhost());
       isGhostMoving = true;
     }
@@ -193,11 +194,12 @@ public class LockerController {
   @FXML
   private void onClickHelp() {
     System.out.println("help button clicked");
-    if (!GameState.isChatOpen) {
+    if (!GameState.isChatOpen) { // If the chat is not open, open the chat
       onClickChat();
     }
+    // Send a hint to the chat
     GameState.chatController.hintClicked();
-    if (GameState.numberOfHints == 0) {
+    if (GameState.numberOfHints == 0) { // If there are no more hints, disable the hint button
       helpButton.setDisable(true);
     }
   }

@@ -267,10 +267,11 @@ public class RoomController {
 
   @FXML
   private void onClickGhost() {
-    if (!GameState.isChatOpen) {
+    if (!GameState.isChatOpen) { // If chat is not open, open the chat and move the ghost
       onClickChat();
       Platform.runLater(() -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
-    } else if (!isSpeechBubbleShowing) {
+    } else if (!isSpeechBubbleShowing) { // If chat is open and speech bubble is not showing, move
+                                         // the ghost
       Platform.runLater(() -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
       ghostMoving = true;
     }

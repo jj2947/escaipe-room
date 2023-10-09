@@ -175,21 +175,12 @@ public class GymnasiumController {
   }
 
   @FXML
-  private void releaseChat() {
-    chatButton.setOpacity(1);
-  }
-
-  @FXML
-  private void enterChatButton() {
-    chatButton.setOpacity(0.5);
-  }
-
-  @FXML
   private void onClickGhost() {
+    // If the chat is not open, open it and move the ghost
     if (!GameState.isChatOpen) {
       onClickChat();
       Platform.runLater(() -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
-    } else if (!isSpeechBubbleShowing) {
+    } else if (!isSpeechBubbleShowing) { // If the chat is open, just move the ghost
       Platform.runLater(() -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
       ghostMoving = true;
     }
@@ -206,6 +197,16 @@ public class GymnasiumController {
   private void onEnterGhost() {
     ghostMoving = false;
     ghost.setEffect(shadow);
+  }
+
+  @FXML
+  private void releaseChat() {
+    chatButton.setOpacity(1);
+  }
+
+  @FXML
+  private void enterChatButton() {
+    chatButton.setOpacity(0.5);
   }
 
   @FXML

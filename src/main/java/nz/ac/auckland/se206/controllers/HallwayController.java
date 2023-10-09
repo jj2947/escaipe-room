@@ -191,10 +191,12 @@ public class HallwayController {
 
   @FXML
   private void onClickGhost() {
+    // If the chat is not open, open it and move the ghost
     if (!GameState.isChatOpen) {
       onClickChat();
       Platform.runLater(() -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
-    } else if (!isSpeechBubbleShowing) {
+    } else if (!isSpeechBubbleShowing) { // If the chat is open, but the speech bubble is not
+                                         // showing, move the ghost
       Platform.runLater(() -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
       ghostMoving = true;
     }
@@ -226,22 +228,25 @@ public class HallwayController {
 
   @FXML
   public void locker1Entered() {
-    if (GameState.countryIsFound) {
+    if (GameState.countryIsFound) { // If the country is found, the locker is unlocked
       GameState.blackboardController.setHoverText("Locker");
     } else {
       GameState.blackboardController.setHoverText("Locker is locked");
     }
+    // Make the locker visible
     lockerRectangle.setVisible(true);
     lockerRectangle2.setVisible(true);
   }
 
   @FXML
   public void locker2Entered() {
+    // If the country is found, the locker is unlocked
     if (GameState.countryIsFound) {
       GameState.blackboardController.setHoverText("Locker");
     } else {
       GameState.blackboardController.setHoverText("Locker is locked");
     }
+    // Make the locker visible
     lockerRectangle3.setVisible(true);
     lockerRectangle4.setVisible(true);
   }
@@ -275,8 +280,9 @@ public class HallwayController {
         ghost1.setEffect(shadow);
         messageText.toFront();
         break;
-        case 3:
-        Platform.runLater(() -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
+      case 3:
+        Platform.runLater(
+            () -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
       default:
         break;
     }
