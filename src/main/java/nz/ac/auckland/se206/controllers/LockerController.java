@@ -41,7 +41,7 @@ public class LockerController {
   @FXML private Button zeroButton;
   @FXML private Button enterButton;
   @FXML private TextField textField;
-  @FXML public Button helpButton;
+  @FXML private Button helpButton;
   @FXML private Button backButton;
   @FXML private Button clearButton;
   @FXML private Label chatLabel;
@@ -501,5 +501,9 @@ public class LockerController {
 
   public Line getLine() {
     return line;
+  }
+
+  public Button getHintButton() {
+    return helpButton;
   }
 }
