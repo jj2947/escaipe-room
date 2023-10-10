@@ -25,6 +25,9 @@ import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 
+/**
+ * This is the Controller for the gymnasium scene.
+ */
 public class GymnasiumController {
 
   @FXML private Label timerLabel;

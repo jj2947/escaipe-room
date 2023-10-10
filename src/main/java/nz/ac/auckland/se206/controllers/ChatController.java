@@ -324,7 +324,7 @@ public class ChatController {
     }
   }
 
-  /** Updates the hint counter. */
+  /** Updates the hint counter. It is called when the hint button is pressed. */
   private void updateHintCounter() {
     if (GameState.numberOfHints < 0) {
       hintLabel.setText("Hints: ∞");
@@ -340,7 +340,7 @@ public class ChatController {
     updateHintCounter();
     if (GameState.numberOfHints == 0) {
       hintButton.setDisable(true);
-      GameState.lockerController.helpButton.setDisable(true);
+      GameState.lockerController.getHintButton().setDisable(true);
     }
     if (hintChatCompletionRequest.getMessages().size() < 2) {
       // Run with prompt

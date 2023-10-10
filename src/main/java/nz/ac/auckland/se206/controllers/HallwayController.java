@@ -141,7 +141,7 @@ public class HallwayController {
         GameState.textFlow.getChildren().clear();
         isFirstTimeLockerClicked = false;
         if (GameState.numberOfHints == 0) {
-          GameState.lockerController.helpButton.setDisable(true);
+          GameState.lockerController.getHintButton().setDisable(true);
         }
       }
       if (GameState.isChatOpen) {

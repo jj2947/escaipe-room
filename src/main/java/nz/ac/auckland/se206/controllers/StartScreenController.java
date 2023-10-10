@@ -113,7 +113,7 @@ public class StartScreenController {
     GameState.timer.setCounter(240);
   }
 
-  /** Setting time to Six. */
+  /** Setting time to complete the game Six. */
   @FXML
   private void onClickSix() {
     timeButtonClicked(sixButton);
