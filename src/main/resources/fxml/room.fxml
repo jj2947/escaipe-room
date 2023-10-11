@@ -25,7 +25,7 @@
             <Image url="@../images/speechBubble2.png" />
          </image>
       </ImageView>
-      <Label fx:id="speechBubbleLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="162.0" layoutY="238.0" prefHeight="158.0" prefWidth="240.0" textAlignment="CENTER" visible="false" wrapText="true">
+      <Label fx:id="speechBubbleLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="162.0" layoutY="238.0" prefHeight="158.0" prefWidth="240.0" styleClass="speechBubble" stylesheets="@../css/stylesheet.css" textAlignment="CENTER" visible="false" wrapText="true">
          <font>
             <Font name="Luminari" size="38.0" />
          </font></Label>
@@ -84,7 +84,7 @@
             <Font size="45.0" />
          </font>
       </Label>
-      <Label fx:id="exitLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="945.0" layoutY="28.0" opacity="0.33" prefHeight="36.0" prefWidth="98.0" style="-fx-background-color: green;" text="EXIT" textFill="WHITE">
+      <Label fx:id="exitLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="945.0" layoutY="28.0" opacity="0.33" prefHeight="36.0" prefWidth="98.0" styleClass="exitLabel" stylesheets="@../css/stylesheet.css" text="EXIT" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="27.0" />
          </font>

@@ -24,7 +24,7 @@
             <Image url="@../images/speechBubble2.png" />
          </image>
       </ImageView>
-      <Label fx:id="speechBubbleLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="739.0" layoutY="29.0" prefHeight="158.0" prefWidth="240.0" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="speechBubbleLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="739.0" layoutY="29.0" prefHeight="158.0" prefWidth="240.0" styleClass="speechBubble" stylesheets="@../css/stylesheet.css" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Luminari" size="38.0" />
          </font>
@@ -66,14 +66,14 @@
       <Rectangle fx:id="hallwayDoor" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="93.0" layoutX="212.0" layoutY="383.0" onMouseClicked="#clickHallDoor" onMouseEntered="#hallwayDoorEntered" onMouseExited="#hallwayDoorExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="78.0" />
       <Label fx:id="hiddenNumberOne" layoutX="287.0" layoutY="113.0" opacity="0.71" stylesheets="@../css/blackboardStylesheet.css" textFill="#d2bfdb" />
       <Label fx:id="hiddenNumberTwo" layoutX="803.0" layoutY="113.0" opacity="0.69" stylesheets="@../css/blackboardStylesheet.css" textFill="#d2bfdb" />
-      <Label fx:id="exitLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="227.0" layoutY="365.0" opacity="0.5" prefHeight="14.0" prefWidth="51.0" style="-fx-background-color: green;" text="EXIT" textFill="WHITE">
+      <Label fx:id="exitLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="227.0" layoutY="365.0" opacity="0.5" prefHeight="14.0" prefWidth="51.0" styleClass="exitLabel" stylesheets="@../css/stylesheet.css" text="EXIT" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="12.0" />
          </font>
       </Label>
       <HBox alignment="CENTER" layoutY="295.0" prefHeight="4.0" prefWidth="1100.0">
          <children>
-            <Label fx:id="goalLabel" layoutX="-5.0" prefHeight="36.0" prefWidth="32.0" text="00" textFill="#eaff00">
+            <Label fx:id="goalLabel" alignment="CENTER" layoutX="-5.0" prefHeight="36.0" prefWidth="71.0" styleClass="backboardLabel" stylesheets="@../css/stylesheet.css" text="00" textAlignment="CENTER" textFill="#eaff00">
                <font>
                   <Font name="DIN Alternate Bold" size="31.0" />
                </font>

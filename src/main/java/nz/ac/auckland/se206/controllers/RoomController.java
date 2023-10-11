@@ -683,9 +683,6 @@ public class RoomController {
       GameState.chatController.sayFact();
       GameState.currentState = "state3";
       GameState.chatController.newStateHint();
-      if (!GameState.isChatOpen) {
-        onClickChat();
-      }
       GameState.isGhostTalking = false;
       return true;
     }

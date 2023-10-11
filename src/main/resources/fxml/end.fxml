@@ -25,7 +25,7 @@
             <ColorAdjust brightness="-0.5" />
          </effect>
       </ImageView>
-      <Label fx:id="textLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="183.0" layoutY="264.0" prefHeight="125.0" prefWidth="734.0" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="textLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="183.0" layoutY="264.0" prefHeight="125.0" prefWidth="734.0" styleClass="chalkduster" stylesheets="@../css/start.css" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Chalkduster" size="80.0" />
          </font>

@@ -131,9 +131,6 @@ public class GymnasiumController {
         setSpeechBubble("Too high to reach");
         GameState.isGhostTalking = false;
       }
-      if (!GameState.isChatOpen) {
-        onClickChat();
-      }
     }
   }
 
@@ -166,9 +163,6 @@ public class GymnasiumController {
       } else {
         setSpeechBubble("Door is locked");
         GameState.isGhostTalking = false;
-      }
-      if (!GameState.isChatOpen) {
-        onClickChat();
       }
     }
   }

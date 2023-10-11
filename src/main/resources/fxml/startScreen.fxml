@@ -29,7 +29,7 @@
       </ImageView>
       <VBox alignment="TOP_CENTER" layoutY="30.0" prefHeight="51.0" prefWidth="1100.0">
          <children>
-            <Label fx:id="titleLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="42.0" prefWidth="646.0" text="Welcome To EscAIpe Room" textAlignment="CENTER" textFill="WHITE">
+            <Label fx:id="titleLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="42.0" prefWidth="646.0" styleClass="chalkduster" stylesheets="@../css/start.css" text="Welcome To EscAIpe Room" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Chalkduster" size="30.0" />
                </font></Label>
@@ -37,28 +37,28 @@
       </VBox>
       <VBox alignment="CENTER" layoutY="75.0" prefHeight="249.0" prefWidth="1100.0" spacing="7.0">
          <children>
-            <Label fx:id="titleLabel1" alignment="CENTER" contentDisplay="CENTER" prefHeight="122.0" prefWidth="1034.0" text="You have overslept in class and woken up to an abandoned school. It's getting dark outside, you should be heading home now." textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Label fx:id="titleLabel1" alignment="CENTER" contentDisplay="CENTER" prefHeight="122.0" prefWidth="1034.0" styleClass="chalkduster" stylesheets="@../css/start.css" text="You have overslept in class and woken up to an abandoned school. It's getting dark outside, you should be heading home now." textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Chalkduster" size="25.0" />
                </font></Label>
-            <Label text="Click the HINT button for hints" textFill="WHITE">
+            <Label styleClass="courier" text="Click the HINT button for hints" textFill="WHITE">
                <font>
                   <Font name="Courier New Bold" size="22.0" />
                </font>
             </Label>
-            <Label text="Difficulty" textFill="WHITE">
+            <Label styleClass="courier" text="Difficulty" textFill="WHITE">
                <font>
                   <Font name="Courier New Bold" size="25.0" />
                </font></Label>
-            <Label text="Easy: Unlimited Hints" textFill="WHITE">
+            <Label styleClass="courier" text="Easy: Unlimited Hints" textFill="WHITE">
                <font>
                   <Font name="Courier New Bold" size="20.0" />
                </font></Label>
-            <Label text="Medium: 5 Hints" textFill="WHITE">
+            <Label styleClass="courier" text="Medium: 5 Hints" textFill="WHITE">
                <font>
                   <Font name="Courier New Bold" size="20.0" />
                </font></Label>
-            <Label text="Hard: No Hints" textFill="WHITE">
+            <Label styleClass="courier" text="Hard: No Hints" textFill="WHITE">
                <font>
                   <Font name="Courier New Bold" size="20.0" />
                </font></Label>
@@ -79,7 +79,7 @@
       </Button>
       <VBox alignment="TOP_CENTER" layoutY="570.0" prefHeight="26.0" prefWidth="1100.0">
          <children>
-            <Label fx:id="toDoLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="1079.0" text="Please Select Time and Difficulty" textAlignment="CENTER" textFill="WHITE">
+            <Label fx:id="toDoLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="1079.0" styleClass="courier" text="Please Select Time and Difficulty" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Courier New Bold" size="20.0" />
                </font></Label>
@@ -98,7 +98,7 @@
       </VBox>
       <VBox alignment="CENTER" layoutY="428.0" prefHeight="100.0" prefWidth="1100.0" spacing="30.0">
          <children>
-            <Label prefHeight="2.0" prefWidth="226.0" text="TIME IN MINUTES" textFill="WHITE">
+            <Label prefHeight="2.0" prefWidth="226.0" styleClass="courier" text="TIME IN MINUTES" textFill="WHITE">
                <font>
                   <Font name="Courier New Bold" size="25.0" />
                </font></Label>
