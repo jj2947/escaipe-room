@@ -25,7 +25,7 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
-/** Controller class for the room view. */
+/** This is the Controller class for the room view. */
 public class RoomController {
 
   @FXML private Pane room;
@@ -107,7 +107,7 @@ public class RoomController {
   /**
    * Initializes the room view, it is called when the room loads.
    *
-   * @throws IOException
+   * @throws IOException if an error occurs when loading the fxml file
    */
   public void initialize() throws IOException {
     // Adding timerLabel to synched timer
@@ -118,6 +118,7 @@ public class RoomController {
     GameState.roomController = this;
   }
 
+  /** Adds the blackboard to the room. It is called when the room loads. */
   public void addBlackboard() {
     // Adding the blackboard to the scene
     blackboardContainer.getChildren().add(GameState.blackboardController.getPane());
@@ -166,7 +167,6 @@ public class RoomController {
       case 3:
         Platform.runLater(
             () -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
-      default:
         break;
     }
   }
@@ -727,7 +727,7 @@ public class RoomController {
     pause.play();
   }
 
-  /** Fades the scene in. */
+  /** Fades the scene in. It is called when the room loads. */
   public void fadeIn() {
     FadeTransition fadeTransitionIn = new FadeTransition(Duration.seconds(1), room);
     room.setOpacity(0);

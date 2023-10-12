@@ -212,7 +212,7 @@ public class ChatController {
 
   /**
    * Handles the enter pressed event.
-   * 
+   *
    * @param event the key event
    * @throws ApiProxyException if there is an error communicating with the API proxy
    * @throws IOException if there is an error loading the fxml file
@@ -233,12 +233,14 @@ public class ChatController {
     }
   }
 
+  /** Called when the chat button is clicked. It closes the chat. */
   public void closeChat() {
     Stage stage = (Stage) chatPane.getScene().getWindow();
     stage.setWidth(1100);
     stage.centerOnScreen();
   }
 
+  /** Called when the chat button is clicked. It opens the chat. */
   public void openChat() {
     Stage stage = (Stage) chatPane.getScene().getWindow();
     stage.setWidth(1340);
@@ -266,9 +268,7 @@ public class ChatController {
     return chatPane;
   }
 
-  /**
-   * Adds the loading effects to the room the chat is in.
-   */
+  /** Adds the loading effects to the room the chat is in. */
   private void responseLoaded() {
     // Stop the loading effects when the response is loaded
     GameState.gymController.responseLoaded();
@@ -277,9 +277,7 @@ public class ChatController {
     GameState.hallController.responseLoaded();
   }
 
-  /**
-   * Removes the loading effects in the room.
-   */
+  /** Removes the loading effects in the room. */
   private void responseLoading() {
     // Start the loading effects while the response is being generated
     if (GameState.chatInGym) {
@@ -327,6 +325,7 @@ public class ChatController {
 
   /**
    * Changes the chat and sends a message.
+   *
    * @param chat the chat to change to
    * @param state the state to change to
    */
@@ -339,9 +338,7 @@ public class ChatController {
     }
   }
 
-  /**
-   * Updates the hint counter.
-   */
+  /** Updates the hint counter. It is called when the hint button is pressed. */
   private void updateHintCounter() {
     if (GameState.numberOfHints < 0) {
       hintLabel.setText("Hints: ∞");
@@ -350,9 +347,7 @@ public class ChatController {
     }
   }
 
-  /**
-   * Handles the hint button being clicked.
-   */
+  /** Handles the hint button being clicked. */
   @FXML
   public void hintClicked() {
     updateGameAndGuiHints();
@@ -391,9 +386,7 @@ public class ChatController {
         new ChatCompletionRequest().setN(1).setTemperature(.6).setTopP(1).setMaxTokens(100);
   }
 
-  /**
-   * Method that returns the fact.
-   */
+  /** Method that returns the fact. */
   public void sayFact() {
     try {
       runGpt(new ChatMessage("user", GptPromptEngineering.getFunFact()), "fact");

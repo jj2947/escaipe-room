@@ -14,6 +14,7 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
+/** This is the controller for the start screen. */
 public class StartScreenController {
   @FXML private Button startButton;
   @FXML private Button exitButton;
@@ -31,7 +32,7 @@ public class StartScreenController {
   private Button time = null;
 
   /**
-   * Called when the start button is clicked.
+   * Called when the start button is clicked. It will start the game.
    *
    * @param event the event that triggered this method
    */
@@ -67,7 +68,7 @@ public class StartScreenController {
     fadeOut();
   }
 
-  /** Called when the exit button is clicked. */
+  /** This method is called when the exit button is clicked. */
   @FXML
   private void onExit() {
     // exit application
@@ -76,7 +77,7 @@ public class StartScreenController {
     GameState.timer.exitGame();
   }
 
-  /** Setting difficulty to easy. */
+  /** Setting difficulty to complete the game to easy. */
   @FXML
   private void onClickEasy() {
     difButtonClicked(easyButton);
@@ -84,7 +85,7 @@ public class StartScreenController {
     GameState.difficulty = "EASY";
   }
 
-  /** Setting difficulty to medium. */
+  /** Setting difficulty to complete the game to medium. */
   @FXML
   private void onClickMedium() {
     difButtonClicked(mediumButton);
@@ -92,7 +93,7 @@ public class StartScreenController {
     GameState.difficulty = "MEDIUM";
   }
 
-  /** Setting difficulty to hard. */
+  /** Setting difficulty to complete the game to hard. */
   @FXML
   private void onClickHard() {
     difButtonClicked(hardButton);
@@ -100,21 +101,21 @@ public class StartScreenController {
     GameState.difficulty = "HARD";
   }
 
-  /** Setting time to Two. */
+  /** Setting the time to complete the game to Two. */
   @FXML
   private void onClickTwo() {
     timeButtonClicked(twoButton);
     GameState.timer.setCounter(120);
   }
 
-  /** Setting time to Four. */
+  /** Setting time to complete the game to Four. */
   @FXML
   private void onClickFour() {
     timeButtonClicked(fourButton);
     GameState.timer.setCounter(240);
   }
 
-  /** Setting time to Six. */
+  /** Setting time to complete the game Six. */
   @FXML
   private void onClickSix() {
     timeButtonClicked(sixButton);
@@ -176,7 +177,7 @@ public class StartScreenController {
     updateToDo();
   }
 
-  /** Fades the scene out. */
+  /** Fades the scene out. This method is used for when the user first starts the game. */
   public void fadeOut() {
     FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), startScreen);
     fadeTransition.setFromValue(1);

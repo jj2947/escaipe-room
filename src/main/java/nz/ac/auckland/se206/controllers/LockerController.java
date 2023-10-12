@@ -23,6 +23,7 @@ import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 
+/** This is the controller for the locker scene. */
 public class LockerController {
   @FXML private Label timerLabel;
   @FXML private ImageView note1;
@@ -441,7 +442,6 @@ public class LockerController {
         break;
       case 3:
         Platform.runLater(() -> moveGhost());
-      default:
         break;
     }
   }
@@ -522,5 +522,9 @@ public class LockerController {
 
   public Line getLine() {
     return line;
+  }
+
+  public Button getHintButton() {
+    return helpButton;
   }
 }

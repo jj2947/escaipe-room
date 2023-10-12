@@ -17,6 +17,7 @@ import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
+/** This is the timer class. It is used to keep track of the time left in the game. */
 public class Timer {
   private int counter = -1;
   private Scene currentScene;
@@ -29,6 +30,10 @@ public class Timer {
   private TextToSpeech textToSpeech;
   private List<Label> placesToHide = new ArrayList<>();
 
+  /**
+   * This is the constructor for the timer class. It creates a new text to speech object and a new
+   * timeline.
+   */
   public Timer() {
     textToSpeech = new TextToSpeech();
     // Everyone second the timerlabels in the different scenes are updated
@@ -45,7 +50,7 @@ public class Timer {
                 }));
   }
 
-  /** Starts the timer. */
+  /** Starts the timer. It is called when the game starts. */
   public void startTimer() {
     counter =
         GameState.totalTime; // Setting value to the number of time choosen at the start of the game
@@ -224,7 +229,7 @@ public class Timer {
     }
   }
 
-  /** Resets the timer. */
+  /** Resets the timer. It is called when the user restarts the game. */
   public void reset() {
     counter = -1;
     if (countdownThread != null && countdownThread.isAlive()) {
@@ -235,6 +240,7 @@ public class Timer {
     }
   }
 
+  /** Exits the game. It is called when the user wants to exit the game. */
   public void exitGame() {
     if (textToSpeech != null) {
       textToSpeech.terminate();
