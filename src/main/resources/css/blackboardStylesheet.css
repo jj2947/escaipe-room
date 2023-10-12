@@ -1,12 +1,17 @@
+@font-face {
+    font-family: "Chalkduster";
+    src: url('Chalkduster.ttf');
+}
+
 .label {
     -fx-control-inner-background: #203112;
-    -fx-font-family: "chalkduster";
+    -fx-font-family: "Chalkduster";
     -fx-prompt-text-fill: #ffffff36;
 }
 
 .button {
     -fx-background-color: none;
-    -fx-font-family: "chalkduster";
+    -fx-font-family: "Chalkduster";
     -fx-border-color: #203112;
     -fx-border-width: 5;
     -fx-text-fill: #203112;

@@ -1,6 +1,16 @@
+@font-face {
+    font-family: "Palatino";
+    src: url('Palatino.ttf');
+}
+
+@font-face {
+    font-family: "Arial Rounded MT Bold";
+    src: url('ArialRoundedMTBold.ttf');
+}
+
 .roomLabel {
     -fx-font-size: 15px;
-    -fx-font-family: "palatino";
+    -fx-font-family: "Palatino";
     -fx-background-color: white;
     -fx-text-fill: black;
 }
@@ -10,8 +20,24 @@
     -fx-opacity: 0.8;
     -fx-border-color: black;
     -fx-border-width: 2;
+    -fx-font-family: "Luminari";
+    -fx-font-size: 25;
 }
 
 .backButton:hover {
-   -fx-opacity: 0.2;
+    -fx-opacity: 0.2;
+    -fx-font-size: 25;
+}
+
+.backboardLabel {
+    -fx-font-family: "DIN Alternate";
+}
+
+.exitLabel {
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-background-color: green;
+}
+
+.speechBubble {
+    -fx-font-family: "Luminari";
 }

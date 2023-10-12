@@ -179,9 +179,6 @@ public class LockerController {
     // Update the game to reflect the basketball being found
     GameState.blackboardController.setObjectiveText("Objective: How many points should I score?");
     GameState.textFlow.getChildren().clear();
-    if (!GameState.isChatOpen) {
-      onClickChat();
-    }
     // Change the chat to the next state
     GameState.chatController.changeChatAndSend(
         new ChatCompletionRequest().setN(1).setTemperature(.2).setTopP(0.5).setMaxTokens(100),
