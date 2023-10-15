@@ -115,6 +115,7 @@ public class GptPromptEngineering {
     StringBuilder state2 = new StringBuilder();
     StringBuilder state3 = new StringBuilder();
     StringBuilder state4 = new StringBuilder();
+    StringBuilder state5 = new StringBuilder();
 
     // Add ai prompts for each state
     state1.append(
@@ -130,6 +131,10 @@ public class GptPromptEngineering {
     state4.append(
         "Give a hint that points to finding hidden numbers, scoring that number, paying"
             + " attention to their surroundings and locate the check button in 15 words or less");
+    state5.append(
+        "Give a hint to the value "
+            + GameState.pinAnswer
+            + ", by providing a digit from the value");
 
     // Return the correct state
     if (gamestate.equals("state1")) {
@@ -140,6 +145,8 @@ public class GptPromptEngineering {
       return state3.toString();
     } else if (gamestate.equals("state4")) {
       return state4.toString();
+    } else if (gamestate.equals("state5")) {
+      return state5.toString();
     }
     return null;
   }

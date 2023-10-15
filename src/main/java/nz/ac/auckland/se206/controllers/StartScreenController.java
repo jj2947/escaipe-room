@@ -89,6 +89,7 @@ public class StartScreenController {
   @FXML
   private void onClickMedium() {
     difButtonClicked(mediumButton);
+    GameState.numberOfHints = 5;
     GameState.difficulty = "MEDIUM";
   }
 
@@ -96,6 +97,7 @@ public class StartScreenController {
   @FXML
   private void onClickHard() {
     difButtonClicked(hardButton);
+    GameState.numberOfHints = 0;
     GameState.difficulty = "HARD";
   }
 
@@ -188,6 +190,7 @@ public class StartScreenController {
             // LOADED
             // A FIX NEEDS TO BE IN PLACE
             GameState.timer.startTimer();
+            GameState.lockerController.updateHintButton();
             SceneManager.addUi(AppUi.CHAT, App.loadFxml("chat"));
             sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
             sceneButtonIsIn.getWindow().sizeToScene();

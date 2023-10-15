@@ -70,6 +70,8 @@ public class GameState {
 
   public static Set<Integer> numberSet = new HashSet<>();
 
+  public static Integer pinAnswer;
+
   public static boolean userWins = false;
 
   public static boolean isGhostTalking = false;
