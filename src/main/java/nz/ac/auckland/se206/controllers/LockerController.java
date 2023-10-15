@@ -486,6 +486,7 @@ public class LockerController {
     pathTransition.play();
   }
 
+  /** Called when the hint button is clicked. It updates the hint button. */
   public void updateHintButton() {
     if (GameState.numberOfHints == 0) {
       helpButton.setDisable(true);
