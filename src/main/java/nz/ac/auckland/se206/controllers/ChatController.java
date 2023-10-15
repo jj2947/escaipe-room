@@ -360,6 +360,9 @@ public class ChatController {
   @FXML
   public void hintClicked() {
     updateGameAndGuiHints();
+    if (GameState.chatInLocker && GameState.currentState.equals("state3")) {
+      GameState.currentState = "state5";
+    }
     // GPT part of hint clicked
     if (hintChatCompletionRequest.getMessages().size() < 2) {
       // Run with prompt
