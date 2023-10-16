@@ -107,7 +107,7 @@ public class GymnasiumController {
   private Timeline thirdShot =
       new Timeline(
           new KeyFrame(
-              Duration.millis(7),
+              Duration.millis(8),
               e -> {
                 if (isGoingDown) {
                   testSlider.setValue(testSlider.getValue() - 1);
@@ -335,6 +335,29 @@ public class GymnasiumController {
         } else {
           redButtonThree.setOpacity(1);
           redButtonThree.setEffect(new Glow(1));
+          exitDoor.setEffect(new Glow(1));
+          // Showing the user that have interacted with door and nothing is happening
+          GameState.isGhostTalking = true;
+          if (!playForward) {
+            Platform.runLater(
+                () -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
+            isSpeechBubbleShowing = true;
+            // Create a PauseTransition for 4 seconds
+            PauseTransition pause = new PauseTransition(Duration.seconds(4));
+            pause.setOnFinished(
+                event -> {
+                  // After 4 seconds, set speech bubble
+                  setSpeechBubble("Door is unlocked");
+                  GameState.isGhostTalking = false;
+                });
+
+            // Start the pause transition
+            pause.play();
+          } else {
+            setSpeechBubble("Door is unlocked");
+            GameState.isGhostTalking = false;
+          }
+          GameState.blackboardController.setObjectiveText("Objective: How to get out?");
         }
         shotCount++;
         goalCount += 3;
