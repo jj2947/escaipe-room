@@ -313,7 +313,7 @@ public class GymnasiumController {
     if (GameState.userWins) { // If the user has won, they can exit
       GameState.blackboardController.setHoverText("Exit Door");
     } else { // If the user has not won, they cannot exit
-      GameState.blackboardController.setHoverText("Exit Door is locked");
+      GameState.blackboardController.setHoverText("Locked Door");
     }
     exitDoorRectangle.setVisible(true);
   }
@@ -358,9 +358,32 @@ public class GymnasiumController {
         redButtonThree.setEffect(null);
         hideSlider();
         shotCount = 1;
+        // Showing the user that have interacted with door and nothing is happening
+        GameState.isGhostTalking = true;
+        if (!playForward) {
+          Platform.runLater(
+              () -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
+          isSpeechBubbleShowing = true;
+          // Create a PauseTransition for 4 seconds
+          PauseTransition pause = new PauseTransition(Duration.seconds(4));
+          pause.setOnFinished(
+              event -> {
+                // After 4 seconds, set speech bubble
+                setSpeechBubble("Try Again");
+                GameState.isGhostTalking = false;
+              });
+
+          // Start the pause transition
+          pause.play();
+        } else {
+          setSpeechBubble("Try Again");
+          GameState.isGhostTalking = false;
+        }
       }
-      if (shotCount == 4) { // If the user has beaten the game, close the slider
+      if (shotCount == 4) {
+        GameState.textFlow.getChildren().clear();
         GameState.userWins = true;
+        GameState.currentState = "state6";
         hideSlider();
         exitDoor.setEffect(new Glow(1));
         GameState.blackboardController.setObjectiveText("Objective: How to get out?");
@@ -471,7 +494,7 @@ public class GymnasiumController {
         });
 
     // Create a PauseTransition for 4 seconds
-    PauseTransition pause = new PauseTransition(Duration.seconds(8));
+    PauseTransition pause = new PauseTransition(Duration.seconds(4));
     pause.setOnFinished(
         event -> {
           // After 4 seconds, send the speech bubble and label to the back
