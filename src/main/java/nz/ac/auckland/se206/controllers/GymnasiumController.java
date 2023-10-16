@@ -166,7 +166,7 @@ public class GymnasiumController {
     if (GameState.basketballCollected && !sliderGameInAction && shotCount != 4) {
       sliderGameInAction = true;
       testSlider.setValue(0);
-      sliderVisible();
+      makeSliderVisible();
       if (shotCount == 1) {
         currentShot = firstShot;
       } else if (shotCount == 2) {
@@ -305,6 +305,9 @@ public class GymnasiumController {
     backboardRectangle.setVisible(false);
   }
 
+  /**
+   * Called when the exit door is entered. If the user has won the game, the exit door is unlocked.
+   */
   @FXML
   public void exitDoorEntered() {
     if (GameState.userWins) { // If the user has won, they can exit
@@ -329,8 +332,9 @@ public class GymnasiumController {
       currentShot.stop();
       sliderGameInAction = false;
       int val = (int) testSlider.getValue();
+      // Checking if the user has won the game
       if (val >= 40 && val <= 60) {
-        if (shotCount == 1) {
+        if (shotCount == 1) { // Update the red buttons
           redButtonOne.setOpacity(1);
           redButtonOne.setEffect(new Glow(1));
         } else if (shotCount == 2) {
@@ -339,36 +343,13 @@ public class GymnasiumController {
         } else {
           redButtonThree.setOpacity(1);
           redButtonThree.setEffect(new Glow(1));
-          exitDoor.setEffect(new Glow(1));
-          // Showing the user that have interacted with door and nothing is happening
-          GameState.isGhostTalking = true;
-          if (!playForward) {
-            Platform.runLater(
-                () -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
-            isSpeechBubbleShowing = true;
-            // Create a PauseTransition for 4 seconds
-            PauseTransition pause = new PauseTransition(Duration.seconds(4));
-            pause.setOnFinished(
-                event -> {
-                  // After 4 seconds, set speech bubble
-                  setSpeechBubble("Door is unlocked");
-                  GameState.isGhostTalking = false;
-                });
-
-            // Start the pause transition
-            pause.play();
-          } else {
-            setSpeechBubble("Door is unlocked");
-            GameState.isGhostTalking = false;
-          }
-          GameState.blackboardController.setObjectiveText("Objective: How to get out?");
         }
         shotCount++;
         goalCount += 3;
         String toAdd = String.format("%02d", goalCount);
         goalLabel.setText(toAdd);
         clickBackboard();
-      } else {
+      } else { // If the user has not won, reset the game
         redButtonOne.setOpacity(.6);
         redButtonOne.setEffect(null);
         redButtonTwo.setOpacity(.6);
@@ -399,9 +380,31 @@ public class GymnasiumController {
           GameState.isGhostTalking = false;
         }
       }
-      if (shotCount == 4) {
+      if (shotCount == 4) { // If the user has beaten the game, close the slider
         GameState.userWins = true;
         hideSlider();
+        exitDoor.setEffect(new Glow(1));
+        GameState.blackboardController.setObjectiveText("Objective: How to get out?");
+        GameState.isGhostTalking = true;
+        if (!playForward) { // If the ghost is not in the correct position, move it
+          Platform.runLater(
+              () -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
+          isSpeechBubbleShowing = true;
+          // Create a PauseTransition for 4 seconds
+          PauseTransition pause = new PauseTransition(Duration.seconds(4));
+          pause.setOnFinished(
+              event -> {
+                // After 4 seconds, set speech bubble
+                setSpeechBubble("Door is unlocked");
+                GameState.isGhostTalking = false;
+              });
+
+          // Start the pause transition
+          pause.play();
+        } else { // If the ghost is in the correct position, set the speech bubble
+          setSpeechBubble("Door is unlocked");
+          GameState.isGhostTalking = false;
+        }
       }
     }
   }
@@ -537,7 +540,8 @@ public class GymnasiumController {
     return line;
   }
 
-  public void sliderVisible() {
+  /** Makes the slider visible. This method is called when the user clicks the backboard. */
+  public void makeSliderVisible() {
     sliderRectangleOne.setVisible(true);
     sliderRectangleTwo.setVisible(true);
     sliderRectangleThree.setVisible(true);
@@ -545,6 +549,7 @@ public class GymnasiumController {
     testSlider.setVisible(true);
   }
 
+  /** Hides the slider. This method is called when the user has won or lost the game. */
   public void hideSlider() {
     sliderRectangleOne.setVisible(false);
     sliderRectangleTwo.setVisible(false);

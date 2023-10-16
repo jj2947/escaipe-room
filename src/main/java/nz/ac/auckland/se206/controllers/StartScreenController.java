@@ -203,7 +203,12 @@ public class StartScreenController {
     fadeTransition.play();
   }
 
+  /**
+   * Disables all buttons on the start screen. This method is used for when the user first starts
+   * the game.
+   */
   public void disableButtons() {
+    // Disables all the buttons
     startButton.setDisable(true);
     exitButton.setDisable(true);
     easyButton.setDisable(true);
