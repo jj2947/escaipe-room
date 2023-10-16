@@ -147,7 +147,6 @@ public class ChatController {
                       GameState.isRiddleResolved = true;
                       GameState.blackboardController.setObjectiveText(
                           "Objective: Where can I find this country?");
-                      // replaceLoadingMessageWithResponse("", false);
 
                       changeChatAndSend(
                           new ChatCompletionRequest()
