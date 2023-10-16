@@ -1,14 +1,16 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
+import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.effect.Glow;
 import javafx.scene.effect.Shadow;
 import javafx.scene.image.ImageView;
@@ -23,11 +25,8 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
-import nz.ac.auckland.se206.gpt.ChatMessage;
 
-/**
- * This is the Controller for the gymnasium scene.
- */
+/** This is the Controller for the gymnasium scene. */
 public class GymnasiumController {
 
   @FXML private Label timerLabel;
@@ -55,14 +54,72 @@ public class GymnasiumController {
   @FXML private Label speechBubbleLabel;
   @FXML private ImageView speaker;
   @FXML private Line line;
+  @FXML private Slider testSlider;
+  @FXML private Rectangle sliderRectangleOne;
+  @FXML private Rectangle sliderRectangleTwo;
+  @FXML private Rectangle sliderRectangleThree;
+  @FXML private Button shootButton;
   private boolean playForward = true;
   private boolean ghostMoving = false;
   private boolean isSpeechBubbleShowing = false;
+  private boolean sliderGameInAction = false;
   private Shadow shadow = new Shadow(10, Color.BLACK);
   private Glow glow = new Glow(0.8);
   private int goalCount = 0;
-  private int numbersFound = 0;
-  private Set<Integer> goalsAleady = new HashSet<>();
+  private boolean isGoingDown = false;
+  private int shotCount = 1;
+  private Timeline currentShot;
+
+  private Timeline firstShot =
+      new Timeline(
+          new KeyFrame(
+              Duration.millis(25),
+              e -> {
+                if (isGoingDown) {
+                  testSlider.setValue(testSlider.getValue() - 1);
+                } else {
+                  testSlider.setValue(testSlider.getValue() + 1);
+                }
+                if (testSlider.getValue() == 100) {
+                  isGoingDown = true;
+                } else if (testSlider.getValue() == 0) {
+                  isGoingDown = false;
+                }
+              }));
+
+  private Timeline secondShot =
+      new Timeline(
+          new KeyFrame(
+              Duration.millis(10),
+              e -> {
+                if (isGoingDown) {
+                  testSlider.setValue(testSlider.getValue() - 1);
+                } else {
+                  testSlider.setValue(testSlider.getValue() + 1);
+                }
+                if (testSlider.getValue() == 100) {
+                  isGoingDown = true;
+                } else if (testSlider.getValue() == 0) {
+                  isGoingDown = false;
+                }
+              }));
+
+  private Timeline thirdShot =
+      new Timeline(
+          new KeyFrame(
+              Duration.millis(7),
+              e -> {
+                if (isGoingDown) {
+                  testSlider.setValue(testSlider.getValue() - 1);
+                } else {
+                  testSlider.setValue(testSlider.getValue() + 1);
+                }
+                if (testSlider.getValue() == 100) {
+                  isGoingDown = true;
+                } else if (testSlider.getValue() == 0) {
+                  isGoingDown = false;
+                }
+              }));
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
@@ -70,6 +127,9 @@ public class GymnasiumController {
     GameState.gymController = this;
     // Adding timer label to synced timer
     GameState.timer.setGym(timerLabel, hiddenNumberOne, hiddenNumberTwo);
+    testSlider.setMinorTickCount(1);
+    testSlider.setSnapToTicks(true);
+    testSlider.setOpacity(.8);
   }
 
   /**
@@ -103,14 +163,20 @@ public class GymnasiumController {
   @FXML
   public void clickBackboard() {
     // Updating the backboard with the score
-    if (GameState.basketballCollected) {
-      if (goalCount == 51) {
-        goalCount = 0;
+    if (GameState.basketballCollected && !sliderGameInAction && shotCount != 4) {
+      sliderGameInAction = true;
+      testSlider.setValue(0);
+      sliderVisible();
+      if (shotCount == 1) {
+        currentShot = firstShot;
+      } else if (shotCount == 2) {
+        currentShot = secondShot;
+      } else {
+        currentShot = thirdShot;
       }
-      goalCount += 3;
-      String toAdd = String.format("%02d", goalCount);
-      goalLabel.setText(toAdd);
-    } else {
+      currentShot.setCycleCount(Timeline.INDEFINITE);
+      currentShot.play();
+    } else if (!GameState.basketballCollected) {
       GameState.isGhostTalking = true;
       if (!playForward) {
         Platform.runLater(
@@ -251,58 +317,45 @@ public class GymnasiumController {
     exitDoorRectangle.setVisible(false);
   }
 
-  @FXML
-  public void greenEntered() {
-    GameState.blackboardController.setHoverText("Check Button");
-    greenButton.setOpacity(0.5);
-  }
-
-  @FXML
-  public void greenExited() {
-    GameState.blackboardController.setHoverText("");
-    greenButton.setOpacity(1);
-  }
-
   /** Called when the green button is clicked. Checks if the user has found the correct numbers. */
   @FXML
-  public void greenButtonClicked() {
+  public void shootClicked() {
     // Checking if the user has found the correct numbers
-    ChatMessage toAppend = new ChatMessage("dev", "*COMPUTING*");
-    GameState.chatController.appendChatMessage(toAppend);
-    if (!GameState.isChatOpen) {
-      onClickChat();
-    }
-    // If user has found the correct numbers, light up the lights
-    if (GameState.numberSet.contains(goalCount) && !goalsAleady.contains(goalCount)) {
-      numbersFound++;
-      goalsAleady.add(goalCount);
-      if (numbersFound == 1) {
-        redButtonOne.setOpacity(1);
-        redButtonOne.setEffect(new Glow(1));
-      } else if (numbersFound == 2) {
-        redButtonTwo.setOpacity(1);
-        redButtonTwo.setEffect(new Glow(1));
+    if (sliderGameInAction) {
+      currentShot.stop();
+      sliderGameInAction = false;
+      int val = (int) testSlider.getValue();
+      if (val >= 40 && val <= 60) {
+        if (shotCount == 1) {
+          redButtonOne.setOpacity(1);
+          redButtonOne.setEffect(new Glow(1));
+        } else if (shotCount == 2) {
+          redButtonTwo.setOpacity(1);
+          redButtonTwo.setEffect(new Glow(1));
+        } else {
+          redButtonThree.setOpacity(1);
+          redButtonThree.setEffect(new Glow(1));
+        }
+        shotCount++;
+        goalCount += 3;
+        String toAdd = String.format("%02d", goalCount);
+        goalLabel.setText(toAdd);
+        clickBackboard();
       } else {
-        redButtonThree.setOpacity(1);
-        redButtonThree.setEffect(new Glow(1));
-        exitDoor.setEffect(new Glow(1));
-        GameState.userWins = true;
+        redButtonOne.setOpacity(.6);
+        redButtonOne.setEffect(null);
+        redButtonTwo.setOpacity(.6);
+        redButtonTwo.setEffect(null);
+        redButtonThree.setOpacity(.6);
+        redButtonThree.setEffect(null);
+        hideSlider();
+        shotCount = 1;
       }
-    } else {
-      numbersFound = 0;
-      goalsAleady.clear();
-      redButtonOne.setEffect(null);
-      redButtonTwo.setEffect(null);
-      redButtonThree.setEffect(null);
-      redButtonOne.setOpacity(0.6);
-      redButtonTwo.setOpacity(0.6);
-      redButtonThree.setOpacity(0.6);
-      GameState.userWins = false;
+      if (shotCount == 4) {
+        GameState.userWins = true;
+        hideSlider();
+      }
     }
-    // Resetting the goal count
-    goalCount = 0;
-    String toAdd = String.format("%02d", goalCount);
-    goalLabel.setText(toAdd);
   }
 
   /** Opens the chat in this scene. */
@@ -434,5 +487,21 @@ public class GymnasiumController {
 
   public Line getLine() {
     return line;
+  }
+
+  public void sliderVisible() {
+    sliderRectangleOne.setVisible(true);
+    sliderRectangleTwo.setVisible(true);
+    sliderRectangleThree.setVisible(true);
+    shootButton.setVisible(true);
+    testSlider.setVisible(true);
+  }
+
+  public void hideSlider() {
+    sliderRectangleOne.setVisible(false);
+    sliderRectangleTwo.setVisible(false);
+    sliderRectangleThree.setVisible(false);
+    shootButton.setVisible(false);
+    testSlider.setVisible(false);
   }
 }

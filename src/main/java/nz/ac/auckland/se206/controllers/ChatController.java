@@ -159,6 +159,11 @@ public class ChatController {
                     } else {
                       // Replacing the "Ghost is Writing..." with the response
                       replaceLoadingMessageWithResponse(chatMsg.getContent(), isFunFact);
+                      inputText.setDisable(false);
+                      if (GameState.numberOfHints != 0) {
+                        hintButton.setDisable(false);
+                        GameState.lockerController.enableHelpButton();
+                      }
                       // Stop the loading effects
                       responseLoaded();
                     }
@@ -167,11 +172,7 @@ public class ChatController {
                     }
 
                     newStateHint();
-                    inputText.setDisable(false);
-                    if (GameState.numberOfHints != 0) {
-                      hintButton.setDisable(false);
-                      GameState.lockerController.enableHelpButton();
-                    }
+
                     // If gpt has just given a fun fact run the new prompt for new state
                     if (isFunFact) {
                       changeChatAndSend(
@@ -360,6 +361,9 @@ public class ChatController {
   @FXML
   public void hintClicked() {
     updateGameAndGuiHints();
+    if (GameState.chatInLocker && GameState.currentState.equals("state3")) {
+      GameState.currentState = "state5";
+    }
     // GPT part of hint clicked
     if (hintChatCompletionRequest.getMessages().size() < 2) {
       // Run with prompt

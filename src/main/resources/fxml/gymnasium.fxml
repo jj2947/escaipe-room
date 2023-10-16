@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.effect.Shadow?>
@@ -128,11 +131,6 @@
             </ImageView>
          </children>
       </HBox>
-      <ImageView fx:id="greenButton" fitHeight="16.0" fitWidth="26.0" layoutX="776.0" layoutY="430.0" onMouseClicked="#greenButtonClicked" onMouseEntered="#greenEntered" onMouseExited="#greenExited" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/greenButton.png" />
-         </image>
-      </ImageView>
       <ImageView fx:id="ghost" fitHeight="192.0" fitWidth="191.0" layoutX="600.0" layoutY="200.0" onMouseClicked="#onClickGhost" onMouseEntered="#onEnterGhost" onMouseExited="#onExitGhost" opacity="0.4" pickOnBounds="true">
          <image>
             <Image url="@../images/ghost.png" />
@@ -147,5 +145,17 @@
          </effect>
       </ImageView>
       <Line fx:id="line" endX="22.97205352783203" endY="18.766563415527344" fill="RED" layoutX="55.0" layoutY="103.0" startX="-20.241931915283203" startY="-30.252281188964844" stroke="RED" strokeWidth="5.0" visible="false" />
+      <Rectangle fx:id="sliderRectangleOne" arcHeight="5.0" arcWidth="5.0" fill="#3fff1f" height="15.0" layoutX="524.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="51.0" />
+      <Rectangle fx:id="sliderRectangleTwo" arcHeight="5.0" arcWidth="5.0" fill="#ff2121" height="15.0" layoutX="416.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="111.0" />
+      <Rectangle fx:id="sliderRectangleThree" arcHeight="5.0" arcWidth="5.0" fill="#ff2121" height="15.0" layoutX="575.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="103.0" />
+      <Slider fx:id="testSlider" blockIncrement="0.0" disable="true" focusTraversable="false" layoutX="416.0" layoutY="399.0" majorTickUnit="20.0" prefHeight="15.0" prefWidth="266.0" visible="false">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></Slider>
+      <Button fx:id="shootButton" layoutX="501.0" layoutY="500.0" mnemonicParsing="false" onMouseClicked="#shootClicked" stylesheets="@../css/start.css" text="SHOOT" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </Pane>
