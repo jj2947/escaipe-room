@@ -116,6 +116,7 @@ public class GptPromptEngineering {
     StringBuilder state3 = new StringBuilder();
     StringBuilder state4 = new StringBuilder();
     StringBuilder state5 = new StringBuilder();
+    StringBuilder state6 = new StringBuilder();
 
     // Add ai prompts for each state
     state1.append(
@@ -129,13 +130,15 @@ public class GptPromptEngineering {
         "Give a hint that points to searching around the school and using their hallpass to unlock"
             + " something previously locked in 15 words or less.");
     state4.append(
-        "Give a hint that points to scoring points, and having a good reaction time in 15 words or"
-            + " less");
+        "Give a hint that points to getting a basketball to go to the gym and shoot hoops in 15"
+            + " words or less");
     state5.append(
         "Give a hint to the value "
             + GameState.pinAnswer
             + ", by providing a digit from the value");
-
+    state6.append(
+        "Give a hint that points to leaving the gym through a door under red lights in 15 words or"
+            + " less");
     // Return the correct state
     if (gamestate.equals("state1")) {
       return state1.toString();
@@ -147,6 +150,8 @@ public class GptPromptEngineering {
       return state4.toString();
     } else if (gamestate.equals("state5")) {
       return state5.toString();
+    } else if (gamestate.equals("state6")) {
+      return state6.toString();
     }
     return null;
   }

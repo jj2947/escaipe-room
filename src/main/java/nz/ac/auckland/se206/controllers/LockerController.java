@@ -215,7 +215,6 @@ public class LockerController {
     GameState.currentState = "state5";
 
     // Send a hint to the chat
-
     GameState.chatController.hintClicked();
     if (GameState.numberOfHints == 0) { // If there are no more hints, disable the hint button
       helpButton.setDisable(true);
@@ -356,6 +355,8 @@ public class LockerController {
       note1.setVisible(true);
       note2.setVisible(true);
       basketball.toFront();
+      GameState.textFlow.getChildren().clear();
+      GameState.currentState = "state4";
     } else {
       // Incorrect answer
       numsEntered = 0;

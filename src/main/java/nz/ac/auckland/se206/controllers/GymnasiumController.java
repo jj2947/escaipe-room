@@ -380,8 +380,10 @@ public class GymnasiumController {
           GameState.isGhostTalking = false;
         }
       }
-      if (shotCount == 4) { // If the user has beaten the game, close the slider
+      if (shotCount == 4) {
+        GameState.textFlow.getChildren().clear();
         GameState.userWins = true;
+        GameState.currentState = "state6";
         hideSlider();
         exitDoor.setEffect(new Glow(1));
         GameState.blackboardController.setObjectiveText("Objective: How to get out?");
@@ -491,8 +493,8 @@ public class GymnasiumController {
           speechBubbleLabel.toFront();
         });
 
-    // Create a PauseTransition for 8 seconds
-    PauseTransition pause = new PauseTransition(Duration.seconds(8));
+    // Create a PauseTransition for 4 seconds
+    PauseTransition pause = new PauseTransition(Duration.seconds(4));
     pause.setOnFinished(
         event -> {
           // After 4 seconds, send the speech bubble and label to the back

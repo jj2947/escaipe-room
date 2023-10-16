@@ -74,7 +74,7 @@ public class ChatController {
   public void appendChatMessage(ChatMessage msg) {
     Text messageText = new Text(msg.getContent() + "\n\n");
     if (msg.getRole().equals("user")) {
-      messageText.setText("Me: " + messageText.getText());
+      messageText.setText(messageText.getText());
       messageText.setFill(Color.rgb(5, 236, 253));
     } else {
       messageText.setFill(Color.WHITE);
