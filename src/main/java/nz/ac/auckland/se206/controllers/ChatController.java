@@ -336,11 +336,12 @@ public class ChatController {
    * @param state the state to change to
    */
   public void changeChatAndSend(ChatCompletionRequest chat, String state) {
+    // Change the chat
     chatCompletionRequest = chat;
     try {
-      if (state.equals("state2")) {
+      if (state.equals("state2")) { // If the state is 2, there are two ghost messages
         runGpt(new ChatMessage("user", GptPromptEngineering.apiNoHints(state)), "normal", true);
-      } else {
+      } else { // If the state is not 2, it is a normal message
         runGpt(new ChatMessage("user", GptPromptEngineering.apiNoHints(state)), "normal", false);
       }
     } catch (ApiProxyException e) {
@@ -410,6 +411,7 @@ public class ChatController {
     }
   }
 
+  /** Updates the game and GUI hints. It is used when the hint button is pressed. */
   public void updateGameAndGuiHints() {
     // GUI aspects of hint being clicked Going to be extracted to new funciton
     GameState.numberOfHints--;
