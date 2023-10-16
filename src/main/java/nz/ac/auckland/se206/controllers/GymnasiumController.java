@@ -307,7 +307,11 @@ public class GymnasiumController {
 
   @FXML
   public void exitDoorEntered() {
-    GameState.blackboardController.setHoverText("Exit Door");
+    if (GameState.userWins) { // If the user has won, they can exit
+      GameState.blackboardController.setHoverText("Exit Door");
+    } else { // If the user has not won, they cannot exit
+      GameState.blackboardController.setHoverText("Locked Door");
+    }
     exitDoorRectangle.setVisible(true);
   }
 
@@ -373,6 +377,27 @@ public class GymnasiumController {
         redButtonThree.setEffect(null);
         hideSlider();
         shotCount = 1;
+        // Showing the user that have interacted with door and nothing is happening
+        GameState.isGhostTalking = true;
+        if (!playForward) {
+          Platform.runLater(
+              () -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
+          isSpeechBubbleShowing = true;
+          // Create a PauseTransition for 4 seconds
+          PauseTransition pause = new PauseTransition(Duration.seconds(4));
+          pause.setOnFinished(
+              event -> {
+                // After 4 seconds, set speech bubble
+                setSpeechBubble("Try Again");
+                GameState.isGhostTalking = false;
+              });
+
+          // Start the pause transition
+          pause.play();
+        } else {
+          setSpeechBubble("Try Again");
+          GameState.isGhostTalking = false;
+        }
       }
       if (shotCount == 4) {
         GameState.userWins = true;
@@ -463,7 +488,7 @@ public class GymnasiumController {
           speechBubbleLabel.toFront();
         });
 
-    // Create a PauseTransition for 4 seconds
+    // Create a PauseTransition for 8 seconds
     PauseTransition pause = new PauseTransition(Duration.seconds(8));
     pause.setOnFinished(
         event -> {
