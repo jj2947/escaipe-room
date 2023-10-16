@@ -90,7 +90,7 @@ public class GymnasiumController {
   private Timeline secondShot =
       new Timeline(
           new KeyFrame(
-              Duration.millis(8),
+              Duration.millis(10),
               e -> {
                 if (isGoingDown) {
                   testSlider.setValue(testSlider.getValue() - 1);
@@ -107,7 +107,7 @@ public class GymnasiumController {
   private Timeline thirdShot =
       new Timeline(
           new KeyFrame(
-              Duration.millis(5),
+              Duration.millis(7),
               e -> {
                 if (isGoingDown) {
                   testSlider.setValue(testSlider.getValue() - 1);

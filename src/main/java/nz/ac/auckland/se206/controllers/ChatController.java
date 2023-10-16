@@ -159,6 +159,11 @@ public class ChatController {
                     } else {
                       // Replacing the "Ghost is Writing..." with the response
                       replaceLoadingMessageWithResponse(chatMsg.getContent(), isFunFact);
+                      inputText.setDisable(false);
+                      if (GameState.numberOfHints != 0) {
+                        hintButton.setDisable(false);
+                        GameState.lockerController.enableHelpButton();
+                      }
                       // Stop the loading effects
                       responseLoaded();
                     }
@@ -167,11 +172,7 @@ public class ChatController {
                     }
 
                     newStateHint();
-                    inputText.setDisable(false);
-                    if (GameState.numberOfHints != 0) {
-                      hintButton.setDisable(false);
-                      GameState.lockerController.enableHelpButton();
-                    }
+
                     // If gpt has just given a fun fact run the new prompt for new state
                     if (isFunFact) {
                       changeChatAndSend(

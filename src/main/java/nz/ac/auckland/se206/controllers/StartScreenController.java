@@ -179,6 +179,7 @@ public class StartScreenController {
 
   /** Fades the scene out. This method is used for when the user first starts the game. */
   public void fadeOut() {
+    disableButtons();
     FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), startScreen);
     fadeTransition.setFromValue(1);
     fadeTransition.setToValue(0);
@@ -200,5 +201,16 @@ public class StartScreenController {
           GameState.roomController.fadeIn();
         });
     fadeTransition.play();
+  }
+
+  public void disableButtons() {
+    startButton.setDisable(true);
+    exitButton.setDisable(true);
+    easyButton.setDisable(true);
+    mediumButton.setDisable(true);
+    hardButton.setDisable(true);
+    twoButton.setDisable(true);
+    fourButton.setDisable(true);
+    sixButton.setDisable(true);
   }
 }
