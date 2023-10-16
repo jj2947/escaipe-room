@@ -179,7 +179,6 @@ public class LockerController {
     GameState.blackboardController.showBasketball();
     // Update the game to reflect the basketball being found
     GameState.blackboardController.setObjectiveText("Objective: What to do with a basketball?");
-    GameState.textFlow.getChildren().clear();
     // Change the chat to the next state
     GameState.chatController.changeChatAndSend(
         new ChatCompletionRequest().setN(1).setTemperature(.2).setTopP(0.5).setMaxTokens(100),
