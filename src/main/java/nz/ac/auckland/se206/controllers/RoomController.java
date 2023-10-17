@@ -312,6 +312,9 @@ public class RoomController {
 
   @FXML
   public void clickMap() {
+    if (!playForward) {
+      Platform.runLater(() -> playForward = GameState.moveGhost(ghost, path, playForward, shadow));
+    }
     disableWhileMapOpen();
     enableCountries();
     showWhenOnMap();
